@@ -28,7 +28,7 @@
     <view class="time">
       <block wx:for="{{timeList}}" wx:key="this">
         <view class="hour">
-          <text>{{item}}</text>
+          <text>{{item.time}}</text>
         </view>
       </block>
     </view>
@@ -209,32 +209,29 @@
           </view>
         </view>
       </swiper-item> -->
-      <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex">
+      <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex" wx:key="this">
         <swiper-item>
           <view class="table">
             <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
               <view class="day">
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
-                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <block wx:for="{{weekItem.tableList}}" wx:key="this" wx:for-item="tableItem" wx:for-index="tableIndex">
+                  <block wx:if="{{tableItem.hasTask == true}}">
+                    <!-- 当前时间段有任务 -->
+                    <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;">
+                      <text>{{tableItem.title}}</text>
+                    </view>
+                  </block>
+                  <block wx:else>
+                  <!-- 当前时间段没有任务 -->
+                    <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} " style="margin-bottom: {{tableItem.paddingBottom}}rpx; height:{{tableItem.height}}rpx" ></view>
+                  </block>
+                  
+                </block>
               </view>
             </block>
           </view>
         </swiper-item>
       </block>
-
     </swiper>
   </view>
 </view>

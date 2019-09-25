@@ -269,6 +269,10 @@ page {
   height: 1690rpx;
 }
 
+.course .course_right .table .day .onday {
+  background-color: #f1fff1;
+}
+
 .course .course_right .table .day .select {
   background-color: #b2f3b5;
 }
@@ -287,10 +291,6 @@ page {
 
 .course .course_right .table .day .delete {
   background-color: #ff3d3d;
-}
-
-.course .course_right .table .day .onday {
-  background-color: #f1fff1;
 }
 
 .course .course_right .table .day .all-day {

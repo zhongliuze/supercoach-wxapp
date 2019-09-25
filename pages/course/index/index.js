@@ -16,11 +16,7 @@ Page({
     timeList: [],
     dateList: [
       {
-        weekList : [
-          {
-            'week' : '一',
-            'day' : '23'
-          },
+        weekList: [
           {
             'week': '一',
             'day': '23'
@@ -45,26 +41,30 @@ Page({
             'week': '一',
             'day': '23'
           },
-          
+          {
+            'week': '一',
+            'day': '23'
+          },
+
         ],
-        'month' : '7月',
-        'year' : '2019年',
-        'currentDay' : '24',
-        'table' : [
+        'month': '7月',
+        'year': '2019年',
+        'currentDay': '24',
+        'table': [
           {
-            'begin' : '08:00',
-            'end' : '09:00',
-            'status' : '1',
+            'begin': '08:00',
+            'end': '09:00',
+            'status': '1',
           }
         ]
       }
     ],
-    
+
     swiperEasing: 'linear', // 滑动动画，linear为线性，default为默认
     scrollData: '',
     courseList: [],
-    beforeWeek : 5,  // 默认加载当前日期前x周
-    aftherWeek : 5,  // 默认加载当前日期前y周
+    beforeWeek: 0,  // 默认加载当前日期前x周
+    aftherWeek: 0,  // 默认加载当前日期前y周
     weekSetpLength: 5,  // 每次新加载x周
     prestrainWeek: 2, // 当前后剩余x周时候提前加载
     currentWeek: 0,  // 当前周列表键值
@@ -76,7 +76,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(this.data.dateList);
+    // console.log(this.data.dateList);
     var _this = this;
     // 获取菜单按钮（右上角胶囊按钮）的布局位置信息，坐标信息以屏幕左上角为原点。
     var isSupport = !!wx.getMenuButtonBoundingClientRect;
@@ -100,9 +100,9 @@ Page({
     var timeList = [];
     for (startTime; startTime <= endTime; startTime++) {
       if (startTime < 10) {
-        timeList.push('0' + startTime + ':00');
+        timeList.push({ time: '0' + startTime + ':00', hour: startTime });
       } else {
-        timeList.push(startTime + ':00');
+        timeList.push({ time: startTime + ':00', hour: startTime });
       }
     }
     _this.setData({
@@ -116,7 +116,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+
     let timestamp = moment().valueOf();
     // console.log('onReady');
     // console.log(util.getSign(timestamp));
@@ -172,17 +172,12 @@ Page({
     // )
 
 
-    // 获取当前日期s
-    var currentDate = moment().weekday(1).format('YYYY-MM-DD');
-    var currentDate = moment().weekday(7).format('YYYY-MM-DD');
-    console.log(moment().weekday(0).date());
-    console.log(moment().weekday(7).date());
     // var weekArray = [];
-    var monthArray= [];
+    var monthArray = [];
     const beforeWeek = this.data.beforeWeek;
     const aftherWeek = this.data.aftherWeek;
     // 获取当前周及后三周日期列表
-    for(let i = 0; i<= aftherWeek; i++) {
+    for (let i = 0; i <= aftherWeek; i++) {
       var weekArray = [];
       for (let j = 1; j <= 7; j++) {
         weekArray.push(moment().weekday(i * 7 + j).format('YYYY-MM-DD'));
@@ -203,18 +198,18 @@ Page({
     var currentMonth = '7月';
     var currentYear = '2019年';
     // 组建对象数组
-    for (let i = 0; i< monthArray.length; i++) {
-      console.log(monthArray[i]);
+    for (let i = 0; i < monthArray.length; i++) {
       var tempWeekList = [];
       var tempCurrentWeek = false;
       // 优化日期数组
-      for(let j = 0; j< monthArray[i].length; j++) {
+      for (let j = 0; j < monthArray[i].length; j++) {
         let tempDayList = [];
         // 判断是否是当日
         if (monthArray[i][j] == moment().format('YYYY-MM-DD')) {
           tempDayList = {
             'day': moment(monthArray[i][j]).date(),
             'isCurrent': true,
+            'tableList': [],
           }
           tempCurrentWeek = true;
           // 当前周键值
@@ -223,28 +218,466 @@ Page({
           currentMonth = moment(monthArray[i][0]).format('M月');
           // 当前年键值
           currentYear = moment(monthArray[i][0]).format('YYYY年');
-        }else {
+        } else {
           tempDayList = {
             'day': moment(monthArray[i][j]).date(),
             'isCurrent': false,
+            'tableList': [],
           }
         }
-        tempWeekList.push(tempDayList);
+        tempWeekList.push(tempDayList); 
       }
-      
+
+
+      for (let i = 0; i < tempWeekList.length; i++) {
+        if (tempWeekList[i]['day'] == 24) {
+          tempWeekList[i]['tableList'] = [
+            {
+              date: '2019-09-25 08:00',
+              hasTask: true,
+              taskDuration: 1,    // 时长
+              beginTime: '8:00',  // 开始时间
+              endTime: '9:00',    // 结束时间
+              taskStatus: 1,      // 任务状态   0:待完成，1:已完成，2:待确认，-1:已取消，-2:已删除
+              taskId: 5,          // 任务ID
+              titleColor: "#ffc229",     // 任务背景颜色   0:#ffc229  1 :#5fcd64
+              taskType: 0,        // 任务类型   0:排课，1:休息，2:自定义
+              title: "刘泽中",
+              beginHour: '8',
+              beginMinute: '00',
+              endHour: '9',
+              endMinute: '00',
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 0.5,
+              height: '52',
+              paddingBottom: '0',
+            },
+            {
+              date: '2019-09-25 10:00',
+              hasTask: true,
+              taskDuration: 1,    // 时长
+              beginTime: '10:00',  // 开始时间
+              endTime: '11:00',    // 结束时间
+              taskStatus: 0,      // 任务状态
+              taskId: 5,          // 任务ID
+              titleColor: "#5fcd64",     // 任务背景颜色
+              taskType: 0,        // 任务类型
+              title: "孙少平",
+              beginHour: '10',
+              beginMinute: '00',
+              endHour: '11',
+              endMinute: '00',
+              height: '114',
+              paddingBottom: '0',
+            },
+            {
+              date: '2019-09-25 11:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '52',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 12:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 13:00',
+              hasTask: false,
+              taskDuration: 0.5,
+              height: '52',
+              paddingBottom: '0',
+            },
+            {
+              date: '2019-09-25 14:00',
+              hasTask: true,
+              taskDuration: 1,    // 时长
+              beginTime: '14:00',  // 开始时间
+              endTime: '15:00',    // 结束时间
+              taskStatus: 0,      // 任务状态
+              taskId: 5,          // 任务ID
+              titleColor: "#ff3d3d",     // 任务背景颜色
+              taskType: 0,        // 任务类型
+              title: "金老三",
+              beginHour: '14',
+              beginMinute: '00',
+              endHour: '15',
+              endMinute: '00',
+              height: '114',
+              paddingBottom: '0',
+            },
+            
+            {
+              date: '2019-09-25 15:00',
+              hasTask: true,
+              taskDuration: 1,
+              beginTime: '14:00',  // 开始时间
+              endTime: '15:00',    // 结束时间
+              taskStatus: 0,      // 任务状态
+              taskId: 5,          // 任务ID
+              titleColor: "#b2b3b7",     // 任务背景颜色
+              taskType: 0,        // 任务类型
+              title: "田福军",
+              beginHour: '14',
+              beginMinute: '00',
+              endHour: '15',
+              endMinute: '00',
+              height: '114',
+              paddingBottom: '0',
+            },
+            {
+              date: '2019-09-25 16:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '52',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 16:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 16:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 19:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 10:00',
+              hasTask: true,
+              taskDuration: 1,    // 时长
+              beginTime: '10:00',  // 开始时间
+              endTime: '11:00',    // 结束时间
+              taskStatus: 0,      // 任务状态
+              taskId: 5,          // 任务ID
+              titleColor: "#5fcd64",     // 任务背景颜色
+              taskType: 0,        // 任务类型
+              title: "孙少平",
+              beginHour: '10',
+              beginMinute: '00',
+              endHour: '11',
+              endMinute: '00',
+              height: '332',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 22:00',
+              hasTask: false,
+              taskDuration: 1, 
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 22:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+          ]
+        } else {
+          tempWeekList[i]['tableList'] = [
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+            {
+              date: '2019-09-25 09:00',
+              hasTask: false,
+              taskDuration: 1,
+              height: '104',
+              paddingBottom: '10',
+            },
+          ]
+        }
+
+
+
+        // } else if (tempWeekList[i]['day'] == 25) {
+        //   tempWeekList[i]['tableList'] = {
+        //     'taskDate': '25',
+        //     'taskList': [
+        //       {
+        //         beginTime: '8:00',  // 开始时间
+        //         endTime: '10:00',    // 结束时间
+        //         taskStatus: 0,      // 任务状态
+        //         taskId: 5,          // 任务ID
+        //         titleColor: "",     // 任务背景颜色
+        //         taskType: 0,        // 任务类型   0:排课，1:休息，2:自定义
+        //         title: "刘泽中",
+        //         beginHour: '8',
+        //         beginMinute: '00',
+        //         endHour: '10',
+        //         endMinute: '00',
+        //       },
+        //       {
+        //         beginTime: '10:00',  // 开始时间
+        //         endTime: '11:00',    // 结束时间
+        //         taskStatus: 2,      // 任务状态
+        //         taskId: 5,          // 任务ID
+        //         titleColor: "",     // 任务背景颜色
+        //         taskType: 0,        // 任务类型
+        //         title: "沈超",
+        //         beginHour: '10',
+        //         beginMinute: '00',
+        //         endHour: '11',
+        //         endMinute: '00',
+        //       },
+        //       {
+        //         beginTime: '13:00',  // 开始时间
+        //         endTime: '14:00',    // 结束时间
+        //         taskStatus: -1,      // 任务状态
+        //         taskId: 5,          // 任务ID
+        //         titleColor: "",     // 任务背景颜色
+        //         taskType: 0,        // 任务类型
+        //         title: "孙少平",
+        //         beginHour: '13',
+        //         beginMinute: '00',
+        //         endHour: '14',
+        //         endMinute: '00',
+        //       },
+        //       {
+        //         beginTime: '19:00',  // 开始时间
+        //         endTime: '20:00',    // 结束时间
+        //         taskStatus: -2,      // 任务状态
+        //         taskId: 5,          // 任务ID
+        //         titleColor: "",     // 任务背景颜色
+        //         taskType: 0,        // 任务类型
+        //         title: "赵雷",
+        //         beginHour: '19',
+        //         beginMinute: '00',
+        //         endHour: '20',
+        //         endMinute: '00',
+        //       },
+        //       {
+        //         beginTime: '20:00',  // 开始时间
+        //         endTime: '21:00',    // 结束时间
+        //         taskStatus: 0,      // 任务状态
+        //         taskId: 5,          // 任务ID
+        //         titleColor: "",     // 任务背景颜色
+        //         taskType: 0,        // 任务类型
+        //         title: "周杰伦",
+        //         beginHour: '20',
+        //         beginMinute: '00',
+        //         endHour: '21',
+        //         endMinute: '00',
+        //       }
+        //     ]
+        //   }
+        // } else if (tempWeekList[i]['day'] == 28) {
+        //   tempWeekList[i]['tableList'] = {
+        //     'taskDate': '28',
+        //     'taskList': [
+        //       {
+        //         beginTime: '10:00',  // 开始时间
+        //         endTime: '11:00',    // 结束时间
+        //         taskStatus: 0,      // 任务状态   0:待完成，1:已完成，2:待确认，-1:已取消，-2:已删除
+        //         taskId: 5,          // 任务ID
+        //         titleColor: "",     // 任务背景颜色
+        //         taskType: 0,        // 任务类型   0:排课，1:休息，2:自定义
+        //         title: "周杰伦",
+        //         beginHour: '10',
+        //         beginMinute: '00',
+        //         endHour: '11',
+        //         endMinute: '00',
+        //       },
+        //       {
+        //         beginTime: '15:30',  // 开始时间
+        //         endTime: '16:30',    // 结束时间
+        //         taskStatus: 0,      // 任务状态
+        //         taskId: 5,          // 任务ID
+        //         titleColor: "",     // 任务背景颜色
+        //         taskType: 0,        // 任务类型
+        //         title: "吴涛",
+        //         beginHour: '15',
+        //         beginMinute: '30',
+        //         endHour: '16',
+        //         endMinute: '30',
+        //       },
+        //       {
+        //         beginTime: '19:30',  // 开始时间
+        //         endTime: '20:30',    // 结束时间
+        //         taskStatus: 0,      // 任务状态
+        //         taskId: 5,          // 任务ID
+        //         titleColor: "",     // 任务背景颜色
+        //         taskType: 0,        // 任务类型
+        //         title: "钱多多",
+        //         beginHour: '19',
+        //         beginMinute: '30',
+        //         endHour: '20',
+        //         endMinute: '30',
+        //       },
+        //     ]
+        //   }
+        // } else if (tempWeekList[i]['day'] == 29) {
+        //   tempWeekList[i]['tableList'] = {
+        //     'taskDate': '29',
+        //     'taskList': [
+        //       {
+        //         beginTime: '08:00',  // 开始时间
+        //         endTime: '12:00',    // 结束时间
+        //         taskStatus: 0,      // 任务状态   0:待完成，1:已完成，2:待确认，-1:已取消，-2:已删除
+        //         taskId: 5,          // 任务ID
+        //         titleColor: "",     // 任务背景颜色
+        //         taskType: 1,        // 任务类型   0:排课，1:休息，2:自定义
+        //         title: "休息",
+        //         beginHour: '8',
+        //         beginMinute: '00',
+        //         endHour: '12',
+        //         endMinute: '00',
+        //       },
+        //       {
+        //         beginTime: '15:30',  // 开始时间
+        //         endTime: '16:30',    // 结束时间
+        //         taskStatus: 0,      // 任务状态
+        //         taskId: 5,          // 任务ID
+        //         titleColor: "#000000",     // 任务背景颜色
+        //         taskType: 2,        // 任务类型
+        //         title: "公司团建",
+        //         beginHour: '15',
+        //         beginMinute: '30',
+        //         endHour: '16',
+        //         endMinute: '30',
+        //       },
+        //       {
+        //         beginTime: '19:00',  // 开始时间
+        //         endTime: '20:00',    // 结束时间
+        //         taskStatus: 0,      // 任务状态
+        //         taskId: 5,          // 任务ID
+        //         titleColor: "",     // 任务背景颜色
+        //         taskType: 2,        // 任务类型
+        //         title: "打老虎",
+        //         beginHour: '19',
+        //         beginMinute: '00',
+        //         endHour: '20',
+        //         endMinute: '00',
+        //       },
+        //     ]
+        //   }
+        // }
+      }
       var tempList = {
         'weekList': tempWeekList,
         'month': moment(monthArray[i][0]).month() + 1,
         'year': moment(monthArray[i][0]).year(),
-        'tableList': [],
         'currentWeek': tempCurrentWeek,
       }
       courseList.push(tempList);
     }
-    console.log('************************');
-    console.log(currentWeek);
-    console.log('scrollData' + currentWeek);
-    console.log('************************');
+
     this.setData({
       courseList: courseList,
       currentWeek: currentWeek,
@@ -292,7 +725,7 @@ Page({
 
   bindTableChange: function (event) {
     var courseList = this.data.courseList;
-    
+
     // 向后加载数据
     if (event.detail.current > (courseList.length - this.data.prestrainWeek - 1)) {
       console.log('需要向后加载数据了');
@@ -313,7 +746,7 @@ Page({
         monthArray.push(weekArray);
       }
       console.log(monthArray);
-      
+
       var courseList = this.data.courseList;
       var currentWeek = 0;
       var currentMonth = '7月';
@@ -430,7 +863,7 @@ Page({
           'tableList': [],
           'currentWeek': tempCurrentWeek,
         }
-        
+
         courseList.unshift(tempList);
       }
       console.log(courseList);
@@ -440,7 +873,7 @@ Page({
         currentMonth: courseList[event.detail.current].month + '月',
         courseList: courseList,
         beforeWeek: newBeforeWeek - 1,
-        currentWeek: event.detail.current + this.data.weekSetpLength -1,
+        currentWeek: event.detail.current + this.data.weekSetpLength - 1,
       });
       wx.hideLoading();
     } else {
