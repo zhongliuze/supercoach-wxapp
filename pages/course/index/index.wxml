@@ -1,0 +1,240 @@
+<!--pages/course/index/index.wxml-->
+<view class="navigation-bar">
+  <view class="navigation-bar__placeholder {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px;visibility: hidden;"></view>
+  <view class="navigation-bar__inner {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px; color: {{navigation_color}};background: {{navigation_background}};{{innerPaddingRight}};{{innerWidth}};">
+    <view class='navigation-bar__left' style="{{leftWidth}}">
+      <view class="navigation-bar__buttons">
+        <view bindtap="back" class="navigation-bar__button navigation-bar__btn_goback"></view>
+      </view>
+    </view>
+    <view class='navigation-bar__center'>
+      <text>日历排课</text>
+    </view>
+    <view class='navigation-bar__right'>
+    </view>
+  </view>
+</view>
+
+<view class="course">
+  <view class="course_left">
+    <view class="date date_fixed">
+      <view class="year">
+        <text>{{currentYear}}</text>
+      </view>
+      <view class="month">
+        <text>{{currentMonth}}</text>
+      </view>
+    </view>
+    <view class="time">
+      <block wx:for="{{timeList}}" wx:key="this">
+        <view class="hour">
+          <text>{{item}}</text>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="course_right">
+    <scroll-view class="course_date" scroll-x scroll-into-view="{{scrollData}}">
+      <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex">
+        <view class="scroll-block" id="scrollData{{courseIndex}}">
+          <view class="scroll-date">
+            <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
+              <view class="date">
+                <view class="week">
+                  <text wx:if="{{weekIndex == 0}}">一</text>
+                  <text wx:elif="{{weekIndex == 1}}">二</text>
+                  <text wx:elif="{{weekIndex == 2}}">三</text>
+                  <text wx:elif="{{weekIndex == 3}}">四</text>
+                  <text wx:elif="{{weekIndex == 4}}">五</text>
+                  <text wx:elif="{{weekIndex == 5}}">六</text>
+                  <text wx:elif="{{weekIndex == 6}}">日</text>
+                </view>
+                <view class="day {{weekItem.isCurrent == 1 ? 'current_day' : ''}}">
+                  <text>{{weekItem.day}}</text>
+                </view>
+              </view>
+            </block>
+          </view>
+        </view>
+      </block>
+      <!-- <view class="scroll-block" id='scrollCurrent1'>
+        <view class="scroll-date">
+          <block wx:for="{{dateList}}" wx:key="this">
+            <view class="date">
+              <view class="week">
+                <text>{{item[0]}}</text>
+              </view>
+              <view class="day {{item[2]==1 ? 'current_day' : ''}}">
+                <text>{{item[1]}}</text>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view> -->
+
+    </scroll-view>
+
+    <swiper easing-function="{{swiperEasing}}" bindchange="bindTableChange" current="{{currentWeek}}">
+      <!-- <swiper-item>
+        <view class="table">
+          <view class="day">
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+          </view>
+          <view class="day">
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time select">
+              <text></text>
+            </view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time ready">
+              <text>刘泽中</text>
+            </view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+          </view>
+          <view class="day">
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time complete">
+              <text>常文静</text>
+            </view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time cancel">
+              <text>云龙</text>
+            </view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+          </view>
+          <view class="day">
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time delete">
+              <text>李克强</text>
+            </view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+          </view>
+          <view class="day">
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+            <view class="time onday"></view>
+          </view>
+          <view class="day">
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+            <view class="time"></view>
+          </view>
+          <view class="day all-day">
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+            <view class="time all-day"></view>
+          </view>
+        </view>
+      </swiper-item> -->
+      <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex">
+        <swiper-item>
+          <view class="table">
+            <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
+              <view class="day">
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+                <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}"></view>
+              </view>
+            </block>
+          </view>
+        </swiper-item>
+      </block>
+
+    </swiper>
+  </view>
+</view>

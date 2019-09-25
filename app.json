@@ -1,0 +1,44 @@
+{
+  "pages": [
+    "pages/course/index/index",
+    "pages/students/index/index",
+    
+    
+    "pages/mine/index/index",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/course/index/index",
+        "iconPath": "/images/tabbar-course.png",
+        "selectedIconPath": "/images/tabbar-course-select.png",
+        "text": "课表"
+      },
+      {
+        "pagePath": "pages/students/index/index",
+        "iconPath": "/images/tabbar-students.png",
+        "selectedIconPath": "/images/tabbar-students-select.png",
+        "text": "学员"
+      },
+      {
+        "pagePath": "pages/mine/index/index",
+        "iconPath": "/images/tabbar-mine.png",
+        "selectedIconPath": "/images/tabbar-mine-select.png",
+        "text": "我的"
+      }
+    ],
+    "color": "#C7C7C7",
+    "selectedColor": "#2B313D",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white"
+  }
+}
