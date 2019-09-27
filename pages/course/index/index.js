@@ -70,6 +70,7 @@ Page({
     currentWeek: 0,  // 当前周列表键值
     currentYear: '2019年',  // 当前年
     currentMonth: '10月',  // 当前年
+
   },
 
   /**
@@ -95,8 +96,8 @@ Page({
       }
     });
 
-    var startTime = 8; // 日程开始时间
-    var endTime = 22;  // 日程结束时间
+    var startTime = this.data.startTime; // 日程开始时间
+    var endTime = this.data.endTime;  // 日程结束时间
     var timeList = [];
     for (startTime; startTime <= endTime; startTime++) {
       if (startTime < 10) {
@@ -106,8 +107,6 @@ Page({
       }
     }
     _this.setData({
-      startTime: startTime,
-      endTime: endTime,
       timeList: timeList,
     });
   },
@@ -176,6 +175,74 @@ Page({
     var monthArray = [];
     const beforeWeek = this.data.beforeWeek;
     const aftherWeek = this.data.aftherWeek;
+
+
+    var tempPostList = [
+      {
+        beginTime: "8:00",
+        endTime: "9:00",
+        setp: 1,
+        taskStatus: 1,      // 任务状态   0:待完成，1:已完成，2:待确认，-1:已取消，-2:已删除
+        taskId: 5,          // 任务ID
+        titleColor: "#ffc229",     // 任务背景颜色   0:#ffc229  1 :#5fcd64
+        taskType: 0,        // 任务类型   0:排课，1:休息，2:自定义
+        title: "刘泽中",
+      },
+      {
+        beginTime: "9:30",
+        endTime: "10:30",
+        setp: 1,
+        taskStatus: 0,      // 任务状态
+        taskId: 5,          // 任务ID
+        titleColor: "#5fcd64",     // 任务背景颜色
+        taskType: 0,        // 任务类型
+        title: "孙少平",
+
+      },
+      {
+        beginTime: "12:30",
+        endTime: "13:30",
+        setp: 1,
+        taskStatus: 0,      // 任务状态
+        taskId: 5,          // 任务ID
+        titleColor: "#ff3d3d",     // 任务背景颜色
+        taskType: 0,        // 任务类型
+        title: "金老三",
+      },
+      {
+        beginTime: "13:30",
+        endTime: "14:30",
+        setp: 1,
+        taskStatus: 0,      // 任务状态
+        taskId: 5,          // 任务ID
+        titleColor: "#b2b3b7",     // 任务背景颜色
+        taskType: 0,        // 任务类型
+        title: "田福军",
+
+      },
+      {
+        beginTime: "15:30",
+        endTime: "17:30",
+        setp: 2,
+        taskStatus: 0,      // 任务状态
+        taskId: 5,          // 任务ID
+        titleColor: "#ffc229",     // 任务背景颜色
+        taskType: 0,        // 任务类型
+        title: "田福军",
+      },
+      {
+        beginTime: "19:00",
+        endTime: "21:00",
+        setp: 2,
+        taskStatus: 0,      // 任务状态
+        taskId: 5,          // 任务ID
+        titleColor: "#5fcd64",     // 任务背景颜色
+        taskType: 0,        // 任务类型
+        title: "孙少平",
+      }
+    ];
+
+
     // 获取当前周及后三周日期列表
     for (let i = 0; i <= aftherWeek; i++) {
       var weekArray = [];
@@ -225,175 +292,311 @@ Page({
             'tableList': [],
           }
         }
-        tempWeekList.push(tempDayList); 
+        tempWeekList.push(tempDayList);
       }
 
 
+
       for (let i = 0; i < tempWeekList.length; i++) {
+
         if (tempWeekList[i]['day'] == 24) {
-          tempWeekList[i]['tableList'] = [
-            {
-              date: '2019-09-25 08:00',
-              hasTask: true,
-              taskDuration: 1,    // 时长
-              beginTime: '8:00',  // 开始时间
-              endTime: '9:00',    // 结束时间
-              taskStatus: 1,      // 任务状态   0:待完成，1:已完成，2:待确认，-1:已取消，-2:已删除
-              taskId: 5,          // 任务ID
-              titleColor: "#ffc229",     // 任务背景颜色   0:#ffc229  1 :#5fcd64
-              taskType: 0,        // 任务类型   0:排课，1:休息，2:自定义
-              title: "刘泽中",
-              beginHour: '8',
-              beginMinute: '00',
-              endHour: '9',
-              endMinute: '00',
-              height: '104',
-              paddingBottom: '10',
-            },
-            {
-              date: '2019-09-25 09:00',
-              hasTask: false,
-              taskDuration: 0.5,
-              height: '52',
-              paddingBottom: '0',
-            },
-            {
-              date: '2019-09-25 10:00',
-              hasTask: true,
-              taskDuration: 1,    // 时长
-              beginTime: '10:00',  // 开始时间
-              endTime: '11:00',    // 结束时间
-              taskStatus: 0,      // 任务状态
-              taskId: 5,          // 任务ID
-              titleColor: "#5fcd64",     // 任务背景颜色
-              taskType: 0,        // 任务类型
-              title: "孙少平",
-              beginHour: '10',
-              beginMinute: '00',
-              endHour: '11',
-              endMinute: '00',
-              height: '114',
-              paddingBottom: '0',
-            },
-            {
-              date: '2019-09-25 11:00',
-              hasTask: false,
-              taskDuration: 1,
-              height: '52',
-              paddingBottom: '10',
-            },
-            {
-              date: '2019-09-25 12:00',
-              hasTask: false,
-              taskDuration: 1,
-              height: '104',
-              paddingBottom: '10',
-            },
-            {
-              date: '2019-09-25 13:00',
-              hasTask: false,
-              taskDuration: 0.5,
-              height: '52',
-              paddingBottom: '0',
-            },
-            {
-              date: '2019-09-25 14:00',
-              hasTask: true,
-              taskDuration: 1,    // 时长
-              beginTime: '14:00',  // 开始时间
-              endTime: '15:00',    // 结束时间
-              taskStatus: 0,      // 任务状态
-              taskId: 5,          // 任务ID
-              titleColor: "#ff3d3d",     // 任务背景颜色
-              taskType: 0,        // 任务类型
-              title: "金老三",
-              beginHour: '14',
-              beginMinute: '00',
-              endHour: '15',
-              endMinute: '00',
-              height: '114',
-              paddingBottom: '0',
-            },
-            
-            {
-              date: '2019-09-25 15:00',
-              hasTask: true,
-              taskDuration: 1,
-              beginTime: '14:00',  // 开始时间
-              endTime: '15:00',    // 结束时间
-              taskStatus: 0,      // 任务状态
-              taskId: 5,          // 任务ID
-              titleColor: "#b2b3b7",     // 任务背景颜色
-              taskType: 0,        // 任务类型
-              title: "田福军",
-              beginHour: '14',
-              beginMinute: '00',
-              endHour: '15',
-              endMinute: '00',
-              height: '114',
-              paddingBottom: '0',
-            },
-            {
-              date: '2019-09-25 16:00',
-              hasTask: false,
-              taskDuration: 1,
-              height: '52',
-              paddingBottom: '10',
-            },
-            {
-              date: '2019-09-25 16:00',
-              hasTask: false,
-              taskDuration: 1,
-              height: '104',
-              paddingBottom: '10',
-            },
-            {
-              date: '2019-09-25 16:00',
-              hasTask: false,
-              taskDuration: 1,
-              height: '104',
-              paddingBottom: '10',
-            },
-            {
-              date: '2019-09-25 19:00',
-              hasTask: false,
-              taskDuration: 1,
-              height: '104',
-              paddingBottom: '10',
-            },
-            {
-              date: '2019-09-25 10:00',
-              hasTask: true,
-              taskDuration: 1,    // 时长
-              beginTime: '10:00',  // 开始时间
-              endTime: '11:00',    // 结束时间
-              taskStatus: 0,      // 任务状态
-              taskId: 5,          // 任务ID
-              titleColor: "#5fcd64",     // 任务背景颜色
-              taskType: 0,        // 任务类型
-              title: "孙少平",
-              beginHour: '10',
-              beginMinute: '00',
-              endHour: '11',
-              endMinute: '00',
-              height: '332',
-              paddingBottom: '10',
-            },
-            {
-              date: '2019-09-25 22:00',
-              hasTask: false,
-              taskDuration: 1, 
-              height: '104',
-              paddingBottom: '10',
-            },
-            {
-              date: '2019-09-25 22:00',
-              hasTask: false,
-              taskDuration: 1,
-              height: '104',
-              paddingBottom: '10',
-            },
-          ]
+
+
+          for (let j = this.data.startTime; j <= this.data.endTime; j++) {
+            var hasTask = -1;
+            var tempTime = [];
+            // console.log(j);
+            for (let k = 0; k < tempPostList.length; k++) {
+
+              if (tempPostList[k]['beginTime'] == (j + ':00')) {
+                // 有整点任务
+                console.log('整点');
+                hasTask = k;
+                tempTime = {
+                  hasTask: true,
+                  taskDuration: tempPostList[k]['setp'],    // 时长
+                  taskId: tempPostList[k]['taskId'],          // 任务ID
+                  titleColor: tempPostList[k]['titleColor'],     // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                  taskType: tempPostList[k]['taskType'],        // 任务类型   0:排课，1:休息，2:自定义
+                  title: tempPostList[k]['title'],
+                  height: 104 * tempPostList[k]['setp'] + 10 * (tempPostList[k]['setp'] - 1),
+                  paddingBottom: '10',
+                }
+                tempWeekList[i]['tableList'].push(tempTime);
+                j = j + tempPostList[k]['setp'] - 1;
+                console.log(104 * tempPostList[k]['setp'] + 10 * (tempPostList[k]['setp'] - 1));
+                break;
+              } else if (tempPostList[k]['beginTime'] == (j + ':30')) {
+                // 有半点任务
+                // 判断是否需要半个空白格
+                console.log('半点任务');
+                hasTask = k;
+                var hasEndTime = -1;
+                for (let p = 0; p < tempPostList.length; p++) {
+                  if (tempPostList[p]['endTime'] == (j + ':30')) {
+                    hasEndTime = p;
+                  }
+                }
+                if (hasEndTime == -1) {
+                  // 输出空白格
+                  var tempTime0 = {
+                    hasTask: false,
+                    height: '52',
+                    paddingBottom: '0',
+                  }
+                  tempWeekList[i]['tableList'].push(tempTime0);
+                }
+                // 输出任务快
+                tempTime = {
+                  hasTask: true,
+                  taskDuration: tempPostList[k]['setp'],    // 时长
+                  taskId: tempPostList[k]['taskId'],          // 任务ID
+                  titleColor: tempPostList[k]['titleColor'],     // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                  taskType: tempPostList[k]['taskType'],        // 任务类型   0:排课，1:休息，2:自定义
+                  title: tempPostList[k]['title'],
+                  height: (104 * tempPostList[k]['setp']) + (10 * (tempPostList[k]['setp'])),
+                  paddingBottom: '0',
+                }
+                tempWeekList[i]['tableList'].push(tempTime);
+                j = j + tempPostList[k]['setp'] - 1;
+                break;
+              } else if (tempPostList[k]['endTime'] == (j + ':30')) {
+                // 有结束任务
+                // 输出半个空格
+                console.log('有结束任务');
+                var hasBeginTime = -1;
+                for (let p = 0; p < tempPostList.length; p++) {
+                  if (tempPostList[p]['beginTime'] == (j + ':30')) {
+                    hasBeginTime = p;
+                  }
+                }
+                if (hasBeginTime == -1) {
+                  tempTime = {
+                    hasTask: false,
+                    height: '52',
+                    paddingBottom: '10',
+                  }
+                  tempWeekList[i]['tableList'].push(tempTime);
+                }
+                hasTask = k;
+
+              }
+            }
+
+            if (hasTask == -1) {
+              // 输出默认方块，无任务
+              tempTime = {
+                hasTask: false,
+                height: '104',
+                paddingBottom: '10',
+              }
+              tempWeekList[i]['tableList'].push(tempTime);
+            }
+            // } else {
+            //   // 判断是整点任务还是半点任务
+            //   if (tempPostList[hasTask]['beginTime'] == (j + ':00')) {
+            //     // 整点任务
+            //     tempTime = {
+            //       hasTask: true,
+            //       taskDuration: tempPostList[hasTask]['setp'],    // 时长
+            //       taskId: tempPostList[hasTask]['taskId'],          // 任务ID
+            //       titleColor: tempPostList[hasTask]['titleColor'],     // 任务背景颜色   0:#ffc229  1 :#5fcd64
+            //       taskType: tempPostList[hasTask]['taskType'],        // 任务类型   0:排课，1:休息，2:自定义
+            //       title: tempPostList[hasTask]['title'],
+            //       height: 104 * tempPostList[hasTask]['setp'] + 10 * (tempPostList[hasTask]['setp'] - 1),
+            //       paddingBottom: '10',
+            //     }
+            //   } else if (tempPostList[hasTask]['beginTime'] == (j + ':30')) {
+            //     // 半点任务
+
+            //     // 输入半个方块
+            //     tempTime = {
+            //       hasTask: false,
+            //       height: '52',
+            //       paddingBottom: '0',
+            //     }
+            //     // 输入任务
+            //     tempTime = {
+            //       hasTask: true,
+            //       taskDuration: tempPostList[hasTask]['setp'],    // 时长
+            //       taskId: tempPostList[hasTask]['taskId'],          // 任务ID
+            //       titleColor: tempPostList[hasTask]['titleColor'],     // 任务背景颜色   0:#ffc229  1 :#5fcd64
+            //       taskType: tempPostList[hasTask]['taskType'],        // 任务类型   0:排课，1:休息，2:自定义
+            //       title: tempPostList[hasTask]['title'],
+            //       height: 104 * tempPostList[hasTask]['setp'] + 10 * (tempPostList[hasTask]['setp'] - 1),
+            //       paddingBottom: 0,
+            //     }
+
+            //   }
+
+            // }
+          }
+          console.log(tempWeekList[i]['tableList']);
+
+
+          // tempWeekList[i]['tableList'] = [
+          //   {
+          //     date: '2019-09-25 08:00',
+          //     hasTask: true,
+          //     taskDuration: 1,    // 时长
+          //     beginTime: '8:00',  // 开始时间
+          //     endTime: '9:00',    // 结束时间
+          //     taskStatus: 1,      // 任务状态   0:待完成，1:已完成，2:待确认，-1:已取消，-2:已删除
+          //     taskId: 5,          // 任务ID
+          //     titleColor: "#ffc229",     // 任务背景颜色   0:#ffc229  1 :#5fcd64
+          //     taskType: 0,        // 任务类型   0:排课，1:休息，2:自定义
+          //     title: "刘泽中",
+          //     beginHour: '8',
+          //     beginMinute: '00',
+          //     endHour: '9',
+          //     endMinute: '00',
+          //     height: '104',
+          //     paddingBottom: '10',
+          //   },
+          //   {
+          //     date: '2019-09-25 09:00',
+          //     hasTask: false,
+          //     taskDuration: 0.5,
+          //     height: '52',
+          //     paddingBottom: '0',
+          //   },
+          //   {
+          //     date: '2019-09-25 10:00',
+          //     hasTask: true,
+          //     taskDuration: 1,    // 时长
+          //     beginTime: '10:00',  // 开始时间
+          //     endTime: '11:00',    // 结束时间
+          //     taskStatus: 0,      // 任务状态
+          //     taskId: 5,          // 任务ID
+          //     titleColor: "#5fcd64",     // 任务背景颜色
+          //     taskType: 0,        // 任务类型
+          //     title: "孙少平",
+          //     beginHour: '10',
+          //     beginMinute: '00',
+          //     endHour: '11',
+          //     endMinute: '00',
+          //     height: '114',
+          //     paddingBottom: '0',
+          //   },
+          //   {
+          //     date: '2019-09-25 11:00',
+          //     hasTask: false,
+          //     taskDuration: 1,
+          //     height: '52',
+          //     paddingBottom: '10',
+          //   },
+          //   {
+          //     date: '2019-09-25 12:00',
+          //     hasTask: false,
+          //     taskDuration: 1,
+          //     height: '104',
+          //     paddingBottom: '10',
+          //   },
+          //   {
+          //     date: '2019-09-25 13:00',
+          //     hasTask: false,
+          //     taskDuration: 0.5,
+          //     height: '52',
+          //     paddingBottom: '0',
+          //   },
+          //   {
+          //     date: '2019-09-25 14:00',
+          //     hasTask: true,
+          //     taskDuration: 1,    // 时长
+          //     beginTime: '14:00',  // 开始时间
+          //     endTime: '15:00',    // 结束时间
+          //     taskStatus: 0,      // 任务状态
+          //     taskId: 5,          // 任务ID
+          //     titleColor: "#ff3d3d",     // 任务背景颜色
+          //     taskType: 0,        // 任务类型
+          //     title: "金老三",
+          //     beginHour: '14',
+          //     beginMinute: '00',
+          //     endHour: '15',
+          //     endMinute: '00',
+          //     height: '114',
+          //     paddingBottom: '0',
+          //   },
+
+          //   {
+          //     date: '2019-09-25 15:00',
+          //     hasTask: true,
+          //     taskDuration: 1,
+          //     beginTime: '14:00',  // 开始时间
+          //     endTime: '15:00',    // 结束时间
+          //     taskStatus: 0,      // 任务状态
+          //     taskId: 5,          // 任务ID
+          //     titleColor: "#b2b3b7",     // 任务背景颜色
+          //     taskType: 0,        // 任务类型
+          //     title: "田福军",
+          //     beginHour: '14',
+          //     beginMinute: '00',
+          //     endHour: '15',
+          //     endMinute: '00',
+          //     height: '114',
+          //     paddingBottom: '0',
+          //   },
+          //   {
+          //     date: '2019-09-25 16:00',
+          //     hasTask: false,
+          //     taskDuration: 1,
+          //     height: '52',
+          //     paddingBottom: '10',
+          //   },
+          //   {
+          //     date: '2019-09-25 16:00',
+          //     hasTask: false,
+          //     taskDuration: 1,
+          //     height: '104',
+          //     paddingBottom: '10',
+          //   },
+          //   {
+          //     date: '2019-09-25 16:00',
+          //     hasTask: false,
+          //     taskDuration: 1,
+          //     height: '104',
+          //     paddingBottom: '10',
+          //   },
+          //   {
+          //     date: '2019-09-25 19:00',
+          //     hasTask: false,
+          //     taskDuration: 1,
+          //     height: '104',
+          //     paddingBottom: '10',
+          //   },
+          //   {
+          //     date: '2019-09-25 10:00',
+          //     hasTask: true,
+          //     taskDuration: 1,    // 时长
+          //     beginTime: '10:00',  // 开始时间
+          //     endTime: '11:00',    // 结束时间
+          //     taskStatus: 0,      // 任务状态
+          //     taskId: 5,          // 任务ID
+          //     titleColor: "#5fcd64",     // 任务背景颜色
+          //     taskType: 0,        // 任务类型
+          //     title: "孙少平",
+          //     beginHour: '10',
+          //     beginMinute: '00',
+          //     endHour: '11',
+          //     endMinute: '00',
+          //     height: '332',
+          //     paddingBottom: '10',
+          //   },
+          //   {
+          //     date: '2019-09-25 22:00',
+          //     hasTask: false,
+          //     taskDuration: 1,
+          //     height: '104',
+          //     paddingBottom: '10',
+          //   },
+          //   {
+          //     date: '2019-09-25 22:00',
+          //     hasTask: false,
+          //     taskDuration: 1,
+          //     height: '104',
+          //     paddingBottom: '10',
+          //   },
+          // ]
         } else {
           tempWeekList[i]['tableList'] = [
             {
