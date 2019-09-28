@@ -1,64 +1,87 @@
 <!--pages/course/index/index.wxml-->
-<view class="navigation-bar">
-  <view class="navigation-bar__placeholder {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px;visibility: hidden;"></view>
-  <view class="navigation-bar__inner {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px; color: {{navigation_color}};background: {{navigation_background}};{{innerPaddingRight}};{{innerWidth}};">
-    <view class='navigation-bar__left' style="{{leftWidth}}">
-      <view class="navigation-bar__buttons">
-        <view bindtap="back" class="navigation-bar__button navigation-bar__btn_goback"></view>
-      </view>
-    </view>
-    <view class='navigation-bar__center'>
-      <text>日历排课</text>
-    </view>
-    <view class='navigation-bar__right'>
-    </view>
-  </view>
-</view>
+<view class="container-page" bindtap="bindCloseMark">
 
-<view class="course">
-  <view class="course_left">
-    <view class="date date_fixed">
-      <view class="year">
-        <text>{{currentYear}}</text>
-      </view>
-      <view class="month">
-        <text>{{currentMonth}}</text>
-      </view>
-    </view>
-    <view class="time">
-      <block wx:for="{{timeList}}" wx:key="this">
-        <view class="hour">
-          <text>{{item.time}}</text>
-        </view>
-      </block>
-    </view>
-  </view>
 
-  <view class="course_right">
-    <scroll-view class="course_date" scroll-x scroll-into-view="{{scrollData}}">
-      <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex">
-        <view class="scroll-block" id="scrollData{{courseIndex}}">
-          <view class="scroll-date">
-            <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
-              <view class="date">
-                <view class="week">
-                  <text wx:if="{{weekIndex == 0}}">一</text>
-                  <text wx:elif="{{weekIndex == 1}}">二</text>
-                  <text wx:elif="{{weekIndex == 2}}">三</text>
-                  <text wx:elif="{{weekIndex == 3}}">四</text>
-                  <text wx:elif="{{weekIndex == 4}}">五</text>
-                  <text wx:elif="{{weekIndex == 5}}">六</text>
-                  <text wx:elif="{{weekIndex == 6}}">日</text>
-                </view>
-                <view class="day {{weekItem.isCurrent == 1 ? 'current_day' : ''}}">
-                  <text>{{weekItem.day}}</text>
-                </view>
-              </view>
-            </block>
+  <view class="navigation-bar">
+    <view class="navigation-bar__placeholder {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px;visibility: hidden;"></view>
+    <view class="navigation-bar__inner {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px; color: {{navigation_color}};background: {{navigation_background}};{{innerPaddingRight}};{{innerWidth}};">
+      <view class='navigation-bar__left' style="{{leftWidth}}">
+        <view class="navigation-bar__buttons" catchtap="catchMenuButton">
+          <view bindtap="back" class="navigation-bar__button navigation-bar__btn_goback"></view>
+          <view class="navigation-bar-menu"  catchtap="catchMenuButtonBubbling" wx:if="{{showMenuButton}}">
+            <view class="bar-menu-button-top"></view>
+            <view class="bar-menu-button" catchtap="catchChangeView">
+              <image src='/images/course-menu-change.png'></image>
+              <text>切换视图</text>
+            </view>
+            <view class="bar-menu-button" catchtap="catchGenerateImages">
+              <image src='/images/course-menu-image.png'></image>
+              <text>生成图片</text>
+            </view>
+            <view class="bar-menu-button" catchtap="catchNavigateOrder">
+              <image src='/images/course-menu-message.png'></image>
+              <text>预约消息</text>
+            </view>
+            <view class="bar-menu-button" catchtap="catchCurrentTableChange">
+              <image src='/images/course-menu-change.png'></image>
+              <text>回到当前</text>
+            </view>
+            <view class="bar-menu-button-bottom"></view>
           </view>
         </view>
-      </block>
-      <!-- <view class="scroll-block" id='scrollCurrent1'>
+      </view>
+      <view class='navigation-bar__center'>
+        <text>日历排课</text>
+      </view>
+      <view class='navigation-bar__right'>
+      </view>
+    </view>
+    </view>
+  
+  <view class="course">
+    <view class="course_left">
+      <view class="date date_fixed">
+        <view class="year">
+          <text>{{currentYear}}</text>
+        </view>
+        <view class="month">
+          <text>{{currentMonth}}</text>
+        </view>
+      </view>
+      <view class="time">
+        <block wx:for="{{timeList}}" wx:key="this">
+          <view class="hour">
+            <text>{{item.time}}</text>
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view class="course_right">
+      <scroll-view class="course_date" scroll-x scroll-into-view="{{scrollData}}">
+        <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex">
+          <view class="scroll-block" id="scrollData{{courseIndex}}">
+            <view class="scroll-date">
+              <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
+                <view class="date">
+                  <view class="week">
+                    <text wx:if="{{weekIndex == 0}}">一</text>
+                    <text wx:elif="{{weekIndex == 1}}">二</text>
+                    <text wx:elif="{{weekIndex == 2}}">三</text>
+                    <text wx:elif="{{weekIndex == 3}}">四</text>
+                    <text wx:elif="{{weekIndex == 4}}">五</text>
+                    <text wx:elif="{{weekIndex == 5}}">六</text>
+                    <text wx:elif="{{weekIndex == 6}}">日</text>
+                  </view>
+                  <view class="day {{weekItem.isCurrent == 1 ? 'current_day' : ''}}">
+                    <text>{{weekItem.day}}</text>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+        <!-- <view class="scroll-block" id='scrollCurrent1'>
         <view class="scroll-date">
           <block wx:for="{{dateList}}" wx:key="this">
             <view class="date">
@@ -73,10 +96,10 @@
         </view>
       </view> -->
 
-    </scroll-view>
+      </scroll-view>
 
-    <swiper easing-function="{{swiperEasing}}" bindchange="bindTableChange" current="{{currentWeek}}">
-      <!-- <swiper-item>
+      <swiper easing-function="{{swiperEasing}}" bindchange="bindTableChange" current="{{currentWeek}}">
+        <!-- <swiper-item>
         <view class="table">
           <view class="day">
             <view class="time"></view>
@@ -209,29 +232,31 @@
           </view>
         </view>
       </swiper-item> -->
-      <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex" wx:key="this">
-        <swiper-item>
-          <view class="table">
-            <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
-              <view class="day">
-                <block wx:for="{{weekItem.tableList}}" wx:key="this" wx:for-item="tableItem" wx:for-index="tableIndex">
-                  <block wx:if="{{tableItem.hasTask == true}}">
-                    <!-- 当前时间段有任务 -->
-                    <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;">
-                      <text>{{tableItem.title}}</text>
-                    </view>
+        <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex" wx:key="this">
+          <swiper-item>
+            <view class="table">
+              <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
+                <view class="day">
+                  <block wx:for="{{weekItem.tableList}}" wx:key="this" wx:for-item="tableItem" wx:for-index="tableIndex">
+                    <block wx:if="{{tableItem.hasTask == true}}">
+                      <!-- 当前时间段有任务 -->
+                      <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;">
+                        <text>{{tableItem.title}}</text>
+                      </view>
+                    </block>
+                    <block wx:else>
+                      <!-- 当前时间段没有任务 -->
+                      <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} " style="margin-bottom: {{tableItem.paddingBottom}}rpx; height:{{tableItem.height}}rpx"></view>
+                    </block>
+
                   </block>
-                  <block wx:else>
-                  <!-- 当前时间段没有任务 -->
-                    <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} " style="margin-bottom: {{tableItem.paddingBottom}}rpx; height:{{tableItem.height}}rpx" ></view>
-                  </block>
-                  
-                </block>
-              </view>
-            </block>
-          </view>
-        </swiper-item>
-      </block>
-    </swiper>
+                </view>
+              </block>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
   </view>
+  
 </view>

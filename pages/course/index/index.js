@@ -70,7 +70,7 @@ Page({
     currentWeek: 0,  // 当前周列表键值
     currentYear: '2019年',  // 当前年
     currentMonth: '10月',  // 当前年
-
+    showMenuButton: false, // 左上角菜单键
   },
 
   /**
@@ -1088,4 +1088,39 @@ Page({
     }
     wx.vibrateShort();
   },
-}) 
+  // 点击空白区域关闭弹窗
+  bindCloseMark: function (event) {
+    console.log('关闭所有mark');
+    this.setData({
+      showMenuButton: false,
+    });
+  },
+  // 开启关闭菜单弹窗
+  catchMenuButton: function (event) {
+    this.setData({
+      showMenuButton: !this.data.showMenuButton,
+    });
+    wx.vibrateShort();
+  },
+  // 点击弹窗自身，阻止冒泡关闭弹窗
+  catchMenuButtonBubbling: function (event) {
+    console.log('点击弹窗本身，阻止冒泡');
+  },
+  // 切换视图
+  catchChangeView: function (event) {
+    console.log('切换视图');
+  },
+  // 生成图片
+  catchGenerateImages: function (enent) {
+    console.log('生成图片');
+  },
+  // 打开预约消息
+  catchNavigateOrder: function (event) {
+    console.log('打开预约消息');
+  },
+  // 回到当前
+  catchCurrentTableChange: function (event) {
+    console.log('回到当前');
+  }
+
+});
