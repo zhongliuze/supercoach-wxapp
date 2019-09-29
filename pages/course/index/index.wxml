@@ -5,29 +5,28 @@
   <view class="navigation-bar">
     <view class="navigation-bar__placeholder {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px;visibility: hidden;"></view>
     <view class="navigation-bar__inner {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px; color: {{navigation_color}};background: {{navigation_background}};{{innerPaddingRight}};{{innerWidth}};">
-      <view class='navigation-bar__left' style="{{leftWidth}}">
-        <view class="navigation-bar__buttons" catchtap="catchMenuButton">
-          <view bindtap="back" class="navigation-bar__button navigation-bar__btn_goback"></view>
-          <view class="navigation-bar-menu"  catchtap="catchMenuButtonBubbling" wx:if="{{showMenuButton}}">
-            <view class="bar-menu-button-top"></view>
-            <view class="bar-menu-button" catchtap="catchChangeView">
-              <image src='/images/course-menu-change.png'></image>
-              <text>切换视图</text>
-            </view>
-            <view class="bar-menu-button" catchtap="catchGenerateImages">
-              <image src='/images/course-menu-image.png'></image>
-              <text>生成图片</text>
-            </view>
-            <view class="bar-menu-button" catchtap="catchNavigateOrder">
-              <image src='/images/course-menu-message.png'></image>
-              <text>预约消息</text>
-            </view>
-            <view class="bar-menu-button" catchtap="catchCurrentTableChange">
-              <image src='/images/course-menu-change.png'></image>
-              <text>回到当前</text>
-            </view>
-            <view class="bar-menu-button-bottom"></view>
+      <!-- <view class='navigation-bar__left' style="{{leftWidth}}" catchtap="catchMenuButton"> -->
+      <view class='navigation-bar__left' style="width:102px;" catchtap="catchMenuButton">
+        <view bindtap="back" class="navigation-bar__btn_goback"></view>
+        <view class="navigation-bar-menu" catchtap="catchMenuButtonBubbling" wx:if="{{showMenuButton}}">
+          <view class="bar-menu-button-top"></view>
+          <view class="bar-menu-button" catchtap="catchChangeView">
+            <image src='/images/course-menu-change.png'></image>
+            <text>切换视图</text>
           </view>
+          <view class="bar-menu-button" catchtap="catchGenerateImages">
+            <image src='/images/course-menu-image.png'></image>
+            <text>生成图片</text>
+          </view>
+          <view class="bar-menu-button" catchtap="catchNavigateOrder">
+            <image src='/images/course-menu-message.png'></image>
+            <text>预约消息</text>
+          </view>
+          <view class="bar-menu-button" catchtap="catchCurrentTableChange" wx:if="{{currentWeek != currentTable}}">
+            <image src='/images/course-menu-change.png'></image>
+            <text>返回本周</text>
+          </view>
+          <view class="bar-menu-button-bottom"></view>
         </view>
       </view>
       <view class='navigation-bar__center'>
@@ -36,8 +35,8 @@
       <view class='navigation-bar__right'>
       </view>
     </view>
-    </view>
-  
+  </view>
+
   <view class="course">
     <view class="course_left">
       <view class="date date_fixed">
@@ -98,7 +97,7 @@
 
       </scroll-view>
 
-      <swiper easing-function="{{swiperEasing}}" bindchange="bindTableChange" current="{{currentWeek}}">
+      <swiper easing-function="{{swiperEasing}}" bindchange="bindTableChange" current="{{currentTable}}">
         <!-- <swiper-item>
         <view class="table">
           <view class="day">
@@ -231,18 +230,23 @@
             <view class="time all-day"></view>
           </view>
         </view>
+        
       </swiper-item> -->
         <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex" wx:key="this">
           <swiper-item>
+          <view style="height: 1700rpx;width: 650rpx;background-color:red;display: flex;flex-direction: column;">
             <view class="table">
               <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
                 <view class="day">
-                  <block wx:for="{{weekItem.tableList}}" wx:key="this" wx:for-item="tableItem" wx:for-index="tableIndex">
+                  <block wx:for="{{weekItem.tableList}}" wx:key="this" wx:for-item="tableItem" wx:for-index="">
                     <block wx:if="{{tableItem.hasTask == true}}">
                       <!-- 当前时间段有任务 -->
-                      <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;">
-                        <text>{{tableItem.title}}</text>
-                      </view>
+                     
+                        <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;">
+                          <text>{{tableItem.title}}</text>
+                        </view>
+                   
+
                     </block>
                     <block wx:else>
                       <!-- 当前时间段没有任务 -->
@@ -253,10 +257,12 @@
                 </view>
               </block>
             </view>
+             <view class="table-mark">测试</view>
+             </view>
           </swiper-item>
         </block>
       </swiper>
     </view>
   </view>
-  
+
 </view>
