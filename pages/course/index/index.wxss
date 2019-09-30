@@ -171,12 +171,11 @@ page {
 .course .course_left .time {
   display: flex;
   flex-direction: column;
-  padding-top: 32rpx;
+  padding-top: 15rpx;
   border-right: 1rpx solid #e5e5e5;
   width: 94rpx;
   justify-content: center;
   align-items: center;
-  margin-top: 130rpx;
   height: 1700rpx;
 }
 
@@ -270,9 +269,8 @@ page {
 .course .course_right .table {
   display: flex;
   flex-direction: row;
-  padding-top: 32rpx;
+  padding-top: 20rpx;
   padding-left: 15rpx;
-  margin-top: 130rpx;
   height: 1700rpx;
   width: 650rpx;
 }
@@ -343,14 +341,33 @@ swiper {
 }
 
 .table-mark {
-  background-color:green;
+  background-color:#ffffff;
   position:absolute;
-  top: 0rpx;
-  left: 0rpx;
-  width:281rpx;
+  width:266rpx;
   height:402rpx;
   
-  box-shadow:0rpx 10rpx 24rpx 0rpx rgba(15,22,15,0.22);
+  box-shadow:0rpx 5rpx 20rpx 0rpx rgba(15,22,15,0.22);
   border-radius:10rpx;
- 
+  display: flex;
+  flex-direction: column;
+}
+
+.table-mark .content {
+  width:266rpx;
+  height:402rpx;
+}
+
+.table-mark .arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16rpx;
+  height: 24rpx;
+  position: absolute;
+  /* top: 46%; */
+}
+
+.table-mark .arrow image {
+  width: 16rpx;
+  height: 24rpx;
 }

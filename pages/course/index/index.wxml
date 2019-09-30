@@ -47,6 +47,7 @@
           <text>{{currentMonth}}</text>
         </view>
       </view>
+      <view style="width:94rpx;height: 146rpx;"></view>
       <view class="time">
         <block wx:for="{{timeList}}" wx:key="this">
           <view class="hour">
@@ -80,23 +81,8 @@
             </view>
           </view>
         </block>
-        <!-- <view class="scroll-block" id='scrollCurrent1'>
-        <view class="scroll-date">
-          <block wx:for="{{dateList}}" wx:key="this">
-            <view class="date">
-              <view class="week">
-                <text>{{item[0]}}</text>
-              </view>
-              <view class="day {{item[2]==1 ? 'current_day' : ''}}">
-                <text>{{item[1]}}</text>
-              </view>
-            </view>
-          </block>
-        </view>
-      </view> -->
-
       </scroll-view>
-
+      <view style="width:656rpx;height: 155rpx;"></view>
       <swiper easing-function="{{swiperEasing}}" bindchange="bindTableChange" current="{{currentTable}}">
         <!-- <swiper-item>
         <view class="table">
@@ -234,31 +220,35 @@
       </swiper-item> -->
         <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex" wx:key="this">
           <swiper-item>
-          <view style="height: 1700rpx;width: 650rpx;background-color:red;display: flex;flex-direction: column;">
-            <view class="table">
-              <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
-                <view class="day">
-                  <block wx:for="{{weekItem.tableList}}" wx:key="this" wx:for-item="tableItem" wx:for-index="">
-                    <block wx:if="{{tableItem.hasTask == true}}">
-                      <!-- 当前时间段有任务 -->
-                     
-                        <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;">
+            <view style="height: 1700rpx;width: 650rpx;display: flex;flex-direction: column;">
+              <view class="table">
+                <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
+                  <view class="day">
+                    <block wx:for="{{weekItem.tableList}}" wx:key="this" wx:for-item="tableItem" wx:for-index="tableIndex">
+                      <block wx:if="{{tableItem.hasTask == true}}">
+                        <!-- 当前时间段有任务 -->
+
+                        <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;" catchtap="catchTableMark" data-tableIndex="{{tableIndex}}" data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}">
                           <text>{{tableItem.title}}</text>
                         </view>
-                   
+
+
+                      </block>
+                      <block wx:else>
+                        <!-- 当前时间段没有任务 -->
+                        <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} " style="margin-bottom: {{tableItem.paddingBottom}}rpx; height:{{tableItem.height}}rpx" catchtap="catchTableMark" data-tableIndex="{{tableIndex}}" data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}"></view>
+                      </block>
 
                     </block>
-                    <block wx:else>
-                      <!-- 当前时间段没有任务 -->
-                      <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} " style="margin-bottom: {{tableItem.paddingBottom}}rpx; height:{{tableItem.height}}rpx"></view>
-                    </block>
-
-                  </block>
-                </view>
-              </block>
+                  </view>
+                </block>
+              </view>
+              <view class="table-mark" wx:if="{{showTableButton}}" style="{{tableButtonStyle}}">
+                <view class="content">测试</view>
+                <view class="arrow" style="right: -15rpx;" wx:if="{{showTableDirection == 'left'}}"><image src="/images/course-table-arrow-right.png"></image></view>
+                <view class="arrow" style="left: -15rpx;" wx:else="{{showTableDirection == 'right'}}"><image src="/images/course-table-arrow-left.png"></image></view>
+              </view>
             </view>
-             <view class="table-mark">测试</view>
-             </view>
           </swiper-item>
         </block>
       </swiper>
