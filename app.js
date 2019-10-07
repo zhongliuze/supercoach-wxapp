@@ -1,9 +1,14 @@
 //app.js
 import $ from 'common/common.js';
 App({
+  data: {
+    deviceInfo: {}
+  },
   onLaunch: function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
+    this.data.deviceInfo = wx.getSystemInfoSync();
+    console.log(this.data.deviceInfo);
+    var logs = wx.getStorageSync('logs' ) || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 

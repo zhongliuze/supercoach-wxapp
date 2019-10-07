@@ -1,32 +1,10 @@
-<scroll-view scroll-x="true" class="weui-navbar">
-  <block wx:for-items="{{tabs}}">
-    <view id="{{index}}" class="{{activeIndex == index ?'item_on':''}} default-item" bindtap="tabClick" style="width:{{tabW}}px">
-      {{item}}
-    </view>
-  </block>
-  <view class="weui-navbar-slider" style="transform:translateX({{slideOffset}}px);"></view>
-</scroll-view>
-<view class="rec" />
-<swiper current="{{activeIndex}}" class="swiper-box" duration="100" bindchange="bindChange">
-  <swiper-item class="swiper-item">
-    <view class="slide-view">tab0</view>
-  </swiper-item>
-  <swiper-item class="swiper-item">
-    <view class="slide-view">tab1</view>
-  </swiper-item>
-  <swiper-item class="swiper-item">
-    <view class="slide-view">tab2</view>
-  </swiper-item>
-  <swiper-item class="swiper-item">
-    <view class="slide-view">tab3</view>
-  </swiper-item>
-  <swiper-item class="swiper-item">
-    <view class="slide-view">tab4</view>
-  </swiper-item>
-  <swiper-item class="swiper-item">
-    <view class="slide-view">tab5</view>
-  </swiper-item>
-  <swiper-item class="swiper-item">
-    <view class="slide-view">tab6</view>
-  </swiper-item>
-</swiper>
+<view wx:for="{{items}}" wx:key="{{index}}">
+  <movable-area class='movable-area'>
+    <movable-view direction="horizontal" class='movable-view'>
+      <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+        <view class="content" bindtap='goDetail'>{{item.content}}</view>
+        <view class="del" catchtap="del" data-index="{{index}}">删除</view>
+      </view>
+    </movable-view>
+  </movable-area>
+</view>

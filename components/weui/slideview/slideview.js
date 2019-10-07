@@ -105,7 +105,12 @@ Component({
         },
         buttons: {
             type: Array,
-            value: [],
+          value: [{
+            type: 'warn',
+            text: '删除',
+            extClass: 'test',
+            src: '', // icon的路径
+          }],
             observer: function observer(newVal) {
                 this.addClassNameForButton();
             }

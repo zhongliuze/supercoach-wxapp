@@ -1,0 +1,33 @@
+<!--pages/course/course/course.wxml-->
+<view class="container-page">
+  <view class="course-date">
+    <view class="date-info">
+      <view class="start-time">
+        <text class="day">07月15日 周一</text>
+        <text class="time">18:00</text>
+      </view>
+      <view class="arrow-icon">
+        <image src="/images/course-course-arrow.png"></image>
+      </view>
+      <view class="end-time">
+        <text class="day">07月15日 周一</text>
+        <text class="time">19:00</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="course-student">
+    <view class="icon">
+      <image src="/images/course-course-student.icon"></image>
+    </view>
+    <view class="titile">
+      <text>上课学员</text>
+    </view>
+    <view class="content">
+      <text>请选择</text>
+    </view>
+    <view class="arrow">
+      <image src="/images/arrow-right.png"></image>
+    </view>
+  </view>
+</view>

@@ -1,50 +1,80 @@
-var app = getApp();
-var mtabW;
+var app = getApp()
 Page({
   data: {
-    tabs: ["综合与绘画", "艺术喷漆", "泥塑", "纸面绘画", "布面绘画", "中国油画", "水墨画"],
-    activeIndex: 0,
-    slideOffset: 0,
-    tabW: 0
+    items: [],
+    startX: 0, //开始坐标
+    startY: 0
   },
-  //事件处理函数
   onLoad: function () {
-    var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        mtabW = res.windowWidth / 4; //设置tab的宽度
-        that.setData({
-          tabW: mtabW
-        })
-      }
-    });
-
-  },
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
+    for (var i = 0; i < 10; i++) {
+      this.data.items.push({
+        content: i + " 向左滑动删除哦,向左滑动删除哦,向左滑动删除哦,向左滑动删除哦,向左滑动删除哦",
+        isTouchMove: false //默认全隐藏删除
+      })
+    }
+    this.setData({
+      items: this.data.items
     })
   },
-  tabClick: function (e) {
-    var that = this;
-    var idIndex = e.currentTarget.id;
-    var offsetW = e.currentTarget.offsetLeft; //2种方法获取距离文档左边有多少距离
+  //手指触摸动作开始 记录起点X坐标
+  touchstart: function (e) {
+    //开始触摸时 重置所有删除
+    this.data.items.forEach(function (v, i) {
+      if (v.isTouchMove)//只操作为true的
+        v.isTouchMove = false;
+    })
     this.setData({
-      activeIndex: idIndex,
-      slideOffset: offsetW
-    });
+      startX: e.changedTouches[0].clientX,
+      startY: e.changedTouches[0].clientY,
+      items: this.data.items
+    })
   },
-  bindChange: function (e) {
-    var current = e.detail.current;
-    if ((current + 1) % 4 == 0) {
-
-    }
-    var offsetW = current * mtabW; //2种方法获取距离文档左边有多少距离
+  //滑动事件处理
+  touchmove: function (e) {
+    var that = this,
+      index = e.currentTarget.dataset.index,//当前索引
+      startX = that.data.startX,//开始X坐标
+      startY = that.data.startY,//开始Y坐标
+      touchMoveX = e.changedTouches[0].clientX,//滑动变化坐标
+      touchMoveY = e.changedTouches[0].clientY,//滑动变化坐标
+      //获取滑动角度
+      angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
+    that.data.items.forEach(function (v, i) {
+      v.isTouchMove = false
+      //滑动超过30度角 return
+      if (Math.abs(angle) > 30) return;
+      if (i == index) {
+        if (touchMoveX > startX) //右滑
+          v.isTouchMove = false
+        else //左滑
+          v.isTouchMove = true
+      }
+    })
+    //更新数据
+    that.setData({
+      items: that.data.items
+    })
+  },
+  /**
+   * 计算滑动角度
+   * @param {Object} start 起点坐标
+   * @param {Object} end 终点坐标
+   */
+  angle: function (start, end) {
+    var _X = end.X - start.X,
+      _Y = end.Y - start.Y
+    //返回角度 /Math.atan()返回数字的反正切值
+    return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
+  },
+  //删除事件
+  del: function (e) {
+    this.data.items.splice(e.currentTarget.dataset.index, 1)
     this.setData({
-      activeIndex: current,
-      slideOffset: offsetW
-    });
-
+      items: this.data.items
+    })
+  },
+  //跳转
+  goDetail() {
+    console.log('点击元素跳转')
   }
-
 })

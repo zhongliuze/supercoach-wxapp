@@ -1,0 +1,98 @@
+/* pages/course/course/course.wxss */
+
+page {
+  background-color: #f7f7f7;
+}
+
+.course-date {
+  width: 750rpx;
+  height: 154rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  margin-top: 24rpx;
+}
+
+.course-date .date-info {
+  width: 590rpx;
+  height: 154rpx;
+  margin-left: 80rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.course-date .start-time, .course-date .end-time {
+  height: 154rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #181d24;
+  font-size: 30rpx;
+  line-height: 50rpx;
+}
+
+.course-date .arrow-icon {
+  width: 30rpx;
+  height: 154rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: yellow;
+}
+
+.course-date .arrow-icon image {
+  width: 18rpx;
+  height: 106rpx;
+}
+
+.course-student {
+  width: 750rpx;
+  height: 120rpx;
+  margin-top: 32rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* flex-direction: row;
+  align-items: center; */
+  background-color: #fff;
+}
+
+.course-student .icon {
+  margin-left: 30rpx;
+  width: 28rpx;
+  height: 28rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.course-student .icon image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.course-student .title {
+  margin-left: 24rpx;
+  font-size: 34rpx;
+  color: #181d24;
+}
+
+.course-student .content {
+  font-size: 34rpx;
+  color: #cfcfcf;
+}
+
+.course-student .arrow {
+  width: 14rpx;
+  height: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.course-student .arrow image{
+  width: 14rpx;
+  height: 24rpx;
+
+}

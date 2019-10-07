@@ -1,258 +1,679 @@
 <!--pages/course/index/index.wxml-->
-<view class="container-page" bindtap="bindCloseMark">
-
-
-  <view class="navigation-bar">
-    <view class="navigation-bar__placeholder {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px;visibility: hidden;"></view>
-    <view class="navigation-bar__inner {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px; color: {{navigation_color}};background: {{navigation_background}};{{innerPaddingRight}};{{innerWidth}};">
-      <!-- <view class='navigation-bar__left' style="{{leftWidth}}" catchtap="catchMenuButton"> -->
-      <view class='navigation-bar__left' style="width:102px;" catchtap="catchMenuButton">
-        <view bindtap="back" class="navigation-bar__btn_goback"></view>
-        <view class="navigation-bar-menu" catchtap="catchMenuButtonBubbling" wx:if="{{showMenuButton}}">
-          <view class="bar-menu-button-top"></view>
-          <view class="bar-menu-button" catchtap="catchChangeView">
-            <image src='/images/course-menu-change.png'></image>
-            <text>切换视图</text>
+<movable-area style="width:auto;height:auto;">
+  <view class="container-page" bindtap="bindCloseMark">
+    <view class="navigation-bar">
+      <view class="navigation-bar__placeholder {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px;visibility: hidden;"></view>
+      <view class="navigation-bar__inner {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px; color: {{navigation_color}};background: {{navigation_background}};{{innerPaddingRight}};{{innerWidth}};">
+        <!-- <view class='navigation-bar__left' style="{{leftWidth}}" catchtap="catchMenuButton"> -->
+        <view class='navigation-bar__left' style="width:102px;" catchtap="catchMenuButton">
+          <view bindtap="back" class="navigation-bar__btn_goback"></view>
+          <view class="navigation-bar-menu" catchtap="catchMenuButtonBubbling" wx:if="{{showMenuButton}}">
+            <view class="bar-menu-button-top"></view>
+            <view class="bar-menu-button" catchtap="catchChangeView">
+              <image src='/images/course-menu-change.png'></image>
+              <text>切换视图</text>
+            </view>
+            <view class="bar-menu-button" catchtap="catchGenerateImages">
+              <image src='/images/course-menu-image.png'></image>
+              <text>生成图片</text>
+            </view>
+            <view class="bar-menu-button" catchtap="catchNavigateOrder">
+              <image src='/images/course-menu-message.png'></image>
+              <text>预约消息</text>
+            </view>
+            <view class="bar-menu-button" catchtap="catchCurrentTableChange" wx:if="{{currentWeek != currentTable}}">
+              <image src='/images/course-menu-change.png'></image>
+              <text>返回本周</text>
+            </view>
+            <view class="bar-menu-button-bottom"></view>
           </view>
-          <view class="bar-menu-button" catchtap="catchGenerateImages">
-            <image src='/images/course-menu-image.png'></image>
-            <text>生成图片</text>
-          </view>
-          <view class="bar-menu-button" catchtap="catchNavigateOrder">
-            <image src='/images/course-menu-message.png'></image>
-            <text>预约消息</text>
-          </view>
-          <view class="bar-menu-button" catchtap="catchCurrentTableChange" wx:if="{{currentWeek != currentTable}}">
-            <image src='/images/course-menu-change.png'></image>
-            <text>返回本周</text>
-          </view>
-          <view class="bar-menu-button-bottom"></view>
         </view>
-      </view>
-      <view class='navigation-bar__center'>
-        <text>日历排课</text>
-      </view>
-      <view class='navigation-bar__right'>
-      </view>
-    </view>
-  </view>
-
-  <view class="course">
-    <view class="course_left">
-      <view class="date date_fixed">
-        <view class="year">
-          <text>{{currentYear}}</text>
+        <view class='navigation-bar__center'>
+          <text>日历排课</text>
         </view>
-        <view class="month">
-          <text>{{currentMonth}}</text>
+        <view class='navigation-bar__right'>
         </view>
-      </view>
-      <view style="width:94rpx;height: 146rpx;"></view>
-      <view class="time">
-        <block wx:for="{{timeList}}" wx:key="this">
-          <view class="hour">
-            <text>{{item.time}}</text>
-          </view>
-        </block>
       </view>
     </view>
 
-    <view class="course_right">
-      <scroll-view class="course_date" scroll-x scroll-into-view="{{scrollData}}">
-        <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex">
-          <view class="scroll-block" id="scrollData{{courseIndex}}">
-            <view class="scroll-date">
-              <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
-                <view class="date">
-                  <view class="week">
-                    <text wx:if="{{weekIndex == 0}}">一</text>
-                    <text wx:elif="{{weekIndex == 1}}">二</text>
-                    <text wx:elif="{{weekIndex == 2}}">三</text>
-                    <text wx:elif="{{weekIndex == 3}}">四</text>
-                    <text wx:elif="{{weekIndex == 4}}">五</text>
-                    <text wx:elif="{{weekIndex == 5}}">六</text>
-                    <text wx:elif="{{weekIndex == 6}}">日</text>
-                  </view>
-                  <view class="day {{weekItem.isCurrent == 1 ? 'current_day' : ''}}">
-                    <text>{{weekItem.day}}</text>
-                  </view>
-                </view>
-              </block>
-            </view>
+    <view class="course" wx:if="{{viewType == 0}}">
+      <view class="course_left">
+        <view class="date date_fixed">
+          <view class="year">
+            <text>{{currentYear}}</text>
           </view>
-        </block>
-      </scroll-view>
-      <view style="width:656rpx;height: 155rpx;"></view>
-      <swiper easing-function="{{swiperEasing}}" bindchange="bindTableChange" current="{{currentTable}}">
-        <!-- <swiper-item>
-        <view class="table">
-          <view class="day">
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-          </view>
-          <view class="day">
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time select">
-              <text></text>
-            </view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time ready">
-              <text>刘泽中</text>
-            </view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-          </view>
-          <view class="day">
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time complete">
-              <text>常文静</text>
-            </view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time cancel">
-              <text>云龙</text>
-            </view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-          </view>
-          <view class="day">
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time delete">
-              <text>李克强</text>
-            </view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-          </view>
-          <view class="day">
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-            <view class="time onday"></view>
-          </view>
-          <view class="day">
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-            <view class="time"></view>
-          </view>
-          <view class="day all-day">
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
-            <view class="time all-day"></view>
+          <view class="month">
+            <text>{{currentMonth}}</text>
           </view>
         </view>
-        
-      </swiper-item> -->
-        <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex" wx:key="this">
-          <swiper-item>
-            <view style="height: 1700rpx;width: 650rpx;display: flex;flex-direction: column;">
-              <view class="table">
+        <view style="width:94rpx;height: 146rpx;"></view>
+        <view class="time">
+          <block wx:for="{{timeList}}" wx:key="this">
+            <view class="hour" wx:if="{{!item.isCurrent}}">
+              <text>{{item.time}}</text>
+            </view>
+            <view class="hour current" wx:else>
+              <text>{{item.time}}</text>
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class="course_right">
+        <scroll-view class="course_date" scroll-x scroll-into-view="{{scrollData}}">
+          <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex">
+            <view class="scroll-block" id="scrollData{{courseIndex}}">
+              <view class="scroll-date">
                 <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
-                  <view class="day">
-                    <block wx:for="{{weekItem.tableList}}" wx:key="this" wx:for-item="tableItem" wx:for-index="tableIndex">
-                      <block wx:if="{{tableItem.hasTask == true}}">
-                        <!-- 当前时间段有任务 -->
-
-                        <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;" catchtap="catchTableMark" data-tableIndex="{{tableIndex}}" data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}">
-                          <text>{{tableItem.title}}</text>
-                        </view>
-
-
-                      </block>
-                      <block wx:else>
-                        <!-- 当前时间段没有任务 -->
-                        <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} " style="margin-bottom: {{tableItem.paddingBottom}}rpx; height:{{tableItem.height}}rpx" catchtap="catchTableMark" data-tableIndex="{{tableIndex}}" data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}"></view>
-                      </block>
-
-                    </block>
+                  <view class="date">
+                    <view class="week">
+                      <text wx:if="{{weekIndex == 0}}">一</text>
+                      <text wx:elif="{{weekIndex == 1}}">二</text>
+                      <text wx:elif="{{weekIndex == 2}}">三</text>
+                      <text wx:elif="{{weekIndex == 3}}">四</text>
+                      <text wx:elif="{{weekIndex == 4}}">五</text>
+                      <text wx:elif="{{weekIndex == 5}}">六</text>
+                      <text wx:elif="{{weekIndex == 6}}">日</text>
+                    </view>
+                    <view class="day {{weekItem.isCurrent == 1 ? 'current_day' : ''}}">
+                      <text>{{weekItem.day}}</text>
+                    </view>
                   </view>
                 </block>
               </view>
-              <view class="table-mark" wx:if="{{showTableButton}}" style="{{tableButtonStyle}}">
-                <view class="content">测试</view>
-                <view class="arrow" style="right: -15rpx;" wx:if="{{showTableDirection == 'left'}}"><image src="/images/course-table-arrow-right.png"></image></view>
-                <view class="arrow" style="left: -15rpx;" wx:else="{{showTableDirection == 'right'}}"><image src="/images/course-table-arrow-left.png"></image></view>
+            </view>
+          </block>
+        </scroll-view>
+        <view style="width:656rpx;height: 155rpx;"></view>
+        <swiper easing-function="{{swiperEasing}}" bindchange="bindTableChange" current="{{currentTable}}">
+          <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex" wx:key="this">
+            <swiper-item>
+              <view style="width: 650rpx;display: flex;flex-direction: column;">
+                <view class="table">
+                  <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
+                    <view class="day">
+                      <block wx:for="{{weekItem.tableList}}" wx:key="this" wx:for-item="tableItem" wx:for-index="tableIndex">
+                        <block wx:if="{{tableItem.hasTask == true}}">
+                          <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;" catchtap="catchTableMark" data-tableIndex="{{tableIndex}}"
+                            data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}">
+                            <text>{{tableItem.title}}</text>
+                          </view>
+                        </block>
+                        <block wx:else>
+                          <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} " style="margin-bottom: {{tableItem.paddingBottom}}rpx; height:{{tableItem.height}}rpx" catchtap="catchTableMark" data-tableIndex="{{tableIndex}}" data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}"></view>
+                        </block>
+                      </block>
+                    </view>
+                  </block>
+                </view>
+                <view class="table-mark" wx:if="{{showTableButton}}" style="{{tableButtonStyle}}">
+                  <view class="content">
+                    <block wx:if="{{tableButtonType == 0}}">
+                      <view class="button" catchtap="catchCourse">
+                        <image src="/images/course-table-button-course.png"></image>
+                        <text>排课</text>
+                      </view>
+                      <view class="button" catchtap="catchRest">
+                        <image src="/images/course-table-button-rest.png"></image>
+                        <text>休息</text>
+                      </view>
+                      <view class="button" catchtap="catchCustom">
+                        <image src="/images/course-table-button-custom.png"></image>
+                        <text>自定义</text>
+                      </view>
+                    </block>
+                    <block wx:else>
+                      <view class="button" catchtap="catchCourse">
+                        <image src="/images/course-table-button-edit.png"></image>
+                        <text>编辑</text>
+                      </view>
+                      <view class="button" catchtap="catchRest">
+                        <image src="/images/course-table-button-delete.png"></image>
+                        <text>删除</text>
+                      </view>
+                    </block>
+                  </view>
+                  <view class="arrow" style="{{tableButtonArrowStyle}}" wx:if="{{showTableDirection == 'left'}}">
+                    <image src="/images/course-table-arrow-right.png"></image>
+                  </view>
+                  <view class="arrow" style="{{tableButtonArrowStyle}}" wx:else="{{showTableDirection == 'right'}}">
+                    <image src="/images/course-table-arrow-left.png"></image>
+                  </view>
+                </view>
+                <view class='time-line' style="left:0rpx; top:{{timeLineTop}}rpx;" wx:if="{{timeLineTop != -1}}">
+                  <view class="point"></view>
+                  <view class="line"></view>
+                </view>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+    </view>
+    <view class="course_list" wx:elif="{{viewType == 1}}">
+      <view class="course-scroll">
+        <scroll-view class="course_date" scroll-x scroll-into-view="{{scrollData}}" wx:if="{{calendarShow == false}}">
+          <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex">
+            <view class="scroll-block" id="scrollData{{courseIndex}}">
+              <view class="scroll-date">
+                <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
+                  <view class="date">
+                    <view class="week">
+                      <text wx:if="{{weekIndex == 0}}">一</text>
+                      <text wx:elif="{{weekIndex == 1}}">二</text>
+                      <text wx:elif="{{weekIndex == 2}}">三</text>
+                      <text wx:elif="{{weekIndex == 3}}">四</text>
+                      <text wx:elif="{{weekIndex == 4}}">五</text>
+                      <text wx:elif="{{weekIndex == 5}}">六</text>
+                      <text wx:elif="{{weekIndex == 6}}">日</text>
+                    </view>
+                    <view class="day {{weekItem.isCurrent == 1 ? 'current_day' : ''}}">
+                      <text>{{weekItem.day}}</text>
+                      <view class="no-spot"></view>
+                    </view>
+                  </view>
+                </block>
               </view>
             </view>
-          </swiper-item>
-        </block>
-      </swiper>
+          </block>
+        </scroll-view>
+        <scroll-view class="course_date" scroll-x scroll-into-view="a" wx:elif="{{calendarShow == true}}">
+          <view class="scroll-block" id="a">
+            <view class="scroll-date-line">
+              <view class="week-line">
+                <text>一</text>
+                <text>二</text>
+                <text>三</text>
+                <text>四</text>
+                <text>五</text>
+                <text>六</text>
+                <text>日</text>
+              </view>
+              <view class="day-list">
+
+                <view class="day-line">
+                  <view class="datenum default">
+                    <text>7</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum default">
+                    <text>8</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum default">
+                    <text>9</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>10</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>11</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>12</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>13</text>
+                    <view class="spot"></view>
+                  </view>
+                </view>
+                <view class="day-line">
+                  <view class="datenum">
+                    <text>14</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>15</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>16</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>17</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>18</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>19</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>20</text>
+                    <view class="no-spot"></view>
+                  </view>
+                </view>
+                <view class="day-line">
+                  <view class="datenum current-day">
+                    <text>今</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>22</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>23</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>24</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>25</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>26</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>27</text>
+                    <view class="no-spot"></view>
+                  </view>
+                </view>
+                <view class="day-line">
+                  <view class="datenum">
+                    <text>28</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>29</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>30</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>31</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>1</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>2</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>3</text>
+                    <view class="no-spot"></view>
+                  </view>
+                </view>
+                <view class="day-line">
+                  <view class="datenum">
+                    <text>4</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>5</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>6</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum default">
+                    <text>7</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum default">
+                    <text>8</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum default">
+                    <text>9</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum default">
+                    <text>10</text>
+                    <view class="no-spot"></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="scroll-block" id="a">
+            <view class="scroll-date-line">
+              <view class="week-line">
+                <text>一</text>
+                <text>二</text>
+                <text>三</text>
+                <text>四</text>
+                <text>五</text>
+                <text>六</text>
+                <text>日</text>
+              </view>
+              <view class="day-list">
+
+                <view class="day-line">
+                  <view class="datenum default">
+                    <text>7</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum default">
+                    <text>8</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum default">
+                    <text>9</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>10</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>11</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>12</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>13</text>
+                    <view class="spot"></view>
+                  </view>
+                </view>
+                <view class="day-line">
+                  <view class="datenum">
+                    <text>14</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>15</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>16</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>17</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>18</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>19</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>20</text>
+                    <view class="no-spot"></view>
+                  </view>
+                </view>
+                <view class="day-line">
+                  <view class="datenum current-day">
+                    <text>今</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>22</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>23</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>24</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>25</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>26</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>27</text>
+                    <view class="no-spot"></view>
+                  </view>
+                </view>
+                <view class="day-line">
+                  <view class="datenum">
+                    <text>28</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>29</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>30</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>31</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>1</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>2</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>3</text>
+                    <view class="no-spot"></view>
+                  </view>
+                </view>
+                <view class="day-line">
+                  <view class="datenum">
+                    <text>4</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>5</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum">
+                    <text>6</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum default">
+                    <text>7</text>
+                    <view class="spot"></view>
+                  </view>
+                  <view class="datenum default">
+                    <text>8</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum default">
+                    <text>9</text>
+                    <view class="no-spot"></view>
+                  </view>
+                  <view class="datenum default">
+                    <text>10</text>
+                    <view class="no-spot"></view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+        <view class="spread" catchtap="changeCalendarShow">
+          <image src="/images/course-list-arrow-down.png" wx:if="{{calendarShow == false}}"></image>
+          <image src="/images/course-list-arrow-up.png" wx:elif="{{calendarShow == true}}"></image>
+        </view>
+      </view>
+
+      <view class="course-info" style="margin-top:{{calendarShow == true ? '543' : '197'}}rpx;">
+        <view class="date-info">
+          <text>07月11日  周五</text>
+        </view>
+        <view class="tasks">
+          <block wx:for="{{taskList}}">
+            <movable-area class='movable-area'>
+              <movable-view direction="horizontal" class='movable-view'>
+                <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchStart" bindtouchmove="touchMove">
+                  <view class="task-line {{item.isTouchMove ? 'touch-task-line' : ''}}">
+                    <view class="task-status"></view>
+                    <view class="avatar">
+                      <text>泽中</text>
+                    </view>
+                    <view class="task-user">
+                      <view class="name">
+                        <text>刘泽中</text>
+                      </view>
+                      <view class="subtitle">
+                        <text>展示本节课内容</text>
+                      </view>
+                    </view>
+                    <view class="task-time">
+                      <view class="surplus-hour">
+                        <text>剩余03课时</text>
+                      </view>
+                      <view class="course-time">
+                        <text>08:30~09:30</text>
+                      </view>
+                    </view>
+                  </view>
+                  <view class="delete-button" catchtap="catchDelete" data-index="{{index}}">删除</view>
+                </view>
+              </movable-view>
+            </movable-area>
+          </block>
+          <!-- <view class="task-line">
+            <view class="task-status prepare"></view>
+            <view class="avatar">
+              <text>泽中</text>
+            </view>
+            <view class="task-user">
+              <view class="name">
+                <text>刘泽中</text>
+              </view>
+              <view class="subtitle">
+                <text>展示本节课内容</text>
+              </view>
+            </view>
+            <view class="task-time">
+              <view class="surplus-hour">
+                <text>剩余03课时</text>
+              </view>
+              <view class="course-time">
+                <text>08:30~09:30</text>
+              </view>
+            </view>
+          </view>
+          <view class="task-line">
+            <view class="task-status prepare"></view>
+            <view class="avatar">
+              <text>泽中</text>
+            </view>
+            <view class="task-user">
+              <view class="name">
+                <text>刘泽中</text>
+              </view>
+              <view class="subtitle">
+                <text>展示本节课内容</text>
+              </view>
+            </view>
+            <view class="task-time">
+              <view class="surplus-hour">
+                <text>剩余03课时</text>
+              </view>
+              <view class="course-time">
+                <text>08:30~09:30</text>
+              </view>
+            </view>
+          </view>
+          <view class="task-line">
+            <view class="task-status cancel"></view>
+            <view class="avatar">
+              <text>泽中</text>
+            </view>
+            <view class="task-user">
+              <view class="name">
+                <text>刘泽中</text>
+              </view>
+              <view class="subtitle">
+                <text>展示本节课内容</text>
+              </view>
+            </view>
+            <view class="task-time">
+              <view class="surplus-hour">
+                <text>剩余03课时</text>
+              </view>
+              <view class="course-time">
+                <text>08:30~09:30</text>
+              </view>
+            </view>
+          </view>
+          <view class="task-line">
+            <view class="task-status custom"></view>
+            <view class="avatar">
+              <text>泽中</text>
+            </view>
+            <view class="task-user">
+              <view class="name">
+                <text>刘泽中</text>
+              </view>
+              <view class="subtitle">
+                <text>展示本节课内容</text>
+              </view>
+            </view>
+            <view class="task-time">
+              <view class="surplus-hour">
+                <text>剩余03课时</text>
+              </view>
+              <view class="course-time">
+                <text>08:30~09:30</text>
+              </view>
+            </view>
+          </view> -->
+        </view>
+        <view class="tasks-bottom"></view>
+        <view class="unwind-button" catchtap="catchUnwind">
+          <image src="/images/course-unwind.png"></image>
+        </view>
+
+      </view>
     </view>
   </view>
 
-</view>
+  <!-- <movable-view class="movableMessage" direction="all" inertia="true" x="{{movableMessageX}}rpx" y="{{movableMessageY}}rpx">
+    <text class="message">未处理预约</text>
+    <text class="num">3</text>
+  </movable-view> -->
+</movable-area>
+
+<block wx:if="{{operateMark}}">
+
+
+  <view class="unwind-view" catchtap="catchUnwind">
+
+  </view>
+  <view class="unwind-button-group">
+    <view class="button">
+      <text>排课</text>
+      <image src="/images/course-table-button-course.png"></image>
+    </view>
+    <view class="button">
+      <text>休息</text>
+      <image src="/images/course-table-button-rest.png"></image>
+    </view>
+    <view class="button">
+      <text>自定义</text>
+      <image src="/images/course-table-button-custom.png"></image>
+    </view>
+  </view>
+</block>
