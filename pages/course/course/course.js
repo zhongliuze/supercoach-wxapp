@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    courseType: 1, // 0排课，1休息，2自定义
     fixedBottomButtonMargin: 0, // 吸底按钮自适应高度
     timePickerArray: [], // 选择框时间列表
     timeShowArray: [], // 展示时间列表
@@ -14,10 +15,29 @@ Page({
     endTimePickerIndex: [0, 0, 0], // 默认选中结束时间 
     remindType: 0, // 提醒类型：0不提醒，1开始时、30分钟前、1小时前……
     repeatType: 0, // 重复类型：0不重复，1每天、2每周、3每月
-    repeatTimes: 1, // 重复次数
+    repeatTimes: 0, // 重复次数, 实际次数为repeatTimes+1
     remindArray: ['无提醒', '开始时', '30分钟前', '1小时前', '3小时前', '6小时前', '1天前'],
     repeatArray: ['不重复', '每天', '每周', '每月'],
-     
+    fullDaySwitch: false, // 全天按钮
+    colorArray: [
+      { color: '#DC4F5A' , selected: false},
+      { color: '#DC5960', selected: false },
+      { color: '#EA6E7F', selected: false },
+      { color: '#E89CA4', selected: true },
+      { color: '#306BF5', selected: false },
+      { color: '#5392E8', selected: false },
+      { color: '#F1A044', selected: false },
+      { color: '#F4BA40', selected: false },
+      { color: '#5392E8', selected: false },
+      { color: '#F1A044', selected: false },
+      { color: '#F4BA40', selected: false },
+      { color: '#439697', selected: false },
+      { color: '#58A45C', selected: false },
+      { color: '#6653A2', selected: false },
+      { color: '#07070B', selected: false },
+      { color: '#444756', selected: false },
+    ],
+    selectColorIndex: 0, // 选中颜色
   },
 
   /**
@@ -183,5 +203,29 @@ Page({
     wx.navigateTo({
       url: '../repeat/repeat?repeatType=' + this.data.repeatType + '&repeatTimes=' + this.data.repeatTimes,
     })
+  },
+
+  fullDaySwitch: function(event) {
+    console.log(event);
+    this.setData({
+      fullDaySwitch: event.detail.value,
+    });
+  },
+
+  selectCustomColor: function (event) {
+    var colorArray = this.data.colorArray;
+    var colorIndex = event.currentTarget.dataset.index;
+ 
+    for(let i = 0; i< colorArray.length;i++) {
+      if (i == colorIndex) {
+        colorArray[i]['selected'] = true;
+      }else {
+        colorArray[i]['selected'] = false;
+      }
+    }
+    this.setData({
+      colorArray: colorArray,
+      selectColorIndex: colorIndex,
+    });
   }
 })

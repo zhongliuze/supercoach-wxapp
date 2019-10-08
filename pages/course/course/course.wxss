@@ -4,18 +4,24 @@ page {
   background-color: #f7f7f7;
 }
 
+.course-time-group {
+  margin-top: 24rpx;
+}
+
+.course-custom-group {
+  margin-top: 24rpx;
+  margin-bottom: 8rpx;
+}
+
 .course-date {
   width: 750rpx;
-  height: 154rpx;
   background-color: #fff;
   display: flex;
   align-items: center;
-  margin-top: 24rpx;
 }
 
 .course-date .date-info {
   width: 590rpx;
-  height: 154rpx;
   margin-left: 80rpx;
   display: flex;
   flex-direction: row;
@@ -85,20 +91,18 @@ page {
   justify-content: flex-end;
 }
 
-.course-student .content .avatar{
+.course-student .content .avatar {
   width: 70rpx;
   height: 70rpx;
-  font-size:22rpx;
+  font-size: 22rpx;
   margin-left: 8rpx;
 }
 
-.course-student .content .num{
-  color: #181D24;
+.course-student .content .num {
+  color: #181d24;
   font-size: 34rpx;
   margin-left: 16rpx;
 }
-
-
 
 .course-student .arrow {
   margin-left: 15rpx;
@@ -128,7 +132,7 @@ page {
   align-items: center;
   width: 750rpx;
   height: 120rpx;
-  background-color: #FFF;
+  background-color: #fff;
 }
 
 .course-cells-group .course-cells .icon {
@@ -151,7 +155,7 @@ page {
   height: 100%;
   display: flex;
   align-items: center;
-  border-bottom: 1rpx solid #EFF0F1;
+  border-bottom: 1rpx solid #eff0f1;
 }
 
 .course-cells-group .course-cells .noborder {
@@ -175,8 +179,19 @@ page {
   justify-content: flex-end;
 }
 
+.course-cells-group .course-cells .content .switch {
+  width: 429rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.course-cells-group .course-cells .content .switch switch {
+  zoom: 0.9;
+}
+
 .course-cells-group .course-cells .content .valuable {
-  color: #181D24;
+  color: #181d24;
 }
 
 .course-cells-group .course-cells .content .arrow {
@@ -193,20 +208,51 @@ page {
   height: 24rpx;
 }
 
+.course-cells-group .course-cells .content .custom-title {
+  font-size: 34rpx;
+  color: #181d24;
+  width: 80rpx;
+  display: flex;
+  align-items: center;
+}
+
+.course-cells-group .course-cells .content .custom-value {
+  margin-left: 30rpx;
+  width: 428rpx;
+  font-size: 34rpx;
+  font-weight: 500;
+  color: #181d24;
+  display: flex;
+  align-items: center;
+}
+
+.course-cells-group .course-cells .content .custom-value-placeholder {
+  color: #cfcfcf;
+  font-weight: normal;
+}
+
+.course-cells-group .course-cells .content .custom-button {
+  width: 100rpx;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 34rpx;
+  color: #2b87ff;
+}
+
 .course-fixed-bottom-button {
   position: fixed;
   left: 0rpx;
   bottom: 0rpx;
-  background-color: #5FCD64;
+  background-color: #5fcd64;
 }
 
 .course-fixed-bottom-button button {
-  background-color: #5FCD64;
-  color: #FFF;
+  background-color: #5fcd64;
+  color: #fff;
   border-radius: 0rpx;
   border: 0rpx;
-  font-size:34rpx; 
-  font-weight:500;
+  font-size: 34rpx;
+  font-weight: 500;
   width: 750rpx;
   height: 100rpx;
   display: flex;
@@ -218,4 +264,82 @@ page {
   border-radius: 0rpx;
   border: 0rpx;
   bottom: 0;
+}
+
+.course-custom-color {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32rpx;
+}
+
+.course-custom-color .custom-title {
+  display: flex;
+  flex-direction: column;
+  font-size: 26rpx;
+  color: #a3a4a6;
+  margin-left: 30rpx;
+}
+
+.course-custom-color .custom-color-list {
+  width: 750rpx;
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+
+.custom-scroll-view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+  background-color: white;
+  z-index: 99;
+  height: 120rpx;
+  width: 750rpx;
+}
+
+.custom-scroll-view .scroll-block {
+  position: relative;
+  display: inline-block;
+  height: 120rpx;
+  width: 82rpx;
+  margin-right: 16rpx;
+}
+
+.custom-scroll-view  .scroll-block-last {
+  margin-left: 30rpx;
+}
+
+.custom-scroll-view .scroll-block .color-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120rpx;
+  width: 82rpx;
+}
+
+.custom-scroll-view .scroll-block .color-block .color {
+  display: flex;
+  align-items: center;
+  height: 82rpx;
+  width: 82rpx;
+  background-color: #00d17d;
+  border-radius: 100%;
+  opacity: 0.2;
+}
+
+.custom-scroll-view .scroll-block .color-block .color-show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 58rpx;
+  width: 58rpx;
+  background-color: #00d17d;
+  border-radius: 100%;
+  position: absolute;
+  /* top: 31rpx;
+  left: 12rpx; */
 }

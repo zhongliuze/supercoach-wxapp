@@ -5,8 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    repeatArray: [
-      {
+    repeatArray: [{
         name: '不重复',
         selected: true,
       },
@@ -23,16 +22,19 @@ Page({
         selected: false,
       },
     ],
-    repeatIndex: 0,  // 默认选中重复数
+    repeatIndex: 0, // 默认选中重复数
     resCourse: 0, // 剩余课时数
-    repeatPickerIndex: 0, // picker默认选中
+    repeatPickerIndex: 1, // picker默认选中
     repeatPickerArray: [], // picker列表数据
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    console.log(options);
+    var repeatPickerIndex = options.repeatTimes; // 默认选中picker
+    var repeatIndex = options.repeatType; // 默认选中重复列表
     var resCourse = 15; // 剩余课程数
     var repeatPickerArray = [];
     if (resCourse == 0) {
@@ -44,64 +46,76 @@ Page({
         repeatPickerArray.push(i);
       }
     }
-    
+
+    var repeatArray = this.data.repeatArray;
+    for (let i = 0; i < repeatArray.length; i++) {
+      if (i == repeatIndex) {
+        repeatArray[i]['selected'] = true;
+      } else {
+        repeatArray[i]['selected'] = false;
+      }
+    }
+
     this.setData({
       repeatPickerArray: repeatPickerArray,
+      repeatPickerIndex: repeatPickerIndex,
       resCourse: resCourse,
+      repeatIndex: repeatIndex,
+      repeatArray: repeatArray,
     });
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
   // 选择重复类型
-  selectRepeat: function (event) {
+  selectRepeat: function(event) {
     var index = event.currentTarget.dataset.index;
     if (index == this.data.repeatIndex) {
       return;
@@ -114,6 +128,15 @@ Page({
         repeatArray[i]['selected'] = false;
       }
     }
+
+    // 向前一页赋值
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2]; // 上一页
+    prevPage.setData({
+      repeatType: index,
+      repeatTimes: this.data.repeatPickerIndex
+    });
+
     this.setData({
       repeatArray: repeatArray,
       repeatIndex: index,
@@ -121,8 +144,16 @@ Page({
   },
 
   bindPickerChange: function(event) {
+    // 向前一页赋值
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2]; // 上一页
+    prevPage.setData({
+      repeatType: this.data.repeatIndex,
+      repeatTimes: event.detail.value,
+    });
+
     this.setData({
-      repeatIndex: event.detail.value,
+      repeatPickerIndex: event.detail.value,
     })
   }
 })

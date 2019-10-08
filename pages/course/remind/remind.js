@@ -42,7 +42,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var remindArray = this.data.remindArray;
+    for (let i = 0; i < remindArray.length; i++) {
+      if (i == parseInt(options.remindType)) {
+        remindArray[i]['selected'] = true;
+      } else {
+        remindArray[i]['selected'] = false;
+      }
+    }
+    this.setData({
+      remindIndex: options.remindType,
+      remindArray: remindArray,
+    });
   },
 
   /**
