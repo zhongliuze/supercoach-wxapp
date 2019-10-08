@@ -1,0 +1,30 @@
+/* pages/course/repeat/repeat.wxss */
+page {
+  background-color: #f7f7f7;
+}
+
+.repeat-select-cells {
+  margin-top: 24rpx;
+}
+
+.repeat-select-cells-group {
+  margin-top: 32rpx;
+}
+
+.select-cells-group .select-cells .content .arrow {
+  color: #181D24;
+  font-size: 34rpx;
+}
+
+.select-cells-group .select-cells .content .arrow image {
+  width: 34rpx;
+  height: 24rpx;
+}
+
+.repeat-content {
+  margin-top: 32rpx;
+  margin-left: 30rpx;
+  font-size: 26rpx;
+  color: #a3a4a6;
+  margin-bottom: 32rpx;
+}

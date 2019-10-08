@@ -2,32 +2,90 @@
 <view class="container-page">
   <view class="course-date">
     <view class="date-info">
-      <view class="start-time">
-        <text class="day">07月15日 周一</text>
-        <text class="time">18:00</text>
-      </view>
+      <picker mode="multiSelector" bindchange="bindStartTimePickerChange" value="{{startTimePickerIndex}}" range="{{timePickerArray}}">
+        <view class="start-time">
+          <text class="day">{{timeShowArray[0][startTimePickerIndex[0]]}}</text>
+          <text class="time">{{timeShowArray[1][startTimePickerIndex[1]]}}:{{timeShowArray[2][startTimePickerIndex[2]]}}</text>
+        </view>
+      </picker>
       <view class="arrow-icon">
         <image src="/images/course-course-arrow.png"></image>
       </view>
-      <view class="end-time">
-        <text class="day">07月15日 周一</text>
-        <text class="time">19:00</text>
-      </view>
+      <picker mode="multiSelector" bindchange="bindEndTimePickerChange" value="{{endTimePickerIndex}}" range="{{timePickerArray}}">
+        <view class="end-time">
+          <text class="day">{{timeShowArray[0][endTimePickerIndex[0]]}}</text>
+          <text class="time">{{timeShowArray[1][endTimePickerIndex[1]]}}:{{timeShowArray[2][endTimePickerIndex[2]]}}</text>
+        </view>
+      </picker>
     </view>
   </view>
 
   <view class="course-student">
     <view class="icon">
-      <image src="/images/course-course-student.icon"></image>
+      <image src="/images/student-name.png"></image>
     </view>
-    <view class="titile">
+    <view class="title">
       <text>上课学员</text>
     </view>
     <view class="content">
-      <text>请选择</text>
+      <!-- <text>请选择</text> -->
+      <view class="default-avatar avatar">
+        <text>泽中</text>
+      </view>
+      <!-- <view class="default-avatar avatar">
+        <text>泽中</text>
+      </view>
+      <view class="default-avatar avatar">
+        <text>泽中</text>
+      </view>
+      <view class="default-avatar avatar">
+        <text>泽中</text>
+      </view>
+      <view class="num">
+        <text>3人</text>
+      </view> -->
     </view>
     <view class="arrow">
       <image src="/images/arrow-right.png"></image>
     </view>
+  </view>
+
+  <view class="course-cells-group course-other-info">
+    <view class="course-cells" >
+      <view class="icon">
+        <image src="/images/course-course-reminder.png"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>课前提醒</text>
+        </view>
+        <view class="value valuable" bindtap="navigateToRemind">
+          <text>{{remindArray[remindType]}}</text>
+        </view>
+        <view class="arrow">
+          <image src="/images/arrow-right.png"></image>
+        </view>
+      </view>
+    </view>
+    <view class="course-cells">
+      <view class="icon">
+        <image src="/images/course-course-repeat.png"></image>
+      </view>
+      <view class="content noborder">
+        <view class="title">
+          <text>重复</text>
+        </view>
+        <view class="value valuable" bindtap="navigateToRepeat">
+          <text>{{repeatArray[repeatType]}}</text>
+        </view>
+        <view class="arrow">
+          <image src="/images/arrow-right.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="course-fixed-bottom-button" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
+    <button>保存</button>
   </view>
 </view>

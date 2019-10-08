@@ -1,0 +1,35 @@
+<!--pages/course/remind/remind.wxml-->
+<view class="container-page">
+  <view class="select-cells-group remind-select-cells">
+    <view class="select-cells" bindtap="selectRemind" data-index="0">
+      <view class="icon"></view>
+      <view class="content no-border">
+        <view class="title">
+          <text>{{remindArray[0].name}}</text>
+        </view>
+        <view class="arrow">
+          <image src="/images/course-selected.png" wx:if="{{remindArray[0].selected}}"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="select-cells-group remind-select-cells-group">
+    <block wx:for="{{remindArray}}">
+      <view class="select-cells" wx:if="{{index}}" bindtap="selectRemind" data-index="{{index}}">
+        <view class="icon"></view>
+        <view class="content {{index == remindArray.length - 1 ? 'no-border' : ''}}">
+          <view class="title">
+            <text>{{item.name}}</text>
+          </view>
+          <view class="arrow">
+            <image src="/images/course-selected.png" wx:if="{{item.selected}}"></image>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="remind-content" wx:if="{{remindIndex != 0}}">
+    <text wx:if="{{remindIndex ==1}}">将在课程开始时向学员发送提醒</text>
+    <text wx:else>将在课程开始{{remindArray[remindIndex]['name']}}向学员发送提醒</text>
+  </view>
+</view>

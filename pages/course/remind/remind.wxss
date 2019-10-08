@@ -1,0 +1,23 @@
+page {
+  background-color: #f7f7f7;
+}
+
+.remind-select-cells {
+  margin-top: 24rpx;
+}
+
+.remind-select-cells-group {
+  margin-top: 32rpx;
+}
+
+.select-cells-group .select-cells .content .arrow image {
+  width: 34rpx;
+  height: 24rpx;
+}
+
+.remind-content {
+  margin-top: 32rpx;
+  margin-left: 30rpx;
+  font-size: 26rpx;
+  color: #a3a4a6;
+}

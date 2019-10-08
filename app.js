@@ -8,9 +8,18 @@ App({
     // 展示本地存储能力
     this.data.deviceInfo = wx.getSystemInfoSync();
     console.log(this.data.deviceInfo);
-    var logs = wx.getStorageSync('logs' ) || []
+    var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+
+    wx.getSystemInfo({
+      success(res) {
+        // 吸底按钮自适应
+        console.log('吸底按钮距离：' + (res.screenHeight - res.safeArea.bottom) * 2);
+        wx.setStorageSync('fixedBottomButtonMargin', (res.screenHeight - res.safeArea.bottom)*2);
+      }
+    })
+
 
     //登录
     wx.login({
@@ -60,6 +69,8 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    startTime: 8, // 日程开始时间
+    endTime: 22, // 日程结束时间
   }
 })

@@ -48,12 +48,26 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 2,
 			"list": [
 				{
 					"id": -1,
 					"name": "pages/students/index/index",
 					"pathName": "pages/students/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/remind/remind",
+					"pathName": "pages/course/remind/remind",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/course/course",
+					"pathName": "pages/course/course/course",
 					"scene": null
 				}
 			]

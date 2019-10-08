@@ -1,0 +1,51 @@
+<!--pages/course/repeat/repeat.wxml-->
+<view class="container-page">
+  <view class="select-cells-group repeat-select-cells">
+    <view class="select-cells" bindtap="selectRepeat" data-index="0">
+      <view class="icon"></view>
+      <view class="content no-border">
+        <view class="title">
+          <text>{{repeatArray[0].name}}</text>
+        </view>
+        <view class="arrow">
+          <image src="/images/course-selected.png" wx:if="{{repeatArray[0].selected}}"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="select-cells-group repeat-select-cells-group">
+    <block wx:for="{{repeatArray}}">
+      <view class="select-cells" wx:if="{{index}}" bindtap="selectRepeat" data-index="{{index}}">
+        <view class="icon"></view>
+        <view class="content {{index == repeatArray.length - 1 ? 'no-border' : ''}}">
+          <view class="title">
+            <text>{{item.name}}</text>
+          </view>
+          <view class="arrow">
+            <image src="/images/course-selected.png" wx:if="{{item.selected}}"></image>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <block wx:if="{{repeatArray[0].selected == false}}">
+    <view class="repeat-content">
+      <text>该学员剩余有效课时数：{{resCourse}}</text>
+    </view>
+    <view class="select-cells-group">
+      <picker mode="selector" bindchange="bindPickerChange" value="{{repeatPickerIndex}}" range="{{repeatPickerArray}}">
+        <view class="select-cells">
+          <view class="icon"></view>
+          <view class="content no-border">
+            <view class="title">
+              <text>重复周期</text>
+            </view>
+            <view class="arrow">
+              <text>{{repeatPickerArray[repeatPickerIndex]}}</text>
+            </view>
+          </view>
+        </view>
+      </picker>
+    </view>
+  </block>
+</view>
