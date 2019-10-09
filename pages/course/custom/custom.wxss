@@ -1,0 +1,84 @@
+/* pages/course/custom/custom.wxss */
+
+page {
+  background-color: #f7f7f7;
+}
+
+.custom-cells-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24rpx;
+}
+
+.movable-area, .movable-view {
+  width: 750rpx;
+  height: 120rpx;
+}
+
+.touch-item {
+  display: flex;
+  overflow: hidden;
+}
+
+.touch-move-active .custom-cell, .touch-move-active .delete-button {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.delete-button {
+  background-color: #ff3d3d;
+  width: 120rpx;
+  height: 120rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  -webkit-transform: translateX(120rpx);
+  transform: translateX(120rpx);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.custom-cell {
+  width: 750rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 120rpx;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(120rpx);
+  transform: translateX(120rpx);
+  margin-left: -120rpx;
+}
+
+.custom-cell .content {
+  width: 720rpx;
+  height: 120rpx;
+  border-bottom: 1rpx solid #EFF0F1;
+  display: flex;
+  align-items: center;
+  margin-left: 30rpx;
+}
+
+.custom-cell .content .color-block{
+  width: 24rpx;
+  height: 24rpx;
+  display: flex;
+  align-items: center;
+  border-radius: 100%;
+}
+
+.custom-cell .content .value{
+  margin-left: 24rpx;
+  color: #181D24;
+  font-size: 34rpx;
+}
+
+.custom-cell .no-border {
+  border:0rpx;
+}

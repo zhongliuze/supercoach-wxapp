@@ -1,6 +1,6 @@
 <!--pages/course/course/course.wxml-->
 <view class="container-page">
-  <view class="course-cells-group course-custom-group">
+  <view class="course-cells-group course-custom-group" wx:if="{{courseType == 2}}">
     <view class="course-cells" wx:if="{{courseType != 0}}">
       <view class="icon">
         <image src="/images/course-custom-title.png"></image>
@@ -10,9 +10,9 @@
           <text>标题</text>
         </view>
         <view class="custom-value">
-          <input placeholder="输入自定义事项名称" placeholder-class="custom-value-placeholder"></input>
+          <input placeholder="输入自定义事项名称" placeholder-class="custom-value-placeholder" value="{{customTitle}}"></input>
         </view>
-        <view class="custom-button">
+        <view class="custom-button" bindtap="navigateToCustomList">
           <text>常用</text>
         </view>
       </view>
@@ -42,7 +42,7 @@
           </view>
         </picker>
         <view class="arrow-icon" style="height:{{fullDaySwitch ? '120' : '154'}}rpx;">
-          <image src="/images/course-course-arrow.png" style="height:72rpx;width:12rpx;" wx:if="{{fullDaySwitch}}"></image>
+          <image src="/images/course-course-arrow4.png" style="height:72rpx;width:12rpx;" wx:if="{{fullDaySwitch}}"></image>
           <image src="/images/course-course-arrow.png" style="height:106rpx;width:18rpx;" wx:elif="{{!fullDaySwitch}}"></image>
         </view>
         <picker mode="multiSelector" bindchange="bindEndTimePickerChange" value="{{endTimePickerIndex}}" range="{{timePickerArray}}">
@@ -54,9 +54,6 @@
       </view>
     </view>
   </view>
-
-
-
   <view class="course-student" wx:if="{{courseType == 0}}">
     <view class="icon">
       <image src="/images/student-name.png"></image>
@@ -121,12 +118,12 @@
       </view>
     </view>
   </view>
-  <view class="course-custom-color">
+  <view class="course-custom-color" wx:if="{{courseType == 2}}">
     <view class="custom-title">
       <text>自定义时间方块颜色</text>
     </view>
     <view class="custom-color-list">
-      <scroll-view class="custom-scroll-view" scroll-x scroll-into-view="">
+      <scroll-view class="custom-scroll-view" scroll-x scroll-into-view="{{scrollIntoView}}">
         <block wx:for="{{colorArray}}">
           <view class="scroll-block {{index == 0 ? 'scroll-block-last' : ''}}" id="color{{index}}" bindtap="selectCustomColor" data-index="{{index}}">
             <view class="color-block">
@@ -134,58 +131,11 @@
               <view class="color-show" style="background-color:{{item.color}};"></view>
             </view>
           </view>
-
         </block>
-
-        <!-- <view class="scroll-block" id="b">
-          <view class="color-block">
-            <view class="color" style="opacity: 0;"></view>
-            <view class="color-show"></view>
-          </view>
-        </view>
-        <view class="scroll-block" id="b">
-          <view class="color-block">
-            <view class="color" style="opacity: 0;"></view>
-            <view class="color-show"></view>
-          </view>
-        </view>
-        <view class="scroll-block" id="b">
-          <view class="color-block">
-            <view class="color" style="opacity: 0;"></view>
-            <view class="color-show"></view>
-          </view>
-        </view>
-        <view class="scroll-block" id="b">
-          <view class="color-block">
-            <view class="color" style="opacity: 0;"></view>
-            <view class="color-show"></view>
-          </view>
-        </view>
-        <view class="scroll-block" id="b">
-          <view class="color-block">
-            <view class="color" style="opacity: 0;"></view>
-            <view class="color-show"></view>
-          </view>
-        </view>
-        <view class="scroll-block" id="b">
-          <view class="color-block">
-            <view class="color" style="opacity: 0;"></view>
-            <view class="color-show"></view>
-          </view>
-        </view>
-        <view class="scroll-block" id="b">
-          <view class="color-block">
-            <view class="color" style="opacity: 0;"></view>
-            <view class="color-show"></view>
-          </view>
-        </view> -->
-
       </scroll-view>
     </view>
   </view>
   <view class="course-fixed-bottom-button" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
-    <button>保存</button>
+    <button bindtap="bindSave">保存</button>
   </view>
-
-
 </view>

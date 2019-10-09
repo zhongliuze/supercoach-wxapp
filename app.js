@@ -2,20 +2,12 @@
 import $ from 'common/common.js';
 App({
   data: {
-    deviceInfo: {}
   },
   onLaunch: function () {
-    // 展示本地存储能力
-    this.data.deviceInfo = wx.getSystemInfoSync();
-    console.log(this.data.deviceInfo);
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
+    // 获取手机系统信息
     wx.getSystemInfo({
       success(res) {
-        // 吸底按钮自适应
-        console.log('吸底按钮距离：' + (res.screenHeight - res.safeArea.bottom) * 2);
+        // 吸底按钮自适应,设置吸底按钮距离
         wx.setStorageSync('fixedBottomButtonMargin', (res.screenHeight - res.safeArea.bottom)*2);
       }
     })

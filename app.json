@@ -1,14 +1,11 @@
 {
   "pages": [
+    "pages/course/index/index",
+    "pages/course/custom/custom",
     "pages/course/course/course",
     "pages/course/repeat/repeat",
     "pages/course/remind/remind",
-   
-    
-    "pages/course/index/index",
     "pages/students/index/index",
-    
-    
     "pages/mine/index/index",
     "pages/index/index",
     "pages/logs/logs"

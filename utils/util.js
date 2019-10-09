@@ -31,6 +31,11 @@ const getSign =timestamp => {
   }
 }
 
+/**
+   * 计算滑动角度
+   * @param {Object} start 起点坐标
+   * @param {Object} end 终点坐标
+   */
 module.exports = {
   formatTime: formatTime,
   getTimestamp: getTimestamp,

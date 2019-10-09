@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    courseType: 1, // 0排课，1休息，2自定义
+    courseType: 2, // 0排课，1休息，2自定义
     fixedBottomButtonMargin: 0, // 吸底按钮自适应高度
     timePickerArray: [], // 选择框时间列表
     timeShowArray: [], // 展示时间列表
@@ -20,7 +20,7 @@ Page({
     repeatArray: ['不重复', '每天', '每周', '每月'],
     fullDaySwitch: false, // 全天按钮
     colorArray: [
-      { color: '#DC4F5A' , selected: false},
+      { color: '#DC4F5A', selected: false },
       { color: '#DC5960', selected: false },
       { color: '#EA6E7F', selected: false },
       { color: '#E89CA4', selected: true },
@@ -28,7 +28,6 @@ Page({
       { color: '#5392E8', selected: false },
       { color: '#F1A044', selected: false },
       { color: '#F4BA40', selected: false },
-      { color: '#5392E8', selected: false },
       { color: '#F1A044', selected: false },
       { color: '#F4BA40', selected: false },
       { color: '#439697', selected: false },
@@ -38,12 +37,15 @@ Page({
       { color: '#444756', selected: false },
     ],
     selectColorIndex: 0, // 选中颜色
+    customTitle: '',  // 自定义标题内容
+    scrollIntoView: '', // 方块颜色自动滚入位置
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options);
     var selectDate = '2019-10-08-18-30';  // 上一页选中时间
     var timePickerArray = [];  // picker选择框中数据
     var timeShowArray = [];  // 展示数据
@@ -117,6 +119,7 @@ Page({
       timeShowArray: timeShowArray,
       startTimePickerIndex: startTimePickerIndex,
       endTimePickerIndex: endTimePickerIndex,
+      courseType: options.courseType,
     });
   },
 
@@ -192,7 +195,7 @@ Page({
   },
 
   // 进入课程提醒选择页
-  navigateToRemind: function() {
+  navigateToRemind: function () {
     wx.navigateTo({
       url: '../remind/remind?remindType=' + this.data.remindType,
     })
@@ -205,7 +208,7 @@ Page({
     })
   },
 
-  fullDaySwitch: function(event) {
+  fullDaySwitch: function (event) {
     console.log(event);
     this.setData({
       fullDaySwitch: event.detail.value,
@@ -215,11 +218,11 @@ Page({
   selectCustomColor: function (event) {
     var colorArray = this.data.colorArray;
     var colorIndex = event.currentTarget.dataset.index;
- 
-    for(let i = 0; i< colorArray.length;i++) {
+
+    for (let i = 0; i < colorArray.length; i++) {
       if (i == colorIndex) {
         colorArray[i]['selected'] = true;
-      }else {
+      } else {
         colorArray[i]['selected'] = false;
       }
     }
@@ -227,5 +230,26 @@ Page({
       colorArray: colorArray,
       selectColorIndex: colorIndex,
     });
+  },
+
+  navigateToCustomList: function (event) {
+    wx.navigateTo({
+      url: '../custom/custom',
+    })
+  },
+
+  bindSave: function (event) {
+    wx.showToast({
+      title: '创建成功',
+      icon: 'success',
+      success: function () {
+        setTimeout(function () {
+          wx.navigateBack({
+            delta: '1'
+          })
+        }, 1500);
+      }
+
+    })
   }
 })

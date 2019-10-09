@@ -1,6 +1,7 @@
 <!--pages/course/index/index.wxml-->
 <movable-area style="width:auto;height:auto;">
   <view class="container-page" bindtap="bindCloseMark">
+    <!-- 顶部自定义导航栏 -->
     <view class="navigation-bar">
       <view class="navigation-bar__placeholder {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px;visibility: hidden;"></view>
       <view class="navigation-bar__inner {{ios ? 'ios' : 'android'}}" style="padding-top: {{statusBarHeight}}px; color: {{navigation_color}};background: {{navigation_background}};{{innerPaddingRight}};{{innerWidth}};">
@@ -35,7 +36,7 @@
         </view>
       </view>
     </view>
-
+    <!-- 表格视图 -->
     <view class="course" wx:if="{{viewType == 0}}">
       <view class="course_left">
         <view class="date date_fixed">
@@ -60,7 +61,7 @@
       </view>
       <view class="course_right">
         <scroll-view class="course_date" scroll-x scroll-into-view="{{scrollData}}">
-          <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex">
+          <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex" wx:key="this">
             <view class="scroll-block" id="scrollData{{courseIndex}}">
               <view class="scroll-date">
                 <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
@@ -149,8 +150,10 @@
         </swiper>
       </view>
     </view>
+    <!-- 日历视图 -->
     <view class="course_list" wx:elif="{{viewType == 1}}">
       <view class="course-scroll">
+        <!-- 日历收起 -->
         <scroll-view class="course_date" scroll-x scroll-into-view="{{scrollData}}" wx:if="{{calendarShow == false}}">
           <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex">
             <view class="scroll-block" id="scrollData{{courseIndex}}">
@@ -176,6 +179,7 @@
             </view>
           </block>
         </scroll-view>
+        <!-- 日历展开 -->
         <scroll-view class="course_date" scroll-x scroll-into-view="a" wx:elif="{{calendarShow == true}}">
           <view class="scroll-block" id="a">
             <view class="scroll-date-line">
@@ -510,16 +514,19 @@
             </view>
           </view>
         </scroll-view>
+        <!-- 展开、收起按钮 -->
         <view class="spread" catchtap="changeCalendarShow">
           <image src="/images/course-list-arrow-down.png" wx:if="{{calendarShow == false}}"></image>
           <image src="/images/course-list-arrow-up.png" wx:elif="{{calendarShow == true}}"></image>
         </view>
       </view>
-
+      <!-- 任务列表展示 -->
       <view class="course-info" style="margin-top:{{calendarShow == true ? '543' : '197'}}rpx;">
+        <!-- 选中时间 -->
         <view class="date-info">
           <text>07月11日  周五</text>
         </view>
+        <!-- 任务列表 -->
         <view class="tasks">
           <block wx:for="{{taskList}}">
             <movable-area class='movable-area'>
@@ -552,94 +559,6 @@
               </movable-view>
             </movable-area>
           </block>
-          <!-- <view class="task-line">
-            <view class="task-status prepare"></view>
-            <view class="avatar">
-              <text>泽中</text>
-            </view>
-            <view class="task-user">
-              <view class="name">
-                <text>刘泽中</text>
-              </view>
-              <view class="subtitle">
-                <text>展示本节课内容</text>
-              </view>
-            </view>
-            <view class="task-time">
-              <view class="surplus-hour">
-                <text>剩余03课时</text>
-              </view>
-              <view class="course-time">
-                <text>08:30~09:30</text>
-              </view>
-            </view>
-          </view>
-          <view class="task-line">
-            <view class="task-status prepare"></view>
-            <view class="avatar">
-              <text>泽中</text>
-            </view>
-            <view class="task-user">
-              <view class="name">
-                <text>刘泽中</text>
-              </view>
-              <view class="subtitle">
-                <text>展示本节课内容</text>
-              </view>
-            </view>
-            <view class="task-time">
-              <view class="surplus-hour">
-                <text>剩余03课时</text>
-              </view>
-              <view class="course-time">
-                <text>08:30~09:30</text>
-              </view>
-            </view>
-          </view>
-          <view class="task-line">
-            <view class="task-status cancel"></view>
-            <view class="avatar">
-              <text>泽中</text>
-            </view>
-            <view class="task-user">
-              <view class="name">
-                <text>刘泽中</text>
-              </view>
-              <view class="subtitle">
-                <text>展示本节课内容</text>
-              </view>
-            </view>
-            <view class="task-time">
-              <view class="surplus-hour">
-                <text>剩余03课时</text>
-              </view>
-              <view class="course-time">
-                <text>08:30~09:30</text>
-              </view>
-            </view>
-          </view>
-          <view class="task-line">
-            <view class="task-status custom"></view>
-            <view class="avatar">
-              <text>泽中</text>
-            </view>
-            <view class="task-user">
-              <view class="name">
-                <text>刘泽中</text>
-              </view>
-              <view class="subtitle">
-                <text>展示本节课内容</text>
-              </view>
-            </view>
-            <view class="task-time">
-              <view class="surplus-hour">
-                <text>剩余03课时</text>
-              </view>
-              <view class="course-time">
-                <text>08:30~09:30</text>
-              </view>
-            </view>
-          </view> -->
         </view>
         <view class="tasks-bottom"></view>
         <view class="unwind-button" catchtap="catchUnwind">
@@ -657,21 +576,18 @@
 </movable-area>
 
 <block wx:if="{{operateMark}}">
-
-
   <view class="unwind-view" catchtap="catchUnwind">
-
   </view>
   <view class="unwind-button-group">
-    <view class="button">
+    <view class="button" catchtap="catchCourse">
       <text>排课</text>
       <image src="/images/course-table-button-course.png"></image>
     </view>
-    <view class="button">
+    <view class="button" catchtap="catchRest">
       <text>休息</text>
       <image src="/images/course-table-button-rest.png"></image>
     </view>
-    <view class="button">
+    <view class="button" catchtap="catchCustom">
       <text>自定义</text>
       <image src="/images/course-table-button-custom.png"></image>
     </view>

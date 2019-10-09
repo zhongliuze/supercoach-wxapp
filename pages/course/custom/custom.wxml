@@ -1,0 +1,36 @@
+<!--pages/course/custom/custom.wxml-->
+<view class="container-page">
+  <view class="custom-cells-group">
+    <block wx:for="{{customArray}}" wx:key="this">
+      <movable-area class='movable-area'>
+        <movable-view direction="horizontal" class='movable-view'>
+          <block wx:if="{{item.canDelete}}">
+            <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}">
+              <view class="custom-cell">
+                <view class="content {{index == (customArray.length-1) ? 'no-border' : ''}}" bindtap="chooseCustom" data-index="{{index}}">
+                  <view class="color-block" style="background-color:{{item.color}};"></view>
+                  <view class="value">
+                    <text>{{item.name}}</text>
+                  </view>
+                </view>
+              </view>
+              <view class="delete-button" catchtap="catchDelete" data-index="{{index}}">删除</view>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="touch-item">
+              <view class="custom-cell">
+                <view class="content {{index == (customArray.length-1) ? 'no-border' : ''}}" bindtap="chooseCustom"  data-index="{{index}}">
+                  <view class="color-block" style="background-color:{{item.color}};"></view>
+                  <view class="value">
+                    <text>{{item.name}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </movable-view>
+      </movable-area>
+    </block>
+  </view>
+</view>
