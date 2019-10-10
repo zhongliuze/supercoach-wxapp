@@ -94,7 +94,7 @@
                     <view class="day">
                       <block wx:for="{{weekItem.tableList}}" wx:key="this" wx:for-item="tableItem" wx:for-index="tableIndex">
                         <block wx:if="{{tableItem.hasTask == true}}">
-                          <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;" catchtap="catchTableMark" data-tableIndex="{{tableIndex}}"
+                          <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;margin-top:{{tableItem.marginTop}}rpx;" catchtap="catchTableMark" data-tableIndex="{{tableIndex}}"
                             data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}">
                             <text>{{tableItem.title}}</text>
                           </view>

@@ -20,10 +20,10 @@ Page({
     swiperEasing: 'default', // 滑动动画，linear为线性，default为默认
     scrollData: '',
     courseList: [],
-    beforeWeek: 5, // 默认加载当前日期前x周
-    aftherWeek: 5, // 默认加载当前日期前y周
-    defaultWeekLength: 5, // 默认加载周列表长度，左右各5
-    weekSetpLength: 5, // 每次新加载x周
+    beforeWeek: 3, // 默认加载当前日期前x周
+    aftherWeek: 2, // 默认加载当前日期前y周
+    defaultWeekLength: 2, // 默认加载周列表长度，左右各5
+    weekSetpLength: 2, // 每次新加载x周
     prestrainWeek: 1, // 当前后剩余x周时候提前加载
     currentWeek: 0, // 当前周列表键值
     currentTable: 0, // 当前滑动表格（视图）位置
@@ -44,49 +44,14 @@ Page({
     movableMessageY: '1029', // 可移动的通知框初始Y轴坐标
     viewType: 0, // 0为表格视图，1为列表视图
     calendarShow: true, // false为日历隐藏，true为日历展开
-    taskList: [{
-      status: 1,
-      avatar: 0,
-      username: '刘泽中',
-      content: '测试测试测试啊',
-      lasttime: '03',
-      time: '08:30~9:30',
-      isTouchMove: false
-    }, {
-      status: 1,
-      avatar: 0,
-      username: '刘泽中',
-      content: '测试测试测试啊',
-      lasttime: '03',
-      time: '08:30~9:30',
-      isTouchMove: false
-    },
-    {
-      status: 1,
-      avatar: 0,
-      username: '刘泽中',
-      content: '测试测试测试啊',
-      lasttime: '03',
-      time: '08:30~9:30',
-      isTouchMove: false
-    },
-    {
-      status: 1,
-      avatar: 0,
-      username: '刘泽中',
-      content: '测试测试测试啊',
-      lasttime: '03',
-      time: '08:30~9:30',
-      isTouchMove: false
-    },
-    ],
     operateMark: false, // 操作蒙层
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    console.log('onLoad start');
     var _this = this;
 
     // 获取缓存中视图类型
@@ -141,34 +106,6 @@ Page({
       }
     }
 
-    // 更新数据
-    _this.setData({
-      timeList: timeList,
-      viewType: viewType,
-      calendarShow: calendarShow,
-    });
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-    // 获取当前时间戳
-    let timestamp = moment().valueOf();
-
-    // 按周获取任务数据
-    // $.get(
-    //   'task/week', {
-    //     coachid: wx.getStorageSync('coachid'),
-    //     date: '2019-09-24', // 周时间（默认为本周，格式 yyyy-MM-dd）
-    //     sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-    //     timestamp: timestamp, //时间戳
-    //   },
-    //   function(res) {
-    //     console.log(res);
-    //   }
-    // )
 
     /**
      * 初始化，构建表格
@@ -177,7 +114,7 @@ Page({
     var tempCourseList = [];
     const defaultWeekLength = this.data.defaultWeekLength;
     // 获取当前周及前后n周日期数据
-    for (let i = 0; i < defaultWeekLength; i++) {
+    for (let i = 0; i <= defaultWeekLength; i++) {
       var weekAfterArray = [];
       var weekBeforeArray = [];
       for (let j = 1; j <= 7; j++) {
@@ -188,60 +125,61 @@ Page({
       tempCourseList.unshift(weekBeforeArray)
     }
 
-    var courseList = [];  // 表格列表
-    var currentWeek = 0;  // 当前周下表位置
-    var currentMonth = '';  // 当前月
+    var courseList = []; // 表格列表
+    var currentWeek = 0; // 当前周下表位置
+    var currentMonth = ''; // 当前月
     var currentYear = ''; // 当前年
     // 组建对象数组
     for (let i = 0; i < tempCourseList.length; i++) {
-      var tempWeekList = [];  // 周列表
-      var tempCurrentWeek = false;  // 是否为当前周
+      var tempWeekList = []; // 周列表
+      var tempCurrentWeek = false; // 是否为当前周
       // 优化日期数组
       for (let j = 0; j < tempCourseList[i].length; j++) {
-        let tempDayList = [];  // 日列表
-        var tempCurrentDay = false;  // 是否为当前天
+        let tempDayList = []; // 日列表
+        var tempCurrentDay = false; // 是否为当前天
         // 写入默认空白列表数据
-        var tempTaskList = [];  // 日任务数据列表
+        var tempTaskList = []; // 日任务数据列表
         for (let k = this.data.startTime; k <= this.data.endTime; k++) {
           var tableDate = moment(tempCourseList[i][j]).format('YYYY-MM-DD');
           var tableTime = k < 10 ? '0' + k : k;
           // 拼接数据
           tempTaskList.push({
-            date: tableDate + '-' + tableTime + '-00',  // 日期
-            hasTask: false,  // 是否有任务
+            date: tableDate + '-' + tableTime + '-00', // 日期
+            hasTask: false, // 是否有任务
             taskDuration: 1, // 任务时长
-            height: '104',  // 列表高度
-            paddingBottom: '10',  // 距底部距离
+            height: '104', // 列表高度
+            paddingBottom: '10', // 距底部距离
+            marginTop: '0',
           });
         }
         // 判断是否是当前日
         if (tempCourseList[i][j] == moment().format('YYYY-MM-DD')) {
-          tempCurrentDay = true;  // 是当日
-          currentWeek = i;  // 当前周值
-          currentMonth = moment(tempCourseList[i][0]).format('M月');  // 当前月值
-          currentYear = moment(tempCourseList[i][0]).format('YYYY年');  // 当前年份值
+          tempCurrentDay = true; // 是当日
+          currentWeek = i; // 当前周值
+          currentMonth = moment(tempCourseList[i][0]).format('M月'); // 当前月值
+          currentYear = moment(tempCourseList[i][0]).format('YYYY年'); // 当前年份值
         } else {
-          var isCurrent = false;  // 不是当日
+          var isCurrent = false; // 不是当日
         }
         // 拼接日数据
         tempDayList = {
-          'isCurrent': tempCurrentDay,  // 是否当日
-          'day': moment(tempCourseList[i][j]).date(),  // 所属日
+          'isCurrent': tempCurrentDay, // 是否当日
+          'day': moment(tempCourseList[i][j]).date(), // 所属日
           'month': moment(tempCourseList[i][j]).month() + 1, // 所属月
-          'year': moment(tempCourseList[i][j]).year(),  // 所属年
+          'year': moment(tempCourseList[i][j]).year(), // 所属年
           'date': moment(tempCourseList[i][j]).format('YYYY-MM-DD'),
-          'tableList': tempTaskList,  // 日列表
+          'tableList': tempTaskList, // 日列表
         }
         // 写入日数据到周列表中
         tempWeekList.push(tempDayList);
       }
       // 拼接周数据
       var tempList = {
-        'currentWeek': tempCurrentWeek,  // 是否当前周
-        'year': moment(tempCourseList[i][0]).year(),  // 所属年
+        'currentWeek': tempCurrentWeek, // 是否当前周
+        'year': moment(tempCourseList[i][0]).year(), // 所属年
         'month': moment(tempCourseList[i][0]).month() + 1, // 所属月
         'date': moment(tempCourseList[i][0]).format('YYYY-MM'),
-        'weekList': tempWeekList,  // 周列表
+        'weekList': tempWeekList, // 周列表
       }
       // 写入周数据到表格中
       courseList.push(tempList);
@@ -255,14 +193,33 @@ Page({
       scrollData: 'scrollData' + currentWeek,
       currentMonth: currentMonth,
       currentYear: currentYear,
+      timeList: timeList,
+      viewType: viewType,
+      calendarShow: calendarShow,
     });
+
+    console.log('onLoad end');
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+    console.log('onReady start');
+
+
+    console.log('onReady end');
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
+    console.log('onShow start');
     var _this = this;
+    var courseList = this.data.courseList; // 已生成课表数据
+    console.log(courseList);
     // 获取当前时间，展示时间线
     if (moment().hour() < (this.data.endTime + 1) && moment().hour() > (this.data.startTime - 1)) {
       // 显示时间线
@@ -281,211 +238,175 @@ Page({
       }
     }
 
-    var tempPostList = [{
-      beginTime: "8:00",
-      endTime: "11:00",
-      setp: 3,
-      taskStatus: 1, // 任务状态   0:待完成，1:已完成，2:待确认，-1:已取消，-2:已删除
-      taskId: 5, // 任务ID
-      titleColor: "#ffc229", // 任务背景颜色   0:#ffc229  1 :#5fcd64
-      taskType: 0, // 任务类型   0:排课，1:休息，2:自定义
-      title: "刘泽中",
-    },
-    {
-      beginTime: "12:30",
-      endTime: "13:30",
-      setp: 1,
-      taskStatus: 0, // 任务状态
-      taskId: 5, // 任务ID
-      titleColor: "#ff3d3d", // 任务背景颜色
-      taskType: 0, // 任务类型
-      title: "金老三",
-    },
-    {
-      beginTime: "13:30",
-      endTime: "14:30",
-      setp: 1,
-      taskStatus: 0, // 任务状态
-      taskId: 5, // 任务ID
-      titleColor: "#b2b3b7", // 任务背景颜色
-      taskType: 0, // 任务类型
-      title: "田福军",
-
-    },
-    {
-      beginTime: "15:30",
-      endTime: "17:30",
-      setp: 2,
-      taskStatus: 0, // 任务状态
-      taskId: 5, // 任务ID
-      titleColor: "#ffc229", // 任务背景颜色
-      taskType: 0, // 任务类型
-      title: "田福军",
-    },
-    {
-      beginTime: "20:00",
-      endTime: "21:00",
-      setp: 1,
-      taskStatus: 0, // 任务状态
-      taskId: 5, // 任务ID
-      titleColor: "#ffc229", // 任务背景颜色
-      taskType: 0, // 任务类型
-      title: "田福军",
-    },
-    {
-      beginTime: "21:00",
-      endTime: "22:00",
-      setp: 1,
-      taskStatus: 0, // 任务状态
-      taskId: 5, // 任务ID
-      titleColor: "#5fcd64", // 任务背景颜色
-      taskType: 0, // 任务类型
-      title: "孙少平",
-    },
-    {
-      beginTime: "22:00",
-      endTime: "23:00",
-      setp: 1,
-      taskStatus: 0, // 任务状态
-      taskId: 5, // 任务ID
-      titleColor: "#5fcd64", // 任务背景颜色
-      taskType: 0, // 任务类型
-      title: "孙少平",
-    }
-    ];
-
     let timestamp = moment().valueOf();
     $.get(
       'task/range', {
         coachid: wx.getStorageSync('coachid'),
-        beginDate: '2019-09-16', // 周时间（默认为本周，格式 yyyy-MM-dd）
-        endDate: '2019-10-10',
+        beginDate: courseList[0]['weekList'][0]['date'], // 周时间（默认为本周，格式 yyyy-MM-dd）
+        endDate: courseList[courseList.length - 1]['weekList'][courseList[courseList.length - 1]['weekList'].length - 1]['date'],
         sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
         timestamp: timestamp, //时间戳
       },
-      function (res) {
-
+      function(res) {
         if (res.data.code == 0) {
           // 获取成功
-          var taskList = res.data.data.taskList;  // 服务器返回结果
-          var courseList = _this.data.courseList; // 已生成课表数据
-          console.log(taskList);
+          console.log(res.data);
+          var taskList = res.data.data.taskList; // 服务器返回结果
           for (let i = 0; i < taskList.length; i++) {
             for (let j = 0; j < courseList.length; j++) {
               // 寻找相同年、月的数据
-              if (moment(taskList[i]['taskDate']).format('YYYY-MM') == courseList[j]['date']) {
-                for (let k = 0; k < courseList[j]['weekList'].length;k++) {
+              if (moment(taskList[i]['taskDate']).format('YYYY-MM') == courseList[j]['date'] || moment(taskList[i]['taskDate']).format('YYYY-MM') == moment(courseList[j]['weekList'][6]['date']).format('YYYY-MM')) {
+                for (let k = 0; k < courseList[j]['weekList'].length; k++) {
                   // 寻找相同日的数据
                   if (taskList[i]['taskDate'] == courseList[j]['weekList'][k]['date']) {
-                    console.log(courseList[j]['weekList'][k]['tableList']);
+                    // 寻找到相同日，将该日表格重写
+                    // 取出返回数据中taskList的值
+                    var tempTaskList = taskList[i]['taskList'];
+                    // 临时存放某天数据列表的数组
+                    var tempDayList = [];
+                    // 从开始时间统计到结束时间，默认步长1小时
+                    for (let p = _this.data.startTime; p <= _this.data.endTime; p++) {
+                      var hasTask = -1; // 是否有任务
+                      var tempTime = []; // 临时存放每个时段数据的数组
+                      // 遍历Post返回数据的任务列表
+                      // var dayDate = moment(tempCourseList[i][j]).format('YYYY-MM-DD');
+                      var dayTime = p < 10 ? '0' + p : p; // 当前小时
+                      for (let q = 0; q < tempTaskList.length; q++) {
+                        // 判断是否有整点（00分）开始任务
+                        if (tempTaskList[q]['beginTimeStr'] == (dayTime + ':00')) {
+                          // 有整点开始任务
+                          // 是否有任务，有任务为任务的下标，无任务在为-1； 
+                          hasTask = q;
+                          // 组建当前时间段数组
+                          tempTime = {
+                            date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
+                            hasTask: true, // 有任务
+                            taskDuration: tempTaskList[q]['step'], // 任务时长
+                            taskId: tempTaskList[q]['taskId'], // 任务ID
+                            titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                            taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                            title: tempTaskList[q]['title'], // 任务名称、标题
+                            height: 104 * tempTaskList[q]['step'] + 10 * (tempTaskList[q]['step'] - 1), // 任务列方块高度
+                            paddingBottom: '10', // 任务列方块距底部间距
+                          }
+                          // 将时间块写入到日列表中
+                          tempDayList.push(tempTime);
+                          // 根据任务时长调整日列表中方块数量
+                          p = p + tempTaskList[q]['step'] - 1;
+                          break;
+                        } else if (tempTaskList[q]['beginTimeStr'] == (dayTime + ':30')) {
+                          // 有半点（30分）开始任务
+                          // 判断是否需要半个空任务（空白格）
+                          hasTask = q; // 是否有任务，有任务为任务的下标，无任务在为-1；
+                          var hasEndTime = -1; // 是否有相同的结束时间冲突状态，默认没有；
+                          // 遍历当日任务数组，判断是否有某个结束时间与开始时间相同；
+                          for (let m = 0; m < tempTaskList.length; m++) {
+                            // 寻找当前时间的半点（30分）是否与某个任务的结束时间相同
+                            if (tempTaskList[m]['endTimeStr'] == (dayTime + ':30')) {
+                              hasEndTime = m;
+                            }
+                          }
+                          // 判断遍历结果，hasEndTime为-1则未找到，为其它值则找到
+                          if (hasEndTime == -1) {
+                            // 未找到则输出空任务方块（空白格），找到则不输出
+                            tempDayList.push({
+                              date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                              taskDuration: '0.5', // 任务时长
+                              hasTask: false,
+                              height: '52',
+                              paddingBottom: '0',
+                              marginTop: '0',
+                            });
 
-                    // for (let p = this.data.startTime; p <= this.data.endTime; j++) {
-                    //   var hasTask = -1;  // 是否有任务
-                    //   var tempTime = [];
+                            // 输出正常的任务块
+                            tempTime = {
+                              date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                              hasTask: true, // 有任务
+                              taskDuration: tempTaskList[q]['step'], // 任务时长
+                              taskId: tempTaskList[q]['taskId'], // 任务ID
+                              titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                              taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                              title: tempTaskList[q]['title'], // 任务标题、名称
+                              height: (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])), // 任务列方块高度                         
+                              marginTop: '0',
+                              paddingBottom: '0', // 任务列方块距底部间距
+                            }
+                          }
 
-                    //   for (let k = 0; k < tempPostList.length; k++) {
-                    //     if (tempPostList[k]['beginTime'] == (j + ':00')) {
-                    //       // 有整点任务
-                    //       hasTask = k;
-                    //       tempTime = {
-                    //         hasTask: true,
-                    //         taskDuration: tempPostList[k]['setp'], // 时长
-                    //         taskId: tempPostList[k]['taskId'], // 任务ID
-                    //         titleColor: tempPostList[k]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
-                    //         taskType: tempPostList[k]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
-                    //         title: tempPostList[k]['title'],
-                    //         height: 104 * tempPostList[k]['setp'] + 10 * (tempPostList[k]['setp'] - 1),
-                    //         paddingBottom: '10',
-                    //       }
-                    //       tempWeekList[i]['tableList'].push(tempTime);
-                    //       j = j + tempPostList[k]['setp'] - 1;
-                    //       break;
-                    //     } else if (tempPostList[k]['beginTime'] == (j + ':30')) {
-                    //       // 有半点任务
-                    //       // 判断是否需要半个空白格
-                    //       hasTask = k;
-                    //       var hasEndTime = -1;
-                    //       for (let p = 0; p < tempPostList.length; p++) {
-                    //         if (tempPostList[p]['endTime'] == (j + ':30')) {
-                    //           hasEndTime = p;
-                    //         }
-                    //       }
-                    //       if (hasEndTime == -1) {
-                    //         // 输出空白格
-                    //         var tempTime0 = {
-                    //           hasTask: false,
-                    //           height: '52',
-                    //           paddingBottom: '0',
-                    //         }
-                    //         tempWeekList[i]['tableList'].push(tempTime0);
-                    //       }
-                    //       // 输出任务快
-                    //       tempTime = {
-                    //         hasTask: true,
-                    //         taskDuration: tempPostList[k]['setp'], // 时长
-                    //         taskId: tempPostList[k]['taskId'], // 任务ID
-                    //         titleColor: tempPostList[k]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
-                    //         taskType: tempPostList[k]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
-                    //         title: tempPostList[k]['title'],
-                    //         height: (104 * tempPostList[k]['setp']) + (10 * (tempPostList[k]['setp'])),
-                    //         paddingBottom: '0',
-                    //       }
-                    //       tempWeekList[i]['tableList'].push(tempTime);
-                    //       j = j + tempPostList[k]['setp'] - 1;
-                    //       break;
-                    //     } else if (tempPostList[k]['endTime'] == (j + ':30')) {
-                    //       // 有结束任务
-                    //       // 输出半个空格
-                    //       var hasBeginTime = -1;
-                    //       for (let p = 0; p < tempPostList.length; p++) {
-                    //         if (tempPostList[p]['beginTime'] == (j + ':30')) {
-                    //           hasBeginTime = p;
-                    //         }
-                    //       }
-                    //       if (hasBeginTime == -1) {
-                    //         tempTime = {
-                    //           hasTask: false,
-                    //           height: '52',
-                    //           paddingBottom: '10',
-                    //         }
-                    //         tempWeekList[i]['tableList'].push(tempTime);
-                    //       }
-                    //       hasTask = k;
-                    //     }
-                    //   }
+                          // 判断是否有相邻两个且颜色相同的任务块，若有则有1像素的分隔线，若无则正常显示
+                          if (hasEndTime != -1 && tempTaskList[hasEndTime]['titleColor'] == tempTaskList[q]['titleColor']) {
+                            var tempTimeHeight = (103 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])); // 任务列方块高度
+                            var tempMarginTop = 1 * tempTaskList[q]['step'];
+                          } else {
+                            var tempTimeHeight = (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])); // 任务列方块高度
+                            var tempMarginTop = '0';
+                          }
 
-                    //   if (hasTask == -1) {
-                    //     // 输出默认方块，无任务
-                    //     tempTime = {
-                    //       hasTask: false,
-                    //       height: '104',
-                    //       paddingBottom: '10',
-                    //     }
-                    //     tempWeekList[i]['tableList'].push(tempTime);
-                    //   }
-
-                    // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                          // 将时间块写入到日列表中
+                          tempDayList.push({
+                            date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                            hasTask: true, // 有任务
+                            taskDuration: tempTaskList[q]['step'], // 任务时长
+                            taskId: tempTaskList[q]['taskId'], // 任务ID
+                            titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                            taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                            title: tempTaskList[q]['title'], // 任务标题、名称
+                            height: tempTimeHeight, // 任务列方块高度                         
+                            marginTop: tempMarginTop,
+                            paddingBottom: '0', // 任务列方块距底部间距
+                          });
+                          // 根据任务时长调整日列表中方块数量
+                          p = p + tempTaskList[q]['step'] - 1;
+                          break;
+                        } else if (tempTaskList[q]['endTimeStr'] == (p + ':30')) {
+                          // 有某个半点（30分）结束时间与开始时间相同
+                          var hasBeginTime = -1; // 是否有相同的开始时间冲突状态，默认没有；
+                          // 遍历当日任务数组，判断是否有某个开始时间与之相同；
+                          for (let m = 0; m < tempTaskList.length; m++) {
+                            // 寻找当前时间的半点（30分）是否与某个任务的开始时间相同
+                            if (tempTaskList[m]['beginTimeStr'] == (p + ':30')) {
+                              hasBeginTime = m;
+                            }
+                          }
+                          // 判断遍历结果，hasBeginTime为-1则未找到，为其它值则找到
+                          if (hasBeginTime == -1) {
+                            tempDayList.push({
+                              date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                              taskDuration: '0.5', // 任务时长
+                              hasTask: false,
+                              height: '52',
+                              paddingBottom: '10',
+                              marginTop: '0',
+                            });
+                          }
+                          // 是否有任务，有任务为任务的下标，无任务在为-1；
+                          hasTask = q;
+                        }
+                      }
+                      // 未匹配到任务
+                      if (hasTask == -1) {
+                        // 无任务，输出默认方块
+                        // 拼接数据
+                        tempDayList.push({
+                          date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
+                          hasTask: false,
+                          taskDuration: 1, // 任务时长
+                          height: '104', // 列表高度
+                          paddingBottom: '10', // 距底部距离
+                          marginTop: '0',
+                        });
+                      }
+                    }
+                    courseList[j]['weekList'][k]['tableList'] = tempDayList;
                   }
                 }
               }
             }
           }
-
+          console.log(courseList);
+          _this.setData({
+            courseList: courseList,
+          });
         } else {
           wx.showToast({
             title: '课程信息加载失败',
@@ -495,209 +416,592 @@ Page({
       }
     )
 
-    console.log(moment('2019-10-09').format('YYYY-MM'));
-
-    this.setData({
-      timeLineTop: timeLineTop,  // 当前时间线位置
-      timeList: timeList,  // 更新当前时间展示颜色
-      movableMessageY: 1029 + (this.data.statusBarHeight - 20),  // 设置可移动预约消息框初始Y轴坐标
+    _this.setData({
+      timeLineTop: timeLineTop, // 当前时间线位置
+      timeList: timeList, // 更新当前时间展示颜色
+      movableMessageY: 1029 + (this.data.statusBarHeight - 20), // 设置可移动预约消息框初始Y轴坐标
     });
+    console.log('onShow end');
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
-  bindTableChange: function (event) {
+  /**
+   * 滑动加载表格数据
+   */
+  bindTableChange: function(event) {
+    var _this = this;
+    // 获取现有列表
     var courseList = this.data.courseList;
-
-    // 向后加载数据
+    var tempCoursePostList = [];
+    console.log(event.detail.current);
+    // 判断是向前还是向后加载周数据
     if (event.detail.current > (courseList.length - this.data.prestrainWeek - 1)) {
-      // var weekArray = [];
-      wx.showToast({
-        title: '正在加载',
-        icon: 'loading'
-      })
-      var monthArray = [];
+      // 向后加载数据
+      var tempCourseList = [];
       const aftherWeek = this.data.aftherWeek;
       const newAfterWeek = aftherWeek + this.data.weekSetpLength;
       // 获取当前周及后三周日期列表
       for (let i = aftherWeek + 1; i <= newAfterWeek; i++) {
-        var weekArray = [];
+        var weekAfterArray = [];
         for (let j = 1; j <= 7; j++) {
-          weekArray.push(moment().weekday(i * 7 + j).format('YYYY-MM-DD'));
+          weekAfterArray.push(moment().weekday(i * 7 + j).format('YYYY-MM-DD'));
         }
-        monthArray.push(weekArray);
+        tempCourseList.push(weekAfterArray);
       }
 
-      var courseList = this.data.courseList;
-      var currentWeek = 0;
-      var currentMonth = '7月';
-      var currentYear = '2019年';
+
+      var currentWeek = 0; // 当前周下表位置
+      var currentMonth = ''; // 当前月
+      var currentYear = ''; // 当前年
       // 组建对象数组
-      for (let i = 0; i < monthArray.length; i++) {
-        console.log(monthArray[i]);
-        var tempWeekList = [];
-        var tempCurrentWeek = false;
+      for (let i = 0; i < tempCourseList.length; i++) {
+        var tempWeekList = []; // 周列表
+        var tempCurrentWeek = false; // 是否为当前周
         // 优化日期数组
-        for (let j = 0; j < monthArray[i].length; j++) {
-          let tempDayList = [];
-          // 判断是否是当日
-          if (monthArray[i][j] == moment().format('YYYY-MM-DD')) {
-            tempDayList = {
-              'day': moment(monthArray[i][j]).date(),
-              'isCurrent': true,
-            }
-            tempCurrentWeek = true;
-            // 当前周键值
-            currentWeek = i;
-            // 当前月键值
-            currentMonth = moment(monthArray[i][0]).format('M月');
-            // 当前年键值
-            currentYear = moment(monthArray[i][0]).format('YYYY年');
-          } else {
-            tempDayList = {
-              'day': moment(monthArray[i][j]).date(),
-              'isCurrent': false,
-            }
+        for (let j = 0; j < tempCourseList[i].length; j++) {
+          let tempDayList = []; // 日列表
+          var tempCurrentDay = false; // 是否为当前天
+
+          // 写入默认空白列表数据
+          var tempTaskList = []; // 日任务数据列表
+          for (let k = this.data.startTime; k <= this.data.endTime; k++) {
+            var tableDate = moment(tempCourseList[i][j]).format('YYYY-MM-DD');
+            var tableTime = k < 10 ? '0' + k : k;
+            // 拼接数据
+            tempTaskList.push({
+              date: tableDate + '-' + tableTime + '-00', // 日期
+              hasTask: false, // 是否有任务
+              taskDuration: 1, // 任务时长
+              height: '104', // 列表高度
+              paddingBottom: '10', // 距底部距离
+              marginTop: '0',
+            });
           }
-          tempWeekList.push(tempDayList);
+
+          // 判断是否是当日
+          if (tempCourseList[i][j] == moment().format('YYYY-MM-DD')) {
+            tempCurrentDay = true; // 是当日
+            currentWeek = i; // 当前周值
+            currentMonth = moment(tempCourseList[i][0]).format('M月'); // 当前月值
+            currentYear = moment(tempCourseList[i][0]).format('YYYY年'); // 当前年份值
+          } else {
+            var isCurrent = false; // 不是当日
+          }
+
+          // 写入日数据到周列表中
+          tempWeekList.push({
+            'isCurrent': tempCurrentDay, // 是否当日
+            'day': moment(tempCourseList[i][j]).date(), // 所属日
+            'month': moment(tempCourseList[i][j]).month() + 1, // 所属月
+            'year': moment(tempCourseList[i][j]).year(), // 所属年
+            'date': moment(tempCourseList[i][j]).format('YYYY-MM-DD'),
+            'tableList': tempTaskList, // 日列表
+          });
         }
 
-        var tempList = {
-          'weekList': tempWeekList,
-          'month': moment(monthArray[i][0]).month() + 1,
-          'year': moment(monthArray[i][0]).year(),
-          'tableList': [],
-          'currentTable': tempCurrentWeek,
-        }
-        courseList.push(tempList);
+        // 写入周数据到表格中
+        tempCoursePostList.push({
+          'currentWeek': tempCurrentWeek, // 是否当前周
+          'year': moment(tempCourseList[i][0]).year(), // 所属年
+          'month': moment(tempCourseList[i][0]).month() + 1, // 所属月
+          'date': moment(tempCourseList[i][0]).format('YYYY-MM'),
+          'weekList': tempWeekList, // 周列表
+        });
       }
 
-      this.setData({
+      let timestamp = moment().valueOf();
+      console.log(tempCoursePostList[0]['weekList'][0]['date']);
+      console.log(tempCoursePostList[tempCoursePostList.length - 1]['weekList'][tempCoursePostList[tempCoursePostList.length - 1]['weekList'].length - 1]['date']);
+      $.get(
+        'task/range', {
+          coachid: wx.getStorageSync('coachid'),
+          beginDate: tempCoursePostList[0]['weekList'][0]['date'], // 周时间（默认为本周，格式 yyyy-MM-dd）
+          endDate: tempCoursePostList[tempCoursePostList.length - 1]['weekList'][tempCoursePostList[tempCoursePostList.length - 1]['weekList'].length - 1]['date'],
+          sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+          timestamp: timestamp, //时间戳
+        },
+        function(res) {
+          if (res.data.code == 0) {
+            // 获取成功
+            console.log(res.data);
+            var taskList = res.data.data.taskList; // 服务器返回结果
+            for (let i = 0; i < taskList.length; i++) {
+              for (let j = 0; j < tempCoursePostList.length; j++) {
+                // 寻找相同年、月的数据
+                if (moment(taskList[i]['taskDate']).format('YYYY-MM') == tempCoursePostList[j]['date'] || moment(taskList[i]['taskDate']).format('YYYY-MM') == moment(tempCoursePostList[j]['weekList'][6]['date']).format('YYYY-MM')) {
+                  for (let k = 0; k < tempCoursePostList[j]['weekList'].length; k++) {
+                    // 寻找相同日的数据
+                    if (taskList[i]['taskDate'] == tempCoursePostList[j]['weekList'][k]['date']) {
+                      // 寻找到相同日，将该日表格重写
+                      // 取出返回数据中taskList的值
+                      var tempTaskList = taskList[i]['taskList'];
+                      // 临时存放某天数据列表的数组
+                      var tempDayList = [];
+                      // 从开始时间统计到结束时间，默认步长1小时
+                      for (let p = _this.data.startTime; p <= _this.data.endTime; p++) {
+                        var hasTask = -1; // 是否有任务
+                        var tempTime = []; // 临时存放每个时段数据的数组
+                        // 遍历Post返回数据的任务列表
+                        // var dayDate = moment(tempCourseList[i][j]).format('YYYY-MM-DD');
+                        var dayTime = p < 10 ? '0' + p : p; // 当前小时
+                        for (let q = 0; q < tempTaskList.length; q++) {
+                          // 判断是否有整点（00分）开始任务
+                          if (tempTaskList[q]['beginTimeStr'] == (dayTime + ':00')) {
+                            // 有整点开始任务
+                            // 是否有任务，有任务为任务的下标，无任务在为-1； 
+                            hasTask = q;
+                            // 组建当前时间段数组
+                            tempTime = {
+                              date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
+                              hasTask: true, // 有任务
+                              taskDuration: tempTaskList[q]['step'], // 任务时长
+                              taskId: tempTaskList[q]['taskId'], // 任务ID
+                              titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                              taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                              title: tempTaskList[q]['title'], // 任务名称、标题
+                              height: 104 * tempTaskList[q]['step'] + 10 * (tempTaskList[q]['step'] - 1), // 任务列方块高度
+                              paddingBottom: '10', // 任务列方块距底部间距
+                            }
+                            // 将时间块写入到日列表中
+                            tempDayList.push(tempTime);
+                            // 根据任务时长调整日列表中方块数量
+                            p = p + tempTaskList[q]['step'] - 1;
+                            break;
+                          } else if (tempTaskList[q]['beginTimeStr'] == (dayTime + ':30')) {
+                            // 有半点（30分）开始任务
+                            // 判断是否需要半个空任务（空白格）
+                            hasTask = q; // 是否有任务，有任务为任务的下标，无任务在为-1；
+                            var hasEndTime = -1; // 是否有相同的结束时间冲突状态，默认没有；
+                            // 遍历当日任务数组，判断是否有某个结束时间与开始时间相同；
+                            for (let m = 0; m < tempTaskList.length; m++) {
+                              // 寻找当前时间的半点（30分）是否与某个任务的结束时间相同
+                              if (tempTaskList[m]['endTimeStr'] == (dayTime + ':30')) {
+                                hasEndTime = m;
+                              }
+                            }
+                            // 判断遍历结果，hasEndTime为-1则未找到，为其它值则找到
+                            if (hasEndTime == -1) {
+                              // 未找到则输出空任务方块（空白格），找到则不输出
+                              tempDayList.push({
+                                date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                                taskDuration: '0.5', // 任务时长
+                                hasTask: false,
+                                height: '52',
+                                paddingBottom: '0',
+                                marginTop: '0',
+                              });
+
+                              // 输出正常的任务块
+                              tempTime = {
+                                date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                                hasTask: true, // 有任务
+                                taskDuration: tempTaskList[q]['step'], // 任务时长
+                                taskId: tempTaskList[q]['taskId'], // 任务ID
+                                titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                                taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                                title: tempTaskList[q]['title'], // 任务标题、名称
+                                height: (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])), // 任务列方块高度                         
+                                marginTop: '0',
+                                paddingBottom: '0', // 任务列方块距底部间距
+                              }
+                            }
+
+                            // 判断是否有相邻两个且颜色相同的任务块，若有则有1像素的分隔线，若无则正常显示
+                            if (hasEndTime != -1 && tempTaskList[hasEndTime]['titleColor'] == tempTaskList[q]['titleColor']) {
+                              var tempTimeHeight = (103 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])); // 任务列方块高度
+                              var tempMarginTop = 1 * tempTaskList[q]['step'];
+                            } else {
+                              var tempTimeHeight = (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])); // 任务列方块高度
+                              var tempMarginTop = '0';
+                            }
+
+                            // 将时间块写入到日列表中
+                            tempDayList.push({
+                              date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                              hasTask: true, // 有任务
+                              taskDuration: tempTaskList[q]['step'], // 任务时长
+                              taskId: tempTaskList[q]['taskId'], // 任务ID
+                              titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                              taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                              title: tempTaskList[q]['title'], // 任务标题、名称
+                              height: tempTimeHeight, // 任务列方块高度                         
+                              marginTop: tempMarginTop,
+                              paddingBottom: '0', // 任务列方块距底部间距
+                            });
+                            // 根据任务时长调整日列表中方块数量
+                            p = p + tempTaskList[q]['step'] - 1;
+                            break;
+                          } else if (tempTaskList[q]['endTimeStr'] == (p + ':30')) {
+                            // 有某个半点（30分）结束时间与开始时间相同
+                            var hasBeginTime = -1; // 是否有相同的开始时间冲突状态，默认没有；
+                            // 遍历当日任务数组，判断是否有某个开始时间与之相同；
+                            for (let m = 0; m < tempTaskList.length; m++) {
+                              // 寻找当前时间的半点（30分）是否与某个任务的开始时间相同
+                              if (tempTaskList[m]['beginTimeStr'] == (p + ':30')) {
+                                hasBeginTime = m;
+                              }
+                            }
+                            // 判断遍历结果，hasBeginTime为-1则未找到，为其它值则找到
+                            if (hasBeginTime == -1) {
+                              tempDayList.push({
+                                date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                                taskDuration: '0.5', // 任务时长
+                                hasTask: false,
+                                height: '52',
+                                paddingBottom: '10',
+                                marginTop: '0',
+                              });
+                            }
+                            // 是否有任务，有任务为任务的下标，无任务在为-1；
+                            hasTask = q;
+                          }
+                        }
+                        // 未匹配到任务
+                        if (hasTask == -1) {
+                          // 无任务，输出默认方块
+                          // 拼接数据
+                          tempDayList.push({
+                            date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
+                            hasTask: false,
+                            taskDuration: 1, // 任务时长
+                            height: '104', // 列表高度
+                            paddingBottom: '10', // 距底部距离
+                            marginTop: '0',
+                          });
+                        }
+                      }
+                      tempCoursePostList[j]['weekList'][k]['tableList'] = tempDayList;
+                    }
+                  }
+                }
+              }
+            }
+            _this.setData({
+              courseList: courseList.concat(tempCoursePostList),
+            });
+          } else {
+            wx.showToast({
+              title: '课程信息加载失败',
+              icon: 'none'
+            })
+          }
+        }
+      )
+
+      _this.setData({
         scrollData: 'scrollData' + (event.detail.current),
         currentYear: courseList[event.detail.current].year + '年',
         currentMonth: courseList[event.detail.current].month + '月',
-        courseList: courseList,
+        // courseList: courseList.concat(tempCoursePostList),
         aftherWeek: newAfterWeek,
       });
-      wx.hideLoading();
+
 
     }
+
     // 向前加载数据
     else if (event.detail.current < this.data.prestrainWeek) {
-      wx.showToast({
-        title: '正在加载',
-        icon: 'loading'
-      })
-      console.log('需要向前加载数据了');
-      console.log(event.detail.current);
-      // var weekArray = [];
-      var monthArray = [];
+      
+      console.log('向后加载数据');
+      var tempCourseList = [];
       const beforeWeek = this.data.beforeWeek;
       const newBeforeWeek = beforeWeek + this.data.weekSetpLength;
       // 获取当前周及后三周日期列表
       for (let i = beforeWeek; i < newBeforeWeek; i++) {
-        var weekArray = [];
+        var weekBeforeArray = [];
         for (let j = 1; j <= 7; j++) {
-          weekArray.push(moment().weekday(0 - i * 7 - j + 1).format('YYYY-MM-DD'));
+          weekBeforeArray.push(moment().weekday(0 - i * 7 - j + 1).format('YYYY-MM-DD'));
         }
-        monthArray.unshift(weekArray.reverse());
+        tempCourseList.unshift(weekBeforeArray.reverse());
       }
 
-      var courseList = this.data.courseList;
-      var currentWeek = 0;
-      var currentMonth = '7月';
-      var currentYear = '2019年';
-
+      var currentWeek = 0; // 当前周下表位置
+      var currentMonth = ''; // 当前月
+      var currentYear = ''; // 当前年
       // 组建对象数组
-      for (var i = monthArray.length - 1; i > 0; i--) {
-        var tempWeekList = [];
-        var tempCurrentWeek = false;
+      for (var i = tempCourseList.length - 1; i > 0; i--) {
+        var tempWeekList = [];  // 周列表
+        var tempCurrentWeek = false;  // 是否为当前周
         // 优化日期数组
-        for (let j = 0; j < monthArray[i].length; j++) {
+        for (let j = 0; j < tempCourseList[i].length; j++) {
           let tempDayList = [];
-          // 判断是否是当日
-          if (monthArray[i][j] == moment().format('YYYY-MM-DD')) {
-            tempDayList = {
-              'day': moment(monthArray[i][j]).date(),
-              'isCurrent': true,
-            }
-            tempCurrentWeek = true;
-            // 当前周键值
-            currentWeek = i;
-            // 当前月键值
-            currentMonth = moment(monthArray[i][0]).format('M月');
-            // 当前年键值
-            currentYear = moment(monthArray[i][0]).format('YYYY年');
-          } else {
-            tempDayList = {
-              'day': moment(monthArray[i][j]).date(),
-              'isCurrent': false,
-            }
+          var tempCurrentDay = false; // 是否为当前天
+
+          // 写入默认空白列表数据
+          var tempTaskList = []; // 日任务数据列表
+          for (let k = this.data.startTime; k <= this.data.endTime; k++) {
+            var tableDate = moment(tempCourseList[i][j]).format('YYYY-MM-DD');
+            var tableTime = k < 10 ? '0' + k : k;
+            // 拼接数据
+            tempTaskList.push({
+              date: tableDate + '-' + tableTime + '-00', // 日期
+              hasTask: false, // 是否有任务
+              taskDuration: 1, // 任务时长
+              height: '104', // 列表高度
+              paddingBottom: '10', // 距底部距离
+              marginTop: '0',
+            });
           }
-          tempWeekList.push(tempDayList);
-        }
-        console.log(tempWeekList);
-        var tempList = {
-          'weekList': tempWeekList,
-          'month': moment(monthArray[i][0]).month() + 1,
-          'year': moment(monthArray[i][0]).year(),
-          'tableList': [],
-          'currentTable': tempCurrentWeek,
+
+
+          // 判断是否是当日
+          if (tempCourseList[i][j] == moment().format('YYYY-MM-DD')) {
+            tempCurrentDay = true; // 是当日
+            currentWeek = i; // 当前周值
+            currentMonth = moment(tempCourseList[i][0]).format('M月'); // 当前月值
+            currentYear = moment(tempCourseList[i][0]).format('YYYY年'); // 当前年份值
+          } else {
+            var isCurrent = false; // 不是当日
+          }
+          // 写入日数据到周列表中
+          tempWeekList.push({
+            'isCurrent': tempCurrentDay, // 是否当日
+            'day': moment(tempCourseList[i][j]).date(), // 所属日
+            'month': moment(tempCourseList[i][j]).month() + 1, // 所属月
+            'year': moment(tempCourseList[i][j]).year(), // 所属年
+            'date': moment(tempCourseList[i][j]).format('YYYY-MM-DD'),
+            'tableList': tempTaskList, // 日列表
+          });
         }
 
-        courseList.unshift(tempList);
+        // 写入周数据到表格中
+        tempCoursePostList.unshift({
+          'currentWeek': tempCurrentWeek, // 是否当前周
+          'year': moment(tempCourseList[i][0]).year(), // 所属年
+          'month': moment(tempCourseList[i][0]).month() + 1, // 所属月
+          'date': moment(tempCourseList[i][0]).format('YYYY-MM'),
+          'weekList': tempWeekList, // 周列表
+        });
+
       }
-      console.log(courseList);
+      let timestamp = moment().valueOf();
+      $.get(
+        'task/range', {
+          coachid: wx.getStorageSync('coachid'),
+          beginDate: tempCoursePostList[0]['weekList'][0]['date'], // 周时间（默认为本周，格式 yyyy-MM-dd）
+          endDate: tempCoursePostList[tempCoursePostList.length - 1]['weekList'][tempCoursePostList[tempCoursePostList.length - 1]['weekList'].length - 1]['date'],
+          sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+          timestamp: timestamp, //时间戳
+        },
+        function (res) {
+          if (res.data.code == 0) {
+            // 获取成功
+            console.log(res.data);
+            var taskList = res.data.data.taskList; // 服务器返回结果
+            for (let i = 0; i < taskList.length; i++) {
+              for (let j = 0; j < tempCoursePostList.length; j++) {
+                // 寻找相同年、月的数据
+                if (moment(taskList[i]['taskDate']).format('YYYY-MM') == tempCoursePostList[j]['date'] || moment(taskList[i]['taskDate']).format('YYYY-MM') == moment(tempCoursePostList[j]['weekList'][6]['date']).format('YYYY-MM')) {
+                  for (let k = 0; k < tempCoursePostList[j]['weekList'].length; k++) {
+                    // 寻找相同日的数据
+                    if (taskList[i]['taskDate'] == tempCoursePostList[j]['weekList'][k]['date']) {
+                      // 寻找到相同日，将该日表格重写
+                      // 取出返回数据中taskList的值
+                      var tempTaskList = taskList[i]['taskList'];
+                      // 临时存放某天数据列表的数组
+                      var tempDayList = [];
+                      // 从开始时间统计到结束时间，默认步长1小时
+                      for (let p = _this.data.startTime; p <= _this.data.endTime; p++) {
+                        var hasTask = -1; // 是否有任务
+                        var tempTime = []; // 临时存放每个时段数据的数组
+                        // 遍历Post返回数据的任务列表
+                        // var dayDate = moment(tempCourseList[i][j]).format('YYYY-MM-DD');
+                        var dayTime = p < 10 ? '0' + p : p; // 当前小时
+                        for (let q = 0; q < tempTaskList.length; q++) {
+                          // 判断是否有整点（00分）开始任务
+                          if (tempTaskList[q]['beginTimeStr'] == (dayTime + ':00')) {
+                            // 有整点开始任务
+                            // 是否有任务，有任务为任务的下标，无任务在为-1； 
+                            hasTask = q;
+                            // 组建当前时间段数组
+                            tempTime = {
+                              date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
+                              hasTask: true, // 有任务
+                              taskDuration: tempTaskList[q]['step'], // 任务时长
+                              taskId: tempTaskList[q]['taskId'], // 任务ID
+                              titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                              taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                              title: tempTaskList[q]['title'], // 任务名称、标题
+                              height: 104 * tempTaskList[q]['step'] + 10 * (tempTaskList[q]['step'] - 1), // 任务列方块高度
+                              paddingBottom: '10', // 任务列方块距底部间距
+                            }
+                            // 将时间块写入到日列表中
+                            tempDayList.push(tempTime);
+                            // 根据任务时长调整日列表中方块数量
+                            p = p + tempTaskList[q]['step'] - 1;
+                            break;
+                          } else if (tempTaskList[q]['beginTimeStr'] == (dayTime + ':30')) {
+                            // 有半点（30分）开始任务
+                            // 判断是否需要半个空任务（空白格）
+                            hasTask = q; // 是否有任务，有任务为任务的下标，无任务在为-1；
+                            var hasEndTime = -1; // 是否有相同的结束时间冲突状态，默认没有；
+                            // 遍历当日任务数组，判断是否有某个结束时间与开始时间相同；
+                            for (let m = 0; m < tempTaskList.length; m++) {
+                              // 寻找当前时间的半点（30分）是否与某个任务的结束时间相同
+                              if (tempTaskList[m]['endTimeStr'] == (dayTime + ':30')) {
+                                hasEndTime = m;
+                              }
+                            }
+                            // 判断遍历结果，hasEndTime为-1则未找到，为其它值则找到
+                            if (hasEndTime == -1) {
+                              // 未找到则输出空任务方块（空白格），找到则不输出
+                              tempDayList.push({
+                                date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                                taskDuration: '0.5', // 任务时长
+                                hasTask: false,
+                                height: '52',
+                                paddingBottom: '0',
+                                marginTop: '0',
+                              });
+
+                              // 输出正常的任务块
+                              tempTime = {
+                                date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                                hasTask: true, // 有任务
+                                taskDuration: tempTaskList[q]['step'], // 任务时长
+                                taskId: tempTaskList[q]['taskId'], // 任务ID
+                                titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                                taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                                title: tempTaskList[q]['title'], // 任务标题、名称
+                                height: (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])), // 任务列方块高度                         
+                                marginTop: '0',
+                                paddingBottom: '0', // 任务列方块距底部间距
+                              }
+                            }
+
+                            // 判断是否有相邻两个且颜色相同的任务块，若有则有1像素的分隔线，若无则正常显示
+                            if (hasEndTime != -1 && tempTaskList[hasEndTime]['titleColor'] == tempTaskList[q]['titleColor']) {
+                              var tempTimeHeight = (103 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])); // 任务列方块高度
+                              var tempMarginTop = 1 * tempTaskList[q]['step'];
+                            } else {
+                              var tempTimeHeight = (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])); // 任务列方块高度
+                              var tempMarginTop = '0';
+                            }
+
+                            // 将时间块写入到日列表中
+                            tempDayList.push({
+                              date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                              hasTask: true, // 有任务
+                              taskDuration: tempTaskList[q]['step'], // 任务时长
+                              taskId: tempTaskList[q]['taskId'], // 任务ID
+                              titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                              taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                              title: tempTaskList[q]['title'], // 任务标题、名称
+                              height: tempTimeHeight, // 任务列方块高度                         
+                              marginTop: tempMarginTop,
+                              paddingBottom: '0', // 任务列方块距底部间距
+                            });
+                            // 根据任务时长调整日列表中方块数量
+                            p = p + tempTaskList[q]['step'] - 1;
+                            break;
+                          } else if (tempTaskList[q]['endTimeStr'] == (p + ':30')) {
+                            // 有某个半点（30分）结束时间与开始时间相同
+                            var hasBeginTime = -1; // 是否有相同的开始时间冲突状态，默认没有；
+                            // 遍历当日任务数组，判断是否有某个开始时间与之相同；
+                            for (let m = 0; m < tempTaskList.length; m++) {
+                              // 寻找当前时间的半点（30分）是否与某个任务的开始时间相同
+                              if (tempTaskList[m]['beginTimeStr'] == (p + ':30')) {
+                                hasBeginTime = m;
+                              }
+                            }
+                            // 判断遍历结果，hasBeginTime为-1则未找到，为其它值则找到
+                            if (hasBeginTime == -1) {
+                              tempDayList.push({
+                                date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                                taskDuration: '0.5', // 任务时长
+                                hasTask: false,
+                                height: '52',
+                                paddingBottom: '10',
+                                marginTop: '0',
+                              });
+                            }
+                            // 是否有任务，有任务为任务的下标，无任务在为-1；
+                            hasTask = q;
+                          }
+                        }
+                        // 未匹配到任务
+                        if (hasTask == -1) {
+                          // 无任务，输出默认方块
+                          // 拼接数据
+                          tempDayList.push({
+                            date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
+                            hasTask: false,
+                            taskDuration: 1, // 任务时长
+                            height: '104', // 列表高度
+                            paddingBottom: '10', // 距底部距离
+                            marginTop: '0',
+                          });
+                        }
+                      }
+                      tempCoursePostList[j]['weekList'][k]['tableList'] = tempDayList;
+                    }
+                  }
+                }
+              }
+            }
+            _this.setData({
+              courseList: tempCoursePostList.concat(courseList),
+            });
+          } else {
+            wx.showToast({
+              title: '课程信息加载失败',
+              icon: 'none'
+            })
+          }
+        }
+      )
+
+      
       this.setData({
         scrollData: 'scrollData' + (event.detail.current),
         currentYear: courseList[event.detail.current].year + '年',
         currentMonth: courseList[event.detail.current].month + '月',
-        courseList: courseList,
+        // courseList: tempCoursePostList.concat(courseList),
         beforeWeek: newBeforeWeek - 1,
         currentTable: event.detail.current + this.data.weekSetpLength - 1,
       });
-      wx.hideLoading();
+
     } else {
       this.setData({
         scrollData: 'scrollData' + (event.detail.current),
         currentYear: courseList[event.detail.current].year + '年',
         currentMonth: courseList[event.detail.current].month + '月',
         currentTable: event.detail.current,
-
       });
     }
     this.setData({
@@ -707,7 +1011,7 @@ Page({
     wx.vibrateShort();
   },
   // 点击空白区域关闭弹窗
-  bindCloseMark: function (event) {
+  bindCloseMark: function(event) {
     console.log('关闭所有mark');
     this.setData({
       showMenuButton: false,
@@ -716,18 +1020,18 @@ Page({
     });
   },
   // 开启关闭菜单弹窗
-  catchMenuButton: function (event) {
+  catchMenuButton: function(event) {
     this.setData({
       showMenuButton: !this.data.showMenuButton,
     });
     wx.vibrateShort();
   },
   // 点击弹窗自身，阻止冒泡关闭弹窗
-  catchMenuButtonBubbling: function (event) {
+  catchMenuButtonBubbling: function(event) {
     console.log('点击弹窗本身，阻止冒泡');
   },
   // 切换视图
-  catchChangeView: function (event) {
+  catchChangeView: function(event) {
     console.log('切换视图');
     wx.setStorageSync('viewType', this.data.viewType == 0 ? 1 : 0);
     this.setData({
@@ -737,15 +1041,15 @@ Page({
     });
   },
   // 生成图片
-  catchGenerateImages: function (enent) {
+  catchGenerateImages: function(enent) {
     console.log('生成图片');
   },
   // 打开预约消息
-  catchNavigateOrder: function (event) {
+  catchNavigateOrder: function(event) {
     console.log('打开预约消息');
   },
   // 回到当前
-  catchCurrentTableChange: function (event) {
+  catchCurrentTableChange: function(event) {
     console.log('回到当前');
     this.setData({
       currentTable: this.data.currentWeek,
@@ -753,7 +1057,7 @@ Page({
     });
   },
   // 表格弹窗
-  catchTableMark: function (event) {
+  catchTableMark: function(event) {
     var courseIndex = event.currentTarget.dataset.courseindex;
     var weekIndex = event.currentTarget.dataset.weekindex;
     var tableIndex = event.currentTarget.dataset.tableindex;
@@ -901,7 +1205,7 @@ Page({
   },
 
   // 点击排课按钮
-  catchCourse: function (event) {
+  catchCourse: function(event) {
     wx.showTabBar();
     wx.navigateTo({
       url: '../course/course?courseType=0',
@@ -911,7 +1215,7 @@ Page({
   },
 
   // 点击休息按钮
-  catchRest: function (event) {
+  catchRest: function(event) {
     wx.showTabBar();
     wx.navigateTo({
       url: '../course/course?courseType=1',
@@ -921,7 +1225,7 @@ Page({
   },
 
   // 点击自定义按钮
-  catchCustom: function (event) {
+  catchCustom: function(event) {
     wx.showTabBar();
     wx.navigateTo({
       url: '../course/course?courseType=2',
@@ -930,11 +1234,11 @@ Page({
 
   },
 
-  catchEdit: function (event) {
+  catchEdit: function(event) {
 
   },
 
-  catchDelete: function (event) {
+  catchDelete: function(event) {
     wx.showModal({
       title: '确认要删除吗？',
       content: '相关联的课程数据也将被删除',
@@ -952,7 +1256,7 @@ Page({
     })
   },
 
-  changeCalendarShow: function (event) {
+  changeCalendarShow: function(event) {
     wx.setStorageSync('calendarShow', !this.data.calendarShow);
     this.setData({
       calendarShow: !this.data.calendarShow,
@@ -960,10 +1264,10 @@ Page({
   },
 
   //手指触摸动作开始 记录起点X坐标
-  touchStart: function (e) {
+  touchStart: function(e) {
     //开始触摸时 重置所有删除
     var taskList = this.data.taskList;
-    taskList.forEach(function (v, i) {
+    taskList.forEach(function(v, i) {
       if (v.isTouchMove) //只操作为true的
         v.isTouchMove = false;
     })
@@ -974,7 +1278,7 @@ Page({
     })
   },
   //滑动事件处理
-  touchMove: function (e) {
+  touchMove: function(e) {
     var taskList = this.data.taskList;
     var that = this,
       index = e.currentTarget.dataset.index, //当前索引
@@ -988,10 +1292,10 @@ Page({
         X: startX,
         Y: startY
       }, {
-          X: touchMoveX,
-          Y: touchMoveY
-        });
-    taskList.forEach(function (v, i) {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
+    taskList.forEach(function(v, i) {
       v.isTouchMove = false
       //滑动超过30度角 return
       if (Math.abs(angle) > 30) return;
@@ -1012,14 +1316,14 @@ Page({
    * @param {Object} start 起点坐标
    * @param {Object} end 终点坐标
    */
-  angle: function (start, end) {
+  angle: function(start, end) {
     var _X = end.X - start.X,
       _Y = end.Y - start.Y
     //返回角度 /Math.atan()返回数字的反正切值
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   },
 
-  catchUnwind: function (event) {
+  catchUnwind: function(event) {
     console.log('点击');
     if (this.data.operateMark == true) {
       // 关闭遮罩层，打开菜单栏
