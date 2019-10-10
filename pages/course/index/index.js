@@ -484,69 +484,11 @@ Page({
         tempCourseList.push(weekAfterArray);
       }
 
-
-      var currentWeek = 0; // 当前周下表位置
-      var currentMonth = ''; // 当前月
-      var currentYear = ''; // 当前年
       // 组建对象数组
-      for (let i = 0; i < tempCourseList.length; i++) {
-        var tempWeekList = []; // 周列表
-        var tempCurrentWeek = false; // 是否为当前周
-        // 优化日期数组
-        for (let j = 0; j < tempCourseList[i].length; j++) {
-          let tempDayList = []; // 日列表
-          var tempCurrentDay = false; // 是否为当前天
-
-          // 写入默认空白列表数据
-          var tempTaskList = []; // 日任务数据列表
-          for (let k = this.data.startTime; k <= this.data.endTime; k++) {
-            var tableDate = moment(tempCourseList[i][j]).format('YYYY-MM-DD');
-            var tableTime = k < 10 ? '0' + k : k;
-            // 拼接数据
-            tempTaskList.push({
-              date: tableDate + '-' + tableTime + '-00', // 日期
-              hasTask: false, // 是否有任务
-              taskDuration: 1, // 任务时长
-              height: '104', // 列表高度
-              paddingBottom: '10', // 距底部距离
-              marginTop: '0',
-            });
-          }
-
-          // 判断是否是当日
-          if (tempCourseList[i][j] == moment().format('YYYY-MM-DD')) {
-            tempCurrentDay = true; // 是当日
-            currentWeek = i; // 当前周值
-            currentMonth = moment(tempCourseList[i][0]).format('M月'); // 当前月值
-            currentYear = moment(tempCourseList[i][0]).format('YYYY年'); // 当前年份值
-          } else {
-            var isCurrent = false; // 不是当日
-          }
-
-          // 写入日数据到周列表中
-          tempWeekList.push({
-            'isCurrent': tempCurrentDay, // 是否当日
-            'day': moment(tempCourseList[i][j]).date(), // 所属日
-            'month': moment(tempCourseList[i][j]).month() + 1, // 所属月
-            'year': moment(tempCourseList[i][j]).year(), // 所属年
-            'date': moment(tempCourseList[i][j]).format('YYYY-MM-DD'),
-            'tableList': tempTaskList, // 日列表
-          });
-        }
-
-        // 写入周数据到表格中
-        tempCoursePostList.push({
-          'currentWeek': tempCurrentWeek, // 是否当前周
-          'year': moment(tempCourseList[i][0]).year(), // 所属年
-          'month': moment(tempCourseList[i][0]).month() + 1, // 所属月
-          'date': moment(tempCourseList[i][0]).format('YYYY-MM'),
-          'weekList': tempWeekList, // 周列表
-        });
-      }
-
+      tempCoursePostList = this.getCourseTableList(tempCourseList,'after');
+      // 生成时间戳
       let timestamp = moment().valueOf();
-      console.log(tempCoursePostList[0]['weekList'][0]['date']);
-      console.log(tempCoursePostList[tempCoursePostList.length - 1]['weekList'][tempCoursePostList[tempCoursePostList.length - 1]['weekList'].length - 1]['date']);
+      // 向服务器获取数据
       $.get(
         'task/range', {
           coachid: wx.getStorageSync('coachid'),
@@ -559,160 +501,8 @@ Page({
           if (res.data.code == 0) {
             // 获取成功
             console.log(res.data);
-            var taskList = res.data.data.taskList; // 服务器返回结果
-            for (let i = 0; i < taskList.length; i++) {
-              for (let j = 0; j < tempCoursePostList.length; j++) {
-                // 寻找相同年、月的数据
-                if (moment(taskList[i]['taskDate']).format('YYYY-MM') == tempCoursePostList[j]['date'] || moment(taskList[i]['taskDate']).format('YYYY-MM') == moment(tempCoursePostList[j]['weekList'][6]['date']).format('YYYY-MM')) {
-                  for (let k = 0; k < tempCoursePostList[j]['weekList'].length; k++) {
-                    // 寻找相同日的数据
-                    if (taskList[i]['taskDate'] == tempCoursePostList[j]['weekList'][k]['date']) {
-                      // 寻找到相同日，将该日表格重写
-                      // 取出返回数据中taskList的值
-                      var tempTaskList = taskList[i]['taskList'];
-                      // 临时存放某天数据列表的数组
-                      var tempDayList = [];
-                      // 从开始时间统计到结束时间，默认步长1小时
-                      for (let p = _this.data.startTime; p <= _this.data.endTime; p++) {
-                        var hasTask = -1; // 是否有任务
-                        var tempTime = []; // 临时存放每个时段数据的数组
-                        // 遍历Post返回数据的任务列表
-                        // var dayDate = moment(tempCourseList[i][j]).format('YYYY-MM-DD');
-                        var dayTime = p < 10 ? '0' + p : p; // 当前小时
-                        for (let q = 0; q < tempTaskList.length; q++) {
-                          // 判断是否有整点（00分）开始任务
-                          if (tempTaskList[q]['beginTimeStr'] == (dayTime + ':00')) {
-                            // 有整点开始任务
-                            // 是否有任务，有任务为任务的下标，无任务在为-1； 
-                            hasTask = q;
-                            // 组建当前时间段数组
-                            tempTime = {
-                              date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
-                              hasTask: true, // 有任务
-                              taskDuration: tempTaskList[q]['step'], // 任务时长
-                              taskId: tempTaskList[q]['taskId'], // 任务ID
-                              titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
-                              taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
-                              title: tempTaskList[q]['title'], // 任务名称、标题
-                              height: 104 * tempTaskList[q]['step'] + 10 * (tempTaskList[q]['step'] - 1), // 任务列方块高度
-                              paddingBottom: '10', // 任务列方块距底部间距
-                            }
-                            // 将时间块写入到日列表中
-                            tempDayList.push(tempTime);
-                            // 根据任务时长调整日列表中方块数量
-                            p = p + tempTaskList[q]['step'] - 1;
-                            break;
-                          } else if (tempTaskList[q]['beginTimeStr'] == (dayTime + ':30')) {
-                            // 有半点（30分）开始任务
-                            // 判断是否需要半个空任务（空白格）
-                            hasTask = q; // 是否有任务，有任务为任务的下标，无任务在为-1；
-                            var hasEndTime = -1; // 是否有相同的结束时间冲突状态，默认没有；
-                            // 遍历当日任务数组，判断是否有某个结束时间与开始时间相同；
-                            for (let m = 0; m < tempTaskList.length; m++) {
-                              // 寻找当前时间的半点（30分）是否与某个任务的结束时间相同
-                              if (tempTaskList[m]['endTimeStr'] == (dayTime + ':30')) {
-                                hasEndTime = m;
-                              }
-                            }
-                            // 判断遍历结果，hasEndTime为-1则未找到，为其它值则找到
-                            if (hasEndTime == -1) {
-                              // 未找到则输出空任务方块（空白格），找到则不输出
-                              tempDayList.push({
-                                date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
-                                taskDuration: '0.5', // 任务时长
-                                hasTask: false,
-                                height: '52',
-                                paddingBottom: '0',
-                                marginTop: '0',
-                              });
-
-                              // 输出正常的任务块
-                              tempTime = {
-                                date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
-                                hasTask: true, // 有任务
-                                taskDuration: tempTaskList[q]['step'], // 任务时长
-                                taskId: tempTaskList[q]['taskId'], // 任务ID
-                                titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
-                                taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
-                                title: tempTaskList[q]['title'], // 任务标题、名称
-                                height: (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])), // 任务列方块高度                         
-                                marginTop: '0',
-                                paddingBottom: '0', // 任务列方块距底部间距
-                              }
-                            }
-
-                            // 判断是否有相邻两个且颜色相同的任务块，若有则有1像素的分隔线，若无则正常显示
-                            if (hasEndTime != -1 && tempTaskList[hasEndTime]['titleColor'] == tempTaskList[q]['titleColor']) {
-                              var tempTimeHeight = (103 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])); // 任务列方块高度
-                              var tempMarginTop = 1 * tempTaskList[q]['step'];
-                            } else {
-                              var tempTimeHeight = (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])); // 任务列方块高度
-                              var tempMarginTop = '0';
-                            }
-
-                            // 将时间块写入到日列表中
-                            tempDayList.push({
-                              date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
-                              hasTask: true, // 有任务
-                              taskDuration: tempTaskList[q]['step'], // 任务时长
-                              taskId: tempTaskList[q]['taskId'], // 任务ID
-                              titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
-                              taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
-                              title: tempTaskList[q]['title'], // 任务标题、名称
-                              height: tempTimeHeight, // 任务列方块高度                         
-                              marginTop: tempMarginTop,
-                              paddingBottom: '0', // 任务列方块距底部间距
-                            });
-                            // 根据任务时长调整日列表中方块数量
-                            p = p + tempTaskList[q]['step'] - 1;
-                            break;
-                          } else if (tempTaskList[q]['endTimeStr'] == (p + ':30')) {
-                            // 有某个半点（30分）结束时间与开始时间相同
-                            var hasBeginTime = -1; // 是否有相同的开始时间冲突状态，默认没有；
-                            // 遍历当日任务数组，判断是否有某个开始时间与之相同；
-                            for (let m = 0; m < tempTaskList.length; m++) {
-                              // 寻找当前时间的半点（30分）是否与某个任务的开始时间相同
-                              if (tempTaskList[m]['beginTimeStr'] == (p + ':30')) {
-                                hasBeginTime = m;
-                              }
-                            }
-                            // 判断遍历结果，hasBeginTime为-1则未找到，为其它值则找到
-                            if (hasBeginTime == -1) {
-                              tempDayList.push({
-                                date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
-                                taskDuration: '0.5', // 任务时长
-                                hasTask: false,
-                                height: '52',
-                                paddingBottom: '10',
-                                marginTop: '0',
-                              });
-                            }
-                            // 是否有任务，有任务为任务的下标，无任务在为-1；
-                            hasTask = q;
-                          }
-                        }
-                        // 未匹配到任务
-                        if (hasTask == -1) {
-                          // 无任务，输出默认方块
-                          // 拼接数据
-                          tempDayList.push({
-                            date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
-                            hasTask: false,
-                            taskDuration: 1, // 任务时长
-                            height: '104', // 列表高度
-                            paddingBottom: '10', // 距底部距离
-                            marginTop: '0',
-                          });
-                        }
-                      }
-                      tempCoursePostList[j]['weekList'][k]['tableList'] = tempDayList;
-                    }
-                  }
-                }
-              }
-            }
             _this.setData({
-              courseList: courseList.concat(tempCoursePostList),
+              courseList: courseList.concat(_this.getCourseTasksList(res.data.data.taskList, tempCoursePostList)),
             });
           } else {
             wx.showToast({
@@ -737,7 +527,6 @@ Page({
     // 向前加载数据
     else if (event.detail.current < this.data.prestrainWeek) {
       
-      console.log('向后加载数据');
       var tempCourseList = [];
       const beforeWeek = this.data.beforeWeek;
       const newBeforeWeek = beforeWeek + this.data.weekSetpLength;
@@ -749,12 +538,19 @@ Page({
         }
         tempCourseList.unshift(weekBeforeArray.reverse());
       }
-
+      console.log(tempCourseList);
       var currentWeek = 0; // 当前周下表位置
       var currentMonth = ''; // 当前月
       var currentYear = ''; // 当前年
       // 组建对象数组
-      for (var i = tempCourseList.length - 1; i > 0; i--) {
+      // var i = tempCourseList.length - 1; i > 0; i--
+      // var i = 0; i < tempCourseList.length; i++
+      console.log('00000');
+      console.log(tempCourseList);
+      // tempCourseList.reverse();
+      // console.log(tempCourseList.reverse());
+      console.log(tempCourseList.length);
+      for (var i = 0; i < tempCourseList.length; i++) {
         var tempWeekList = [];  // 周列表
         var tempCurrentWeek = false;  // 是否为当前周
         // 优化日期数组
@@ -777,8 +573,6 @@ Page({
               marginTop: '0',
             });
           }
-
-
           // 判断是否是当日
           if (tempCourseList[i][j] == moment().format('YYYY-MM-DD')) {
             tempCurrentDay = true; // 是当日
@@ -800,7 +594,7 @@ Page({
         }
 
         // 写入周数据到表格中
-        tempCoursePostList.unshift({
+        tempCoursePostList.push({
           'currentWeek': tempCurrentWeek, // 是否当前周
           'year': moment(tempCourseList[i][0]).year(), // 所属年
           'month': moment(tempCourseList[i][0]).month() + 1, // 所属月
@@ -809,6 +603,8 @@ Page({
         });
 
       }
+      console.log(tempCoursePostList);
+      // tempCoursePostList = this.getCourseTableList(tempCourseList, 'before');
       let timestamp = moment().valueOf();
       $.get(
         'task/range', {
@@ -820,162 +616,11 @@ Page({
         },
         function (res) {
           if (res.data.code == 0) {
-            // 获取成功
-            console.log(res.data);
-            var taskList = res.data.data.taskList; // 服务器返回结果
-            for (let i = 0; i < taskList.length; i++) {
-              for (let j = 0; j < tempCoursePostList.length; j++) {
-                // 寻找相同年、月的数据
-                if (moment(taskList[i]['taskDate']).format('YYYY-MM') == tempCoursePostList[j]['date'] || moment(taskList[i]['taskDate']).format('YYYY-MM') == moment(tempCoursePostList[j]['weekList'][6]['date']).format('YYYY-MM')) {
-                  for (let k = 0; k < tempCoursePostList[j]['weekList'].length; k++) {
-                    // 寻找相同日的数据
-                    if (taskList[i]['taskDate'] == tempCoursePostList[j]['weekList'][k]['date']) {
-                      // 寻找到相同日，将该日表格重写
-                      // 取出返回数据中taskList的值
-                      var tempTaskList = taskList[i]['taskList'];
-                      // 临时存放某天数据列表的数组
-                      var tempDayList = [];
-                      // 从开始时间统计到结束时间，默认步长1小时
-                      for (let p = _this.data.startTime; p <= _this.data.endTime; p++) {
-                        var hasTask = -1; // 是否有任务
-                        var tempTime = []; // 临时存放每个时段数据的数组
-                        // 遍历Post返回数据的任务列表
-                        // var dayDate = moment(tempCourseList[i][j]).format('YYYY-MM-DD');
-                        var dayTime = p < 10 ? '0' + p : p; // 当前小时
-                        for (let q = 0; q < tempTaskList.length; q++) {
-                          // 判断是否有整点（00分）开始任务
-                          if (tempTaskList[q]['beginTimeStr'] == (dayTime + ':00')) {
-                            // 有整点开始任务
-                            // 是否有任务，有任务为任务的下标，无任务在为-1； 
-                            hasTask = q;
-                            // 组建当前时间段数组
-                            tempTime = {
-                              date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
-                              hasTask: true, // 有任务
-                              taskDuration: tempTaskList[q]['step'], // 任务时长
-                              taskId: tempTaskList[q]['taskId'], // 任务ID
-                              titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
-                              taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
-                              title: tempTaskList[q]['title'], // 任务名称、标题
-                              height: 104 * tempTaskList[q]['step'] + 10 * (tempTaskList[q]['step'] - 1), // 任务列方块高度
-                              paddingBottom: '10', // 任务列方块距底部间距
-                            }
-                            // 将时间块写入到日列表中
-                            tempDayList.push(tempTime);
-                            // 根据任务时长调整日列表中方块数量
-                            p = p + tempTaskList[q]['step'] - 1;
-                            break;
-                          } else if (tempTaskList[q]['beginTimeStr'] == (dayTime + ':30')) {
-                            // 有半点（30分）开始任务
-                            // 判断是否需要半个空任务（空白格）
-                            hasTask = q; // 是否有任务，有任务为任务的下标，无任务在为-1；
-                            var hasEndTime = -1; // 是否有相同的结束时间冲突状态，默认没有；
-                            // 遍历当日任务数组，判断是否有某个结束时间与开始时间相同；
-                            for (let m = 0; m < tempTaskList.length; m++) {
-                              // 寻找当前时间的半点（30分）是否与某个任务的结束时间相同
-                              if (tempTaskList[m]['endTimeStr'] == (dayTime + ':30')) {
-                                hasEndTime = m;
-                              }
-                            }
-                            // 判断遍历结果，hasEndTime为-1则未找到，为其它值则找到
-                            if (hasEndTime == -1) {
-                              // 未找到则输出空任务方块（空白格），找到则不输出
-                              tempDayList.push({
-                                date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
-                                taskDuration: '0.5', // 任务时长
-                                hasTask: false,
-                                height: '52',
-                                paddingBottom: '0',
-                                marginTop: '0',
-                              });
-
-                              // 输出正常的任务块
-                              tempTime = {
-                                date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
-                                hasTask: true, // 有任务
-                                taskDuration: tempTaskList[q]['step'], // 任务时长
-                                taskId: tempTaskList[q]['taskId'], // 任务ID
-                                titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
-                                taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
-                                title: tempTaskList[q]['title'], // 任务标题、名称
-                                height: (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])), // 任务列方块高度                         
-                                marginTop: '0',
-                                paddingBottom: '0', // 任务列方块距底部间距
-                              }
-                            }
-
-                            // 判断是否有相邻两个且颜色相同的任务块，若有则有1像素的分隔线，若无则正常显示
-                            if (hasEndTime != -1 && tempTaskList[hasEndTime]['titleColor'] == tempTaskList[q]['titleColor']) {
-                              var tempTimeHeight = (103 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])); // 任务列方块高度
-                              var tempMarginTop = 1 * tempTaskList[q]['step'];
-                            } else {
-                              var tempTimeHeight = (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])); // 任务列方块高度
-                              var tempMarginTop = '0';
-                            }
-
-                            // 将时间块写入到日列表中
-                            tempDayList.push({
-                              date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
-                              hasTask: true, // 有任务
-                              taskDuration: tempTaskList[q]['step'], // 任务时长
-                              taskId: tempTaskList[q]['taskId'], // 任务ID
-                              titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
-                              taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
-                              title: tempTaskList[q]['title'], // 任务标题、名称
-                              height: tempTimeHeight, // 任务列方块高度                         
-                              marginTop: tempMarginTop,
-                              paddingBottom: '0', // 任务列方块距底部间距
-                            });
-                            // 根据任务时长调整日列表中方块数量
-                            p = p + tempTaskList[q]['step'] - 1;
-                            break;
-                          } else if (tempTaskList[q]['endTimeStr'] == (p + ':30')) {
-                            // 有某个半点（30分）结束时间与开始时间相同
-                            var hasBeginTime = -1; // 是否有相同的开始时间冲突状态，默认没有；
-                            // 遍历当日任务数组，判断是否有某个开始时间与之相同；
-                            for (let m = 0; m < tempTaskList.length; m++) {
-                              // 寻找当前时间的半点（30分）是否与某个任务的开始时间相同
-                              if (tempTaskList[m]['beginTimeStr'] == (p + ':30')) {
-                                hasBeginTime = m;
-                              }
-                            }
-                            // 判断遍历结果，hasBeginTime为-1则未找到，为其它值则找到
-                            if (hasBeginTime == -1) {
-                              tempDayList.push({
-                                date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
-                                taskDuration: '0.5', // 任务时长
-                                hasTask: false,
-                                height: '52',
-                                paddingBottom: '10',
-                                marginTop: '0',
-                              });
-                            }
-                            // 是否有任务，有任务为任务的下标，无任务在为-1；
-                            hasTask = q;
-                          }
-                        }
-                        // 未匹配到任务
-                        if (hasTask == -1) {
-                          // 无任务，输出默认方块
-                          // 拼接数据
-                          tempDayList.push({
-                            date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
-                            hasTask: false,
-                            taskDuration: 1, // 任务时长
-                            height: '104', // 列表高度
-                            paddingBottom: '10', // 距底部距离
-                            marginTop: '0',
-                          });
-                        }
-                      }
-                      tempCoursePostList[j]['weekList'][k]['tableList'] = tempDayList;
-                    }
-                  }
-                }
-              }
-            }
+            console.log();
+            var tempCourseList = _this.getCourseTasksList(res.data.data.taskList, tempCoursePostList).concat(courseList);
+            console.log(tempCourseList);
             _this.setData({
-              courseList: tempCoursePostList.concat(courseList),
+              courseList: tempCourseList,
             });
           } else {
             wx.showToast({
@@ -986,14 +631,12 @@ Page({
         }
       )
 
-      
       this.setData({
         scrollData: 'scrollData' + (event.detail.current),
         currentYear: courseList[event.detail.current].year + '年',
         currentMonth: courseList[event.detail.current].month + '月',
-        // courseList: tempCoursePostList.concat(courseList),
-        beforeWeek: newBeforeWeek - 1,
-        currentTable: event.detail.current + this.data.weekSetpLength - 1,
+        beforeWeek: newBeforeWeek,
+        currentTable: event.detail.current + this.data.weekSetpLength ,
       });
 
     } else {
@@ -1335,5 +978,234 @@ Page({
     this.setData({
       operateMark: !this.data.operateMark,
     });
+  },
+
+  /**
+   * 在空列表基础上拼接任务
+   */
+  getCourseTasksList: function (taskList, courseList) {
+    var _this = this;
+    for (let i = 0; i < taskList.length; i++) {
+      for (let j = 0; j < courseList.length; j++) {
+        // 寻找相同年、月的数据
+        if (moment(taskList[i]['taskDate']).format('YYYY-MM') == courseList[j]['date'] || moment(taskList[i]['taskDate']).format('YYYY-MM') == moment(courseList[j]['weekList'][6]['date']).format('YYYY-MM')) {
+          for (let k = 0; k < courseList[j]['weekList'].length; k++) {
+            // 寻找相同日的数据
+            if (taskList[i]['taskDate'] == courseList[j]['weekList'][k]['date']) {
+              // 寻找到相同日，将该日表格重写
+              // 取出返回数据中taskList的值
+              var tempTaskList = taskList[i]['taskList'];
+              // 临时存放某天数据列表的数组
+              var tempDayList = [];
+              // 从开始时间统计到结束时间，默认步长1小时
+              for (let p = _this.data.startTime; p <= _this.data.endTime; p++) {
+                var hasTask = -1; // 是否有任务
+                var tempTime = []; // 临时存放每个时段数据的数组
+                // 遍历Post返回数据的任务列表
+                // var dayDate = moment(tempCourseList[i][j]).format('YYYY-MM-DD');
+                var dayTime = p < 10 ? '0' + p : p; // 当前小时
+                for (let q = 0; q < tempTaskList.length; q++) {
+                  // 判断是否有整点（00分）开始任务
+                  if (tempTaskList[q]['beginTimeStr'] == (dayTime + ':00')) {
+                    // 有整点开始任务
+                    // 是否有任务，有任务为任务的下标，无任务在为-1； 
+                    hasTask = q;
+                    // 组建当前时间段数组
+                    tempTime = {
+                      date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
+                      hasTask: true, // 有任务
+                      taskDuration: tempTaskList[q]['step'], // 任务时长
+                      taskId: tempTaskList[q]['taskId'], // 任务ID
+                      titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                      taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                      title: tempTaskList[q]['title'], // 任务名称、标题
+                      height: 104 * tempTaskList[q]['step'] + 10 * (tempTaskList[q]['step'] - 1), // 任务列方块高度
+                      paddingBottom: '10', // 任务列方块距底部间距
+                    }
+                    // 将时间块写入到日列表中
+                    tempDayList.push(tempTime);
+                    // 根据任务时长调整日列表中方块数量
+                    p = p + tempTaskList[q]['step'] - 1;
+                    break;
+                  } else if (tempTaskList[q]['beginTimeStr'] == (dayTime + ':30')) {
+                    // 有半点（30分）开始任务
+                    // 判断是否需要半个空任务（空白格）
+                    hasTask = q; // 是否有任务，有任务为任务的下标，无任务在为-1；
+                    var hasEndTime = -1; // 是否有相同的结束时间冲突状态，默认没有；
+                    // 遍历当日任务数组，判断是否有某个结束时间与开始时间相同；
+                    for (let m = 0; m < tempTaskList.length; m++) {
+                      // 寻找当前时间的半点（30分）是否与某个任务的结束时间相同
+                      if (tempTaskList[m]['endTimeStr'] == (dayTime + ':30')) {
+                        hasEndTime = m;
+                      }
+                    }
+                    // 判断遍历结果，hasEndTime为-1则未找到，为其它值则找到
+                    if (hasEndTime == -1) {
+                      // 未找到则输出空任务方块（空白格），找到则不输出
+                      tempDayList.push({
+                        date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                        taskDuration: '0.5', // 任务时长
+                        hasTask: false,
+                        height: '52',
+                        paddingBottom: '0',
+                        marginTop: '0',
+                      });
+
+                      // 输出正常的任务块
+                      tempTime = {
+                        date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                        hasTask: true, // 有任务
+                        taskDuration: tempTaskList[q]['step'], // 任务时长
+                        taskId: tempTaskList[q]['taskId'], // 任务ID
+                        titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                        taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                        title: tempTaskList[q]['title'], // 任务标题、名称
+                        height: (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])), // 任务列方块高度                   
+                        marginTop: '0',
+                        paddingBottom: '0', // 任务列方块距底部间距
+                      }
+                    }
+
+                    // 判断是否有相邻两个且颜色相同的任务块，若有则有1像素的分隔线，若无则正常显示
+                    if (hasEndTime != -1 && tempTaskList[hasEndTime]['titleColor'] == tempTaskList[q]['titleColor']) {
+                      var tempTimeHeight = (103 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])); // 任务列方块高度
+                      var tempMarginTop = 1 * tempTaskList[q]['step'];
+                    } else {
+                      var tempTimeHeight = (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])); // 任务列方块高度
+                      var tempMarginTop = '0';
+                    }
+
+                    // 将时间块写入到日列表中
+                    tempDayList.push({
+                      date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                      hasTask: true, // 有任务
+                      taskDuration: tempTaskList[q]['step'], // 任务时长
+                      taskId: tempTaskList[q]['taskId'], // 任务ID
+                      titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                      taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                      title: tempTaskList[q]['title'], // 任务标题、名称
+                      height: tempTimeHeight, // 任务列方块高度                         
+                      marginTop: tempMarginTop,
+                      paddingBottom: '0', // 任务列方块距底部间距
+                    });
+                    // 根据任务时长调整日列表中方块数量
+                    p = p + tempTaskList[q]['step'] - 1;
+                    break;
+                  } else if (tempTaskList[q]['endTimeStr'] == (p + ':30')) {
+                    // 有某个半点（30分）结束时间与开始时间相同
+                    var hasBeginTime = -1; // 是否有相同的开始时间冲突状态，默认没有；
+                    // 遍历当日任务数组，判断是否有某个开始时间与之相同；
+                    for (let m = 0; m < tempTaskList.length; m++) {
+                      // 寻找当前时间的半点（30分）是否与某个任务的开始时间相同
+                      if (tempTaskList[m]['beginTimeStr'] == (p + ':30')) {
+                        hasBeginTime = m;
+                      }
+                    }
+                    // 判断遍历结果，hasBeginTime为-1则未找到，为其它值则找到
+                    if (hasBeginTime == -1) {
+                      tempDayList.push({
+                        date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                        taskDuration: '0.5', // 任务时长
+                        hasTask: false,
+                        height: '52',
+                        paddingBottom: '10',
+                        marginTop: '0',
+                      });
+                    }
+                    // 是否有任务，有任务为任务的下标，无任务在为-1；
+                    hasTask = q;
+                  }
+                }
+                // 未匹配到任务
+                if (hasTask == -1) {
+                  // 无任务，输出默认方块
+                  // 拼接数据
+                  tempDayList.push({
+                    date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
+                    hasTask: false,
+                    taskDuration: 1, // 任务时长
+                    height: '104', // 列表高度
+                    paddingBottom: '10', // 距底部距离
+                    marginTop: '0',
+                  });
+                }
+              }
+              courseList[j]['weekList'][k]['tableList'] = tempDayList;
+            }
+          }
+        }
+      }
+    }
+    return courseList;
+  },
+
+  /**
+   * 生成空的表格列表
+   */
+  getCourseTableList: function (dataList,tableType) {
+    var tableList = [];
+    // 组建对象数组
+    console.log('getCourseTableList');
+    console.log(dataList);
+    if(tableType == 'before') {
+      dataList.reverse();
+    }
+    console.log(dataList);
+    for (let i = 0; i < dataList.length; i++) {
+      var weekList = []; // 周列表
+      var currentWeek = false; // 是否为当前周
+      // 优化日期数组
+      for (let j = 0; j < dataList[i].length; j++) {
+        var currentDay = false; // 是否为当前天
+
+        // 写入默认空白列表数据
+        var taskList = []; // 日任务数据列表
+        for (let k = this.data.startTime; k <= this.data.endTime; k++) {
+          var taskDate = moment(dataList[i][j]).format('YYYY-MM-DD');
+          var taskTime = k < 10 ? '0' + k : k;
+          // 拼接数据
+          taskList.push({
+            date: taskDate + '-' + taskTime + '-00', // 日期
+            hasTask: false, // 是否有任务
+            taskDuration: 1, // 任务时长
+            height: '104', // 列表高度
+            paddingBottom: '10', // 距底部距离
+            marginTop: '0',
+          });
+        }
+
+        // 判断是否是当日
+        if (dataList[i][j] == moment().format('YYYY-MM-DD')) {
+          currentDay = true; // 是当日
+        } else {
+          currentDay = false; // 不是当日
+        }
+
+        // 写入日数据到周列表中
+        weekList.push({
+          'isCurrent': currentDay, // 是否当日
+          'day': moment(dataList[i][j]).date(), // 所属日
+          'month': moment(dataList[i][j]).month() + 1, // 所属月
+          'year': moment(dataList[i][j]).year(), // 所属年
+          'date': moment(dataList[i][j]).format('YYYY-MM-DD'),
+          'tableList': taskList, // 日列表
+        });
+      }
+      
+      var tempTableList = {
+        'currentWeek': currentWeek, // 是否当前周
+        'year': moment(dataList[i][0]).year(), // 所属年
+        'month': moment(dataList[i][0]).month() + 1, // 所属月
+        'date': moment(dataList[i][0]).format('YYYY-MM'),
+        'weekList': weekList, // 周列表
+      };
+      // 写入周数据到表格中
+      if (tableType == 'after') {
+        tableList.push(tempTableList);
+      } else if (tableType == 'before'){
+        tableList.unshift(tempTableList);
+      }
+    }
+    return tableList;
   }
 });
