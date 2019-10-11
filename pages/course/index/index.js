@@ -48,6 +48,7 @@ Page({
     currentButtonWeekIndex: 0, // 表格弹窗选中周下标
     currentButtonDayIndex: 0, // 表格弹窗选中日下标
     currentButtonHourIndex: 0, // 表格弹窗选中小时下标
+    calendarList: [], // 日历视图中日历表格
   },
 
   /**
@@ -133,22 +134,35 @@ Page({
     var date = '2019-07'
 
     // 生成当前月前后各1月的数组数据
-    var currentDate = moment().format('YYYY-MM');
-    var currentDateAdd = moment().add(1, 'M').format('YYYY-MM');
-    console.log(currentDate);
-    console.log(currentDateAdd);
-    var dates = [];
+    var calendarList = [];
     for (let i = 0; i < 3; i++) {
       var currentDate = moment().add(i - 1, 'M').format('YYYY-MM');
-      var tempDates = [];
-      for (let j = 0; j < 42; j++) {
-        const startDate = moment(currentDate).date(1);
+      var monthList = [];
+      const startDate = moment(currentDate).date(1);
+      for (let j = 0; j < 6; j++) {
+        var weekList = [];
+        for(let k=0; k< 7; k++) {
+          weekList.push({
+            day: startDate.isoWeekday(j + k + 1).date(),
+            month: startDate.isoWeekday(j + k + 1).month(),
+            year: startDate.isoWeekday(j + k + 1).year(),
+            selected: false,
+            hasTask: false,
+          });
+        }
         
-        tempDates[j] = startDate.isoWeekday(j + 1).date();
+        monthList.push({
+          'weekList': weekList,
+        });
       };
-      dates.push(tempDates);
+      calendarList.push({
+        'monthList': monthList,
+        'month': moment(currentDate).month(),
+        'year': moment(currentDate).year(),
+        'selected': false,
+      });
     }
-    console.log(dates);
+    console.log(calendarList);
 
     // 构建空表格
     var courseData = this.getCourseTableList(tempCourseList, 'onload');
@@ -163,6 +177,7 @@ Page({
       timeList: timeList,
       viewType: viewType,
       calendarShow: calendarShow,
+      calendarList: calendarList, // 日历视图中日历列表，
     });
   },
 

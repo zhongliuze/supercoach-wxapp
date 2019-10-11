@@ -100,7 +100,8 @@
                           </view>
                         </block>
                         <block wx:else>
-                          <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} " style="margin-bottom: {{tableItem.paddingBottom}}rpx; height:{{tableItem.height}}rpx;background-color:{{tableItem.titleColor}};" catchtap="catchTableMark" data-tableIndex="{{tableIndex}}" data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}"></view>
+                          <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} " style="margin-bottom: {{tableItem.paddingBottom}}rpx; height:{{tableItem.height}}rpx;background-color:{{tableItem.titleColor}};" catchtap="catchTableMark" data-tableIndex="{{tableIndex}}"
+                            data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}"></view>
                         </block>
                       </block>
                     </view>
@@ -181,337 +182,186 @@
         </scroll-view>
         <!-- 日历展开 -->
         <scroll-view class="course_date" scroll-x scroll-into-view="a" wx:elif="{{calendarShow == true}}">
-          <view class="scroll-block" id="a">
-            <view class="scroll-date-line">
-              <view class="week-line">
-                <text>一</text>
-                <text>二</text>
-                <text>三</text>
-                <text>四</text>
-                <text>五</text>
-                <text>六</text>
-                <text>日</text>
-              </view>
-              <view class="day-list">
-                <view class="day-line">
-                  <view class="datenum default">
-                    <text>7</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum default">
-                    <text>8</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum default">
-                    <text>9</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>10</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>11</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>12</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>13</text>
-                    <view class="spot"></view>
-                  </view>
+          <block wx:for="{{calendarList}}" wx:for-item="calendarItem" wx:for-index="calendarIndex">
+            <view class="scroll-block" id="a">
+              <view class="scroll-date-line">
+                <view class="week-line">
+                  <text>一</text>
+                  <text>二</text>
+                  <text>三</text>
+                  <text>四</text>
+                  <text>五</text>
+                  <text>六</text>
+                  <text>日</text>
                 </view>
-                <view class="day-line">
-                  <view class="datenum">
-                    <text>14</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>15</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>16</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>17</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>18</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>19</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>20</text>
-                    <view class="no-spot"></view>
-                  </view>
-                </view>
-                <view class="day-line">
-                  <view class="datenum current-day">
-                    <text>今</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>22</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>23</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>24</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>25</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>26</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>27</text>
-                    <view class="no-spot"></view>
-                  </view>
-                </view>
-                <view class="day-line">
-                  <view class="datenum">
-                    <text>28</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>29</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>30</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>31</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>1</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>2</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>3</text>
-                    <view class="no-spot"></view>
-                  </view>
-                </view>
-                <view class="day-line">
-                  <view class="datenum">
-                    <text>4</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>5</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>6</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum default">
-                    <text>7</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum default">
-                    <text>8</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum default">
-                    <text>9</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum default">
-                    <text>10</text>
-                    <view class="no-spot"></view>
-                  </view>
-                </view>
-              </view>
-            </view>
-          </view>
-          <view class="scroll-block" id="a">
-            <view class="scroll-date-line">
-              <view class="week-line">
-                <text>一</text>
-                <text>二</text>
-                <text>三</text>
-                <text>四</text>
-                <text>五</text>
-                <text>六</text>
-                <text>日</text>
-              </view>
-              <view class="day-list">
+                <view class="day-list">
+                  <block wx:for="{{calendarItem.monthList}}" wx:for-item="monthItem" wx:for-index="monthIndex">
+                    <view class="day-line">
+                      <block wx:for="{{monthItem.weekList}}" wx:for-item="weekItem" wx:for-index="weekIndex">
+                        <view class="datenum">
+                          <text>{{weekItem.day}}</text>
+                          <view class="no-spot"></view>
+                        </view>
+                      </block>
 
-                <view class="day-line">
-                  <view class="datenum default">
-                    <text>7</text>
-                    <view class="no-spot"></view>
+                    </view>
+                  </block>
+                  <!-- <view class="day-line">
+                    <view class="datenum default">
+                      <text>7</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum default">
+                      <text>8</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum default">
+                      <text>9</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>10</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>11</text>
+                      <view class="spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>12</text>
+                      <view class="spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>13</text>
+                      <view class="spot"></view>
+                    </view>
                   </view>
-                  <view class="datenum default">
-                    <text>8</text>
-                    <view class="no-spot"></view>
+                  <view class="day-line">
+                    <view class="datenum">
+                      <text>14</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>15</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>16</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>17</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>18</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>19</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>20</text>
+                      <view class="no-spot"></view>
+                    </view>
                   </view>
-                  <view class="datenum default">
-                    <text>9</text>
-                    <view class="no-spot"></view>
+                  <view class="day-line">
+                    <view class="datenum current-day">
+                      <text>今</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>22</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>23</text>
+                      <view class="spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>24</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>25</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>26</text>
+                      <view class="spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>27</text>
+                      <view class="no-spot"></view>
+                    </view>
                   </view>
-                  <view class="datenum">
-                    <text>10</text>
-                    <view class="no-spot"></view>
+                  <view class="day-line">
+                    <view class="datenum">
+                      <text>28</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>29</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>30</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>31</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>1</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>2</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>3</text>
+                      <view class="no-spot"></view>
+                    </view>
                   </view>
-                  <view class="datenum">
-                    <text>11</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>12</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>13</text>
-                    <view class="spot"></view>
-                  </view>
-                </view>
-                <view class="day-line">
-                  <view class="datenum">
-                    <text>14</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>15</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>16</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>17</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>18</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>19</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>20</text>
-                    <view class="no-spot"></view>
-                  </view>
-                </view>
-                <view class="day-line">
-                  <view class="datenum current-day">
-                    <text>今</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>22</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>23</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>24</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>25</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>26</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>27</text>
-                    <view class="no-spot"></view>
-                  </view>
-                </view>
-                <view class="day-line">
-                  <view class="datenum">
-                    <text>28</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>29</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>30</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>31</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>1</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>2</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>3</text>
-                    <view class="no-spot"></view>
-                  </view>
-                </view>
-                <view class="day-line">
-                  <view class="datenum">
-                    <text>4</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>5</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum">
-                    <text>6</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum default">
-                    <text>7</text>
-                    <view class="spot"></view>
-                  </view>
-                  <view class="datenum default">
-                    <text>8</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum default">
-                    <text>9</text>
-                    <view class="no-spot"></view>
-                  </view>
-                  <view class="datenum default">
-                    <text>10</text>
-                    <view class="no-spot"></view>
-                  </view>
+                  <view class="day-line">
+                    <view class="datenum">
+                      <text>4</text>
+                      <view class="spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>5</text>
+                      <view class="spot"></view>
+                    </view>
+                    <view class="datenum">
+                      <text>6</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum default">
+                      <text>7</text>
+                      <view class="spot"></view>
+                    </view>
+                    <view class="datenum default">
+                      <text>8</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum default">
+                      <text>9</text>
+                      <view class="no-spot"></view>
+                    </view>
+                    <view class="datenum default">
+                      <text>10</text>
+                      <view class="no-spot"></view>
+                    </view>
+                  </view> -->
                 </view>
               </view>
             </view>
-          </view>
+          </block>
+
+
         </scroll-view>
         <!-- 展开、收起按钮 -->
         <view class="spread" catchtap="changeCalendarShow">
