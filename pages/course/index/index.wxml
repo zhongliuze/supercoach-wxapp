@@ -94,13 +94,13 @@
                     <view class="day">
                       <block wx:for="{{weekItem.tableList}}" wx:key="this" wx:for-item="tableItem" wx:for-index="tableIndex">
                         <block wx:if="{{tableItem.hasTask == true}}">
-                          <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;margin-top:{{tableItem.marginTop}}rpx;" catchtap="catchTableMark" data-tableIndex="{{tableIndex}}"
-                            data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}">
+                          <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;margin-top:{{tableItem.marginTop}}rpx;" catchtap="catchTableMark"
+                            data-tableIndex="{{tableIndex}}" data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}">
                             <text>{{tableItem.title}}</text>
                           </view>
                         </block>
                         <block wx:else>
-                          <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} " style="margin-bottom: {{tableItem.paddingBottom}}rpx; height:{{tableItem.height}}rpx" catchtap="catchTableMark" data-tableIndex="{{tableIndex}}" data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}"></view>
+                          <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} " style="margin-bottom: {{tableItem.paddingBottom}}rpx; height:{{tableItem.height}}rpx;background-color:{{tableItem.titleColor}};" catchtap="catchTableMark" data-tableIndex="{{tableIndex}}" data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}"></view>
                         </block>
                       </block>
                     </view>
@@ -154,8 +154,8 @@
     <view class="course_list" wx:elif="{{viewType == 1}}">
       <view class="course-scroll">
         <!-- 日历收起 -->
-        <scroll-view class="course_date" scroll-x scroll-into-view="{{scrollData}}" wx:if="{{calendarShow == false}}">
-          <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex">
+        <scroll-view class="course_date" scroll-x scroll-into-view="{{scrollData}}" wx:if="{{calendarShow == false}}" bindscrolltoupper="courseScrollToupper" bindscrolltolower="courseScrollTolower">
+          <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex" wx:key="this">
             <view class="scroll-block" id="scrollData{{courseIndex}}">
               <view class="scroll-date">
                 <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
@@ -193,7 +193,6 @@
                 <text>日</text>
               </view>
               <view class="day-list">
-
                 <view class="day-line">
                   <view class="datenum default">
                     <text>7</text>
@@ -528,7 +527,7 @@
         </view>
         <!-- 任务列表 -->
         <view class="tasks">
-          <block wx:for="{{taskList}}">
+          <block wx:for="{{taskList}}" wx:key="this">
             <movable-area class='movable-area'>
               <movable-view direction="horizontal" class='movable-view'>
                 <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchStart" bindtouchmove="touchMove">
