@@ -449,7 +449,7 @@ swiper {
   display: flex;
   flex-direction: column;
   white-space: nowrap;
-  position: fixed;
+  /* position: fixed; */
   z-index: 99;
   width: 750rpx;
   background-color: #fff;
@@ -459,7 +459,7 @@ swiper {
 .course_list .course-scroll .course_date {
   display: flex;
   flex-direction: row;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   /* position: fixed;
   z-index: 99;
   width: 750rpx;
@@ -467,8 +467,8 @@ swiper {
 }
 
 .course_list .course-scroll .course_date .scroll-block {
-  position: relative;
-  display: inline-block;
+  /* position: relative;
+  display: inline-block; */
   width: 750rpx;
   /* height: 130rpx; */
 }
@@ -753,6 +753,12 @@ swiper {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.course_list .tasks .task-line .avatar image {
+  width: 84rpx;
+  height: 84rpx;
+  border-radius: 100%;
 }
 
 .course_list .tasks .task-line .task-user {

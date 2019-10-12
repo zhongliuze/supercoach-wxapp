@@ -19,6 +19,7 @@ Page({
 
     swiperEasing: 'default', // 滑动动画，linear为线性，default为默认
     scrollData: '',
+    calendarScrollIndex: '', // 日历缩略列表自动滚动
     courseList: [],
     beforeWeek: 6, // 默认加载当前日期前x周
     aftherWeek: 5, // 默认加载当前日期前y周
@@ -49,6 +50,11 @@ Page({
     currentButtonDayIndex: 0, // 表格弹窗选中日下标
     currentButtonHourIndex: 0, // 表格弹窗选中小时下标
     calendarList: [], // 日历视图中日历表格
+
+    currentCalendarWeekIndex: 0, // 日历视图中当前选中日期周下标
+    currentCalendarDayIndex: 0, // 日历视图中当前选中日期日下标
+    testi: 6,
+
   },
 
   /**
@@ -109,10 +115,28 @@ Page({
       }
     }
 
-
+    // for (let i = 0; i < 3; i++) {
+    //   var monthList = [];
+    //   var currentDate = moment().add(i - 1, 'M').format('YYYY-MM');
+    //   // 获取本月开始、结束时间
+    //   for (let j = moment(currentDate).startOf('month').date(); j <= moment(currentDate).endOf('month').date(); j++) {
+    //     monthList.push({
+    //       'day': j,
+    //       'selected': false,
+    //       'hasTask': false,
+    //     });
+    //   }
+    //   lineCalendarList.push({
+    //     'monthList': monthList,
+    //     'month': moment(currentDate).month() + 1,
+    //     'year': moment(currentDate).year(),
+    //     'selected': false,
+    //   });
+    // }
+    // console.log(lineCalendarList);
 
     /**
-     * 初始化，构建表格
+     * 构建表格视图基础列表
      */
     var tempCourseList = [];
     const defaultWeekLength = this.data.defaultWeekLength;
@@ -128,42 +152,39 @@ Page({
       tempCourseList.unshift(weekBeforeArray)
     }
 
-    console.log('tempCourseList');
-    console.log(tempCourseList);
-    moment.locale('zh-cn');
-    var date = '2019-07'
 
-    // 生成当前月前后各1月的数组数据
+    /**
+     * 构建日历视图基础列表
+     */
     var calendarList = [];
     for (let i = 0; i < 3; i++) {
       var currentDate = moment().add(i - 1, 'M').format('YYYY-MM');
       var monthList = [];
-      const startDate = moment(currentDate).date(1);
       for (let j = 0; j < 6; j++) {
         var weekList = [];
-        for(let k=0; k< 7; k++) {
+        for (let k = 0; k < 7; k++) {
           weekList.push({
-            day: startDate.isoWeekday(j + k + 1).date(),
-            month: startDate.isoWeekday(j + k + 1).month(),
-            year: startDate.isoWeekday(j + k + 1).year(),
+            day: moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).date(),
+            month: moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).month() + 1,
+            year: moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).year(),
             selected: false,
             hasTask: false,
           });
         }
-        
         monthList.push({
           'weekList': weekList,
         });
       };
       calendarList.push({
         'monthList': monthList,
-        'month': moment(currentDate).month(),
+        'month': moment(currentDate).month() + 1,
         'year': moment(currentDate).year(),
         'selected': false,
       });
     }
-    console.log(calendarList);
 
+    console.log(calendarList);
+    
     // 构建空表格
     var courseData = this.getCourseTableList(tempCourseList, 'onload');
     // 更新数据
@@ -172,12 +193,16 @@ Page({
       currentWeek: courseData.currentWeek,
       currentTable: courseData.currentWeek,
       scrollData: 'scrollData' + courseData.currentWeek,
+      calendarScrollIndex: 'calendarScroll' + courseData.currentWeek,
       currentMonth: courseData.currentMonth,
       currentYear: courseData.currentYear,
       timeList: timeList,
       viewType: viewType,
       calendarShow: calendarShow,
       calendarList: calendarList, // 日历视图中日历列表，
+      currentCalendarWeekIndex: courseData.currentWeek, // 日历视图中当前选中日历下标
+      currentCalendarDayIndex: courseData.currentDay, // 日历视图中当前选中日历下标
+      
     });
   },
 
@@ -186,6 +211,8 @@ Page({
    */
   onReady: function () {
     console.log('本周位置：' + this.data.currentWeek);
+    console.log(this.data.courseList);
+    console.log(this.data.calendarScrollIndex);
   },
 
   /**
@@ -226,6 +253,7 @@ Page({
       function (res) {
         if (res.data.code == 0) {
           // 获取成功
+          console.log(res.data);
           _this.setData({
             courseList: _this.getCourseTasksList(res.data.data.taskList, courseList),
           });
@@ -796,15 +824,24 @@ Page({
                     hasTask = q;
                     // 组建当前时间段数组
                     tempTime = {
-                      date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
-                      hasTask: true, // 有任务
-                      taskDuration: tempTaskList[q]['step'], // 任务时长
-                      taskId: tempTaskList[q]['taskId'], // 任务ID
-                      titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
-                      taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
-                      title: tempTaskList[q]['title'], // 任务名称、标题
-                      height: 104 * tempTaskList[q]['step'] + 10 * (tempTaskList[q]['step'] - 1), // 任务列方块高度
-                      paddingBottom: '10', // 任务列方块距底部间距
+                      'date': taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
+                      'hasTask': true, // 有任务
+                      'taskDuration': tempTaskList[q]['step'], // 任务时长
+                      'taskId': tempTaskList[q]['taskId'], // 任务ID
+                      'titleColor': tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                      'taskType': tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                      'title': tempTaskList[q]['title'], // 任务名称、标题
+                      'height': 104 * tempTaskList[q]['step'] + 10 * (tempTaskList[q]['step'] - 1), // 任务列方块高度
+                      'paddingBottom': '10', // 任务列方块距底部间距
+                      'isTouchMove': false,  // 是否左侧滑动
+                      'beginTimeStr': tempTaskList[q]['beginTimeStr'],  // 开始时间
+                      'endTimeStr': tempTaskList[q]['endTimeStr'],  // 结束时间
+                      'avatar': '',  // 头像
+                      'studentId': tempTaskList[q]['studentId'], // 学员ID
+                      'taskStatus': tempTaskList[q]['taskStatus'], // 任务ID
+                      'studentName': tempTaskList[q]['title'].substr(-2), // 学员姓名，截取最后2为字符
+                      'surplusCourse': '08', // 剩余课时数
+                      'courseContent': '蛙泳蹬腿划手练习' // 本节课内容
                     }
                     // 将时间块写入到日列表中
                     tempDayList.push(tempTime);
@@ -827,25 +864,35 @@ Page({
                     if (hasEndTime == -1) {
                       // 未找到则输出空任务方块（空白格），找到则不输出
                       tempDayList.push({
-                        date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
-                        taskDuration: '0.5', // 任务时长
-                        hasTask: false,
-                        height: '52',
-                        paddingBottom: '0',
-                        marginTop: '0',
+                        'date': taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                        'taskDuration': '0.5', // 任务时长
+                        'hasTask': false,
+                        'height': '52',
+                        'paddingBottom': '0',
+                        'marginTop': '0',
+                        'isTouchMove': false,
                       });
                       // 输出正常的任务块
                       tempTime = {
-                        date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
-                        hasTask: true, // 有任务
-                        taskDuration: tempTaskList[q]['step'], // 任务时长
-                        taskId: tempTaskList[q]['taskId'], // 任务ID
-                        titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
-                        taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
-                        title: tempTaskList[q]['title'], // 任务标题、名称
-                        height: (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])), // 任务列方块高度                   
-                        marginTop: '0',
-                        paddingBottom: '0', // 任务列方块距底部间距
+                        'date': taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                        'hasTask': true, // 有任务
+                        'taskDuration': tempTaskList[q]['step'], // 任务时长
+                        'taskId': tempTaskList[q]['taskId'], // 任务ID
+                        'titleColor': tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                        'taskType': tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                        'title': tempTaskList[q]['title'], // 任务标题、名称
+                        'height': (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])), // 任务列方块高度                   
+                        'marginTop': '0',
+                        'paddingBottom': '0', // 任务列方块距底部间距
+                        'isTouchMove': false,
+                        'beginTimeStr': tempTaskList[q]['beginTimeStr'],  // 开始时间
+                        'endTimeStr': tempTaskList[q]['endTimeStr'],  // 结束时间
+                        'avatar': '',  // 头像
+                        'studentId': tempTaskList[q]['studentId'], // 学员ID
+                        'taskStatus': tempTaskList[q]['taskStatus'], // 任务ID
+                        'studentName': tempTaskList[q]['title'].substr(-2), // 学员姓名，截取最后2为字符
+                        'surplusCourse': '08', // 剩余课时数
+                        'courseContent': '蛙泳蹬腿划手练习' // 本节课内容
                       }
                     }
                     // 判断是否有相邻两个且颜色相同的任务块，若有则有1像素的分隔线，若无则正常显示
@@ -858,16 +905,25 @@ Page({
                     }
                     // 将时间块写入到日列表中
                     tempDayList.push({
-                      date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
-                      hasTask: true, // 有任务
-                      taskDuration: tempTaskList[q]['step'], // 任务时长
-                      taskId: tempTaskList[q]['taskId'], // 任务ID
-                      titleColor: tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
-                      taskType: tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
-                      title: tempTaskList[q]['title'], // 任务标题、名称
-                      height: tempTimeHeight, // 任务列方块高度                         
-                      marginTop: tempMarginTop,
-                      paddingBottom: '0', // 任务列方块距底部间距
+                      'date': taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                      'hasTask': true, // 有任务
+                      'taskDuration': tempTaskList[q]['step'], // 任务时长
+                      'taskId': tempTaskList[q]['taskId'], // 任务ID
+                      'titleColor': tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
+                      'taskType': tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
+                      'title': tempTaskList[q]['title'], // 任务标题、名称
+                      'height': tempTimeHeight, // 任务列方块高度                         
+                      'marginTop': tempMarginTop,
+                      'paddingBottom': '0', // 任务列方块距底部间距
+                      'isTouchMove': false,
+                      'beginTimeStr': tempTaskList[q]['beginTimeStr'],  // 开始时间
+                      'endTimeStr': tempTaskList[q]['endTimeStr'],  // 结束时间
+                      'avatar': '',  // 头像
+                      'studentId': tempTaskList[q]['studentId'], // 学员ID
+                      'taskStatus': tempTaskList[q]['taskStatus'], // 任务ID
+                      'studentName': tempTaskList[q]['title'].substr(-2), // 学员姓名，截取最后2为字符
+                      'surplusCourse': '08', // 剩余课时数
+                      'courseContent': '蛙泳蹬腿划手练习' // 本节课内容
                     });
                     // 根据任务时长调整日列表中方块数量
                     p = p + tempTaskList[q]['step'] - 1;
@@ -885,12 +941,13 @@ Page({
                     // 判断遍历结果，hasBeginTime为-1则未找到，为其它值则找到
                     if (hasBeginTime == -1) {
                       tempDayList.push({
-                        date: taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
-                        taskDuration: '0.5', // 任务时长
-                        hasTask: false,
-                        height: '52',
-                        paddingBottom: '10',
-                        marginTop: '0',
+                        'date': taskList[i]['taskDate'] + '-' + dayTime + '-30', // 日期
+                        'taskDuration': '0.5', // 任务时长
+                        'hasTask': false,
+                        'height': '52',
+                        'paddingBottom': '10',
+                        'marginTop': '0',
+                        'isTouchMove': false,
                       });
                     }
                     // 是否有任务，有任务为任务的下标，无任务在为-1；
@@ -902,16 +959,17 @@ Page({
                   // 无任务，输出默认方块
                   // 拼接数据
                   tempDayList.push({
-                    date: taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
-                    hasTask: false,
-                    taskDuration: 1, // 任务时长
-                    height: '104', // 列表高度
-                    paddingBottom: '10', // 距底部距离
-                    marginTop: '0',
+                    'date': taskList[i]['taskDate'] + '-' + dayTime + '-00', // 日期
+                    'hasTask': false,
+                    'taskDuration': 1, // 任务时长
+                    'height': '104', // 列表高度
+                    'paddingBottom': '10', // 距底部距离
+                    'marginTop': '0',
                   });
                 }
               }
               courseList[j]['weekList'][k]['tableList'] = tempDayList;
+              courseList[j]['weekList'][k]['hasTask'] = true;
             }
           }
         }
@@ -925,6 +983,10 @@ Page({
    */
   getCourseTableList: function (dataList, type) {
     var tableList = [];
+    // 初始化moment设置
+    moment.locale('zh-cn', {
+      weekdaysShort: '周日_周一_周二_周三_周四_周五_周六'.split('_'),
+    });
     // 组建对象数组
     for (let i = 0; i < dataList.length; i++) {
       var weekList = []; // 周列表
@@ -940,19 +1002,21 @@ Page({
           var taskTime = k < 10 ? '0' + k : k;
           // 拼接数据
           taskList.push({
-            date: taskDate + '-' + taskTime + '-00', // 日期
-            hasTask: false, // 是否有任务
-            taskDuration: 1, // 任务时长
-            height: '104', // 列表高度
-            paddingBottom: '10', // 距底部距离
-            marginTop: '0',
+            'date': taskDate + '-' + taskTime + '-00', // 日期
+            'hasTask': false, // 是否有任务
+            'taskDuration': 1, // 任务时长
+            'height': '104', // 列表高度
+            'paddingBottom': '10', // 距底部距离
+            'marginTop': '0',
+            'isTouchMove': false,
           });
         }
 
         // 判断是否是当日
         if (dataList[i][j] == moment().format('YYYY-MM-DD')) {
           currentDay = true; // 是当日
-          var currentShowWeek = i; // 当前周值
+          var currentShowWeek = i; // 当前周值下标位置
+          var currentShowDay = j; // 当前日下标位置
           var currentShowMonth = moment(dataList[i][0]).format('M月'); // 当前月值
           var currentShowYear = moment(dataList[i][0]).format('YYYY年'); // 当前年份值
         } else {
@@ -966,7 +1030,9 @@ Page({
           'month': moment(dataList[i][j]).month() + 1, // 所属月
           'year': moment(dataList[i][j]).year(), // 所属年
           'date': moment(dataList[i][j]).format('YYYY-MM-DD'),
+          'dateWeek': moment(dataList[i][j]).format('MM月DD日 ddd'),
           'tableList': taskList, // 日列表
+          'hasTask': false,
         });
       }
 
@@ -983,6 +1049,7 @@ Page({
     if (type == 'onload') {
       var retrunData = {
         currentWeek: currentShowWeek,
+        currentDay: currentShowDay,
         currentMonth: currentShowMonth,
         currentYear: currentShowYear,
         courseList: tableList,
@@ -1072,9 +1139,38 @@ Page({
     _this.setData({
       showMenuButton: false,
       showTableButton: false,
-      scrollData: 'scrollData' + (event.detail.current),
+      calendarScrollIndex: 'calendarScroll' + event.detail.current,
       beforeWeek: newBeforeWeek,
       aftherWeek: newAfterWeek,
     });
   },
+
+  /**
+   * 切换缩略日历日期
+   */
+  changeCalendarDate: function(event) {
+    console.log(event)
+    var weekIndex = event.currentTarget.dataset.week;
+    var dayIndex = event.currentTarget.dataset.day;
+    this.setData({
+      'currentCalendarWeekIndex': weekIndex,
+      'currentCalendarDayIndex': dayIndex,
+    });
+  },
+
+  /**
+   * 缩略日历滑动时触发
+   */
+  // shrinkCalendarScroll: function(event) {
+  //   console.log(event);
+  //   var i = this.data.testi;
+  //   console.log(375 * i + 30);
+  //   if (event.detail.scrollLeft > (375 * i + 50)) {
+  //     this.setData({
+  //       calendarScrollIndex: 'calendarScroll'+ (i+1),
+  //       testi : i+1
+  //     });
+  //     wx.vibrateShort();
+  //   }
+  // }
 });
