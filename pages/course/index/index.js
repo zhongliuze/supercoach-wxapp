@@ -19,7 +19,7 @@ Page({
 
     swiperEasing: 'default', // 滑动动画，linear为线性，default为默认
     scrollData: '',
-    calendarScrollIndex: '', // 日历缩略列表自动滚动
+    calendarScrollIndex: 0, // 日历缩略列表自动滚动
     courseList: [],
     beforeWeek: 6, // 默认加载当前日期前x周
     aftherWeek: 5, // 默认加载当前日期前y周
@@ -53,7 +53,7 @@ Page({
 
     currentCalendarWeekIndex: 0, // 日历视图中当前选中日期周下标
     currentCalendarDayIndex: 0, // 日历视图中当前选中日期日下标
-    testi: 6,
+    currentCalendarDateTitle: '2019年10月',
 
   },
 
@@ -184,7 +184,7 @@ Page({
     }
 
     console.log(calendarList);
-    
+
     // 构建空表格
     var courseData = this.getCourseTableList(tempCourseList, 'onload');
     // 更新数据
@@ -193,7 +193,7 @@ Page({
       currentWeek: courseData.currentWeek,
       currentTable: courseData.currentWeek,
       scrollData: 'scrollData' + courseData.currentWeek,
-      calendarScrollIndex: 'calendarScroll' + courseData.currentWeek,
+      calendarScrollIndex: courseData.currentWeek,
       currentMonth: courseData.currentMonth,
       currentYear: courseData.currentYear,
       timeList: timeList,
@@ -202,7 +202,7 @@ Page({
       calendarList: calendarList, // 日历视图中日历列表，
       currentCalendarWeekIndex: courseData.currentWeek, // 日历视图中当前选中日历下标
       currentCalendarDayIndex: courseData.currentDay, // 日历视图中当前选中日历下标
-      
+
     });
   },
 
@@ -414,9 +414,17 @@ Page({
           scrollData: 'scrollData' + (event.detail.current), // 滚动到某个视图
           beforeWeek: newBeforeWeek, // 距当前周的前距离
           aftherWeek: newAfterWeek, // 距当前周的后距离
-          currentTable: event.detail.current + _this.data.weekSetpLength, // 当前显示的周
           currentWeek: _this.data.currentWeek + _this.data.weekSetpLength, // 当前时间所在周所在位置下标
         });
+        if (_this.data.viewType == 0) {
+          _this.setData({
+            currentTable: event.detail.current + _this.data.weekSetpLength, // 当前显示的周
+          });
+        } else {
+          _this.setData({
+            calendarScrollIndex: event.detail.current + _this.data.weekSetpLength, // 当前显示的周
+          });
+        }
       } else {
         _this.setData({
           scrollData: 'scrollData' + (event.detail.current),
@@ -431,8 +439,16 @@ Page({
         scrollData: 'scrollData' + (event.detail.current),
         currentYear: courseList[event.detail.current].year + '年',
         currentMonth: courseList[event.detail.current].month + '月',
-        currentTable: event.detail.current,
       });
+      if (_this.data.viewType == 0) {
+        _this.setData({
+          currentTable: event.detail.current, // 当前显示的周
+        });
+      } else {
+        _this.setData({
+          calendarScrollIndex: event.detail.current, // 当前显示的周
+        });
+      }
     }
 
     // 关闭所有弹窗
@@ -443,7 +459,6 @@ Page({
     // 设备短震动
     wx.vibrateShort();
   },
-
 
   /**
    * 点击空白区域关闭弹窗
@@ -511,6 +526,7 @@ Page({
     console.log('本周位置：' + this.data.currentWeek);
     this.setData({
       currentTable: this.data.currentWeek,
+      calendarScrollIndex: this.data.currentWeek,
       showMenuButton: false,
     });
   },
@@ -1042,6 +1058,7 @@ Page({
         'year': moment(dataList[i][0]).year(), // 所属年
         'month': moment(dataList[i][0]).month() + 1, // 所属月
         'date': moment(dataList[i][0]).format('YYYY-MM'),
+        'dateStr': moment(dataList[i][0]).format('YYYY年MM日'),
         'weekList': weekList, // 周列表
       });
     }
@@ -1139,7 +1156,7 @@ Page({
     _this.setData({
       showMenuButton: false,
       showTableButton: false,
-      calendarScrollIndex: 'calendarScroll' + event.detail.current,
+      calendarScrollIndex: event.detail.current,
       beforeWeek: newBeforeWeek,
       aftherWeek: newAfterWeek,
     });
@@ -1148,7 +1165,7 @@ Page({
   /**
    * 切换缩略日历日期
    */
-  changeCalendarDate: function(event) {
+  changeCalendarDate: function (event) {
     console.log(event)
     var weekIndex = event.currentTarget.dataset.week;
     var dayIndex = event.currentTarget.dataset.day;

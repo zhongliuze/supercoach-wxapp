@@ -30,7 +30,8 @@
           </view>
         </view>
         <view class='navigation-bar__center'>
-          <text>日历排课</text>
+          <text wx:if="{{viewType == 0}}">日历排课</text>
+          <text wx:else>{{courseList[calendarScrollIndex].dateStr}}</text>
         </view>
         <view class='navigation-bar__right'>
         </view>
@@ -155,7 +156,47 @@
     <view class="course_list" wx:elif="{{viewType == 1}}">
       <view class="course-scroll">
         <!-- 日历收起 -->
-        <!-- <scroll-view class="course_date" scroll-x scroll-into-view="{{calendarScrollIndex}}" wx:if="{{calendarShow == false}}" bindscrolltoupper="courseScrollToupper" bindscrolltolower="courseScrollTolower" scroll-anchoring="true">
+        <swiper wx:if="{{calendarShow == false}}" style="height:200rpx;" current="{{calendarScrollIndex}}" easing-function="{{swiperEasing}}" bindchange="bindTableChange">
+          <swiper-item wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex" wx:key="this">
+            <view class="course_date">
+              <view class="scroll-block" id="calendarScroll{{courseIndex}}">
+                <view class="scroll-date">
+                  <block wx:for="{{courseItem.weekList}}" wx:key="this" wx:for-item="weekItem" wx:for-index="weekIndex">
+                    <view class="date" catchtap="changeCalendarDate" data-week="{{courseIndex}}" data-day="{{weekIndex}}">
+                      <view class="week">
+                        <text wx:if="{{weekIndex == 0}}">一</text>
+                        <text wx:elif="{{weekIndex == 1}}">二</text>
+                        <text wx:elif="{{weekIndex == 2}}">三</text>
+                        <text wx:elif="{{weekIndex == 3}}">四</text>
+                        <text wx:elif="{{weekIndex == 4}}">五</text>
+                        <text wx:elif="{{weekIndex == 5}}">六</text>
+                        <text wx:elif="{{weekIndex == 6}}">日</text>
+                      </view>
+                      <view class="day {{(courseIndex == currentCalendarWeekIndex && weekIndex == currentCalendarDayIndex) ? 'current_day' : ''}}">
+                        <text wx:if="{{weekItem.isCurrent && courseIndex == currentCalendarWeekIndex && weekIndex == currentCalendarDayIndex}}">今</text>
+                        <text wx:else>{{weekItem.day}}</text>
+                        <block wx:if="{{courseIndex == currentCalendarWeekIndex && weekIndex == currentCalendarDayIndex}}">
+                          <view class="{{weekItem.hasTask? 'no-spot' : 'spot'}}"></view>
+                        </block>
+                        <block wx:else>
+                          <view class="{{weekItem.hasTask? 'spot' : 'no-spot'}}"></view>
+                        </block>
+                      </view>
+                    </view>
+                  </block>
+                </view>
+              </view>
+            </view>
+
+          </swiper-item>
+          <!-- <swiper-item>
+            <view style="background-color:blue;width:750rpx;height:200rpx;"></view>
+          </swiper-item>
+          <swiper-item>
+            <view style="background-color:yellow;width:750rpx;height:200rpx;"></view>
+          </swiper-item> -->
+        </swiper>
+        <!-- <scroll-view class="course_date" scroll-x scroll-into-view="{{calendarScrollIndex}}" wx:if="{{calendarShow == false}}">
           <block wx:for="{{courseList}}" wx:for-item="courseItem" wx:for-index="courseIndex" wx:key="this">
             <view class="scroll-block" id="calendarScroll{{courseIndex}}">
               <view class="scroll-date">
@@ -188,10 +229,10 @@
         </scroll-view> -->
         <!-- 日历展开 -->
         <!-- bindchange="bindCalendarChange" current="{{currentTable}}" -->
-        
-          <view class="course_date">
-          <swiper>
-            <swiper-item>
+
+        <!-- <view class="course_date">
+          <swiper style="height:500rpx;">
+            <swiper-item style="width:750rpx;height:500rpx;">
               <view class="scroll-block">
                 <view class="scroll-date-line">
                   <view class="week-line">
@@ -389,10 +430,39 @@
               </view>
 
             </swiper-item>
-             </swiper>
-          </view>
+          </swiper>
+        </view> -->
+        <swiper style="height:600rpx;" wx:elif="{{calendarShow == true}}">
+          <swiper-item wx:for="{{calendarList}}" wx:for-item="calendarItem" wx:for-index="calendarIndex">
+            <view class="scroll-date-line">
+              <view class="week-line">
+                <text>一</text>
+                <text>二</text>
+                <text>三</text>
+                <text>四</text>
+                <text>五</text>
+                <text>六</text>
+                <text>日</text>
+              </view>
+              <view class="day-list">
+                <block wx:for="{{calendarItem.monthList}}" wx:for-item="monthItem" wx:for-index="monthIndex">
+                  <view class="day-line">
+                    <block wx:for="{{monthItem.weekList}}" wx:for-item="weekItem" wx:for-index="weekIndex">
+                      <view class="datenum {{calendarItem.month != weekItem.month ? 'default' : ''}}">
+                        <text>{{weekItem.day}}</text>
+                        <view class="no-spot"></view>
+                      </view>
+                    </block>
 
-       
+                  </view>
+                </block>
+              </view>
+            </view>
+          </swiper-item>
+        </swiper>
+
+
+
         <!-- <scroll-view class="course_date" scroll-x scroll-into-view="a" wx:elif="{{calendarShow == true}}">
           <block wx:for="{{calendarList}}" wx:for-item="calendarItem" wx:for-index="calendarIndex">
             <view class="scroll-block" id="a">
@@ -434,7 +504,7 @@
       </view>
       <!-- 任务列表展示 -->
       <!-- style="margin-top:{{calendarShow == true ? '543' : '197'}}rpx;" -->
-      <view class="course-info">
+      <view class="course-info" style="margin-top:{{calendarShow == true ? '543' : '197'}}rpx;">
         <!-- 选中时间 -->
         <view class="date-info">
           <text>{{courseList[currentCalendarWeekIndex]['weekList'][currentCalendarDayIndex]['dateWeek']}}</text>
@@ -442,7 +512,7 @@
         <!-- 任务列表 -->
         <view class="tasks">
           <block wx:for="{{courseList[currentCalendarWeekIndex]['weekList'][currentCalendarDayIndex]['tableList']}}" wx:key="this">
-            <movable-area class='movable-area' wx:if="{{item.hasTask}}">
+            <movable-area class='movable-area'>
               <movable-view direction="horizontal" class='movable-view'>
                 <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchStart" bindtouchmove="touchMove">
                   <view class="task-line {{item.isTouchMove ? 'touch-task-line' : ''}}">

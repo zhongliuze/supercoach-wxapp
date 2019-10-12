@@ -449,7 +449,7 @@ swiper {
   display: flex;
   flex-direction: column;
   white-space: nowrap;
-  /* position: fixed; */
+  position: fixed;
   z-index: 99;
   width: 750rpx;
   background-color: #fff;
@@ -459,7 +459,7 @@ swiper {
 .course_list .course-scroll .course_date {
   display: flex;
   flex-direction: row;
-  /* white-space: nowrap; */
+  white-space: nowrap;
   /* position: fixed;
   z-index: 99;
   width: 750rpx;
@@ -467,8 +467,8 @@ swiper {
 }
 
 .course_list .course-scroll .course_date .scroll-block {
-  /* position: relative;
-  display: inline-block; */
+  position: relative;
+  display: inline-block;
   width: 750rpx;
   /* height: 130rpx; */
 }
@@ -556,7 +556,7 @@ swiper {
   height: 18rpx;
 }
 
-.course_list .course-scroll .course_date .scroll-block .scroll-date-line {
+.course_list .course-scroll .scroll-date-line {
   display: flex;
   align-items: center;
   width: 720rpx;
@@ -565,7 +565,7 @@ swiper {
   flex-direction: column;
 }
 
-.course_list .course-scroll .course_date .scroll-block .scroll-date-line .week-line {
+.course_list .course-scroll .scroll-date-line .week-line {
   display: flex;
   align-items: center;
   width: 720rpx;
@@ -573,7 +573,7 @@ swiper {
   padding-top: 15rpx;
 }
 
-.course_list .course-scroll .course_date .scroll-block .scroll-date-line .week-line text {
+.course_list .course-scroll .scroll-date-line .week-line text {
   font-size: 22rpx;
   font-weight: 500;
   color: rgba(112, 120, 136, 1);
@@ -583,7 +583,7 @@ swiper {
   justify-content: center;
 }
 
-.course_list .course-scroll .course_date .scroll-block .scroll-date-line .day-list {
+.course_list .course-scroll .scroll-date-line .day-list {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -593,7 +593,7 @@ swiper {
   color: rgba(43, 49, 61, 1);
 }
 
-.course_list .course-scroll .course_date .scroll-block .scroll-date-line .day-list .day-line {
+.course_list .course-scroll .scroll-date-line .day-list .day-line {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -601,7 +601,7 @@ swiper {
   margin-bottom: 10rpx;
 }
 
-.course_list .course-scroll .course_date .scroll-block .scroll-date-line .day-list .day-line .datenum {
+.course_list .course-scroll .scroll-date-line .day-list .day-line .datenum {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -613,11 +613,11 @@ swiper {
   line-height: 30rpx;
 }
 
-.course_list .course-scroll .course_date .scroll-block .scroll-date-line .day-list .day-line .default {
+.course_list .course-scroll .scroll-date-line .day-list .day-line .default {
   color: #c7c7c7;
 }
 
-.course_list .course-scroll .course_date .scroll-block .scroll-date-line .day-list .day-line .datenum .spot {
+.course_list .course-scroll .scroll-date-line .day-list .day-line .datenum .spot {
   background-color: #5fcd64;
   height: 9rpx;
   width: 9rpx;
@@ -625,7 +625,7 @@ swiper {
   margin-top: 7rpx;
 }
 
-.course_list .course-scroll .course_date .scroll-block .scroll-date-line .day-list .day-line .datenum .no-spot {
+.course_list .course-scroll .scroll-date-line .day-list .day-line .datenum .no-spot {
   background-color: #fff;
   height: 9rpx;
   width: 9rpx;
@@ -633,7 +633,7 @@ swiper {
   margin-top: 7rpx;
 }
 
-.course_list .course-scroll .course_date .scroll-block .scroll-date-line .day-list .day-line .current-day {
+.course_list .course-scroll .scroll-date-line .day-list .day-line .current-day {
   background-color: #5fcd64;
   border-radius: 100%;
   color: #fff;

@@ -1,16 +1,15 @@
-<!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
-</view>
+<swiper>
+<swiper-item>
+  <view style="background-color:red;width:750rpx;height:200rpx;"></view>
+</swiper-item>
+<swiper-item>
+  <view style="background-color:blue;width:750rpx;height:200rpx;"></view>
+</swiper-item>
+<swiper-item>
+  <view style="background-color:yellow;width:750rpx;height:200rpx;"></view>
+</swiper-item>
+</swiper>
+
 
 <!-- <view class="day-line">
                     <view class="datenum default">
@@ -162,3 +161,10 @@
                       <view class="no-spot"></view>
                     </view>
                   </view> -->
+
+
+
+
+
+
+                  
