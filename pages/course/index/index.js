@@ -25,15 +25,9 @@ Page({
     aftherWeek: 5, // 默认加载当前日期前y周
     defaultWeekLength: 5, // 默认加载周列表长度，左右各5
     weekSetpLength: 5, // 每次新加载x周
-
-
     beforeCalendar: 2,  // 日历视图加载当前日期前x月
     afterCalendar: 5,  // 日历视图加载当前日期后x-beforeCalendar月
     calendarSetpLength: 5, // 日历视图加载每次加载x月
-
-
-
-
     prestrainWeek: 2, // 当前后剩余x周时候提前加载
     currentWeek: 0, // 当前周列表键值
     currentTable: 0, // 当前滑动表格（视图）位置
@@ -132,26 +126,6 @@ Page({
       }
     }
 
-    // for (let i = 0; i < 3; i++) {
-    //   var monthList = [];
-    //   var currentDate = moment().add(i - 1, 'M').format('YYYY-MM');
-    //   // 获取本月开始、结束时间
-    //   for (let j = moment(currentDate).startOf('month').date(); j <= moment(currentDate).endOf('month').date(); j++) {
-    //     monthList.push({
-    //       'day': j,
-    //       'selected': false,
-    //       'hasTask': false,
-    //     });
-    //   }
-    //   lineCalendarList.push({
-    //     'monthList': monthList,
-    //     'month': moment(currentDate).month() + 1,
-    //     'year': moment(currentDate).year(),
-    //     'selected': false,
-    //   });
-    // }
-    // console.log(lineCalendarList);
-
     /**
      * 构建表格视图基础列表
      */
@@ -218,10 +192,6 @@ Page({
       });
     }
 
-    console.log(calendarList);
-    console.log(currentCompleteCalendarMonthIndex);
-    console.log(currentCompleteCalendarWeekIndex);
-    console.log(currentCompleteCalendarDayIndex);
     // 构建空表格
     var courseData = this.getCourseTableList(tempCourseList, 'onload');
     // 更新数据
@@ -261,8 +231,7 @@ Page({
   onShow: function () {
     var _this = this;
     var courseList = this.data.courseList; // 已生成课表数据
-    console.log('courseList:');
-    console.log(courseList);
+    
     // 获取当前时间，展示时间线
     if (moment().hour() < (this.data.endTime + 1) && moment().hour() > (this.data.startTime - 1)) {
       // 显示时间线
@@ -306,6 +275,49 @@ Page({
         }
       }
     )
+
+    // 获取日历列表中日历状态（点）数据
+    // $.get(
+    //   'task/month', {
+    //     coachid: wx.getStorageSync('coachid'),
+    //     date: moment(calendarList[event.detail.current]['year'] + '-' + calendarList[event.detail.current]['month']).format('YYYY-MM'),
+    //     sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+    //     timestamp: timestamp, //时间戳
+    //   },
+    //   function (res) {
+    //     console.log('get task/month');
+    //     console.log(res.data);
+    //     if (res.data.code == 0) {
+    //       // 获取成功
+    //       var taskList = res.data.data.taskList;
+    //       console.log(calendarList[event.detail.current]['monthList'].length);
+    //       console.log(calendarList[event.detail.current]['monthList'][1]['weekList']);
+    //       for (let i = 0; i < calendarList[event.detail.current]['monthList'].length; i++) {
+    //         for (let j = 0; j < calendarList[event.detail.current]['monthList'][i]['weekList'].length; j++) {
+    //           for (let k = 0; k < taskList.length; k++) {
+    //             console.log('当前日期' + calendarList[event.detail.current]['monthList'][i]['weekList'][j]['date']);
+    //             console.log('返回日期' + taskList[k]);
+    //             if (calendarList[event.detail.current]['monthList'][i]['weekList'][j]['date'] == taskList[k]) {
+    //               calendarList[event.detail.current]['monthList'][i]['weekList'][j]['hasTask'] = true;
+    //             }
+    //           }
+    //         }
+    //       }
+    //       // _this.setData({
+    //       //   courseList: _this.getCourseTasksList(res.data.data.taskList, courseList),
+    //       // });
+    //       console.log(calendarList);
+    //       _this.setData({
+    //         calendarList: calendarList,
+    //       });
+    //     } else {
+    //       wx.showToast({
+    //         title: '课程信息加载失败',
+    //         icon: 'none'
+    //       })
+    //     }
+    //   }
+    // )
 
     _this.setData({
       timeLineTop: timeLineTop, // 当前时间线位置
@@ -382,6 +394,24 @@ Page({
           }
           dataList.push(weekAfterArray);
         }
+
+        // 判断日历视图最后一个月是否大于每周的最后一天属于的月份
+        // 若大于或等于则无需新增月份，否则需要往后新增到最后一周的最后一列所属的月份
+        var calendarList = this.data.calendarList;
+        var tableMonth = moment(dataList[dataList.length - 1][6]).format('YYYY-MM');
+        var calendarMonth = moment(calendarList[calendarList.length - 1]['year'] + '-' + moment(calendarList[calendarList.length - 1]['month'])).format('YYYY-MM');
+        console.log('calendarMonth:' + calendarMonth);
+        console.log('tableMonth:' + tableMonth);
+        if (moment(tableMonth).isBefore(calendarMonth) || moment(tableMonth).isSame(calendarMonth)) {
+          console.log('无需加载日历列表');
+          console.log(moment("2020-02").diff("2019-12",'month'));
+        }else {
+          console.log('需要加载日历列表');
+          // 判断需要加载几个月
+          // （tableMonth - currentMonth）的长度 - 当前已加载的长度
+          console.log(moment(tableMonth).diff(moment().format('YYYY-MM'), 'month')-2);
+        }
+
       } else if (event.detail.current < this.data.prestrainWeek) {
         // 需要向前加载数据
         loadDirection = 'left';
@@ -395,9 +425,10 @@ Page({
           dataList.unshift(weekBeforeArray.reverse());
         }
       }
-
+      console.log(dataList);
       // 组建对象数组
       var tableList = this.getCourseTableList(dataList);
+      console.log(tableList);
       // 获取时间戳
       let timestamp = moment().valueOf();
       $.get(
@@ -608,14 +639,7 @@ Page({
           'selected': false,
         });
       }
-      console.log('原来的');
-      console.log(calendarList);
-      console.log('向前新增的');
-      console.log(tempCalendarList);
-      console.log(_this.data.currentCompleteCalendarMonthIndex);
-      console.log(_this.data.beforeCalendar);
-      console.log(_this.data.calendarSetpLength);
-      console.log(_this.data.currentCompleteCalendarMonthIndex + _this.data.beforeCalendar + _this.data.calendarSetpLength - 2);
+      
       calendarList = tempCalendarList.concat(calendarList);
       _this.setData({
         completeCalendarScrollIndex: event.detail.current + _this.data.calendarSetpLength , // 当前显示的周
@@ -634,47 +658,7 @@ Page({
     // 获取日历视图中日期状态（点）数据
     let timestamp = moment().valueOf();
     console.log(calendarList);
-    // $.get(
-    //   'task/month', {
-    //     coachid: wx.getStorageSync('coachid'),
-    //     date: moment(calendarList[event.detail.current]['year'] + '-' + calendarList[event.detail.current]['month']).format('YYYY-MM'),
-    //     sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-    //     timestamp: timestamp, //时间戳
-    //   },
-    //   function (res) {
-    //     console.log('get task/month');
-    //     console.log(res.data);
-    //     if (res.data.code == 0) {
-    //       // 获取成功
-    //       var taskList = res.data.data.taskList;
-    //       console.log(calendarList[event.detail.current]['monthList'].length);
-    //       console.log(calendarList[event.detail.current]['monthList'][1]['weekList']);
-    //       for (let i = 0; i < calendarList[event.detail.current]['monthList'].length; i++) {
-    //         for (let j = 0; j < calendarList[event.detail.current]['monthList'][i]['weekList'].length; j++) {
-    //           for (let k = 0; k < taskList.length; k++) {
-    //             console.log('当前日期' + calendarList[event.detail.current]['monthList'][i]['weekList'][j]['date']);
-    //             console.log('返回日期' + taskList[k]);
-    //             if (calendarList[event.detail.current]['monthList'][i]['weekList'][j]['date'] == taskList[k]) {
-    //               calendarList[event.detail.current]['monthList'][i]['weekList'][j]['hasTask'] = true;
-    //             }
-    //           }
-    //         }
-    //       }
-    //       // _this.setData({
-    //       //   courseList: _this.getCourseTasksList(res.data.data.taskList, courseList),
-    //       // });
-    //       console.log(calendarList);
-    //       _this.setData({
-    //         calendarList: calendarList,
-    //       });
-    //     } else {
-    //       wx.showToast({
-    //         title: '课程信息加载失败',
-    //         icon: 'none'
-    //       })
-    //     }
-    //   }
-    // )
+    
 
 
     // 判断是否需要加载数据
