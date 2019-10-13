@@ -25,6 +25,15 @@ Page({
     aftherWeek: 5, // 默认加载当前日期前y周
     defaultWeekLength: 5, // 默认加载周列表长度，左右各5
     weekSetpLength: 5, // 每次新加载x周
+
+
+    beforeCalendar: 2,  // 日历视图加载当前日期前x月
+    afterCalendar: 5,  // 日历视图加载当前日期后x-beforeCalendar月
+    calendarSetpLength: 5, // 日历视图加载每次加载x月
+
+
+
+
     prestrainWeek: 2, // 当前后剩余x周时候提前加载
     currentWeek: 0, // 当前周列表键值
     currentTable: 0, // 当前滑动表格（视图）位置
@@ -51,9 +60,17 @@ Page({
     currentButtonHourIndex: 0, // 表格弹窗选中小时下标
     calendarList: [], // 日历视图中日历表格
 
-    currentCalendarWeekIndex: 0, // 日历视图中当前选中日期周下标
-    currentCalendarDayIndex: 0, // 日历视图中当前选中日期日下标
-    currentCalendarDateTitle: '2019年10月',
+    currentCalendarWeekIndex: 0, // 缩略日历视图中当前选中日期周下标
+    currentCalendarDayIndex: 0, // 缩略日历视图中当前选中日期日下标
+    currentCompleteCalendarMonthIndex: 0, // 完整日历视图中当前选中日期月下标
+    currentCompleteCalendarWeekIndex: 0, // 完整日历视图中当前选中日期周下标
+    currentCompleteCalendarDayIndex: 0, // 完整日历视图中当前选中日期日下标
+
+    currentCalendarDateTitle: '2019年10月', // 日历视图中页面标题日期显示
+    completeCalendarScrollIndex: 0, // 完整日历滑动下标
+
+
+
 
   },
 
@@ -157,34 +174,54 @@ Page({
      * 构建日历视图基础列表
      */
     var calendarList = [];
-    for (let i = 0; i < 3; i++) {
-      var currentDate = moment().add(i - 1, 'M').format('YYYY-MM');
+    var currentCompleteCalendarMonthIndex = 0; // 完整日历视图中当前选中日期月下标
+    var currentCompleteCalendarWeekIndex = 0; // 完整日历视图中当前选中日期周下标
+    var currentCompleteCalendarDayIndex = 0; // 完整日历视图中当前选中日期日下标
+    for (let i = 0; i < this.data.calendarSetpLength; i++) {
+      var currentDate = moment().add(i - 2, 'M').format('YYYY-MM');
       var monthList = [];
       for (let j = 0; j < 6; j++) {
         var weekList = [];
         for (let k = 0; k < 7; k++) {
+          // 判断是否是当日
+          var isCurrent = false;
+          if (moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).format('YYYY-MM-DD') == moment().format('YYYY-MM-DD')) {
+            // 是当日
+            isCurrent = true;
+            currentCompleteCalendarMonthIndex = i; // 完整日历视图中当前选中日期月下标
+            currentCompleteCalendarWeekIndex = j; // 完整日历视图中当前选中日期周下标
+            currentCompleteCalendarDayIndex = k; // 完整日历视图中当前选中日期日下标
+          }
           weekList.push({
-            day: moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).date(),
-            month: moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).month() + 1,
-            year: moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).year(),
-            selected: false,
-            hasTask: false,
+            'day': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).date(),
+            'month': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).month() + 1,
+            'year': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).year(),
+            'date': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).format('YYYY-MM-DD'),
+            'hasTask': false,
+            'isCurrent': isCurrent,
           });
         }
         monthList.push({
           'weekList': weekList,
         });
       };
+      // 判断是否是当前月，设置打开自动滚动到当前月
+      if (moment(currentDate).month() == moment().month()) {
+        var completeCalendarScrollIndex = i;
+      }
       calendarList.push({
         'monthList': monthList,
         'month': moment(currentDate).month() + 1,
         'year': moment(currentDate).year(),
+        'date': moment(currentDate).format('YYYY年MM月'),
         'selected': false,
       });
     }
 
     console.log(calendarList);
-
+    console.log(currentCompleteCalendarMonthIndex);
+    console.log(currentCompleteCalendarWeekIndex);
+    console.log(currentCompleteCalendarDayIndex);
     // 构建空表格
     var courseData = this.getCourseTableList(tempCourseList, 'onload');
     // 更新数据
@@ -202,7 +239,10 @@ Page({
       calendarList: calendarList, // 日历视图中日历列表，
       currentCalendarWeekIndex: courseData.currentWeek, // 日历视图中当前选中日历下标
       currentCalendarDayIndex: courseData.currentDay, // 日历视图中当前选中日历下标
-
+      completeCalendarScrollIndex: completeCalendarScrollIndex,
+      currentCompleteCalendarMonthIndex: currentCompleteCalendarMonthIndex, // 完整日历视图中当前选中日期月下标
+      currentCompleteCalendarWeekIndex: currentCompleteCalendarWeekIndex, // 完整日历视图中当前选中日期周下标
+      currentCompleteCalendarDayIndex: currentCompleteCalendarDayIndex, // 完整日历视图中当前选中日期日下标
     });
   },
 
@@ -242,6 +282,7 @@ Page({
     }
 
     let timestamp = moment().valueOf();
+    // 获取表格视图数据
     $.get(
       'task/range', {
         coachid: wx.getStorageSync('coachid'),
@@ -458,6 +499,196 @@ Page({
     });
     // 设备短震动
     wx.vibrateShort();
+  },
+
+  /**
+   * 日历视图：滑动加载数据 
+   */
+  bindCalendarChange: function (event) {
+    var _this = this;
+    // 获取现有列表
+    var courseList = this.data.courseList;
+    var calendarList = this.data.calendarList;
+
+    // 加载方向
+    var loadDirection = 'right';
+
+    if (event.detail.current > this.data.calendarList.length - 2) {
+      // 向右加载列表数据
+      var tempCalendarList = [];
+      var currentCompleteCalendarMonthIndex = 0; // 完整日历视图中当前选中日期月下标
+      var currentCompleteCalendarWeekIndex = 0; // 完整日历视图中当前选中日期周下标
+      var currentCompleteCalendarDayIndex = 0; // 完整日历视图中当前选中日期日下标
+
+      for (let i = calendarList.length; i < calendarList.length + 3; i++) {
+        var currentDate = moment().add(i - 2, 'M').format('YYYY-MM');
+        var monthList = [];
+        for (let j = 0; j < 6; j++) {
+          var weekList = [];
+          for (let k = 0; k < 7; k++) {
+            // 判断是否是当日
+            var isCurrent = false;
+            if (moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).format('YYYY-MM-DD') == moment().format('YYYY-MM-DD')) {
+              // 是当日
+              isCurrent = true;
+              currentCompleteCalendarMonthIndex = i; // 完整日历视图中当前选中日期月下标
+              currentCompleteCalendarWeekIndex = j; // 完整日历视图中当前选中日期周下标
+              currentCompleteCalendarDayIndex = k; // 完整日历视图中当前选中日期日下标
+            }
+            weekList.push({
+              'day': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).date(),
+              'month': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).month() + 1,
+              'year': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).year(),
+              'date': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).format('YYYY-MM-DD'),
+              'hasTask': false,
+              'isCurrent': isCurrent,
+            });
+          }
+          monthList.push({
+            'weekList': weekList,
+          });
+        };
+        tempCalendarList.push({
+          'monthList': monthList,
+          'month': moment(currentDate).month() + 1,
+          'year': moment(currentDate).year(),
+          'date': moment(currentDate).format('YYYY年MM月'),
+          'selected': false,
+        });
+      }
+      console.log('原来的');
+      console.log(calendarList);
+      console.log('新增的');
+      console.log(tempCalendarList);
+      calendarList = calendarList.concat(tempCalendarList);
+      _this.setData({
+        completeCalendarScrollIndex: event.detail.current, // 当前显示的周
+        calendarList: calendarList,
+      });
+    } else if (event.detail.current < 1) {
+      // 向前加载数据
+      var tempCalendarList = [];
+      var currentCompleteCalendarMonthIndex = 0; // 完整日历视图中当前选中日期月下标
+      var currentCompleteCalendarWeekIndex = 0; // 完整日历视图中当前选中日期周下标
+      var currentCompleteCalendarDayIndex = 0; // 完整日历视图中当前选中日期日下标
+
+      for (let i = this.data.beforeCalendar + 1; i <= this.data.beforeCalendar + this.data.calendarSetpLength; i++) {
+        var currentDate = moment().add(0 - i, 'M').format('YYYY-MM');
+        var monthList = [];
+        for (let j = 0; j < 6; j++) {
+          var weekList = [];
+          for (let k = 0; k < 7; k++) {
+            // 判断是否是当日
+            var isCurrent = false;
+            if (moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).format('YYYY-MM-DD') == moment().format('YYYY-MM-DD')) {
+              // 是当日
+              isCurrent = true;
+              currentCompleteCalendarMonthIndex = i; // 完整日历视图中当前选中日期月下标
+              currentCompleteCalendarWeekIndex = j; // 完整日历视图中当前选中日期周下标
+              currentCompleteCalendarDayIndex = k; // 完整日历视图中当前选中日期日下标
+            }
+            weekList.push({
+              'day': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).date(),
+              'month': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).month() + 1,
+              'year': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).year(),
+              'date': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).format('YYYY-MM-DD'),
+              'hasTask': false,
+              'isCurrent': isCurrent,
+            });
+          }
+          monthList.push({
+            'weekList': weekList,
+          });
+        };
+        tempCalendarList.unshift({
+          'monthList': monthList,
+          'month': moment(currentDate).month() + 1,
+          'year': moment(currentDate).year(),
+          'date': moment(currentDate).format('YYYY年MM月'),
+          'selected': false,
+        });
+      }
+      console.log('原来的');
+      console.log(calendarList);
+      console.log('向前新增的');
+      console.log(tempCalendarList);
+      console.log(_this.data.currentCompleteCalendarMonthIndex);
+      console.log(_this.data.beforeCalendar);
+      console.log(_this.data.calendarSetpLength);
+      console.log(_this.data.currentCompleteCalendarMonthIndex + _this.data.beforeCalendar + _this.data.calendarSetpLength - 2);
+      calendarList = tempCalendarList.concat(calendarList);
+      _this.setData({
+        completeCalendarScrollIndex: event.detail.current + _this.data.calendarSetpLength , // 当前显示的周
+        calendarList: calendarList,
+        beforeCalendar: _this.data.beforeCalendar + _this.data.calendarSetpLength,
+        currentCompleteCalendarMonthIndex: _this.data.currentCompleteCalendarMonthIndex + _this.data.calendarSetpLength,
+      });
+    } else {
+      // 无需加载数据
+      _this.setData({
+        completeCalendarScrollIndex: event.detail.current, // 当前显示的周
+        calendarList: calendarList,
+      });
+    }
+
+    // 获取日历视图中日期状态（点）数据
+    let timestamp = moment().valueOf();
+    console.log(calendarList);
+    // $.get(
+    //   'task/month', {
+    //     coachid: wx.getStorageSync('coachid'),
+    //     date: moment(calendarList[event.detail.current]['year'] + '-' + calendarList[event.detail.current]['month']).format('YYYY-MM'),
+    //     sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+    //     timestamp: timestamp, //时间戳
+    //   },
+    //   function (res) {
+    //     console.log('get task/month');
+    //     console.log(res.data);
+    //     if (res.data.code == 0) {
+    //       // 获取成功
+    //       var taskList = res.data.data.taskList;
+    //       console.log(calendarList[event.detail.current]['monthList'].length);
+    //       console.log(calendarList[event.detail.current]['monthList'][1]['weekList']);
+    //       for (let i = 0; i < calendarList[event.detail.current]['monthList'].length; i++) {
+    //         for (let j = 0; j < calendarList[event.detail.current]['monthList'][i]['weekList'].length; j++) {
+    //           for (let k = 0; k < taskList.length; k++) {
+    //             console.log('当前日期' + calendarList[event.detail.current]['monthList'][i]['weekList'][j]['date']);
+    //             console.log('返回日期' + taskList[k]);
+    //             if (calendarList[event.detail.current]['monthList'][i]['weekList'][j]['date'] == taskList[k]) {
+    //               calendarList[event.detail.current]['monthList'][i]['weekList'][j]['hasTask'] = true;
+    //             }
+    //           }
+    //         }
+    //       }
+    //       // _this.setData({
+    //       //   courseList: _this.getCourseTasksList(res.data.data.taskList, courseList),
+    //       // });
+    //       console.log(calendarList);
+    //       _this.setData({
+    //         calendarList: calendarList,
+    //       });
+    //     } else {
+    //       wx.showToast({
+    //         title: '课程信息加载失败',
+    //         icon: 'none'
+    //       })
+    //     }
+    //   }
+    // )
+
+
+    // 判断是否需要加载数据
+
+    // 无需预加载，直接滚到下一页
+
+
+    // 关闭所有弹窗
+    _this.setData({
+      showMenuButton: false,
+      showTableButton: false,
+    });
+    // 设备短震动
+    //wx.vibrateShort();
   },
 
   /**
@@ -723,10 +954,74 @@ Page({
     })
   },
 
+  /**
+   * 日历视图：点击三角标切换缩略日历和完整日历
+   */
   changeCalendarShow: function (event) {
+
+    // 将日历展开、收起状态写入缓存中
     wx.setStorageSync('calendarShow', !this.data.calendarShow);
+    if (this.data.calendarShow == false) {
+      // 判断当前选中日所属哪个月
+      var selectDate = this.data.courseList[this.data.currentCalendarWeekIndex]['weekList'][this.data.currentCalendarDayIndex]['date'];
+      var scrollDate = this.data.courseList[this.data.calendarScrollIndex]['date'];
+      // 设置日历展开后自动滚动到选中月
+      var selectMonth = moment(scrollDate).month() + 1;
+      // 获取表格日历
+      var calendarList = this.data.calendarList;
+      // 当前完整日历滑动下标
+      var completeCalendarScrollIndex = 0;
+      console.log(calendarList);
+
+
+
+      var calendarFindFlag = false; // 是否找到标记
+      for (let i = 0; i < calendarList.length; i++) {
+        if (calendarFindFlag) {
+          break;
+        }
+        for (let j = 0; j < calendarList[i]['monthList'].length; j++) {
+          if (calendarFindFlag) {
+            break;
+          }
+          for (let k = 0; k < calendarList[i]['monthList'][j]['weekList'].length; k++) {
+            if (calendarList[i]['monthList'][j]['weekList'][k]['date'] == selectDate) {
+              console.log('找到了');
+              console.log(i);
+              console.log(j);
+              console.log(k);
+              var currentCompleteCalendarMonthIndex = i;
+              var currentCompleteCalendarWeekIndex = j;
+              var currentCompleteCalendarDayIndex = k;
+              completeCalendarScrollIndex = i;
+              // 如果是当月的，就不要继续往后找了，如果不是当月的，需要继续向后找到属于当月的列表
+              if (calendarList[i]['monthList'][j]['weekList'][k]['month'] == calendarList[i]['month']) {
+                calendarFindFlag = true;
+              }
+              break;
+            }
+          }
+        }
+      }
+      // 如果当前滑块中有选中的日期，则展示到选中日期所在月，如果没有选中的，则展示到当前互动的月份
+      if (this.data.currentCalendarWeekIndex != this.data.calendarScrollIndex) {
+        for (let i = 0; i < calendarList.length; i++) {
+          if (calendarList[i]['month'] == selectMonth) {
+            var completeCalendarScrollIndex = i; // 完整日历滑动下标
+            break;
+          }
+        }
+      }
+      // 在完整日历中选中缩略日历中选中的日期
+    }
+
+    // 更新页面
     this.setData({
-      calendarShow: !this.data.calendarShow,
+      'calendarShow': !this.data.calendarShow,
+      'completeCalendarScrollIndex': completeCalendarScrollIndex,
+      'currentCompleteCalendarMonthIndex': currentCompleteCalendarMonthIndex,
+      'currentCompleteCalendarWeekIndex': currentCompleteCalendarWeekIndex,
+      'currentCompleteCalendarDayIndex': currentCompleteCalendarDayIndex,
     });
   },
 
@@ -1058,7 +1353,7 @@ Page({
         'year': moment(dataList[i][0]).year(), // 所属年
         'month': moment(dataList[i][0]).month() + 1, // 所属月
         'date': moment(dataList[i][0]).format('YYYY-MM'),
-        'dateStr': moment(dataList[i][0]).format('YYYY年MM日'),
+        'dateStr': moment(dataList[i][0]).format('YYYY年MM月'),
         'weekList': weekList, // 周列表
       });
     }
@@ -1166,7 +1461,6 @@ Page({
    * 切换缩略日历日期
    */
   changeCalendarDate: function (event) {
-    console.log(event)
     var weekIndex = event.currentTarget.dataset.week;
     var dayIndex = event.currentTarget.dataset.day;
     this.setData({
@@ -1175,6 +1469,40 @@ Page({
     });
   },
 
+  /**
+   * 切换完整日历日期
+   */
+  changeCompleteCalendarDate: function (event) {
+    var monthIndex = event.currentTarget.dataset.month;
+    var weekIndex = event.currentTarget.dataset.week;
+    var dayIndex = event.currentTarget.dataset.day;
+    var selectDate = event.currentTarget.dataset.date;
+
+    // courseList[currentCalendarWeekIndex]['weekList'][currentCalendarDayIndex]['tableList']
+    console.log(this.data.courseList);
+    console.log(this.data.calendarList);
+    var courseList = this.data.courseList;
+    console.log(courseList[0]['weekList'].length);
+    console.log(courseList[0]['weekList'][0]['dateWeek'].length);
+    console.log(courseList[0]['weekList'][0]['dateWeek']);
+    console.log(selectDate);
+    for (let i = 0; i < courseList.length; i++) {
+      for (let j = 0; j < courseList[i]['weekList'].length; j++) {
+        if (courseList[i]['weekList'][j]['date'] == selectDate) {
+          var currentCalendarWeekIndex = i;
+          var currentCalendarDayIndex = j;
+        }
+      }
+    }
+    this.setData({
+      'currentCompleteCalendarMonthIndex': monthIndex,
+      'currentCompleteCalendarWeekIndex': weekIndex,
+      'currentCompleteCalendarDayIndex': dayIndex,
+      'currentCalendarWeekIndex': currentCalendarWeekIndex,
+      'currentCalendarDayIndex': currentCalendarDayIndex,
+      'calendarScrollIndex': currentCalendarWeekIndex,
+    });
+  }
   /**
    * 缩略日历滑动时触发
    */
