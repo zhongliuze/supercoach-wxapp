@@ -24,8 +24,8 @@ Page({
     afterWeek: 5, // 默认加载当前日期前y周
     defaultWeekLength: 5, // 默认加载周列表长度，左右各5
     weekSetpLength: 5, // 每次新加载x周
-    beforeCalendar: 2,  // 日历视图加载当前日期前x月
-    afterCalendar: 2,  // 日历视图加载当前日期后x-beforeCalendar月
+    beforeCalendar: 2, // 日历视图加载当前日期前x月
+    afterCalendar: 2, // 日历视图加载当前日期后x-beforeCalendar月
     calendarSetpLength: 5, // 日历视图加载每次加载x月
     prestrainWeek: 2, // 当前后剩余x周时候提前加载
     currentWeek: 0, // 当前周列表键值
@@ -73,57 +73,12 @@ Page({
   onLoad: function (options) {
     var _this = this;
 
-    // 获取缓存中视图类型
-    if (wx.getStorageSync('viewType')) {
-      var viewType = wx.getStorageSync('viewType');
-    } else {
-      var viewType = 0; // 0为表格视图，1为日历视图
-    }
 
-    // 获取日历视图是否展开或收起
-    if (wx.getStorageSync('calendarShow')) {
-      var calendarShow = wx.getStorageSync('calendarShow');
-    } else {
-      var calendarShow = false;
-    }
-
-    // 顶部导航栏机型自适应设置
-    // 获取菜单按钮（右上角胶囊按钮）的布局位置信息，坐标信息以屏幕左上角为原点。
-    var isSupport = !!wx.getMenuButtonBoundingClientRect;
-    var rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null;
-    // 获取系统信息
-    wx.getSystemInfo({
-      success: function success(res) {
-        var ios = !!(res.system.toLowerCase().search('ios') + 1);
-        _this.setData({
-          ios: ios,
-          statusBarHeight: res.statusBarHeight,
-          innerWidth: isSupport ? 'width:' + rect.left + 'px' : '',
-          innerPaddingRight: isSupport ? 'padding-right:' + (res.windowWidth - rect.left) + 'px' : '',
-          leftWidth: isSupport ? 'width:' + (res.windowWidth - rect.left) + 'px' : ''
-        });
-      }
-    });
+    // 页面初始化设置
+    this.initSettings();
 
     // 生成表格视图中左侧时间列表
-    var startTime = this.data.startTime; // 日程开始时间
-    var endTime = this.data.endTime; // 日程结束时间
-    var timeList = [];
-    for (startTime; startTime <= endTime; startTime++) {
-      if (startTime < 10) {
-        timeList.push({
-          time: '0' + startTime + ':00',
-          hour: startTime,
-          isCurrent: false
-        });
-      } else {
-        timeList.push({
-          time: startTime + ':00',
-          hour: startTime,
-          isCurrent: false
-        });
-      }
-    }
+    var timeList = this.initTimeList(this.data.startTime, this.data.endTime);
 
     /**
      * 构建表格视图基础列表
@@ -200,8 +155,6 @@ Page({
       currentMonth: courseData.currentMonth,
       currentYear: courseData.currentYear,
       timeList: timeList,
-      viewType: viewType,
-      calendarShow: calendarShow,
       calendarList: calendarList, // 日历视图中日历列表，
       currentCalendarWeekIndex: courseData.currentWeek, // 日历视图中当前选中日历下标
       currentCalendarDayIndex: courseData.currentDay, // 日历视图中当前选中日历下标
@@ -225,97 +178,19 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var _this = this;
-    var courseList = this.data.courseList; // 已生成课表数据
+    // 获取现有数据
+    var courseList = this.data.courseList;
+    var calendarList = this.data.calendarList;
 
-    // 获取当前时间，展示时间线
-    if (moment().hour() < (this.data.endTime + 1) && moment().hour() > (this.data.startTime - 1)) {
-      // 显示时间线
-      var timeLineTop = 20 + (parseInt(moment().hour()) - this.data.startTime) * 114 + (104 / 60) * moment().minute() - 4;
-    } else {
-      // 不显示时间线
-      var timeLineTop = -1;
-    }
-
-    // 寻找当前时间，标红展示
-    var timeList = this.data.timeList;
-    for (let i = 0; i < timeList.length; i++) {
-      if (timeList[i]['hour'] == moment().hour()) {
-        timeList[i]['isCurrent'] = true;
-        break;
-      }
-    }
-
-    let timestamp = moment().valueOf();
-    // 获取表格视图数据
-    $.get(
-      'task/weekRange', {
-        coachid: wx.getStorageSync('coachid'),
-        beginDate: courseList[0]['weekList'][0]['date'], // 周时间（默认为本周，格式 yyyy-MM-dd）
-        endDate: courseList[courseList.length - 1]['weekList'][courseList[courseList.length - 1]['weekList'].length - 1]['date'],
-        sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-        timestamp: timestamp, //时间戳
-      },
-      function (res) {
-        if (res.data.code == 0) {
-          // 获取成功
-          console.log(res.data);
-          _this.setData({
-            courseList: _this.getCourseTasksList(res.data.data.taskList, courseList),
-          });
-        } else {
-          wx.showToast({
-            title: '课程信息加载失败',
-            icon: 'none'
-          })
-        }
-      }
-    )
-
+    // 获取表格列表中任务数据
+    this.getCourseTasksListBak(courseList);
     // 获取日历列表中日历状态（点）数据
-    $.get(
-      'task/monthRange', {
-        coachid: wx.getStorageSync('coachid'),
-        beginDate: '2019-08-01',
-        endDate: '2019-11-01',
-        sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-        timestamp: timestamp, //时间戳
-      },
-      function (res) {
-        console.log('get task/month');
-        console.log(res.data);
-        if (res.data.code == 0) {
-          // 获取成功
-          var taskList = res.data.data.taskList;
-          var calendarList = _this.data.calendarList;
+    this.getCalendarTasksList(calendarList);
 
-          for (let m = 0; m < calendarList.length; m ++) {
-            for (let i = 0; i < calendarList[m]['monthList'].length; i++) {
-              for (let j = 0; j < calendarList[m]['monthList'][i]['weekList'].length; j++) {
-                for (let k = 0; k < taskList.length; k++) {
-                  if (calendarList[m]['monthList'][i]['weekList'][j]['date'] == taskList[k]) {
-                    calendarList[m]['monthList'][i]['weekList'][j]['hasTask'] = true;
-                  }
-                }
-              }
-            }
-          }
-          console.log(calendarList);
-          _this.setData({
-            calendarList: calendarList,
-          });
-        } else {
-          wx.showToast({
-            title: '课程信息加载失败',
-            icon: 'none'
-          })
-        }
-      }
-    )
-
-    _this.setData({
-      timeLineTop: timeLineTop, // 当前时间线位置
-      timeList: timeList, // 更新当前时间展示颜色
+    // 更新数据
+    this.setData({
+      timeLineTop: this.realTimeLine(), // 当前时间线位置
+      timeList: this.realTimeList(), // 更新当前时间展示颜色
       movableMessageY: 1029 + (this.data.statusBarHeight - 20), // 设置可移动预约消息框初始Y轴坐标
     });
   },
@@ -359,18 +234,9 @@ Page({
    * 滑动加载表格数据
    */
   bindTableChange: function (event) {
-    var _this = this;
     // 获取现有列表
     var courseList = this.data.courseList;
-    var tempCoursePostList = [];
-    // 获取当前显示周及需要加载周的长度
-    const afterWeek = this.data.afterWeek;
-    const beforeWeek = this.data.beforeWeek;
-    var newAfterWeek = afterWeek;
-    var newBeforeWeek = beforeWeek;
-    // 加载方向
-    var loadDirection = 'right';
-
+    var calendarList = this.data.calendarList;
     // 判断是否需要加载数据
     if (event.detail.current > (courseList.length - this.data.prestrainWeek - 1) || event.detail.current < this.data.prestrainWeek) {
       // 需要加载数据
@@ -378,525 +244,193 @@ Page({
       // 判断是向前还是向后加载周数据
       if (event.detail.current > (courseList.length - this.data.prestrainWeek - 1)) {
         // 需要向后加载数据
-        loadDirection = 'right';
-        newAfterWeek = newAfterWeek + this.data.weekSetpLength;
+        var loadType = 'loadRight';
+        var newAfterWeek = this.data.afterWeek + this.data.weekSetpLength;
         // 获取当前周及后n周日期列表
-        for (let i = afterWeek + 1; i <= newAfterWeek; i++) {
-          var weekAfterArray = [];
-          for (let j = 1; j <= 7; j++) {
-            weekAfterArray.push(moment().weekday(i * 7 + j).format('YYYY-MM-DD'));
-          }
-          dataList.push(weekAfterArray);
-        }
+        var tableDateList = this.getTableDateList(this.data.afterWeek + 1, newAfterWeek + 1, 'loadRight');
 
-        // 判断日历视图最后一个月是否大于每周的最后一天属于的月份
-        // 若大于或等于则无需新增月份，否则需要往后新增到最后一周的最后一列所属的月份
-        var calendarList = this.data.calendarList;
-        var tableMonth = moment(dataList[dataList.length - 1][6]).format('YYYY-MM');
-        var calendarMonth = moment(calendarList[calendarList.length - 1]['year'] + '-' + moment(calendarList[calendarList.length - 1]['month'])).format('YYYY-MM');
-        // console.log('calendarMonth:' + calendarMonth);
-        // console.log('tableMonth:' + tableMonth);
         // 判断是否需要向后加载日历列表
+        var tableMonth = moment(tableDateList[tableDateList.length - 1][6]).format('YYYY-MM');
+        var calendarMonth = moment(calendarList[calendarList.length - 1]['year'] + '-' + moment(calendarList[calendarList.length - 1]['month'])).format('YYYY-MM');
         if (!moment(tableMonth).isBefore(calendarMonth) && !moment(tableMonth).isSame(calendarMonth)) {
-          var afterCalendar = this.data.afterCalendar; // 当前已加载长度
-          var loadCalendarLength = moment(tableMonth).diff(moment().format('YYYY-MM'), 'month') - this.data.afterCalendar + 1;  // 还需往后加载的长度
+          // 需往后加载的总长度
+          var loadCalendarLength = moment(tableMonth).diff(moment().format('YYYY-MM'), 'month') - this.data.afterCalendar + 1;
           // 向后加载日历列表
-          calendarList = calendarList.concat(this.getCalendarList(afterCalendar, afterCalendar + loadCalendarLength));
+          var tempCalendarList = this.getCalendarList(this.data.afterCalendar, this.data.afterCalendar + loadCalendarLength);
+          // 更新数据
           this.setData({
-            calendarList: calendarList,
-            afterCalendar: afterCalendar + loadCalendarLength,
+            calendarList: calendarList.concat(tempCalendarList),
+            afterCalendar: this.data.afterCalendar + loadCalendarLength,
           });
-        } else {
-          // console.log('需要加载日历列表');
-          // // 判断需要加载几个月
-          // console.log(moment(tableMonth).diff(moment().format('YYYY-MM'), 'month') - 2);
-          // console.log('当前已经向后加载' + this.data.afterCalendar + '月');
-          // console.log('还需往后加载' + (moment(tableMonth).diff(moment().format('YYYY-MM'), 'month') - this.data.afterCalendar + 1) + '月');
-
+          // 获取新日历列表中任务情况并保存至日历列表中
+          this.getCalendarTasksList(tempCalendarList, calendarList, 0, 'loadRight');
         }
-
       } else if (event.detail.current < this.data.prestrainWeek) {
         // 需要向前加载数据
-        loadDirection = 'left';
-        newBeforeWeek = beforeWeek + this.data.weekSetpLength;
-        // 获取当前周及后n周日期列表
-        for (let i = beforeWeek; i < newBeforeWeek; i++) {
-          var weekBeforeArray = [];
-          for (let j = 1; j <= 7; j++) {
-            weekBeforeArray.push(moment().weekday(0 - i * 7 - j + 1).format('YYYY-MM-DD'));
-          }
-          dataList.unshift(weekBeforeArray.reverse());
-        }
+        var loadType = 'loadLeft';
+        var newBeforeWeek = this.data.beforeWeek + this.data.weekSetpLength;
 
-        // 判断日历视图最后一个月是否大于每周的最后一天属于的月份
-        // 若大于或等于则无需新增月份，否则需要往后新增到最后一周的最后一列所属的月份
-        var calendarList = this.data.calendarList;
-        var tableMonth = moment(dataList[0][0]).format('YYYY-MM');
-        var calendarMonth = moment(calendarList[0]['year'] + '-' + moment(calendarList[0]['month'])).format('YYYY-MM');
-        console.log(dataList);
-        console.log(calendarList);
-        console.log('calendarMonth:' + calendarMonth);
-        console.log('tableMonth:' + tableMonth);
+        // 获取当前周及后n周日期列表
+        var tableDateList = this.getTableDateList(this.data.beforeWeek, newBeforeWeek, 'loadLeft');
+
         // 判断是否需要向前加载日历列表
+        var tableMonth = moment(tableDateList[0][0]).format('YYYY-MM');
+        var calendarMonth = moment(calendarList[0]['year'] + '-' + moment(calendarList[0]['month'])).format('YYYY-MM');
         if (!moment(tableMonth).isAfter(calendarMonth) && !moment(tableMonth).isSame(calendarMonth)) {
-          console.log('需要向前加载日历列表数据');
+          // 需要向前加载日历列表数据
           var beforeCalendar = this.data.beforeCalendar; // 当前已加载长度
-          var loadCalendarLength = moment(moment().format('YYYY-MM')).diff(tableMonth, 'month') - this.data.beforeCalendar;  // 还需往后加载的长度
-          console.log('当前已经向前加载' + beforeCalendar + '月');
-          console.log('还需往前加载' + loadCalendarLength + '月');
-          //向后加载日历列表
-          console.log('加载前的calendarList');
-          console.log(calendarList);
-          calendarList = this.getCalendarList(beforeCalendar + 1, beforeCalendar + loadCalendarLength + 1, 'left').concat(calendarList);
-          console.log('加载完后的calendarList');
-          console.log(calendarList);
+          var loadCalendarLength = moment(moment().format('YYYY-MM')).diff(tableMonth, 'month') - this.data.beforeCalendar; // 还需往后加载的长度
+
+          // 向前加载新的日历列表
+          var tempCalendarList = this.getCalendarList(beforeCalendar + 1, beforeCalendar + loadCalendarLength + 1, 'left');
+          // 更新数据
           this.setData({
-            calendarList: calendarList,
+            calendarList: tempCalendarList.concat(calendarList),
             beforeCalendar: beforeCalendar + loadCalendarLength,
           });
+          // 获取新日历列表中任务情况并保存至日历列表中
+          this.getCalendarTasksList(tempCalendarList, calendarList, 0, 'loadLeft');
         }
       }
-      // 组建对象数组
-      var tableList = this.getCourseTableList(dataList);
-      console.log('tableList');
-      console.log(tableList);
-      // 获取时间戳
-      let timestamp = moment().valueOf();
-      $.get(
-        'task/weekRange', {
-          coachid: wx.getStorageSync('coachid'), // 用户id
-          beginDate: tableList[0]['weekList'][0]['date'], //  开始时间
-          endDate: tableList[tableList.length - 1]['weekList'][tableList[tableList.length - 1]['weekList'].length - 1]['date'], // 结束时间
-          sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-          timestamp: timestamp, //时间戳
-        },
-        function (res) {
-          if (res.data.code == 0) {
-            // 判断数据加载方向
-            if (loadDirection == 'left') {
-              // 向前加载
-              var newCourseList = _this.getCourseTasksList(res.data.data.taskList, tableList).concat(courseList);
-            } else if (loadDirection == 'right') {
-              // 向后加载
-              var newCourseList = courseList.concat(_this.getCourseTasksList(res.data.data.taskList, tableList));
-            }
-            // 更新数据
-            _this.setData({
-              courseList: newCourseList,
-              currentYear: newCourseList[event.detail.current].year + '年',
-              currentMonth: newCourseList[event.detail.current].month + '月',
 
-            });
-          } else {
-            // 服务器数据获取失败，返回空表格
-            wx.showToast({
-              title: '课程信息加载失败',
-              icon: 'none'
-            })
-            // 判断数据加载方向
-            if (loadDirection == 'left') {
-              // 向前加载
-              var newCourseList = tableList.concat(courseList);
-            } else if (loadDirection == 'right') {
-              // 向后加载
-              var newCourseList = courseList.concat(tableList);
-            }
-            // 更新数据
-            _this.setData({
-              courseList: newCourseList,
-              currentYear: newCourseList[event.detail.current].year + '年',
-              currentMonth: newCourseList[event.detail.current].month + '月',
-            });
-          }
-        }
-      )
+      // 组建对象数组
+      var tableList = this.getCourseTableList(tableDateList);
+
+      // 从服务器获取数据
+      this.getCourseTasksListBak(tableList, courseList, event.detail.current, loadType);
 
       // 判断加载方向，赋值更新数据
-      if (loadDirection == 'left') {
-        console.log('当前current:' + event.detail.current);
-        console.log('更改后current:' + (event.detail.current + _this.data.weekSetpLength));
-        if (_this.data.viewType == 0) {
-          _this.setData({
-            currentTable: event.detail.current + _this.data.weekSetpLength, // 当前显示的周
+      if (loadType == 'loadLeft') {
+        if (this.data.viewType == 0) {
+          this.setData({
+            currentTable: event.detail.current + this.data.weekSetpLength, // 当前显示的周
           });
         } else {
-          _this.setData({
-            calendarScrollIndex: event.detail.current + _this.data.weekSetpLength, // 当前显示的周
-
+          this.setData({
+            calendarScrollIndex: event.detail.current + this.data.weekSetpLength, // 当前显示的周
           });
         }
-        _this.setData({
+        this.setData({
           scrollData: 'scrollData' + (event.detail.current), // 滚动到某个视图
           beforeWeek: newBeforeWeek, // 距当前周的前距离
-          afterWeek: newAfterWeek, // 距当前周的后距离
-          currentWeek: _this.data.currentWeek + _this.data.weekSetpLength, // 当前时间所在周所在位置下标
-          currentCalendarWeekIndex: _this.data.currentCalendarWeekIndex + _this.data.weekSetpLength,
+          currentWeek: this.data.currentWeek + this.data.weekSetpLength, // 当前时间所在周所在位置下标
+          currentCalendarWeekIndex: this.data.currentCalendarWeekIndex + this.data.weekSetpLength,
         });
 
       } else {
-        _this.setData({
+        this.setData({
           scrollData: 'scrollData' + (event.detail.current),
-          beforeWeek: newBeforeWeek,
           afterWeek: newAfterWeek,
         });
       }
-
     } else {
       // 无需预加载，直接滚到下一页
+      console.log('无需预加载，直接滚到下一页');
+      console.log(courseList);
+      console.log(event.detail.current);
       this.setData({
         scrollData: 'scrollData' + (event.detail.current),
         currentYear: courseList[event.detail.current].year + '年',
         currentMonth: courseList[event.detail.current].month + '月',
       });
-      if (_this.data.viewType == 0) {
-        _this.setData({
+      if (this.data.viewType == 0) {
+        this.setData({
           currentTable: event.detail.current, // 当前显示的周
         });
       } else {
-        _this.setData({
+        this.setData({
           calendarScrollIndex: event.detail.current, // 当前显示的周
         });
       }
     }
-
     // 关闭所有弹窗
-    _this.setData({
+    this.setData({
       showMenuButton: false,
       showTableButton: false,
     });
     // 设备短震动
-    wx.vibrateShort();
+    // wx.vibrateShort();
   },
 
   /**
    * 日历视图：滑动加载数据 
    */
   bindCalendarChange: function (event) {
-    var _this = this;
     // 获取现有列表
     var courseList = this.data.courseList;
     var calendarList = this.data.calendarList;
 
-    // 加载方向
-    var loadDirection = 'right';
-
+    // 判断是否需要加载日历列表
     if (event.detail.current > this.data.calendarList.length - 2) {
       // 向右加载列表数据
-      var tempCalendarList = [];
-      var currentCompleteCalendarMonthIndex = 0; // 完整日历视图中当前选中日期月下标
-      var currentCompleteCalendarWeekIndex = 0; // 完整日历视图中当前选中日期周下标
-      var currentCompleteCalendarDayIndex = 0; // 完整日历视图中当前选中日期日下标
+      // 加载生成日历列表数据
+      var tempCalendarList = this.getCalendarList(this.data.afterCalendar, this.data.afterCalendar + this.data.calendarSetpLength);
 
-      for (let i = this.data.afterCalendar; i < this.data.afterCalendar + this.data.calendarSetpLength; i++) {
-        var currentDate = moment().add(i, 'M').format('YYYY-MM');
-        var monthList = [];
-        for (let j = 0; j < 6; j++) {
-          var weekList = [];
-          for (let k = 0; k < 7; k++) {
-            // 判断是否是当日
-            var isCurrent = false;
-            if (moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).format('YYYY-MM-DD') == moment().format('YYYY-MM-DD')) {
-              // 是当日
-              isCurrent = true;
-              currentCompleteCalendarMonthIndex = i + this.data.afterCalendar; // 完整日历视图中当前选中日期月下标
-              currentCompleteCalendarWeekIndex = j; // 完整日历视图中当前选中日期周下标
-              currentCompleteCalendarDayIndex = k; // 完整日历视图中当前选中日期日下标
-            }
-            weekList.push({
-              'day': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).date(),
-              'month': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).month() + 1,
-              'year': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).year(),
-              'date': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).format('YYYY-MM-DD'),
-              'hasTask': false,
-              'isCurrent': isCurrent,
-            });
-          }
-          monthList.push({
-            'weekList': weekList,
-          });
-        };
-        tempCalendarList.push({
-          'monthList': monthList,
-          'month': moment(currentDate).month() + 1,
-          'year': moment(currentDate).year(),
-          'date': moment(currentDate).format('YYYY年MM月'),
-          'selected': false,
-        });
-      }
-
-      // 判断是否需要加载表格列表数据
-      var courseList = this.data.courseList;
-      console.log(this.data.courseList);
-      console.log(tempCalendarList);
+      // 判断是否需要同步加载表格列表数据
       var tableLastDay = courseList[courseList.length - 1]['weekList'][6]['date'];
       var calendarLastDay = tempCalendarList[tempCalendarList.length - 1]['monthList'][5]['weekList'][6]['date'];
-      console.log('表格中最后一天：' + courseList[courseList.length - 1]['weekList'][6]['date']);
-      console.log('日历中最后一天：' + tempCalendarList[tempCalendarList.length - 1]['monthList'][5]['weekList'][6]['date']);
       if (!moment(calendarLastDay).isBefore(tableLastDay) && !moment(calendarLastDay).isSame(tableLastDay)) {
         // 需要向后加载表格日期数据
-        console.log('需要向后加载表格日期数据');
-
-        // 加载至calendarLastDay所在那个周
-
-        loadDirection = 'right';
-        var afterWeek = this.data.afterWeek;
         var newAfterWeek = moment(calendarLastDay).diff(moment().format('YYYY-MM-DD'), 'week');
-        // 获取当前周及后n周日期列表
-        var dataList = [];
-        console.log('当前已加载周:' + afterWeek);
-
-        console.log('需要加载到:' + moment(calendarLastDay).diff(moment().format('YYYY-MM-DD'), 'week'));
-        console.log('还需加载:' + newAfterWeek);
-        for (let i = afterWeek + 1; i <= newAfterWeek; i++) {
-          console.log(i);
-          var weekAfterArray = [];
-          for (let j = 1; j <= 7; j++) {
-            weekAfterArray.push(moment().weekday(i * 7 + j).format('YYYY-MM-DD'));
-          }
-          dataList.push(weekAfterArray);
-        }
-
+        // 生成日期列表
+        var tableDateList = this.getTableDateList(this.data.afterWeek + 1, newAfterWeek + 1, 'loadRight');
         // 组建对象数组
-        console.log('dataList');
-        console.log(dataList);
-        var tableList = this.getCourseTableList(dataList);
-        console.log('tableList');
-        console.log(tableList);
-        // 获取时间戳
-        let timestamp = moment().valueOf();
-        $.get(
-          'task/weekRange', {
-            coachid: wx.getStorageSync('coachid'), // 用户id
-            beginDate: tableList[0]['weekList'][0]['date'], //  开始时间
-            endDate: tableList[tableList.length - 1]['weekList'][tableList[tableList.length - 1]['weekList'].length - 1]['date'], // 结束时间
-            sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-            timestamp: timestamp, //时间戳
-          },
-          function (res) {
-            if (res.data.code == 0) {
-              // 判断数据加载方向
-              if (loadDirection == 'left') {
-                // 向前加载
-                var newCourseList = _this.getCourseTasksList(res.data.data.taskList, tableList).concat(courseList);
-              } else if (loadDirection == 'right') {
-                // 向后加载
-                var newCourseList = courseList.concat(_this.getCourseTasksList(res.data.data.taskList, tableList));
-              }
-              // 更新数据
-              console.log('自动前得数据');
-              console.log(courseList);
-              console.log('自动加载后得数据');
-              console.log(newCourseList);
-              _this.setData({
-                courseList: newCourseList,
-                currentYear: newCourseList[event.detail.current].year + '年',
-                currentMonth: newCourseList[event.detail.current].month + '月',
-                afterWeek: newAfterWeek,
-              });
-            } else {
-              // 服务器数据获取失败，返回空表格
-              wx.showToast({
-                title: '课程信息加载失败',
-                icon: 'none'
-              })
-              // 判断数据加载方向
-              if (loadDirection == 'left') {
-                // 向前加载
-                var newCourseList = tableList.concat(courseList);
-              } else if (loadDirection == 'right') {
-                // 向后加载
-                var newCourseList = courseList.concat(tableList);
-              }
-              // 更新数据
-              _this.setData({
-                courseList: newCourseList,
-                currentYear: newCourseList[event.detail.current].year + '年',
-                currentMonth: newCourseList[event.detail.current].month + '月',
-                afterWeek: newAfterWeek,
-              });
-            }
-          }
-        )
-
-      } else {
-        console.log('不需要加载数据');
+        var tableList = this.getCourseTableList(tableDateList);
+        // 获取表格列表中任务数据
+        this.getCourseTasksListBak(tableList, courseList, 0, 'loadRight');
       }
-      calendarList = calendarList.concat(tempCalendarList);
-      _this.setData({
-        completeCalendarScrollIndex: event.detail.current, // 当前显示的周
-        calendarList: calendarList,
-        afterCalendar: this.data.afterCalendar + this.data.calendarSetpLength,
+
+      // 更新数据
+      this.setData({
+        'afterCalendar': this.data.afterCalendar + this.data.calendarSetpLength,
+        'calendarList': calendarList.concat(tempCalendarList),
+        'completeCalendarScrollIndex': event.detail.current,
+        'afterWeek': newAfterWeek,
       });
+      // 后台获取日历中日期任务（点）状态
+      this.getCalendarTasksList(tempCalendarList, calendarList, event.detail.current, 'loadRight');
+
     } else if (event.detail.current < 1) {
       // 向前加载数据
-      var tempCalendarList = [];
-      var currentCompleteCalendarMonthIndex = 0; // 完整日历视图中当前选中日期月下标
-      var currentCompleteCalendarWeekIndex = 0; // 完整日历视图中当前选中日期周下标
-      var currentCompleteCalendarDayIndex = 0; // 完整日历视图中当前选中日期日下标
+      // 加载生成日历列表数据
+      var tempCalendarList = this.getCalendarList(this.data.beforeCalendar + 1, this.data.beforeCalendar + this.data.calendarSetpLength + 1, 'loadLeft');
 
-      for (let i = this.data.beforeCalendar + 1; i <= this.data.beforeCalendar + this.data.calendarSetpLength; i++) {
-        var currentDate = moment().subtract(i, 'M').format('YYYY-MM');
-        var monthList = [];
-        for (let j = 0; j < 6; j++) {
-          var weekList = [];
-          for (let k = 0; k < 7; k++) {
-            // 判断是否是当日
-            var isCurrent = false;
-            if (moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).format('YYYY-MM-DD') == moment().format('YYYY-MM-DD')) {
-              // 是当日
-              isCurrent = true;
-              currentCompleteCalendarMonthIndex = i - this.data.beforeCalendar; // 完整日历视图中当前选中日期月下标
-              currentCompleteCalendarWeekIndex = j; // 完整日历视图中当前选中日期周下标
-              currentCompleteCalendarDayIndex = k; // 完整日历视图中当前选中日期日下标
-            }
-            weekList.push({
-              'day': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).date(),
-              'month': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).month() + 1,
-              'year': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).year(),
-              'date': moment(currentDate).date(1).isoWeekday(j * 7 + k + 1).format('YYYY-MM-DD'),
-              'hasTask': false,
-              'isCurrent': isCurrent,
-            });
-          }
-          monthList.push({
-            'weekList': weekList,
-          });
-        };
-        tempCalendarList.unshift({
-          'monthList': monthList,
-          'month': moment(currentDate).month() + 1,
-          'year': moment(currentDate).year(),
-          'date': moment(currentDate).format('YYYY年MM月'),
-          'selected': false,
-        });
-      }
-
-      // 判断是否需要向前加载表格列表数据
-      var courseList = this.data.courseList;
-      console.log(this.data.courseList);
-      console.log(tempCalendarList);
+      // 判断是否需要同步向前加载表格列表数据
       var tableLastDay = courseList[0]['weekList'][0]['date'];
       var calendarLastDay = tempCalendarList[0]['monthList'][0]['weekList'][0]['date'];
-      console.log('表格中第一天：' + tableLastDay);
-      console.log('日历中第一天：' + calendarLastDay);
       if (!moment(calendarLastDay).isAfter(tableLastDay) && !moment(calendarLastDay).isSame(tableLastDay)) {
         // 需要向后加载表格日期数据
-        console.log('需要向前加载表格日期数据');
-
-        // 加载至calendarLastDay所在那个周
-
-        loadDirection = 'left';
-        var beforeWeek = this.data.beforeWeek;
+        // 计算需要加载的总数
         var newBeforeWeek = moment(moment().format('YYYY-MM-DD')).diff(calendarLastDay, 'week');
-        // 获取当前周及后n周日期列表
-        var dataList = [];
-        console.log('当前已加载周:' + beforeWeek);
-
-        console.log('需要加载到:' + newBeforeWeek);
-        for (let i = beforeWeek; i < newBeforeWeek; i++) {
-          console.log(i);
-          var weekBeforeArray = [];
-          for (let j = 1; j <= 7; j++) {
-            weekBeforeArray.push(moment().weekday(0 - i * 7 - j + 1).format('YYYY-MM-DD'));
-          }
-          dataList.unshift(weekBeforeArray.reverse());
-        }
-
+        // 生成日期列表
+        var tableDateList = this.getTableDateList(this.data.beforeWeek, newBeforeWeek, 'loadLeft');
         // 组建对象数组
-        console.log('dataList');
-        console.log(dataList);
-        var tableList = this.getCourseTableList(dataList);
-        console.log('tableList');
-        console.log(tableList);
-        // 获取时间戳
-        let timestamp = moment().valueOf();
-        $.get(
-          'task/weekRange', {
-            coachid: wx.getStorageSync('coachid'), // 用户id
-            beginDate: tableList[0]['weekList'][0]['date'], //  开始时间
-            endDate: tableList[tableList.length - 1]['weekList'][tableList[tableList.length - 1]['weekList'].length - 1]['date'], // 结束时间
-            sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-            timestamp: timestamp, //时间戳
-          },
-          function (res) {
-            if (res.data.code == 0) {
-              // 判断数据加载方向
-              if (loadDirection == 'left') {
-                // 向前加载
-                var newCourseList = _this.getCourseTasksList(res.data.data.taskList, tableList).concat(courseList);
-              } else if (loadDirection == 'right') {
-                // 向后加载
-                var newCourseList = courseList.concat(_this.getCourseTasksList(res.data.data.taskList, tableList));
-              }
-              // 更新数据
-              console.log('自动前得数据');
-              console.log(courseList);
-              console.log('自动加载后得数据');
-              console.log(newCourseList);
-              _this.setData({
-                courseList: newCourseList,
-                currentYear: newCourseList[event.detail.current].year + '年',
-                currentMonth: newCourseList[event.detail.current].month + '月',
-                beforeWeek: newBeforeWeek,
-              });
-            } else {
-              // 服务器数据获取失败，返回空表格
-              wx.showToast({
-                title: '课程信息加载失败',
-                icon: 'none'
-              })
-              // 判断数据加载方向
-              if (loadDirection == 'left') {
-                // 向前加载
-                var newCourseList = tableList.concat(courseList);
-              } else if (loadDirection == 'right') {
-                // 向后加载
-                var newCourseList = courseList.concat(tableList);
-              }
-              // 更新数据
-              _this.setData({
-                courseList: newCourseList,
-                currentYear: newCourseList[event.detail.current].year + '年',
-                currentMonth: newCourseList[event.detail.current].month + '月',
-                beforeWeek: newBeforeWeek,
-              });
-            }
-          }
-        )
-
-      } else {
-        console.log('不需要加载数据');
+        var tableList = this.getCourseTableList(tableDateList);
+        // 获取表格列表中任务数据
+        this.getCourseTasksListBak(tableList, courseList, 0, 'loadLeft');
       }
 
-
-      calendarList = tempCalendarList.concat(calendarList);
-      _this.setData({
-        completeCalendarScrollIndex: event.detail.current + _this.data.calendarSetpLength, // 当前显示的周
-        calendarList: calendarList,
-        beforeCalendar: _this.data.beforeCalendar + _this.data.calendarSetpLength,
-        currentCompleteCalendarMonthIndex: _this.data.currentCompleteCalendarMonthIndex + _this.data.calendarSetpLength,
+      // 后台获取日历中日期任务（点）状态
+      this.setData({
+        'beforeCalendar': _this.data.beforeCalendar + _this.data.calendarSetpLength,
+        'currentCompleteCalendarMonthIndex': _this.data.currentCompleteCalendarMonthIndex + _this.data.calendarSetpLength,
+        'calendarList': tempCalendarList.concat(calendarList),
+        'completeCalendarScrollIndex': event.detail.current + _this.data.calendarSetpLength, // 当前显示的周
+        'beforeWeek': newBeforeWeek,
       });
+      // 后台获取日历中日期任务（点）状态
+      this.getCalendarTasksList(tempCalendarList, calendarList, event.detail.current, 'loadLeft');
+
     } else {
       // 无需加载数据
-      _this.setData({
-        completeCalendarScrollIndex: event.detail.current, // 当前显示的周
-        calendarList: calendarList,
+      this.setData({
+        'completeCalendarScrollIndex': event.detail.current, // 当前显示的周
+        'calendarList': calendarList,
       });
     }
 
-    // 获取日历视图中日期状态（点）数据
-    let timestamp = moment().valueOf();
-    console.log(calendarList);
-
-
-
-    // 判断是否需要加载数据
-
-    // 无需预加载，直接滚到下一页
-
-
     // 关闭所有弹窗
-    _this.setData({
+    this.setData({
       showMenuButton: false,
       showTableButton: false,
     });
@@ -1348,10 +882,10 @@ Page({
                       'title': tempTaskList[q]['title'], // 任务名称、标题
                       'height': 104 * tempTaskList[q]['step'] + 10 * (tempTaskList[q]['step'] - 1), // 任务列方块高度
                       'paddingBottom': '10', // 任务列方块距底部间距
-                      'isTouchMove': false,  // 是否左侧滑动
-                      'beginTimeStr': tempTaskList[q]['beginTimeStr'],  // 开始时间
-                      'endTimeStr': tempTaskList[q]['endTimeStr'],  // 结束时间
-                      'avatar': '',  // 头像
+                      'isTouchMove': false, // 是否左侧滑动
+                      'beginTimeStr': tempTaskList[q]['beginTimeStr'], // 开始时间
+                      'endTimeStr': tempTaskList[q]['endTimeStr'], // 结束时间
+                      'avatar': '', // 头像
                       'studentId': tempTaskList[q]['studentId'], // 学员ID
                       'taskStatus': tempTaskList[q]['taskStatus'], // 任务ID
                       'studentName': tempTaskList[q]['title'].substr(-2), // 学员姓名，截取最后2为字符
@@ -1400,9 +934,9 @@ Page({
                         'marginTop': '0',
                         'paddingBottom': '0', // 任务列方块距底部间距
                         'isTouchMove': false,
-                        'beginTimeStr': tempTaskList[q]['beginTimeStr'],  // 开始时间
-                        'endTimeStr': tempTaskList[q]['endTimeStr'],  // 结束时间
-                        'avatar': '',  // 头像
+                        'beginTimeStr': tempTaskList[q]['beginTimeStr'], // 开始时间
+                        'endTimeStr': tempTaskList[q]['endTimeStr'], // 结束时间
+                        'avatar': '', // 头像
                         'studentId': tempTaskList[q]['studentId'], // 学员ID
                         'taskStatus': tempTaskList[q]['taskStatus'], // 任务ID
                         'studentName': tempTaskList[q]['title'].substr(-2), // 学员姓名，截取最后2为字符
@@ -1431,9 +965,9 @@ Page({
                       'marginTop': tempMarginTop,
                       'paddingBottom': '0', // 任务列方块距底部间距
                       'isTouchMove': false,
-                      'beginTimeStr': tempTaskList[q]['beginTimeStr'],  // 开始时间
-                      'endTimeStr': tempTaskList[q]['endTimeStr'],  // 结束时间
-                      'avatar': '',  // 头像
+                      'beginTimeStr': tempTaskList[q]['beginTimeStr'], // 开始时间
+                      'endTimeStr': tempTaskList[q]['endTimeStr'], // 结束时间
+                      'avatar': '', // 头像
                       'studentId': tempTaskList[q]['studentId'], // 学员ID
                       'taskStatus': tempTaskList[q]['taskStatus'], // 任务ID
                       'studentName': tempTaskList[q]['title'].substr(-2), // 学员姓名，截取最后2为字符
@@ -1616,10 +1150,10 @@ Page({
     });
   },
 
-  getCalendarList: function (beginCalendar, endCalendar, loadType = 'custom') {
+  getCalendarList: function (beginCalendar, endCalendar, loadType = 'init') {
     var tempCalendarList = [];
     for (let i = beginCalendar; i < endCalendar; i++) {
-      if (loadType == 'left') {
+      if (loadType == 'loadLeft') {
         var currentDate = moment().subtract(i, 'M').format('YYYY-MM');
       } else {
         var currentDate = moment().add(i, 'M').format('YYYY-MM');
@@ -1650,14 +1184,254 @@ Page({
           'weekList': weekList,
         });
       };
-      tempCalendarList.push({
-        'monthList': monthList,
-        'month': moment(currentDate).month() + 1,
-        'year': moment(currentDate).year(),
-        'date': moment(currentDate).format('YYYY年MM月'),
-        'selected': false,
-      });
+
+      if (loadType == 'loadLeft') {
+        tempCalendarList.unshift({
+          'monthList': monthList,
+          'month': moment(currentDate).month() + 1,
+          'year': moment(currentDate).year(),
+          'date': moment(currentDate).format('YYYY年MM月'),
+          'selected': false,
+        });
+      } else {
+        tempCalendarList.push({
+          'monthList': monthList,
+          'month': moment(currentDate).month() + 1,
+          'year': moment(currentDate).year(),
+          'date': moment(currentDate).format('YYYY年MM月'),
+          'selected': false,
+        });
+      }
+
     }
     return tempCalendarList;
+  },
+
+
+  /**
+   * 日历视图：获取日历日期状态（点）数据
+   */
+  getCalendarTasksList: function (newCalendarList, oldCalendarList, scrollCurrent, setType = 'init') {
+    var _this = this;
+    let timestamp = moment().valueOf();
+    var beginDate = newCalendarList[0]['year'] + '-' + newCalendarList[0]['month'] + '-' + '01';
+    var endDate = newCalendarList[newCalendarList.length - 1]['year'] + '-' + newCalendarList[newCalendarList.length - 1]['month'] + '-' + '01';
+    $.get(
+      'task/monthRange', {
+        'coachid': wx.getStorageSync('coachid'),
+        'beginDate': moment(beginDate).format('YYYY-MM-DD'),
+        'endDate': moment(endDate).format('YYYY-MM-DD'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, //时间戳
+      },
+      function (res) {
+        console.log('getCalendarTasksList task/month');
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功
+          var taskList = res.data.data.taskList;
+          for (let m = 0; m < newCalendarList.length; m++) {
+            for (let i = 0; i < newCalendarList[m]['monthList'].length; i++) {
+              for (let j = 0; j < newCalendarList[m]['monthList'][i]['weekList'].length; j++) {
+                for (let k = 0; k < taskList.length; k++) {
+                  if (newCalendarList[m]['monthList'][i]['weekList'][j]['date'] == taskList[k]) {
+                    newCalendarList[m]['monthList'][i]['weekList'][j]['hasTask'] = true;
+                  }
+                }
+              }
+            }
+          }
+          console.log('getCalendarTasksList calendarList');
+          console.log(newCalendarList);
+        } else {
+          wx.showToast({
+            title: '课程信息加载失败',
+            icon: 'none'
+          })
+        }
+        if (setType == 'init') {
+          // 初始化
+          _this.setData({
+            'calendarList': newCalendarList,
+          });
+        } else if (setType == 'loadLeft') {
+          // 预加载（loadLeft）
+          console.log('预加载（loadLeft）');
+          console.log(newCalendarList.concat(oldCalendarList));
+          _this.setData({
+            'calendarList': newCalendarList.concat(oldCalendarList),
+            'completeCalendarScrollIndex': scrollCurrent + _this.data.calendarSetpLength,
+          });
+        } else if (setType == 'loadRight') {
+          // 预加载（loadRight）
+          console.log('loadRight');
+          console.log(oldCalendarList.concat(newCalendarList));
+          _this.setData({
+            'calendarList': oldCalendarList.concat(newCalendarList),
+            'completeCalendarScrollIndex': scrollCurrent,
+          });
+        }
+      }
+    )
+  },
+
+  getCourseTasksListBak: function (tableList, courseList = [], scrollCurrent = 0, loadType = 'init') {
+    var _this = this;
+    let timestamp = moment().valueOf(); // 时间戳
+    $.get(
+      'task/weekRange', {
+        coachid: wx.getStorageSync('coachid'), // 用户id
+        beginDate: tableList[0]['weekList'][0]['date'], //  开始时间
+        endDate: tableList[tableList.length - 1]['weekList'][tableList[tableList.length - 1]['weekList'].length - 1]['date'], // 结束时间
+        sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        timestamp: timestamp, //时间戳
+      },
+      function (res) {
+        if (res.data.code == 0) {
+          // 判断数据加载方向
+          if (loadType == 'loadLeft') {
+            // 向前加载
+            var newCourseList = _this.getCourseTasksList(res.data.data.taskList, tableList).concat(courseList);
+          } else if (loadType == 'loadRight') {
+            // 向后加载
+            var newCourseList = courseList.concat(_this.getCourseTasksList(res.data.data.taskList, tableList));
+          } else if (loadType == 'init') {
+            var newCourseList = _this.getCourseTasksList(res.data.data.taskList, tableList);
+          }
+          // 更新数据
+          _this.setData({
+            courseList: newCourseList,
+            currentYear: newCourseList[scrollCurrent].year + '年',
+            currentMonth: newCourseList[scrollCurrent].month + '月',
+          });
+        } else {
+          // 服务器数据获取失败，返回空表格
+          wx.showToast({
+            title: '课程信息加载失败',
+            icon: 'none'
+          })
+          // 判断数据加载方向
+          if (loadType == 'loadLeft') {
+            // 向前加载
+            var newCourseList = tableList.concat(courseList);
+          } else if (loadType == 'loadRight') {
+            // 向后加载
+            var newCourseList = courseList.concat(tableList);
+          } else if (loadType == 'init') {
+            var newCourseList = tableList;
+          }
+          // 更新数据
+          _this.setData({
+            courseList: newCourseList,
+            currentYear: newCourseList[event.detail.current].year + '年',
+            currentMonth: newCourseList[event.detail.current].month + '月',
+          });
+        }
+      }
+    )
+  },
+
+  getTableDateList: function (beginCalendar, endCalendar, loadType = 'init') {
+    var dateList = [];
+    for (let i = beginCalendar; i < endCalendar; i++) {
+      var weekArray = [];
+      for (let j = 1; j <= 7; j++) {
+        if (loadType == 'loadLeft') {
+          weekArray.push(moment().weekday(0 - i * 7 - j + 1).format('YYYY-MM-DD'));
+        } else if (loadType == 'loadRight') {
+          weekArray.push(moment().weekday(i * 7 + j).format('YYYY-MM-DD'));
+        } else {
+
+        }
+      }
+      if (loadType == 'loadLeft') {
+        dateList.unshift(weekArray.reverse());
+      } else if (loadType == 'loadRight') {
+        dateList.push(weekArray);
+      }
+    }
+    return dateList;
+  },
+
+  realTimeList: function () {
+    var timeList = this.data.timeList;
+    for (let i = 0; i < timeList.length; i++) {
+      if (timeList[i]['hour'] == moment().hour()) {
+        timeList[i]['isCurrent'] = true;
+        break;
+      }
+    }
+    return timeList;
+  },
+
+  realTimeLine: function () {
+    if (moment().hour() < (this.data.endTime + 1) && moment().hour() > (this.data.startTime - 1)) {
+      // 显示时间线
+      var timeLineTop = 20 + (parseInt(moment().hour()) - this.data.startTime) * 114 + (104 / 60) * moment().minute() - 4;
+    } else {
+      // 不显示时间线
+      var timeLineTop = -1;
+    }
+    return timeLineTop;
+  },
+
+  initSettings: function () {
+    // 获取缓存中视图类型
+    var _this = this;
+    if (wx.getStorageSync('viewType')) {
+      var viewType = wx.getStorageSync('viewType');
+    } else {
+      var viewType = 0; // 0为表格视图，1为日历视图
+    }
+
+    // 获取日历视图是否展开或收起
+    if (wx.getStorageSync('calendarShow')) {
+      var calendarShow = wx.getStorageSync('calendarShow');
+    } else {
+      var calendarShow = false;
+    }
+
+    // 顶部导航栏机型自适应设置
+    // 获取菜单按钮（右上角胶囊按钮）的布局位置信息，坐标信息以屏幕左上角为原点。
+    var isSupport = !!wx.getMenuButtonBoundingClientRect;
+    var rect = wx.getMenuButtonBoundingClientRect ? wx.getMenuButtonBoundingClientRect() : null;
+    // 获取系统信息
+    wx.getSystemInfo({
+      success: function success(res) {
+        var ios = !!(res.system.toLowerCase().search('ios') + 1);
+        _this.setData({
+          ios: ios,
+          statusBarHeight: res.statusBarHeight,
+          innerWidth: isSupport ? 'width:' + rect.left + 'px' : '',
+          innerPaddingRight: isSupport ? 'padding-right:' + (res.windowWidth - rect.left) + 'px' : '',
+          leftWidth: isSupport ? 'width:' + (res.windowWidth - rect.left) + 'px' : ''
+        });
+      }
+    });
+
+    _this.setData({
+      viewType: viewType,
+      calendarShow: calendarShow,
+    });
+  },
+
+  initTimeList(startTime, endTime) {
+    var timeList = [];
+    for (startTime; startTime <= endTime; startTime++) {
+      if (startTime < 10) {
+        timeList.push({
+          time: '0' + startTime + ':00',
+          hour: startTime,
+          isCurrent: false
+        });
+      } else {
+        timeList.push({
+          time: startTime + ':00',
+          hour: startTime,
+          isCurrent: false
+        });
+      }
+    }
+    return timeList;
   }
 });
