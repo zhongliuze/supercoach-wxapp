@@ -581,7 +581,11 @@ Page({
     }
 
     // 选择位置颜色区分
-    courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['titleColor'] = '#B2F3B5';
+
+    if (tableButtonPopupType == 0) {
+      courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['titleColor'] = '#B2F3B5';
+    }
+    
 
     // 赋值更新数据
     this.setData({
@@ -603,9 +607,12 @@ Page({
   clickTableCourse: function(event) {
     wx.showTabBar();
     wx.navigateTo({
-      url: '../course/course?courseType=0',
+      url: '../course/course?courseType=0&selectDate=' + this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['date'],
     })
     this.bindCloseMark();
+
+    
+    // 需要传输选中日期的开始时间
   },
 
   /**
@@ -613,8 +620,9 @@ Page({
    */
   clickTableRest: function(event) {
     wx.showTabBar();
+    console.log();
     wx.navigateTo({
-      url: '../course/course?courseType=1',
+      url: '../course/course?courseType=1&selectDate=' + this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['date'],
     })
     this.bindCloseMark();
   },
@@ -625,7 +633,7 @@ Page({
   clickTableCustom: function(event) {
     wx.showTabBar();
     wx.navigateTo({
-      url: '../course/course?courseType=2',
+      url: '../course/course?courseType=2&selectDate=' + this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['date'],
     })
     this.bindCloseMark();
   },

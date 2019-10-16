@@ -35,20 +35,20 @@
     </view>
     <view class="course-date">
       <view class="date-info">
-        <picker mode="multiSelector" bindchange="bindStartTimePickerChange" value="{{startTimePickerIndex}}" range="{{timePickerArray}}">
+        <picker mode="multiSelector" bindchange="bindStartTimePickerChange" value="{{startTimePickerIndex}}" range="{{startTimePickerArray}}">
           <view class="start-time" style="height:{{fullDaySwitch ? '120' : '154'}}rpx;">
-            <text class="day">{{timeShowArray[0][startTimePickerIndex[0]]}}</text>
-            <text class="time" wx:if="{{!fullDaySwitch}}">{{timeShowArray[1][startTimePickerIndex[1]]}}:{{timeShowArray[2][startTimePickerIndex[2]]}}</text>
+            <text class="day">{{startTimeShowArray[0][startTimePickerIndex[0]]}}</text>
+            <text class="time" wx:if="{{!fullDaySwitch}}">{{startTimeShowArray[1][startTimePickerIndex[1]]}}:{{startTimeShowArray[2][startTimePickerIndex[2]]}}</text>
           </view>
         </picker>
         <view class="arrow-icon" style="height:{{fullDaySwitch ? '120' : '154'}}rpx;">
           <image src="/images/course-course-arrow4.png" style="height:72rpx;width:12rpx;" wx:if="{{fullDaySwitch}}"></image>
           <image src="/images/course-course-arrow.png" style="height:106rpx;width:18rpx;" wx:elif="{{!fullDaySwitch}}"></image>
         </view>
-        <picker mode="multiSelector" bindchange="bindEndTimePickerChange" value="{{endTimePickerIndex}}" range="{{timePickerArray}}">
+        <picker mode="multiSelector" bindchange="bindEndTimePickerChange" value="{{endTimePickerIndex}}" range="{{endTimePickerArray}}">
           <view class="end-time" style="height:{{fullDaySwitch ? '120' : '154'}}rpx;">
-            <text class="day">{{timeShowArray[0][endTimePickerIndex[0]]}}</text>
-            <text class="time" wx:if="{{!fullDaySwitch}}">{{timeShowArray[1][endTimePickerIndex[1]]}}:{{timeShowArray[2][endTimePickerIndex[2]]}}</text>
+            <text class="day">{{endTimeShowArray[0][endTimePickerIndex[0]]}}</text>
+            <text class="time" wx:if="{{!fullDaySwitch}}">{{endTimeShowArray[1][endTimePickerIndex[1]]}}:{{endTimeShowArray[2][endTimePickerIndex[2]]}}</text>
           </view>
         </picker>
       </view>

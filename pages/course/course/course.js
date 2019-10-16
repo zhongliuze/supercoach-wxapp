@@ -9,8 +9,10 @@ Page({
   data: {
     courseType: 2, // 0排课，1休息，2自定义
     fixedBottomButtonMargin: 0, // 吸底按钮自适应高度
-    timePickerArray: [], // 选择框时间列表
-    timeShowArray: [], // 展示时间列表
+    startTimePickerArray: [], // 选择框时间列表
+    endTimePickerArray:[],
+    startTimeShowArray: [], // 展示时间列表
+    endTimeShowArray: [],
     startTimePickerIndex: [0, 0, 0], // 默认选中开始时间 
     endTimePickerIndex: [0, 0, 0], // 默认选中结束时间 
     remindType: 0, // 提醒类型：0不提醒，1开始时、30分钟前、1小时前……
@@ -46,10 +48,11 @@ Page({
    */
   onLoad: function (options) {
     console.log(options);
-    var selectDate = '2019-10-08-18-30';  // 上一页选中时间
+    var selectDate = options.selectDate;  // 上一页选中时间
     var timePickerArray = [];  // picker选择框中数据
     var timeShowArray = [];  // 展示数据
     var timePickerDate = [];  // picker选中数据日期列表
+    var timeShowDate = [];
     var timePickerHour = [];  // picker选中数据时间列表
     var timeShowHour = [];  // 展示数据时间列表
     var startTimePickerIndex = [0, 0, 0];  // 默认开始日期时间
@@ -66,6 +69,9 @@ Page({
     for (let i = 0; i < 60; i++) {
       timePickerDate.push(moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).add(i + 1, 'day').format('MM月DD日 ddd'));
       timePickerDate.unshift(moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).subtract(i, 'day').format('MM月DD日 ddd'));
+
+      timeShowDate.push(moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).add(i + 1, 'day').format('YYYY-MM-DD'));
+      timeShowDate.unshift(moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).subtract(i, 'day').format('YYYY-MM-DD'));
     }
 
     // 生成picker选择框小时数据
@@ -86,6 +92,7 @@ Page({
     timeShowArray.push(timePickerDate)
     timeShowArray.push(timeShowHour);
     timeShowArray.push(['00', '30']);
+    timeShowArray.push(timeShowDate);
 
     // 获取当前日期所在位置
     for (let i = 0; i < timePickerArray[0].length; i++) {
@@ -115,8 +122,10 @@ Page({
 
     this.setData({
       fixedBottomButtonMargin: wx.getStorageSync('fixedBottomButtonMargin'), // 设置吸底按钮自适应高度
-      timePickerArray: timePickerArray,
-      timeShowArray: timeShowArray,
+      startTimePickerArray: timePickerArray,
+      endTimePickerArray: timePickerArray,
+      startTimeShowArray: timeShowArray,
+      endTimeShowArray: timeShowArray,
       startTimePickerIndex: startTimePickerIndex,
       endTimePickerIndex: endTimePickerIndex,
       courseType: options.courseType,
@@ -175,22 +184,56 @@ Page({
   bindStartTimePickerChange: function (event) {
     var startTimePickerIndex = event.detail.value;
     var endTimePickerIndex = [];
-    endTimePickerIndex.push(startTimePickerIndex[0]);
-    if (startTimePickerIndex[1] > (app.globalData.endTime - app.globalData.startTime)) {
-      endTimePickerIndex.push(startTimePickerIndex[1]);
-    } else {
-      endTimePickerIndex.push(startTimePickerIndex[1] + 1);
+    var endTimePickerArray = this.data.endTimePickerArray;
+    var endTimeShowArray = this.data.endTimeShowArray;
+    endTimePickerIndex = [0,0,0];
+    
+    // 将结束日期列表中日期列表缩减至选中开始日期之后
+    var timePickerDate = [];
+    for (let i = 0; i < 60; i++) {
+      timePickerDate.push(moment(moment(this.data.startTimeShowArray[3][startTimePickerIndex[0]]).format('YYYY-MM-DD')).add(i, 'day').format('MM月DD日 ddd'));
     }
-    endTimePickerIndex.push(startTimePickerIndex[2]);
+    endTimePickerArray[0] = timePickerDate;
+    endTimeShowArray[0] = timePickerDate;
 
+
+    // 将结束时间列表中小时列表缩小至选中开始小时之后
+    var timePickerHour = [];
+    var timeShowHour = [];
+    for (let i = startTimePickerIndex[1] + app.globalData.startTime + 1; i <= app.globalData.endTime + 1; i++) {
+      if (i < 10) {
+        timePickerHour.push('0' + i + '时');
+        timeShowHour.push('0' + i);
+      } else {
+        timePickerHour.push(i + '时');
+        timeShowHour.push(i);
+      }
+    }
+    endTimePickerArray[1] = timePickerHour;
+    endTimeShowArray[1] = timeShowHour;
+
+
+    // 结束时间保持分钟与开始时间分钟数一致
+    if (startTimePickerIndex[2] == 0) {
+      // 选中了00分
+      endTimePickerArray[2] = ['00分'];
+      endTimeShowArray[2] = ['00'];
+    } else if (startTimePickerIndex[2] == 1) {
+      // 选中了30分
+      endTimePickerArray[2] = ['30分'];
+      endTimeShowArray[2] = ['30'];
+    }
+    
     this.setData({
-      startTimePickerIndex: startTimePickerIndex,
-      endTimePickerIndex: endTimePickerIndex,
+      'startTimePickerIndex': startTimePickerIndex,
+      'endTimePickerIndex': endTimePickerIndex,
+      'endTimePickerArray': endTimePickerArray,
+      'endTimeShowArray': endTimeShowArray,
     })
   },
   bindEndTimePickerChange: function (event) {
     this.setData({
-      endTimePickerIndex: event.detail.value,
+      'endTimePickerIndex': event.detail.value,
     })
   },
 
