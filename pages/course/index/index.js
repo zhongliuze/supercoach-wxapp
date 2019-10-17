@@ -602,38 +602,12 @@ Page({
   },
 
   /**
-   * 表格视图：点击弹窗中排课按钮
+   * 表格视图：点击弹窗中排课、休息、自定义按钮
    */
   clickTableCourse: function(event) {
     wx.showTabBar();
     wx.navigateTo({
-      url: '../course/course?courseType=0&selectDate=' + this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['date'],
-    })
-    this.bindCloseMark();
-
-    
-    // 需要传输选中日期的开始时间
-  },
-
-  /**
-   * 表格视图：点击弹窗中休息按钮
-   */
-  clickTableRest: function(event) {
-    wx.showTabBar();
-    console.log();
-    wx.navigateTo({
-      url: '../course/course?courseType=1&selectDate=' + this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['date'],
-    })
-    this.bindCloseMark();
-  },
-
-  /**
-   * 表格视图：点击弹窗中自定义按钮
-   */
-  clickTableCustom: function(event) {
-    wx.showTabBar();
-    wx.navigateTo({
-      url: '../course/course?courseType=2&selectDate=' + this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['date'],
+      url: '../course/course?courseType=' + event.currentTarget.dataset.index +'&selectDate=' + this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['date'],
     })
     this.bindCloseMark();
   },
@@ -642,7 +616,8 @@ Page({
    * 表格视图：点击弹窗中编辑按钮
    */
   clickTableEdit: function(event) {
-
+    // 类型：课程？休息？自定义
+    console.log(this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]);
   },
 
   /**

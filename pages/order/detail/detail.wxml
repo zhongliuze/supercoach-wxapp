@@ -1,0 +1,88 @@
+<!--pages/order/detail/detail.wxml-->
+<view class="order-result">
+    <!-- <icon type="success" size="88" color="#5FCD64"></icon> -->
+    <icon type="clear" size="88" color="#FF3D3D"></icon>
+    <text>已拒绝</text>
+  </view>
+<view class="container">
+  <view class="order">
+    <view class="title-group">
+      <view class="user">
+        <view class="avatar">
+          <text>泽中</text>
+        </view>
+        <view class="name">
+          <text>刘泽中</text>
+        </view>
+      </view>
+      <view class="info">
+        <text>剩余35课时</text>
+      </view>
+    </view>
+
+    <view class="content-group">
+      <view class="line">
+        <view class="title">
+          <text>预约时间：</text>
+        </view>
+        <view class="content">
+          <text>2019年07月15日  15:30 ~ 16:30</text>
+        </view>
+      </view>
+      <view class="line">
+        <view class="title">
+          <text>课程类型：</text>
+        </view>
+        <view class="content">
+          <text>1V1私教游泳课</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="no-button">
+    </view>
+  </view>
+
+  <view class="order-time">
+    <view class="line">
+      <view class="title">
+        <text>申请时间：</text>
+      </view>
+      <view class="content">
+        <text>2019年07月15日  15:30</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="button-group">
+    <button class="agree" catchtap="agreeButton">同意</button>
+    <button class="refuse" catchtap="refuseButton">拒绝</button>
+  </view>
+</view>
+
+
+<block wx:if="{{refusePopup}}">
+  <view class="mongolia" catchtouchmove="catchtouchmove"></view>
+  <view class="popup-view" catchtouchmove="catchtouchmove">
+    <view class="popup">
+      <view class="title">
+        <text>请填写拒绝原因</text>
+      </view>
+      <view class="input-area">
+        <textarea placeholder="请输入拒绝原因……" placeholder-class="input-area-placeholder" value="{{refuseReason}}" bindinput="inputRefuseReason"></textarea>
+      </view>
+      <view class="content-list">
+        <view class="content" wx:for="{{refuseReasonList}}" catchtap="autoFillReason" data-index="{{index}}">
+          <text>{{item}}</text>
+        </view>
+      </view>
+
+      <view class="button" catchtap="submitRefuse">
+        <button>提交</button>
+      </view>
+    </view>
+    <view class="close-button" catchtap="closePopup">
+      <image src="/images/order-popup-close.png"></image>
+    </view>
+  </view>
+</block>

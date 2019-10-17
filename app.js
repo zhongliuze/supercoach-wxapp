@@ -14,31 +14,31 @@ App({
 
 
     //登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log(res.code);
-        $.post(
-          'code2Session', {
-            code: res.code,
-          },
-          function (res) {
-            console.log(res);
-            if (res.data.code == 0) {
-              wx.setStorageSync('coachid', res.data.data.coachid)
-              wx.setStorageSync('token', res.data.data.token)
-            } else {
-              wx.showToast({
-                title: res.data.message,
-                icon: 'none',
-              })
-              wx.setStorageSync('coachid', '')
-              wx.setStorageSync('token', '')
-            }
-          }
-        )
-      }
-    })
+    // wx.login({
+    //   success: res => {
+    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    //     console.log(res.code);
+    //     $.post(
+    //       'code2Session', {
+    //         code: res.code,
+    //       },
+    //       function (res) {
+    //         console.log(res);
+    //         if (res.data.code == 0) {
+    //           wx.setStorageSync('coachid', res.data.data.coachid)
+    //           wx.setStorageSync('token', res.data.data.token)
+    //         } else {
+    //           wx.showToast({
+    //             title: res.data.message,
+    //             icon: 'none',
+    //           })
+    //           wx.setStorageSync('coachid', '')
+    //           wx.setStorageSync('token', '')
+    //         }
+    //       }
+    //     )
+    //   }
+    // })
     // 获取用户信息
     wx.getSetting({
       success: res => {

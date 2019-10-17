@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -65,10 +65,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 2,
 					"name": "pages/course/course/course",
 					"pathName": "pages/course/course/course",
-					"query": "",
+					"query": "courseType=0&selectDate='2019-10-17-09-00'",
 					"scene": null
 				},
 				{
@@ -82,6 +82,14 @@
 					"id": -1,
 					"name": "pages/index/index",
 					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 5,
+					"name": "pages/order/detail/detail",
+					"pathName": "pages/order/detail/detail",
+					"query": "",
 					"scene": null
 				}
 			]

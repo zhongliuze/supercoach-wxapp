@@ -112,15 +112,15 @@
                 <view class="table-mark" wx:if="{{tableButtonPopup}}" style="{{tableButtonPopupStyle}}">
                   <view class="content">
                     <block wx:if="{{tableButtonPopupType == 0}}">
-                      <view class="button" catchtap="clickTableCourse">
+                      <view class="button" catchtap="clickTableCourse" data-index="0">
                         <image src="/images/course-table-button-course.png"></image>
                         <text>排课</text>
                       </view>
-                      <view class="button" catchtap="clickTableRest">
+                      <view class="button" catchtap="clickTableCourse" data-index="1">
                         <image src="/images/course-table-button-rest.png"></image>
                         <text>休息</text>
                       </view>
-                      <view class="button" catchtap="clickTableCustom">
+                      <view class="button" catchtap="clickTableCourse" data-index="2">
                         <image src="/images/course-table-button-custom.png"></image>
                         <text>自定义</text>
                       </view>
