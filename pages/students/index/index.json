@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "向左滑动"
+  "navigationBarTitleText": "学员列表",
+  "usingComponents": {
+    "mp-searchbar": "../../../components/weui/searchbar/searchbar"
+  }
 }

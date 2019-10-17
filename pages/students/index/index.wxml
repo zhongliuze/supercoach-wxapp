@@ -1,10 +1,244 @@
-<view wx:for="{{items}}" wx:key="{{index}}">
-  <movable-area class='movable-area'>
-    <movable-view direction="horizontal" class='movable-view'>
-      <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
-        <view class="content" bindtap='goDetail'>{{item.content}}</view>
-        <view class="del" catchtap="del" data-index="{{index}}">删除</view>
+<view class="container">
+  <view class="search-group">
+    <view class="search">
+      <view class="icon">
+        <image src="/images/student-search.png"></image>
       </view>
-    </movable-view>
-  </movable-area>
+      <view class="input">
+        <input placeholder="搜索" placeholder-class="search-placeholder"></input>
+      </view>
+    </view>
+  </view>
+
+  <view class="student-sort">
+    <image src="/images/student-attention.png"></image>
+    <text>特别关注</text>
+  </view>
+
+  <view class="student-group">
+    <view class="student-line">
+      <view class="avatar">
+        <text>泽中</text>
+      </view>
+      <view class="content">
+        <view class="info">
+          <view class="name">
+            <text>刘泽中</text>
+          </view>
+          <view class="other">
+            <text>18020220001</text>
+          </view>
+        </view>
+        <view class="subtitle">
+          <text>剩余05课时</text>
+        </view>
+      </view>
+    </view>
+    <view class="student-line">
+      <view class="avatar">
+        <text>泽中</text>
+      </view>
+      <view class="content">
+        <view class="info">
+          <view class="name">
+            <text>刘泽中</text>
+          </view>
+          <view class="other">
+            <text>18020220001</text>
+          </view>
+        </view>
+        <view class="subtitle">
+          <text>剩余05课时</text>
+        </view>
+      </view>
+    </view>
+    <view class="student-line">
+      <view class="avatar">
+        <text>泽中</text>
+      </view>
+      <view class="content">
+        <view class="info">
+          <view class="name">
+            <text>刘泽中</text>
+          </view>
+          <view class="other">
+            <text>18020220001</text>
+          </view>
+        </view>
+        <view class="subtitle">
+          <text>剩余05课时</text>
+        </view>
+      </view>
+    </view>
+    <view class="student-line">
+      <view class="avatar">
+        <text>泽中</text>
+      </view>
+      <view class="content no-border">
+        <view class="info">
+          <view class="name">
+            <text>刘泽中</text>
+          </view>
+          <view class="other">
+            <text>18020220001</text>
+          </view>
+        </view>
+        <view class="subtitle">
+          <text>剩余05课时</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="student-sort">
+    <text>A</text>
+  </view>
+
+  <view class="student-group">
+    <view class="student-line">
+      <view class="avatar">
+        <text>泽中</text>
+      </view>
+      <view class="content">
+        <view class="info">
+          <view class="name">
+            <text>刘泽中</text>
+          </view>
+        </view>
+        <view class="subtitle">
+          <text>剩余05课时</text>
+        </view>
+      </view>
+    </view>
+    <view class="student-line">
+      <view class="avatar">
+        <text>泽中</text>
+      </view>
+      <view class="content">
+        <view class="info">
+          <view class="name">
+            <text>刘泽中</text>
+          </view>
+          <view class="other">
+            <text>18020220001</text>
+          </view>
+        </view>
+        <view class="subtitle">
+          <text>剩余05课时</text>
+        </view>
+      </view>
+    </view>
+    <view class="student-line">
+      <view class="avatar">
+        <text>泽中</text>
+      </view>
+      <view class="content">
+        <view class="info">
+          <view class="name">
+            <text>刘泽中</text>
+          </view>
+          <view class="other">
+            <text>18020220001</text>
+          </view>
+        </view>
+        <view class="subtitle">
+        </view>
+      </view>
+    </view>
+    <view class="student-line">
+      <view class="avatar">
+        <text>泽中</text>
+      </view>
+      <view class="content no-border">
+        <view class="info">
+          <view class="name">
+            <text>刘泽中</text>
+          </view>
+          <view class="other">
+            <text>18020220001</text>
+          </view>
+        </view>
+        <view class="subtitle">
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="student-sort">
+    <text>B</text>
+  </view>
+
+  <view class="student-group">
+    <view class="student-line">
+      <view class="avatar">
+        <text>泽中</text>
+      </view>
+      <view class="content">
+        <view class="info">
+          <view class="name">
+            <text>刘泽中</text>
+          </view>
+        </view>
+        <view class="subtitle">
+          <text>剩余05课时</text>
+        </view>
+      </view>
+    </view>
+    <view class="student-line">
+      <view class="avatar">
+        <text>泽中</text>
+      </view>
+      <view class="content">
+        <view class="info">
+          <view class="name">
+            <text>刘泽中</text>
+          </view>
+          <view class="other">
+            <text>18020220001</text>
+          </view>
+        </view>
+        <view class="subtitle">
+          <text>剩余05课时</text>
+        </view>
+      </view>
+    </view>
+    <view class="student-line">
+      <view class="avatar">
+        <text>泽中</text>
+      </view>
+      <view class="content">
+        <view class="info">
+          <view class="name">
+            <text>刘泽中</text>
+          </view>
+          <view class="other">
+            <text>18020220001</text>
+          </view>
+        </view>
+        <view class="subtitle">
+        </view>
+      </view>
+    </view>
+    <view class="student-line">
+      <view class="avatar">
+        <text>泽中</text>
+      </view>
+      <view class="content no-border">
+        <view class="info">
+          <view class="name">
+            <text>刘泽中</text>
+          </view>
+          <view class="other">
+            <text>18020220001</text>
+          </view>
+        </view>
+        <view class="subtitle">
+        </view>
+      </view>
+    </view>
+  </view>
 </view>
+<view class="common-bottom "></view>
+
+
+<!-- <mp-searchbar placeholder="请输入关键字搜索" bindselectresult="selectResult" search="{{search}}"></mp-searchbar> -->
