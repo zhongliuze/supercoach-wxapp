@@ -16,78 +16,34 @@
   </view>
 
   <view class="student-group">
-    <view class="student-line">
-      <view class="avatar">
-        <text>泽中</text>
-      </view>
-      <view class="content">
-        <view class="info">
-          <view class="name">
-            <text>刘泽中</text>
+    <block wx:for="{{studentList}}" wx:key="this">
+      <movable-area class='movable-area'>
+        <movable-view direction="horizontal" class='movable-view'>
+          <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}">
+            <view class="student-line">
+              <view class="avatar">
+                <text>{{item.nameStr}}</text>
+              </view>
+              <view class="content">
+                <view class="info">
+                  <view class="name">
+                    <text>{{item.name}}</text>
+                  </view>
+                  <view class="other" wx:if="{{item.phone}}">
+                    <text>{{item.phone}}</text>
+                  </view>
+                </view>
+                <view class="subtitle">
+                  <text wx:if="{{item.times}}">剩余{{item.times}}课时</text>
+                </view>
+              </view>
+            </view>
+            <view class="delete-button" catchtap="catchDelete" data-index="{{index}}">删除</view>
           </view>
-          <view class="other">
-            <text>18020220001</text>
-          </view>
-        </view>
-        <view class="subtitle">
-          <text>剩余05课时</text>
-        </view>
-      </view>
-    </view>
-    <view class="student-line">
-      <view class="avatar">
-        <text>泽中</text>
-      </view>
-      <view class="content">
-        <view class="info">
-          <view class="name">
-            <text>刘泽中</text>
-          </view>
-          <view class="other">
-            <text>18020220001</text>
-          </view>
-        </view>
-        <view class="subtitle">
-          <text>剩余05课时</text>
-        </view>
-      </view>
-    </view>
-    <view class="student-line">
-      <view class="avatar">
-        <text>泽中</text>
-      </view>
-      <view class="content">
-        <view class="info">
-          <view class="name">
-            <text>刘泽中</text>
-          </view>
-          <view class="other">
-            <text>18020220001</text>
-          </view>
-        </view>
-        <view class="subtitle">
-          <text>剩余05课时</text>
-        </view>
-      </view>
-    </view>
-    <view class="student-line">
-      <view class="avatar">
-        <text>泽中</text>
-      </view>
-      <view class="content no-border">
-        <view class="info">
-          <view class="name">
-            <text>刘泽中</text>
-          </view>
-          <view class="other">
-            <text>18020220001</text>
-          </view>
-        </view>
-        <view class="subtitle">
-          <text>剩余05课时</text>
-        </view>
-      </view>
-    </view>
+        </movable-view>
+      </movable-area>
+    </block>
+
   </view>
 
   <view class="student-sort">
@@ -237,6 +193,9 @@
       </view>
     </view>
   </view>
+</view>
+<view class="total">
+  <text>120位学员</text>
 </view>
 <view class="common-bottom "></view>
 

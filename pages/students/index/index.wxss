@@ -76,14 +76,19 @@ page {
   flex-direction: column;
 }
 
-.student-group .student-line {
+.student-line {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 750rpx;
   height: 135rpx;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(135rpx);
+  transform: translateX(135rpx);
+  margin-left: -135rpx;
 }
 
-.student-group .student-line .avatar {
+.student-line .avatar {
   width: 80rpx;
   height: 80rpx;
   display: flex;
@@ -98,12 +103,12 @@ page {
   margin-right: 24rpx;
 }
 
-.student-group .student-line .avatar image {
+.student-line .avatar image {
   width: 80rpx;
   height: 80rpx;
 }
 
-.student-group .student-line .content {
+.student-line .content {
   display: flex;
   align-items: center;
   width: 616rpx;
@@ -111,33 +116,74 @@ page {
   border-bottom: solid 1rpx #EFF0F1;
 }
 
-.student-group .student-line .no-border {
+.student-line .no-border {
   border: 0;
 }
 
-.student-group .student-line .content .info{
+.student-line .content .info{
   display: flex;
   flex-direction: column;
   width: 350rpx;
 }
 
-.student-group .student-line .content .info .name{
+.student-line .content .info .name{
   font-size: 34rpx;
   color: #181D24;
   font-weight: 500;
   line-height: 54rpx;
 }
 
-.student-group .student-line .content .info .other{
+.student-line .content .info .other{
   font-size: 26rpx;
   color: #8C95A7;
 }
 
-.student-group .student-line .content .subtitle{
+.student-line .content .subtitle{
   font-size: 26rpx;
   color: #707888;
   font-weight: 500;
   width: 236rpx;
   display: flex;
   justify-content: flex-end;
+}
+
+.movable-area, .movable-view {
+  width: 750rpx;
+  height: 135rpx;
+}
+
+.touch-item {
+  display: flex;
+  overflow: hidden;
+}
+
+.touch-move-active .student-line, .touch-move-active .delete-button {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.delete-button {
+  background-color: #ff3d3d;
+  width: 135rpx;
+  height: 135rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  -webkit-transform: translateX(135rpx);
+  transform: translateX(135rpx);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.total {
+  color: #8C95A7;
+  font-size:24rpx;
+  display: flex;
+  justify-content: center;
+  margin-top: 32rpx;
+  width: 750rpx;
 }

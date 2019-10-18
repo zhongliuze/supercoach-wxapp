@@ -1,0 +1,74 @@
+<!--pages/students/add/add.wxml-->
+<view class="container">
+  <view class="input-cell-group">
+    <view class="input-cell">
+      <view class="title">
+        <view class="icon">
+          <image src="/images/student-name.png" style="width:28rpx;height:32rpx;"></image>
+        </view>
+        <view class="name">
+          <text>学员姓名</text>
+        </view>
+      </view>
+      <view class="content">
+        <input placeholder="请输入学员姓名" placeholder-class="input-placeholder"></input>
+      </view>
+    </view>
+  </view>
+
+  <view class="input-more input-more-open" wx:if="{{inputMore}}">
+    <text>以下信息选填</text>
+  </view>
+  <view class="input-more" wx:else bindtap="inputMoreInfo">
+    <text>填写更多信息</text>
+    <image src="/images/student-openmore.png"></image>
+  </view>
+
+  <view class="input-cell-group-big">
+    <view class="input-cell">
+      <view class="title">
+        <view class="icon">
+          <image src="/images/student-phone.png" style="width:24rpx;height:32rpx;"></image>
+        </view>
+        <view class="name">
+          <text>手机号</text>
+        </view>
+      </view>
+      <view class="content">
+        <input placeholder="请输入学员手机号" placeholder-class="input-placeholder"></input>
+      </view>
+    </view>
+    <view class="input-tips">
+      <text>用于向学员发送课前短信通知</text>
+    </view>
+  </view>
+
+  <view class="input-cell-group input-cell-group-margin">
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/student-name.png" style="width:28rpx;height:32rpx;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>学员姓名</text>
+        </view>
+        <view class="value">
+          <input placeholder="请输入学员姓名" placeholder-class="input-placeholder"></input>
+        </view>
+      </view>
+    </view>
+    <view class="input-cell">
+      <view class="title">
+        <view class="icon">
+          <image src="/images/student-name.png" style="width:28rpx;height:32rpx;"></image>
+        </view>
+        <view class="name">
+          <text>学员姓名</text>
+        </view>
+      </view>
+      <view class="content">
+        <input placeholder="请输入学员姓名" placeholder-class="input-placeholder"></input>
+      </view>
+    </view>
+  </view>
+</view>

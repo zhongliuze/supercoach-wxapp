@@ -1,0 +1,214 @@
+/* pages/students/add/add.wxss */
+
+page {
+  background-color: #f7f7f7;
+}
+
+.container {
+  margin-top: 24rpx;
+}
+
+.input-cell-group {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 750rpx;
+}
+
+.input-cell-group-margin {
+  margin-top: 32rpx;
+}
+
+.input-cell-group .input-cell {
+  width: 100%;
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.input-cell-group .input-cell .icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28rpx;
+  margin-left: 30rpx;
+  margin-right: 24rpx;
+}
+
+.input-cell-group .input-cell .icon image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.input-cell-group .input-cell .content {
+  display: flex;
+  align-items: center;
+  width: 638rpx;
+}
+
+.input-cell-group .input-cell .content .title {
+  font-size: 34rpx;
+  color: #181D24;
+}
+
+.input-cell-group .input-cell .content .value {
+  width: 470rpx;
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+}
+
+.input-cell-group .input-cell .content .value input{
+  width: 750rpx;
+  font-size:34rpx;
+  text-align:right;
+}
+
+
+
+
+
+
+
+
+
+/* .input-cell-group .input-cell .title {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  height: 120rpx;
+  width: 250rpx;
+}
+
+.input-cell-group .input-cell .title .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28rpx;
+  margin-left: 30rpx;
+  margin-right: 24rpx;
+}
+
+.input-cell-group .input-cell .title .icon image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.input-cell-group .input-cell .title .name {
+  font-size: 34rpx;
+  color: #181D24;
+}
+
+.input-cell-group .input-cell .content {
+  width: 470rpx;
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+}
+
+
+.input-cell-group .input-cell .content input{
+  width: 750rpx;
+  font-size:34rpx;
+  text-align:right;
+} */
+
+.input-placeholder {
+  font-size:34rpx;
+  color: #CFCFCF;
+}
+
+.input-more {
+  color: #2B87FF;
+  font-size: 30rpx;
+  font-weight:bold;
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 55rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40rpx;
+}
+
+.input-more image{
+  width: 26rpx;
+  height: 22rpx;
+  margin-left: 18rpx;
+}
+
+.input-more-open {
+  justify-content: flex-start;
+  margin-top: 40rpx;
+}
+
+
+
+
+
+
+.input-cell-group-big {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 750rpx;
+  height: 170rpx;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-cell-group-big .input-cell {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.input-cell-group-big .input-cell .title {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 250rpx;
+}
+
+.input-cell-group-big .input-cell .title .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28rpx;
+  margin-left: 30rpx;
+  margin-right: 24rpx;
+}
+
+.input-cell-group-big .input-cell .title .icon image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.input-cell-group-big .input-cell .title .name {
+  font-size: 34rpx;
+  color: #181D24;
+}
+
+.input-cell-group-big .input-cell .content {
+  width: 470rpx;
+  display: flex;
+  align-items: center;
+}
+
+
+.input-cell-group-big .input-cell .content input{
+  width: 470rpx;
+  font-size:34rpx;
+  text-align:right;
+}
+
+.input-cell-group-big .input-tips{
+  color: #707888;
+  font-size:24rpx;
+  width: 690rpx;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 15rpx;
+}
