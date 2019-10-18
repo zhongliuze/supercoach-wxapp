@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/common/custom/custom",
+    "pages/students/source/source",
     "pages/students/add/add",
     "pages/order/detail/detail",
     "pages/order/index/index",

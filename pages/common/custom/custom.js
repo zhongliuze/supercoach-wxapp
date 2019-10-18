@@ -1,21 +1,20 @@
-// pages/students/add/add.js
+// pages/common/custom/custom.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    inputMore: false,
-    fixedBottomButtonMargin: 0, // 吸底按钮的自适应高度
+    customValue: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      fixedBottomButtonMargin: wx.getStorageSync('fixedBottomButtonMargin'), // 设置吸底按钮自适应高度
-    });
+    wx.setNavigationBarTitle({
+      title: '自定义学员来源',
+    })
   },
 
   /**
@@ -67,10 +66,9 @@ Page({
 
   },
 
-  inputMoreInfo: function(event) {
-    console.log(event);
+  customInput: function(event) {
     this.setData({
-      inputMore: true,
+      customValue: event.detail.value,
     });
   }
 })

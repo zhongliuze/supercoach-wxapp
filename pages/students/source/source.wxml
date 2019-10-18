@@ -1,0 +1,54 @@
+<view class="container-page">
+
+  <view class="select-cells-group source-select-cells-group">
+    <block wx:for="{{sourceList}}">
+      <movable-area class='movable-area'>
+        <movable-view direction="horizontal" class='movable-view'>
+          <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}" wx:if="{{item.canDelete}}">
+            <view class="select-cells" bindtap="selectSource" data-index="{{index}}">
+              <view class="icon"></view>
+              <view class="content {{index == sourceList.length - 1 ? 'no-border' : ''}}">
+                <view class="title">
+                  <text>{{item.name}}</text>
+                </view>
+                <view class="arrow">
+                  <image src="/images/course-selected.png" wx:if="{{item.selected}}"></image>
+                </view>
+              </view>
+            </view>
+            <view class="delete-button" catchtap="catchDelete" data-index="{{index}}">删除</view>
+          </view>
+          <view class="touch-item" wx:else>
+            <view class="select-cells" bindtap="selectSource" data-index="{{index}}">
+              <view class="icon"></view>
+              <view class="content {{index == sourceList.length - 1 ? 'no-border' : ''}}">
+                <view class="title">
+                  <text>{{item.name}}</text>
+                </view>
+                <view class="arrow">
+                  <image src="/images/course-selected.png" wx:if="{{item.selected}}"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+
+        </movable-view>
+      </movable-area>
+    </block>
+  </view>
+
+
+  <view class="select-cells-group source-select-cells">
+    <view class="select-cells" bindtap="selectSource" data-index="0">
+      <view class="icon"></view>
+      <view class="content no-border">
+        <view class="title">
+          <text>自定义</text>
+        </view>
+        <view class="arrow-more">
+          <image src="/images/arrow-right.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

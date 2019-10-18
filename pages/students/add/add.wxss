@@ -27,7 +27,7 @@ page {
   align-items: center;
 }
 
-.input-cell-group .input-cell .icon{
+.input-cell-group .input-cell .icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,12 +44,13 @@ page {
 .input-cell-group .input-cell .content {
   display: flex;
   align-items: center;
-  width: 638rpx;
+  width: 668rpx;
 }
 
 .input-cell-group .input-cell .content .title {
   font-size: 34rpx;
-  color: #181D24;
+  color: #181d24;
+  width: 168rpx;
 }
 
 .input-cell-group .input-cell .content .value {
@@ -57,72 +58,39 @@ page {
   height: 120rpx;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
-.input-cell-group .input-cell .content .value input{
-  width: 750rpx;
-  font-size:34rpx;
-  text-align:right;
-}
-
-
-
-
-
-
-
-
-
-/* .input-cell-group .input-cell .title {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  height: 120rpx;
-  width: 250rpx;
-}
-
-.input-cell-group .input-cell .title .icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28rpx;
-  margin-left: 30rpx;
-  margin-right: 24rpx;
-}
-
-.input-cell-group .input-cell .title .icon image {
-  width: 28rpx;
-  height: 28rpx;
-}
-
-.input-cell-group .input-cell .title .name {
-  font-size: 34rpx;
-  color: #181D24;
-}
-
-.input-cell-group .input-cell .content {
+.input-cell-group .input-cell .content .value input {
   width: 470rpx;
-  height: 120rpx;
-  display: flex;
-  align-items: center;
+  font-size: 34rpx;
+  text-align: right;
 }
 
+.input-cell-group .input-cell .content .value text {
+  font-size: 34rpx;
+  color: #cfcfcf;
+}
 
-.input-cell-group .input-cell .content input{
-  width: 750rpx;
-  font-size:34rpx;
-  text-align:right;
-} */
+.input-cell-group .input-cell .content .value image {
+  width: 14rpx;
+  height: 24rpx;
+  margin-left: 16rpx;
+}
+
+.input-cell-group .input-cell-border {
+  border-bottom: solid 1rpx #eff0f1;
+}
 
 .input-placeholder {
-  font-size:34rpx;
-  color: #CFCFCF;
+  font-size: 34rpx;
+  color: #cfcfcf;
 }
 
 .input-more {
-  color: #2B87FF;
+  color: #2b87ff;
   font-size: 30rpx;
-  font-weight:bold;
+  font-weight: bold;
   width: 690rpx;
   margin-left: 30rpx;
   margin-top: 55rpx;
@@ -132,7 +100,7 @@ page {
   margin-bottom: 40rpx;
 }
 
-.input-more image{
+.input-more image {
   width: 26rpx;
   height: 22rpx;
   margin-left: 18rpx;
@@ -142,11 +110,6 @@ page {
   justify-content: flex-start;
   margin-top: 40rpx;
 }
-
-
-
-
-
 
 .input-cell-group-big {
   display: flex;
@@ -188,7 +151,7 @@ page {
 
 .input-cell-group-big .input-cell .title .name {
   font-size: 34rpx;
-  color: #181D24;
+  color: #181d24;
 }
 
 .input-cell-group-big .input-cell .content {
@@ -197,18 +160,78 @@ page {
   align-items: center;
 }
 
-
-.input-cell-group-big .input-cell .content input{
+.input-cell-group-big .input-cell .content input {
   width: 470rpx;
-  font-size:34rpx;
-  text-align:right;
+  font-size: 34rpx;
+  text-align: right;
 }
 
-.input-cell-group-big .input-tips{
+.input-cell-group-big .input-tips {
   color: #707888;
-  font-size:24rpx;
+  font-size: 24rpx;
   width: 690rpx;
   display: flex;
   justify-content: flex-start;
   margin-top: 15rpx;
+}
+
+.textarea-cell-group {
+  display: flex;
+  width: 100%;
+  background-color: #fff;
+  margin-top: 32rpx;
+}
+
+.textarea-cell {
+  margin-top: 40rpx;
+  margin-left: 30rpx;
+  width: 690rpx;
+}
+
+.textarea-cell .title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.textarea-cell .title .icon {
+  width: 28rpx;
+  height: 28rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textarea-cell .title .icon image{
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.textarea-cell .title .name {
+  font-size: 34rpx;
+  color: #181d24;
+  margin-left: 24rpx;
+}
+
+.textarea-cell .input {
+  width: 100%;
+  height: 215rpx;
+  margin-top: 40rpx;
+  margin-bottom: 55rpx;
+}
+
+.textarea-cell .input textarea{
+  font-size:34rpx;
+  width: 100%;
+  height: 215rpx;
+}
+
+.textarea-placeholder {
+  font-size:34rpx;
+  color: #CFCFCF;
+}
+
+.common-bottom {
+  width: 100%;
+  height: 200rpx;
 }

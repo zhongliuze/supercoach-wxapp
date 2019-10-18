@@ -2,16 +2,16 @@
 <view class="container">
   <view class="input-cell-group">
     <view class="input-cell">
-      <view class="title">
-        <view class="icon">
-          <image src="/images/student-name.png" style="width:28rpx;height:32rpx;"></image>
-        </view>
-        <view class="name">
-          <text>学员姓名</text>
-        </view>
+      <view class="icon">
+        <image src="/images/student-name.png" style="width:28rpx;height:32rpx;"></image>
       </view>
       <view class="content">
-        <input placeholder="请输入学员姓名" placeholder-class="input-placeholder"></input>
+        <view class="title">
+          <text>学员姓名</text>
+        </view>
+        <view class="value">
+          <input placeholder="请输入学员姓名" placeholder-class="input-placeholder"></input>
+        </view>
       </view>
     </view>
   </view>
@@ -24,6 +24,7 @@
     <image src="/images/student-openmore.png"></image>
   </view>
 
+  <block wx:if="{{inputMore}}">
   <view class="input-cell-group-big">
     <view class="input-cell">
       <view class="title">
@@ -46,29 +47,72 @@
   <view class="input-cell-group input-cell-group-margin">
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/student-name.png" style="width:28rpx;height:32rpx;"></image>
+        <image src="/images/student-course-type.png" style="width:28rpx;height:28rpx;"></image>
       </view>
-      <view class="content">
+      <view class="content input-cell-border">
         <view class="title">
-          <text>学员姓名</text>
+          <text>课程类型</text>
         </view>
         <view class="value">
-          <input placeholder="请输入学员姓名" placeholder-class="input-placeholder"></input>
+          <text>请选择</text>
+          <view class="arrow">
+            <image src="/images/arrow-right.png"></image>
+          </view>
         </view>
       </view>
     </view>
     <view class="input-cell">
-      <view class="title">
-        <view class="icon">
-          <image src="/images/student-name.png" style="width:28rpx;height:32rpx;"></image>
-        </view>
-        <view class="name">
-          <text>学员姓名</text>
-        </view>
+      <view class="icon">
+        <image src="/images/student-course-times.png" style="width:28rpx;height:26rpx;"></image>
       </view>
       <view class="content">
-        <input placeholder="请输入学员姓名" placeholder-class="input-placeholder"></input>
+        <view class="title">
+          <text>总课时数</text>
+        </view>
+        <view class="value">
+          <input placeholder="请输入课时数" placeholder-class="input-placeholder"></input>
+        </view>
       </view>
     </view>
+  </view>
+
+  <view class="input-cell-group input-cell-group-margin">
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/student-from.png" style="width:28rpx;height:28rpx;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>学员来源</text>
+        </view>
+        <view class="value">
+          <text>请选择</text>
+          <view class="arrow">
+            <image src="/images/arrow-right.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="textarea-cell-group">
+    <view class="textarea-cell">
+      <view class="title">
+        <view class="icon">
+          <image src="/images/student-remarks.png"></image>
+        </view>
+        <view class="name">
+          <text>备注信息</text>
+        </view>
+      </view>
+      <view class="input">
+        <textarea placeholder="示例：老会员，二次购课，本次以减肥减脂为主要锻炼目标。" placeholder-class="textarea-placeholder"></textarea>
+      </view>
+    </view>
+  </view>
+  <view class="common-bottom"></view>
+  </block>
+  <view class="fixed-bottom-button" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
+    <button bindtap="bindSave">保存</button>
   </view>
 </view>

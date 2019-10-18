@@ -1,6 +1,10 @@
 /**app.wxss**/
 @import './components/weui/weui-wxss/dist/style/weui.wxss';
 
+page {
+  background-color: #F7F7F7;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -86,4 +90,77 @@
 .common-bottom {
   width: 750rpx;
   height: 100rpx;
+}
+
+
+.fixed-bottom-button {
+  position: fixed;
+  left: 0rpx;
+  bottom: 0rpx;
+  background-color: #5fcd64;
+}
+
+.fixed-bottom-button button {
+  background-color: #5fcd64;
+  color: #fff;
+  border-radius: 0rpx;
+  border: 0rpx;
+  font-size: 34rpx;
+  font-weight: 500;
+  width: 750rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fixed-bottom-button button::after {
+  border-radius: 0rpx;
+  border: 0rpx;
+  bottom: 0;
+}
+
+.movable-area, .movable-view {
+  width: 750rpx;
+  height: 120rpx;
+}
+
+.touch-item {
+  display: flex;
+  overflow: hidden;
+}
+
+.touch-move-active .select-cells, .touch-move-active .delete-button {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.delete-button {
+  background-color: #ff3d3d;
+  width: 120rpx;
+  height: 120rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  -webkit-transform: translateX(120rpx);
+  transform: translateX(120rpx);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.select-cells {
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(120rpx);
+  transform: translateX(120rpx);
+  margin-left: -120rpx;
+}
+
+.input-placeholder {
+  color: #CFCFCF;
+  font-size: 34rpx
 }
