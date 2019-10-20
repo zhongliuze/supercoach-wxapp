@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 10,
+			"current": 16,
 			"list": [
 				{
 					"id": -1,
@@ -124,6 +124,48 @@
 					"id": -1,
 					"name": "pages/common/custom/custom",
 					"pathName": "pages/common/custom/custom",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/students/add/add",
+					"pathName": "pages/students/add/add",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/students/student/student",
+					"pathName": "pages/students/student/student",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/students/basic/basic",
+					"pathName": "pages/students/basic/basic",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/students/other/other",
+					"pathName": "pages/students/other/other",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/students/record/record",
+					"pathName": "pages/students/record/record",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/students/course/course",
+					"pathName": "pages/students/course/course",
 					"query": "",
 					"scene": null
 				}

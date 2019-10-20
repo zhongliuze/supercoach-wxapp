@@ -1,0 +1,126 @@
+<!--pages/students/basic/basic.wxml-->
+<view class="container">
+  <view class="input-cell-group">
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/student-name.png" style="width:28rpx;height:32rpx;"></image>
+      </view>
+      <view class="content input-cell-border">
+        <view class="title">
+          <text>学员姓名</text>
+        </view>
+        <view class="value">
+          <input placeholder="请输入学员姓名" placeholder-class="input-placeholder" value="刘泽中"></input>
+        </view>
+      </view>
+    </view>
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/student-info-basic-remark.png" style="width:27rpx;height:30rpx;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>备注名</text>
+        </view>
+        <view class="value">
+          <input placeholder="请输入备注名" placeholder-class="input-placeholder" value=""></input>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="input-cell-group input-cell-group-margin">
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/student-phone.png" style="width:24rpx;height:32rpx;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>手机号</text>
+        </view>
+        <view class="value">
+          <input placeholder="请输入手机号" placeholder-class="input-placeholder" value="18020220001"></input>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="input-cell-group input-cell-group-margin">
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/student-from.png" style="width:28rpx;height:28rpx;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>学员来源</text>
+        </view>
+        <view class="value">
+          <text>请选择</text>
+          <view class="arrow">
+            <image src="/images/arrow-right.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="input-cell-group input-cell-group-margin">
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/student-info-basic-reminder.png" style="width:30rpx;height:26rpx;"></image>
+      </view>
+      <view class="content input-cell-border">
+        <view class="title">
+          <text>生日</text>
+        </view>
+        <picker mode="date" bindchange="birthdayPickerChange" value="{{birthday}}">
+          <view class="value">
+            <text class="{{birthdayFormat == '请选择' ? '' : 'hasValue'}}">{{birthdayFormat}}</text>
+            <view class="arrow">
+              <image src="/images/arrow-right.png"></image>
+            </view>
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/student-info-basic-reminder.png" style="width:26rpx;height:28rpx;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>生日提醒</text>
+        </view>
+        <view class="value">
+          <view class="arrow">
+            <switch checked="{{birthdayRemind}}" bindchange="switchChange" wx:if="{{birthday}}"/>
+            <switch checked="{{birthdayRemind}}" bindchange="switchChange" wx:else disabled/>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="birthday-mark" wx:if="{{birthdayRemind}}">
+    <text class="title">将在生日前三天短信提醒您，示例如下：</text>
+    <text class="value">“{{coachName}}教练您好：{{birthdayFormat}}是您会员{{studentName}}的生日，在百忙之中记得抽空为学员送上一份真挚的祝福哦，也祝您工作顺利。”</text>
+
+  </view>
+  <view class="textarea-cell-group">
+    <view class="textarea-cell">
+      <view class="title">
+        <view class="icon">
+          <image src="/images/student-remarks.png"></image>
+        </view>
+        <view class="name">
+          <text>备注信息</text>
+        </view>
+      </view>
+      <view class="input">
+        <textarea placeholder="示例：老会员，二次购课，本次以减肥减脂为主要锻炼目标。" placeholder-class="textarea-placeholder" value="此人有特殊爱好"></textarea>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="common-bottom"></view>

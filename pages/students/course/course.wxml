@@ -1,0 +1,67 @@
+<!--pages/students/course/course.wxml-->
+<view class="container-input">
+  <view class="input-cell-group">
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/student-name.png" style="width:28rpx;height:28rpx;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>上课时间</text>
+        </view>
+        <view class="value">
+          <text class="hasValue">09月20日  14:00 ~ 15:00</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="input-cell-group input-cell-group-margin">
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/student-name.png" style="width:28rpx;height:26rpx;"></image>
+      </view>
+      <view class="content input-cell-border">
+        <view class="title">
+          <text>课程名称</text>
+        </view>
+        <view class="value hasvalue">
+          <text class="hasValue">游泳私教15次卡</text>
+        </view>
+      </view>
+    </view>
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/student-info-basic-remark.png" style="width:26rpx;height:28rpx;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>剩余课时</text>
+        </view>
+        <view class="value">
+          <text class="hasValue">2</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="input-cell-group input-cell-group-margin">
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/student-phone.png" style="width:28rpx;height:28rpx;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>上课状态</text>
+        </view>
+        <view class="value">
+          <text class="hasValue" style="color:#5FCD64;">已完成</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="button-default">
+    <button>保存</button>
+  </view>
+</view>

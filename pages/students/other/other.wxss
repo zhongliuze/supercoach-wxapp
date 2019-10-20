@@ -1,0 +1,50 @@
+/* pages/students/other/other.wxss */
+
+.input-cell-default-group {
+  display: flex;
+  flex-direction: row;
+  width: 750rpx;
+  background-color: #FFF;
+  
+}
+
+.input-cell-default-group .input-cell {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 720rpx;
+  margin-left: 30rpx;
+  height: 120rpx;
+}
+
+.input-cell-default-group .input-cell .name{
+  font-size:34rpx;
+  color: #181D24;
+  width: 290rpx;
+  display: flex;
+  align-items: center;
+}
+
+.input-cell-default-group .input-cell .value{
+  width: 400rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+switch {
+  zoom: 0.9;
+}
+
+.delete-student {
+  width: 750rpx;
+  height: 120rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FF3D3D;
+  font-weight: 500;
+  font-size:34rpx;
+  margin-top: 48rpx;
+  background-color: #FFF;
+}

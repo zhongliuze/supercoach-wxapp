@@ -1,0 +1,5 @@
+/* pages/students/course/course.wxss */
+
+.complete {
+  color: red;
+}

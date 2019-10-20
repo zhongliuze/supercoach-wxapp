@@ -1,0 +1,132 @@
+<!--pages/students/student/student.wxml-->
+<view class="background">
+  <image src="/images/student-info-bg.png"></image>
+</view>
+
+<view class="info">
+  <view class="avatar">
+    <text>泽中</text>
+  </view>
+  <view class="base">
+    <view class="name">
+      <text class="main">刘泽中</text>
+      <text class="sub">（刘小泽的爸爸）</text>
+    </view>
+    <view class="status">
+      <text>未绑定公众号</text>
+    </view>
+  </view>
+  <view class="phone" bindtap="makePhoneCall" data-phone="18020220001">
+    <image src="/images/student-info-phone.png"></image>
+    <text>18020220001</text>
+  </view>
+  <view class="data-group">
+    <view class="data">
+      <view class="num">
+        <text>30</text>
+      </view>
+      <view class="name">
+        <text>总课时数</text>
+      </view>
+    </view>
+
+    <view class="data">
+      <view class="num">
+        <text>5</text>
+      </view>
+      <view class="name">
+        <text>已上课时</text>
+      </view>
+    </view>
+
+    <view class="data">
+      <view class="num">
+        <text>25</text>
+      </view>
+      <view class="name">
+        <text>剩余课时</text>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<view class="ad">
+  <text>邀请学员绑定，领3天VIP会员</text>
+</view>
+
+<view class="button-cell-group">
+  <view class="button-cell">
+    <view class="icon">
+      <image src="/images/student-info-basic.png" style="width:26rpx;height:30rpx;"></image>
+    </view>
+    <view class="content border">
+      <view class="name">
+        <text>基本信息</text>
+      </view>
+      <view class="more">
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="button-cell">
+    <view class="icon">
+      <image src="/images/student-info-course.png" style="width:27rpx;height:28rpx;"></image>
+    </view>
+    <view class="content border">
+      <view class="name">
+        <text>课程管理</text>
+      </view>
+      <view class="more">
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="button-cell">
+    <view class="icon">
+      <image src="/images/student-info-record.png" style="width:28rpx;height:28rpx;"></image>
+    </view>
+    <view class="content">
+      <view class="name">
+        <text>上课记录</text>
+      </view>
+      <view class="more">
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="button-cell-group">
+  <view class="button-cell">
+    <view class="icon">
+      <image src="/images/student-info-data.png" style="width:28rpx;height:26rpx;"></image>
+    </view>
+    <view class="content">
+      <view class="name">
+        <text>体侧信息</text>
+      </view>
+      <view class="more">
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="button-cell-group">
+  <view class="button-cell">
+    <view class="icon">
+      <image src="/images/student-info-more.png" style="width:28rpx;height:24rpx;"></image>
+    </view>
+    <view class="content">
+      <view class="name">
+        <text>其它信息</text>
+      </view>
+      <view class="more">
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="common-bottom"></view>

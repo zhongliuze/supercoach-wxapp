@@ -1,0 +1,17 @@
+<view class="container-input">
+  <view class="input-cell-default-group">
+    <view class="input-cell">
+      <view class="name">
+        <text>设为特别关注</text>
+      </view>
+      <view class="value">
+        <switch></switch>
+      </view>
+    </view>
+  </view>
+
+  <view class="delete-student" bindtap="deleteStudent">
+    <text>删除学员</text>
+  </view>
+
+</view>

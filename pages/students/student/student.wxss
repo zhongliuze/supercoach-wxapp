@@ -1,0 +1,209 @@
+/* pages/students/student/student.wxss */
+
+.background {
+  width: 750rpx;
+  height: 543rpx;
+  position: absolute;
+  z-index: -1;
+  top: -150rpx;
+  left: 0rpx;
+}
+
+.background  image {
+  width: 750rpx;
+  height: 543rpx;
+}
+
+.info {
+  background-color: #fff;
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 80rpx;
+  border-radius: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.info .avatar {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 100%;
+  border: solid 8rpx #fff;
+  font-size: 34rpx;
+  color: #fff;
+  background-color: #2b87ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 40rpx;
+  margin-top: -63rpx;
+}
+
+.info .avatar image {
+  width: 110rpx;
+  height: 110rpx;
+}
+
+.info .base {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 24rpx;
+  width: 610rpx;
+  margin-left: 40rpx;
+}
+
+.info .base .name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 410rpx;
+}
+
+.info .base .name .main {
+  color: #181d24;
+  font-size: 36rpx;
+}
+
+.info .base .name .sub {
+  color: #707888;
+  font-size: 26rpx;
+}
+
+.info .base .status {
+  width: 166rpx;
+  height: 48rpx;
+  background: #ff7d7a;
+  border-radius: 20rpx 0rpx 20rpx 0rpx;
+  font-size: 22rpx;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info .phone {
+  width: 610rpx;
+  margin-left: 40rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 24rpx;
+}
+
+.info .phone image{
+  width: 18rpx;
+  height: 28rpx;
+}
+
+.info .phone text{
+  color: #2B87FF;
+  font-size:30rpx;
+  line-height: 30rpx;
+  margin-left: 12rpx;
+}
+
+.info .data-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 610rpx;
+  margin-left: 40rpx;
+  justify-content: space-between;
+  margin-top: 48rpx;
+  margin-bottom: 56rpx;
+}
+
+.info .data-group .data{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+
+.info .data-group .data .num{
+  color: #181D24;
+  font-weight: bold;
+  font-size: 44rpx;
+  line-height: 64rpx;
+}
+
+.info .data-group .data .name{
+  color: #707888;
+  font-size: 26rpx;
+}
+
+.ad {
+  display: flex;
+  justify-content: center;
+  margin-top: 40rpx;
+  color: #2B87FF;
+  font-size: 26rpx;
+  font-weight: bold;
+  min-height: 10rpx;
+}
+
+.button-cell-group {
+  background-color: #FFF;
+  width: 750rpx;
+  display: flex;
+  flex-direction: column;
+  margin-top: 32rpx;
+}
+
+.button-cell-group .button-cell{
+  width: 750rpx;
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.button-cell-group .button-cell .icon{
+  width: 30rpx;
+  height: 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30rpx;
+  margin-right: 24rpx;
+}
+
+.button-cell-group .button-cell .icon image{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+
+.button-cell-group .button-cell .content{
+  width: 666rpx;
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.button-cell-group .button-cell .content .name{
+  font-size:34rpx;
+  color:#181D24;
+  width: 436rpx;
+}
+
+.button-cell-group .button-cell .content .more{
+  width: 200rpx;
+  display: flex;
+  justify-content: flex-end;
+  
+}
+
+.button-cell-group .button-cell .content .more image{
+  width: 14rpx;
+  height: 24rpx;
+}
+
+.button-cell-group .button-cell .border{
+  border-bottom: 1rpx solid #EFF0F1;
+}

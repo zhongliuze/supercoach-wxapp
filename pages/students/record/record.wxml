@@ -1,0 +1,91 @@
+<!--pages/students/record/record.wxml-->
+<view class="weui-tab">
+  <view class="weui-navbar weui-navbar-fixed">
+    <block wx:for="{{tabs}}" wx:key="*this">
+      <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+        <view class="weui-navbar__title">{{item}}</view>
+      </view>
+    </block>
+    <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+  </view>
+  <view class="weui-tab__panel">
+    <!--  待完成  -->
+    <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+      <view class="course-group">
+        <block wx:for="{{tasksList}}">
+          <movable-area class='movable-area'>
+            <movable-view direction="horizontal" class='movable-view'>
+              <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}">
+                <view class="course {{item.isTouchMove ? 'touch-move-course' : ''}}" >
+                  <view class="icon">
+                    <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
+                  </view>
+                  <view class="info">
+                    <view class="time">
+                      <text>{{item.time}}</text>
+                    </view>
+                    <view class="type">
+                      <text>{{item.type}}</text>
+                    </view>
+                  </view>
+                  <view class="status">
+                    <text>待完成</text>
+                  </view>
+                </view>
+                <view class="delete-button" catchtap="catchDelete" data-index="{{index}}">删除</view>
+              </view>
+            </movable-view>
+          </movable-area>
+
+
+        </block>
+
+      </view>
+    </view>
+    <!--  已完成  -->
+    <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+      <view class="course-group">
+        <view class="course">
+          <view class="icon">
+            <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
+          </view>
+          <view class="info">
+            <view class="time">
+              <text>07月15日 19:30~20:30</text>
+            </view>
+            <view class="type">
+              <text>1V1游泳私教</text>
+            </view>
+          </view>
+          <view class="status complete">
+            <text>已完成</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!--  已取消  -->
+    <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+
+      <view class="course-group">
+        <view class="course">
+          <view class="icon">
+            <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
+          </view>
+          <view class="info">
+            <view class="time">
+              <text>07月15日 19:30~20:30</text>
+            </view>
+            <view class="type">
+              <text>1V1游泳私教</text>
+            </view>
+          </view>
+          <view class="status cancel">
+            <text>已取消</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="common-bottom"></view>

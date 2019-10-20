@@ -1,5 +1,11 @@
 {
   "pages": [
+    "pages/members/index/index",
+    "pages/students/course/course",
+    "pages/students/record/record",
+    "pages/students/other/other",
+    "pages/students/basic/basic",
+    "pages/students/student/student",
     "pages/common/custom/custom",
     "pages/students/source/source",
     "pages/students/add/add",

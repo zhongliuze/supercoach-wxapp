@@ -1,0 +1,28 @@
+/* pages/students/basic/basic.wxss */
+.container {
+  margin-top: 24rpx;
+}
+
+switch {
+  zoom: 0.9;
+}
+
+.birthday-mark {
+  margin-top: 32rpx;
+  width: 690rpx;
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.birthday-mark .title{
+  font-size:24rpx;
+font-weight:bold;
+color: #8893A8;
+line-height: 44rpx;
+}
+
+.birthday-mark .value{
+  font-size:22rpx;
+color: #8893A8;
+}
