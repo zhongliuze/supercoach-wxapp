@@ -1,2 +1,237 @@
 <!--pages/members/index/index.wxml-->
-<text>pages/members/index/index.wxml</text>
+<view class="container">
+  <view class="header">
+    <view class="userinfo">
+      <view class="avatar">
+        <view class="user-avatar">
+          <image src="/images/avatar.jpeg" mode="aspectFill"></image>
+        </view>
+        <view class='vip-status'>
+          <image src="/images/member-vip.png"></image>
+        </view>
+      </view>
+      <view class="info">
+        <view class="name">
+          <text>二狗子没有夏天</text>
+        </view>
+        <view class="viptime">
+          <!-- <text>开通会员，享专属特权</text> -->
+          <!-- <text>会员有效期至：2019-09-15</text> -->
+          <text>您的会员已到期，<text class="link-text">立即续费</text></text>
+        </view>
+      </view>
+      <view class="other">
+        <view class="vip-button">
+          <text>开通记录</text>
+        </view>
+      </view>
+
+    </view>
+
+  </view>
+
+  <view class="price-info">
+    <view class="title">
+      <view class="main">
+        <text>会员套餐</text>
+      </view>
+      <view class="title-link">
+        <text>使用兑换码</text>
+      </view>
+    </view>
+
+    <view class="price-group">
+      <view class="price {{selectPrice == 0? 'selected': ''}}" bindtap="selectPrice" data-price="0">
+        <view class="time">
+          <text>1个月</text>
+        </view>
+        <view class="money">
+          <text class="symbol">￥</text>
+          <text>10</text>
+        </view>
+        <view class="cost">
+          <text>￥20</text>
+        </view>
+      </view>
+      <view class="price {{selectPrice == 1? 'selected': ''}}" bindtap="selectPrice" data-price="1">
+        <view class="time">
+          <text>3个月</text>
+        </view>
+        <view class="money">
+          <text class="symbol">￥</text>
+          <text>27</text>
+        </view>
+        <view class="cost">
+          <text>￥50</text>
+        </view>
+      </view>
+      <view class="price {{selectPrice == 2? 'selected': ''}}" bindtap="selectPrice" data-price="2">
+        <view class="time">
+          <text>1个月</text>
+        </view>
+        <view class="money">
+          <text class="symbol">￥</text>
+          <text>96</text>
+        </view>
+        <view class="cost">
+          <text>￥150</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="agreement">
+      <radio checked="{{agreement}}" bindtap="bindRadio" />
+      <view class="content">
+        <text>我已经阅读并同意<text class="link-content">《会员服务协议》</text></text>
+      </view>
+    </view>
+  </view>
+
+  <view class="vip-power">
+    <view class="title">
+      <text>会员特权</text>
+    </view>
+    <view class="power-group">
+      <view class="power-line">
+        <view class="power">
+          <image src="/images/vip-student.png" style="width:46rpx;height:48rpx;"></image>
+          <text>无限添加学员</text>
+        </view>
+        <view class="power">
+          <image src="/images/vip-sms.png" style="width:48rpx;height:48rpx;"></image>
+          <text>课前短信通知</text>
+        </view>
+        <view class="power">
+          <image src="/images/vip-card.png" style="width:52rpx;height:42rpx;"></image>
+          <text>专属个人名片</text>
+        </view>
+      </view>
+
+      <view class="power-line">
+        <view class="power">
+          <image src="/images/vip-statistics.png" style="width:46rpx;height:46rpx;"></image>
+          <text>课时统计分析</text>
+        </view>
+        <view class="power">
+          <image src="/images/vip-customize.png" style="width:52rpx;height:46rpx;"></image>
+          <text>自定义动作库</text>
+        </view>
+        <view class="power">
+          <image src="/images/vip-lessons.png" style="width:46rpx;height:50rpx;"></image>
+          <text>无限创建备课</text>
+        </view>
+      </view>
+
+      <view class="power-line">
+        <view class="power">
+          <image src="/images/vip-birthday.png" style="width:48rpx;height:44rpx;"></image>
+          <text>学员生日提醒</text>
+        </view>
+        <view class="power">
+          <image src="/images/vip-poster.png" style="width:52rpx;height:42rpx;"></image>
+          <text>专属招生海报</text>
+        </view>
+        <view class="power">
+          <image src="/images/vip-notice.png" style="width:52rpx;height:44rpx;"></image>
+          <text>50条免费短信</text>
+        </view>
+      </view>
+
+      <view class="power-line">
+        <view class="power">
+          <image src="/images/vip-ad.png" style="width:52rpx;height:40rpx;"></image>
+          <text>去除广告</text>
+        </view>
+        <view class="power">
+          <image src="/images/vip-service.png" style="width:48rpx;height:48rpx;"></image>
+          <text>会员专属客服</text>
+        </view>
+        <view class="power">
+          <image src="/images/vip-honorable.png" style="width:52rpx;height:48rpx;"></image>
+          <text>会员尊贵标识</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="explain">
+    <view class="title">
+      <text>开通说明</text>
+    </view>
+    <view class="content">
+      <text>1、购买成功后，会员服务立即生效；
+      2、会员服务已经开通后，不支持退款；
+      3、会员开通成功代表您已阅读并同意《会员服务协议》。</text>
+    </view>
+  </view>
+</view>
+<view class="common-bottom"></view>
+<view class="common-bottom" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;"></view>
+<view class="fixed-bottom-button" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
+  <button bindtap="openPopup">立即开通</button>
+</view>
+
+<block wx:if="{{orderPopup}}">
+  <view class="mongolia" catchtouchmove="catchtouchmove"></view>
+  <view class="popup-view"  catchtap="closePopup" catchtouchmove="catchtouchmove">
+    <view class="popup" catchtap="catchtouchmove">
+      <view class="title">
+        <view class="name">
+          <text>订单确认</text>
+        </view>
+        <view class="close" bindtap="closePopup">
+          <image src="/images/vip-close.png"></image>
+        </view>
+      </view>
+
+      <view class="order-list">
+        <view class="info">
+          <view class="name">
+            <text>商品名称</text>
+          </view>
+          <view class="value">
+            <text>VIP会员</text>
+          </view>
+        </view>
+        <view class="info">
+          <view class="name">
+            <text>有效时长</text>
+          </view>
+          <view class="value">
+            <text>12个月</text>
+          </view>
+        </view>
+        <view class="info">
+          <view class="name">
+            <text>应付金额</text>
+          </view>
+          <view class="value price">
+            <text>￥99.00</text>
+          </view>
+        </view>
+      </view>
+      <view class="pay-type">
+        <view class="subtitle">
+          <text>支付方式</text>
+        </view>
+        <view class="type-list">
+          <view class="type">
+            <view class="icon">
+              <image src="/images/pay-wechat.png"></image>
+            </view>
+            <view class="name">
+              <text>微信支付</text>
+            </view>
+            <view class="select">
+              <radio checked color="#5fcd64" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="open-button" catchtap="closePopup" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
+      <button>确认支付99元</button>
+    </view>
+  </view>
+
+</block>

@@ -156,5 +156,10 @@ Page({
     
   },
 
+  navigateToAdd: function() {
+    wx.navigateTo({
+      url: '../add/add',
+    })
+  }
 
 })

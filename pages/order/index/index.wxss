@@ -151,16 +151,6 @@ page {
   margin-bottom: 40rpx;
 }
 
-.mongolia {
-  width: 750rpx;
-  height: 100%;
-  background-color: #000;
-  opacity: 0.8;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
 .popup-view {
   width: 750rpx;
   height: 100%;

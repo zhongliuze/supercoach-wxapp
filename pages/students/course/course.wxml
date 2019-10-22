@@ -3,7 +3,7 @@
   <view class="input-cell-group">
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/student-name.png" style="width:28rpx;height:28rpx;"></image>
+        <image src="/images/student-course-time.png" style="width:28rpx;height:28rpx;"></image>
       </view>
       <view class="content">
         <view class="title">
@@ -19,7 +19,7 @@
   <view class="input-cell-group input-cell-group-margin">
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/student-name.png" style="width:28rpx;height:26rpx;"></image>
+        <image src="/images/student-course-name.png" style="width:28rpx;height:26rpx;"></image>
       </view>
       <view class="content input-cell-border">
         <view class="title">
@@ -32,7 +32,7 @@
     </view>
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/student-info-basic-remark.png" style="width:26rpx;height:28rpx;"></image>
+        <image src="/images/student-course-last.png" style="width:26rpx;height:28rpx;"></image>
       </view>
       <view class="content">
         <view class="title">
@@ -48,7 +48,7 @@
   <view class="input-cell-group input-cell-group-margin">
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/student-phone.png" style="width:28rpx;height:28rpx;"></image>
+        <image src="/images/student-course-status.png" style="width:28rpx;height:28rpx;"></image>
       </view>
       <view class="content">
         <view class="title">

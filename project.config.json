@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 16,
+			"current": 17,
 			"list": [
 				{
 					"id": -1,
@@ -167,6 +167,12 @@
 					"name": "pages/students/course/course",
 					"pathName": "pages/students/course/course",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/members/index/index",
+					"pathName": "pages/members/index/index",
 					"scene": null
 				}
 			]

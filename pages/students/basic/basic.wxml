@@ -67,7 +67,7 @@
   <view class="input-cell-group input-cell-group-margin">
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/student-info-basic-reminder.png" style="width:30rpx;height:26rpx;"></image>
+        <image src="/images/student-basic-birthday.png" style="width:30rpx;height:26rpx;"></image>
       </view>
       <view class="content input-cell-border">
         <view class="title">

@@ -199,5 +199,8 @@
 </view>
 <view class="common-bottom "></view>
 
+<view class="add-button" bindtap="navigateToAdd">
+  <image src="/images/course-unwind.png"></image>
 
+</view>
 <!-- <mp-searchbar placeholder="请输入关键字搜索" bindselectresult="selectResult" search="{{search}}"></mp-searchbar> -->
