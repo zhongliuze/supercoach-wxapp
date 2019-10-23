@@ -1,1 +1,255 @@
 /* pages/mine/index/index.wxss */
+
+.header {
+  width: 750rpx;
+  height: 100%;
+  background-color: #584f60;
+  display: flex;
+  flex-direction: column;
+}
+
+.header .userinfo {
+  width: 720rpx;
+  margin-left: 30rpx;
+  margin-top: 40rpx;
+  margin-bottom: 64rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header .userinfo .avatar {
+  width: 90rpx;
+  height: 90rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.header .userinfo .avatar .user-avatar {
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.header .userinfo .avatar .user-avatar image {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 100%;
+}
+
+.header .userinfo .avatar .vip-status {
+  width: 30rpx;
+  height: 30rpx;
+  position: relative;
+  left: -30rpx;
+  top: 60rpx;
+}
+
+.header .userinfo .avatar .vip-status image {
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 100%;
+}
+
+.header .userinfo .info {
+  margin-left: 30rpx;
+  width: 350rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.header .userinfo .info .name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.header .userinfo .info .viptime {
+  font-size: 24rpx;
+  color: #e5e5e5;
+  margin-top: 15rpx;
+}
+
+.header .userinfo .info .viptime .link-text {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.header .userinfo .other {
+  margin-left: 30rpx;
+  width: 250rpx;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header .userinfo .other .vip-button{
+  width: 140rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #5fcd64;
+  font-size: 24rpx;
+  border-radius: 30px 0px 0px 30px;
+}
+
+.activity-group {
+  width: 750rpx;
+  background-color: #fff;
+  height: 160rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.activity-group .border {
+  border-right: 1px solid #eff0f1;
+}
+
+.activity-group .activity {
+  width: 375rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-group .activity .icon {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.activity-group .activity .icon image {
+  width: 56rpx;
+  height: 56rpx;
+}
+
+.activity-group .activity .content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 24rpx;
+}
+
+.activity-group .activity .content .title {
+  color: #181d24;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  font-weight: bold;
+}
+
+.activity-group .activity .content .subtitle {
+  color: #707888;
+  font-size: 22rpx;
+}
+
+.data-center {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32rpx;
+  background-color: #fff;
+  width: 750rpx;
+}
+
+.data-center .title {
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+  color: #181d24;
+  font-size: 36rpx;
+  font-weight: bold;
+}
+
+.data-center .data-list {
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 24rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 54rpx;
+}
+
+.data-center .data-list .data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.data-center .data-list .special-data {
+  margin-bottom: -36rpx;
+}
+
+.data-center .data-list .data .num {
+  color: #181d24;
+  font-size: 44rpx;
+  font-weight: bold;
+  line-height: 68rpx;
+}
+
+.data-center .data-list .data .name {
+  color: #707888;
+  font-size: 26rpx;
+}
+
+.data-center .data-list .data .add {
+  color: #FF6969;
+  font-size: 26rpx;
+  font-weight: bold;
+  position: relative;
+  top: -120rpx;
+  right: -60rpx;
+  height: 36rpx;
+}
+
+.button-group {
+  background-color: #FFF;
+  margin-top: 32rpx;
+  display: flex;
+  flex-direction: column;
+  width: 750rpx;
+}
+
+.button-group .last-list {
+  margin-bottom: 56rpx;
+}
+
+.button-group .button-list {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  width: 630rpx;
+  margin-left: 60rpx;
+  margin-top: 56rpx;
+  justify-content: space-between;
+}
+
+.button-group .button-list .button{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120rpx;
+}
+
+.button-group .button-list .button .icon{
+  width: 54rpx;
+  height: 54rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-group .button-list .button .icon image{
+  width: 54rpx;
+  height: 54rpx;
+}
+
+.button-group .button-list .button .name{
+  color: #181D24;
+  font-size: 28rpx;
+  margin-top: 15rpx;
+}

@@ -141,6 +141,23 @@
   align-items: center;
 }
 
+.price-info .span {
+  background-color: #ff5050;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 26rpx;
+  color: #fff;
+  width: 96rpx;
+  height: 48rpx;
+  border-radius:0rpx 10rpx 0rpx 10rpx;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin-top: -24rpx;
+  margin-left: -122rpx;
+}
+
 .price-info .price-group .selected {
   background-color: #effaef;
   border: 2rpx solid #5fcd64;
@@ -153,6 +170,11 @@
   line-height: 32rpx;
   font-weight: bold;
 }
+
+.price-info .price-group .price .span-time {
+  margin-top: 16rpx;
+}
+
 
 .price-info .price-group .price .money {
   margin-top: 30rpx;
@@ -314,24 +336,24 @@
   align-items: center;
 }
 
-.popup .title .name{
+.popup .title .name {
   width: 590rpx;
   margin-left: 50rpx;
   display: flex;
   justify-content: center;
-  color: #2B313D;
-  font-weight:bold;
+  color: #2b313d;
+  font-weight: bold;
   font-size: 36rpx;
 }
 
-.popup .title .close{
+.popup .title .close {
   width: 50rpx;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.popup .title .close image{
+.popup .title .close image {
   width: 24rpx;
   height: 24rpx;
 }
@@ -344,29 +366,29 @@
   flex-direction: column;
 }
 
-.popup .order-list .info{
+.popup .order-list .info {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  font-size:34rpx;
+  font-size: 34rpx;
   width: 686rpx;
   height: 120rpx;
-  border-bottom: 1rpx solid #EFF0F1;
+  border-bottom: 1rpx solid #eff0f1;
 }
 
-.popup .order-list .info .name{
+.popup .order-list .info .name {
   color: #707888;
 }
 
-.popup .order-list .info .value{
-  color: #181D24;
-  font-weight:bold;
+.popup .order-list .info .value {
+  color: #181d24;
+  font-weight: bold;
 }
 
-.popup .order-list .info .price{
-  color: #FF5050;
-  font-weight:bold;
+.popup .order-list .info .price {
+  color: #ff5050;
+  font-weight: bold;
 }
 
 .popup .pay-type {
@@ -389,14 +411,14 @@
   margin-bottom: 80rpx;
 }
 
-.popup .type-list .type{
+.popup .type-list .type {
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 690rpx;
 }
 
-.popup .type-list .type .icon{
+.popup .type-list .type .icon {
   width: 35rpx;
   height: 35rpx;
   display: flex;
@@ -404,19 +426,19 @@
   justify-content: center;
 }
 
-.popup .type-list .type .icon image{
+.popup .type-list .type .icon image {
   width: 34rpx;
   height: 32rpx;
 }
 
-.popup .type-list .type .name{
-  color: #181D24;
+.popup .type-list .type .name {
+  color: #181d24;
   margin-left: 16rpx;
   font-size: 34rpx;
   width: 355rpx;
 }
 
-.popup .type-list .type .select{
+.popup .type-list .type .select {
   width: 300rpx;
   display: flex;
   align-items: center;
@@ -424,7 +446,7 @@
   justify-content: flex-end;
 }
 
-.popup .type-list .type .select radio{
+.popup .type-list .type .select radio {
   zoom: 0.8;
 }
 

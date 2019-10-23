@@ -1,0 +1,159 @@
+<!--pages/members/record/record.wxml-->
+
+<view class="record-list">
+  <view class="record">
+    <view class="header">
+      <view class="icon">
+        <image src="/images/member-vip.png"></image>
+      </view>
+      <view class="title">
+        <text>VIP会员3天</text>
+      </view>
+      <view class="other">
+        <image src="/images/member-record-free.png"></image>
+      </view>
+    </view>
+    <view class="value-list">
+      <view class="value">
+        <text> 生效时间：2019年07月22日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 到期时间：2019年07月25日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 订单编号：2019071509244938232</text>
+      </view>
+      <view class="value">
+        <text> 购买时间：2019年07月25日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 支付方式：微信支付</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="record">
+    <view class="header">
+      <view class="icon">
+        <image src="/images/member-vip.png"></image>
+      </view>
+      <view class="title">
+        <text>VIP会员3天</text>
+      </view>
+      <view class="other">
+        <image src="/images/member-record-free.png"></image>
+      </view>
+    </view>
+    <view class="value-list">
+      <view class="value">
+        <text> 生效时间：2019年07月22日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 到期时间：2019年07月25日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 订单编号：2019071509244938232</text>
+      </view>
+      <view class="value">
+        <text> 购买时间：2019年07月25日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 支付方式：微信支付</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="record">
+    <view class="header">
+      <view class="icon">
+        <image src="/images/member-vip.png"></image>
+      </view>
+      <view class="title">
+        <text>VIP会员3天</text>
+      </view>
+      <view class="other">
+        <image src="/images/member-record-free.png"></image>
+      </view>
+    </view>
+    <view class="value-list">
+      <view class="value">
+        <text> 生效时间：2019年07月22日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 到期时间：2019年07月25日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 订单编号：2019071509244938232</text>
+      </view>
+      <view class="value">
+        <text> 购买时间：2019年07月25日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 支付方式：微信支付</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="record">
+    <view class="header">
+      <view class="icon">
+        <image src="/images/member-vip.png"></image>
+      </view>
+      <view class="title">
+        <text>VIP会员3天</text>
+      </view>
+      <view class="other">
+        <image src="/images/member-record-free.png"></image>
+      </view>
+    </view>
+    <view class="value-list">
+      <view class="value">
+        <text> 生效时间：2019年07月22日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 到期时间：2019年07月25日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 订单编号：2019071509244938232</text>
+      </view>
+      <view class="value">
+        <text> 购买时间：2019年07月25日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 支付方式：微信支付</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="record">
+    <view class="header">
+      <view class="icon">
+        <image src="/images/member-vip.png"></image>
+      </view>
+      <view class="title">
+        <text>VIP会员3天</text>
+      </view>
+      <view class="other">
+        <image src="/images/member-record-free.png"></image>
+      </view>
+    </view>
+    <view class="value-list">
+      <view class="value">
+        <text> 生效时间：2019年07月22日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 到期时间：2019年07月25日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 订单编号：2019071509244938232</text>
+      </view>
+      <view class="value">
+        <text> 购买时间：2019年07月25日 09:22</text>
+      </view>
+      <view class="value">
+        <text> 支付方式：微信支付</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="common-bottom"></view>

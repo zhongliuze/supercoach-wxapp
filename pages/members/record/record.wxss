@@ -1,0 +1,70 @@
+/* pages/members/record/record.wxss */
+
+.record-list {
+  margin-top: 24rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.record {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin-bottom: 32rpx;
+}
+
+.record .header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 750rpx;
+  height: 80rpx;
+  border-bottom: 1rpx solid #eff0f1;
+}
+
+.record .header .icon {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 60rpx;
+  height: 30rpx;
+}
+
+.record .header .icon image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.record .header .title {
+  margin-left: 16rpx;
+  font-size: 30rpx;
+  color: #181d24;
+  font-weight: bold;
+  width: 444rpx;
+}
+
+.record .header .other {
+  width: 200rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.record .header .other image {
+  width: 34rpx;
+  height: 34rpx;
+}
+
+.record .value-list {
+  width: 690rpx;
+  margin-top: 30rpx;
+  margin-left: 30rpx;
+  margin-bottom: 33rpx;
+  font-size: 26rpx;
+  color: #707888;
+}
+.record .value-list .value {
+  margin-bottom: 15rpx;
+}
+

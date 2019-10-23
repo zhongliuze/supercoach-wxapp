@@ -1,2 +1,200 @@
 <!--pages/mine/index/index.wxml-->
-<text>pages/mine/index/index.wxml</text>
+<view class="container">
+  <view class="header">
+    <view class="userinfo">
+      <view class="avatar">
+        <view class="user-avatar">
+          <image src="/images/avatar.jpeg" mode="aspectFill"></image>
+        </view>
+        <view class='vip-status'>
+          <image src="/images/member-vip.png"></image>
+          <!-- <image src="/images/member-novip.png"></image> -->
+        </view>
+      </view>
+      <view class="info">
+        <view class="name">
+          <text>二狗子没有夏天</text>
+        </view>
+        <view class="viptime">
+          <!-- <text>开通会员，享专属特权</text> -->
+          <text>会员有效期至：2019-09-15</text>
+          <!-- <text>您的会员已到期，<text class="link-text">立即续费</text></text> -->
+        </view>
+      </view>
+      <view class="other">
+        <view class="vip-button">
+          <text>我的主页</text>
+        </view>
+      </view>
+
+    </view>
+
+  </view>
+
+  <view class="activity-group">
+    <view class="activity border">
+      <view class="icon">
+        <image src="/images/mine-vip.png" style="width:56rpx;height:46rpx;"></image>
+      </view>
+      <view class="content">
+        <text class="title">开通VIP会员</text>
+        <text class="subtitle">尊享12大特权</text>
+      </view>
+    </view>
+    <view class="activity">
+      <view class="icon">
+        <image src="/images/mine-invite.png" style="width:56rpx;height:50rpx;"></image>
+      </view>
+      <view class="content">
+        <text class="title">邀请好友</text>
+        <text class="subtitle">免费领取VIP会员</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="data-center">
+    <view class="title">
+      <text>本月数据</text>
+    </view>
+    <view class="data-list">
+      <view class="data">
+        <view class="num">
+          <text>16</text>
+        </view>
+        <view class="name">
+          <text>待上课时</text>
+        </view>
+      </view>
+      <view class="data">
+        <view class="num">
+          <text>50</text>
+        </view>
+        <view class="name">
+          <text>已上课时</text>
+        </view>
+      </view>
+      <view class="data special-data">
+        <view class="num">
+          <text>250</text>
+        </view>
+        <view class="name">
+          <text>学员总数</text>
+        </view>
+        <view class="add">
+          <text>+20</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="button-group">
+    <view class="button-list">
+      <view class="button">
+        <view class="icon">
+          <image src="/images/mine-invite-student.png" style="width:52rpx;height:52rpx;"></image>
+        </view>
+        <view class="name">
+          <text>邀请学员</text>
+        </view>
+      </view>
+      <view class="button">
+        <view class="icon">
+          <image src="/images/mine-data-center.png" style="width:54rpx;height:52rpx;"></image>
+        </view>
+        <view class="name">
+          <text>数据中心</text>
+        </view>
+      </view>
+      <view class="button">
+        <view class="icon">
+          <image src="/images/mine-homepage.png" style="width:54rpx;height:52rpx;"></image>
+        </view>
+        <view class="name">
+          <text>编辑主页</text>
+        </view>
+      </view>
+    </view>
+    <view class="button-list">
+      <view class="button">
+        <view class="icon">
+          <image src="/images/mine-action.png" style="width:50rpx;height:52rpx;"></image>
+        </view>
+        <view class="name">
+          <text>动作管理</text>
+        </view>
+      </view>
+      <view class="button">
+        <view class="icon">
+          <image src="/images/mine-lesson.png" style="width:44rpx;height:52rpx;"></image>
+        </view>
+        <view class="name">
+          <text>备课管理</text>
+        </view>
+      </view>
+      <view class="button">
+        <view class="icon">
+          <image src="/images/mine-order.png" style="width:52rpx;height:52rpx;"></image>
+        </view>
+        <view class="name">
+          <text>订单管理</text>
+        </view>
+      </view>
+    </view>
+    <view class="button-list last-list">
+      <view class="button">
+        <view class="icon">
+          <image src="/images/mine-admission.png" style="width:42rpx;height:52rpx;"></image>
+        </view>
+        <view class="name">
+          <text>招生海报</text>
+        </view>
+      </view>
+      <view class="button">
+        <view class="icon">
+          <image src="/images/mine-homepage.png" style="width:52rpx;height:52rpx;"></image>
+        </view>
+        <view class="name">
+          <text>短信群发</text>
+        </view>
+      </view>
+      <view class="button">
+        <view class="icon">
+          <image src="/images/mine-novice.png" style="width:48rpx;height:52rpx;"></image>
+        </view>
+        <view class="name">
+          <text>新手攻略</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="button-group">
+    <view class="button-list last-list">
+      <view class="button">
+        <view class="icon">
+          <image src="/images/mine-setting.png" style="width:48rpx;height:52rpx;"></image>
+        </view>
+        <view class="name">
+          <text>设置</text>
+        </view>
+      </view>
+      <view class="button">
+        <view class="icon">
+          <image src="/images/mine-contact.png" style="width:56rpx;height:52rpx;"></image>
+        </view>
+        <view class="name">
+          <text>联系客服</text>
+        </view>
+      </view>
+      <view class="button">
+        <view class="icon">
+          <image src="/images/mine-feedback.png" style="width:53rpx;height:51rpx;"></image>
+        </view>
+        <view class="name">
+          <text>建议反馈</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="common-bottom"></view>

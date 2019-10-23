@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/treaty/member/member",
+    "pages/members/exchange/exchange",
+    "pages/members/record/record",
     "pages/members/index/index",
     "pages/students/course/course",
     "pages/students/record/record",

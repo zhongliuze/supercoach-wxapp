@@ -1,24 +1,18 @@
-// pages/members/index/index.js
+// pages/members/exchange/exchange.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    inputMore: false,
-    fixedBottomButtonMargin: 0, // 吸底按钮的自适应高度
-    selectPrice: 2, // 选择套餐类型
-    agreement: true, // 勾选服务协议
-    orderPopup: false, // 确认弹窗
+    confirmPopup: false, // 确认兑换弹窗
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      fixedBottomButtonMargin: wx.getStorageSync('fixedBottomButtonMargin'), // 设置吸底按钮自适应高度
-    });
+
   },
 
   /**
@@ -71,35 +65,25 @@ Page({
   },
 
   /**
-   * 选择套餐
+   * 打开确认弹窗
    */
-  selectPrice: function(event) {
+  openConirmPopup: function(event) {
     this.setData({
-      selectPrice: event.currentTarget.dataset.price,
+      confirmPopup: true,
     });
   },
 
   /**
-   * 勾选服务协议
+   * 关闭确认弹窗
    */
-  bindRadio: function(event) {
+  closeConirmPopup: function (event) {
     this.setData({
-      agreement: !this.data.agreement,
+      confirmPopup: false,
     });
   },
 
+  /**
+   * 弹窗后禁止滚动
+   */
   catchtouchmove: function () { },
-
-  closePopup: function (event) {
-    console.log(event);
-    this.setData({
-      'orderPopup': false,
-    });
-  }, 
-
-  openPopup: function(event) {
-    this.setData({
-      'orderPopup': true,
-    });
-  }, 
 })

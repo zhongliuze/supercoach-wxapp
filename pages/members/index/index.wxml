@@ -8,6 +8,7 @@
         </view>
         <view class='vip-status'>
           <image src="/images/member-vip.png"></image>
+           <!-- <image src="/images/member-novip.png"></image> -->
         </view>
       </view>
       <view class="info">
@@ -65,9 +66,13 @@
           <text>￥50</text>
         </view>
       </view>
+
       <view class="price {{selectPrice == 2? 'selected': ''}}" bindtap="selectPrice" data-price="2">
-        <view class="time">
-          <text>1个月</text>
+        <view class="span">
+          <text>超值</text>
+        </view>
+        <view class="time span-time">
+          <text>12个月</text>
         </view>
         <view class="money">
           <text class="symbol">￥</text>
@@ -173,7 +178,7 @@
 
 <block wx:if="{{orderPopup}}">
   <view class="mongolia" catchtouchmove="catchtouchmove"></view>
-  <view class="popup-view"  catchtap="closePopup" catchtouchmove="catchtouchmove">
+  <view class="popup-view" catchtap="closePopup" catchtouchmove="catchtouchmove">
     <view class="popup" catchtap="catchtouchmove">
       <view class="title">
         <view class="name">

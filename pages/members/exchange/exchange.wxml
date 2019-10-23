@@ -1,0 +1,52 @@
+<!--pages/members/exchange/exchange.wxml-->
+<view class="subtitle">
+  <text>兑换成功后即可畅享会员特权</text>
+</view>
+<view class="exchange-input">
+  <view class="title">
+    <text>兑换码</text>
+  </view>
+  <view class="input">
+    <input placeholder="请输入兑换码，区分大小写" placeholder-class="input-placeholder"></input>
+  </view>
+</view>
+<view class="exchange-button" bindtap="openConirmPopup">
+  <button>立即兑换</button>
+</view>
+
+<view class="remarks">
+  <view class="title">
+    <text>如何获取兑换码？</text>
+  </view>
+  <view class="content">
+    <text>我们会不定期举行一些活动，届时就会有兑换码砸向幸运的你啦~请注意关注我们的公众号“私教小助手”哦。</text>
+  </view>
+</view>
+
+<block wx:if="{{confirmPopup}}">
+<view class="mongolia" catchtouchmove="catchtouchmove"></view>
+<view class="popup-view" catchtap="closeConirmPopup" catchtouchmove="catchtouchmove">
+  <view class="popup"catchtap="catchtouchmove">
+    <view class="title">
+      <text>您的兑换码包含</text>
+    </view>
+    <view class="icon">
+      <image src="/images/vip-icon.png"></image>
+    </view>
+    <view class="content">
+      <view class="name">
+        <text>12个月会员</text>
+      </view>
+      <view class="value">
+        <text>有效期至2020年08月05日</text>
+      </view>
+    </view>
+    <view class="button" catchtap="submitRefuse">
+      <button>确认兑换</button>
+    </view>
+  </view>
+  <view class="close-button" catchtap="closeConirmPopup">
+    <image src="/images/order-popup-close.png"></image>
+  </view>
+</view>
+</block>

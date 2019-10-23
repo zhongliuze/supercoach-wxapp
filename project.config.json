@@ -48,7 +48,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 17,
+			"current": 21,
 			"list": [
 				{
 					"id": -1,
@@ -173,6 +173,34 @@
 					"id": -1,
 					"name": "pages/members/index/index",
 					"pathName": "pages/members/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/members/record/record",
+					"pathName": "pages/members/record/record",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/members/exchange/exchange",
+					"pathName": "pages/members/exchange/exchange",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/members/exchange/exchange",
+					"pathName": "pages/treaty/member/member",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/index/index",
+					"pathName": "pages/mine/index/index",
 					"scene": null
 				}
 			]

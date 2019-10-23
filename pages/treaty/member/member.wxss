@@ -1,0 +1,14 @@
+/* pages/treaty/member/member.wxss */
+page {
+  background-color: #FFF;
+}
+
+.content {
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+  color: #181D24;
+  font-size: 30rpx;
+  line-height: 60rpx;
+}
