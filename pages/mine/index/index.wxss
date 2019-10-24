@@ -253,3 +253,19 @@
   font-size: 28rpx;
   margin-top: 15rpx;
 }
+.button-group .button-list .button button{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120rpx;
+  padding: 0;
+line-height: inherit;
+
+  background-color: #FFF;
+  border: 0;
+}
+
+.button-group .button-list .button button::after{
+  border: 0;
+}

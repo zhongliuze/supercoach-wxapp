@@ -1,20 +1,18 @@
-// pages/mine/index/index.js
+// pages/mine/order/index/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    customerPhone: '10010', // 客服电话
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      'customerPhone': '+8618020220001', // 客服电话
-    });
+
   },
 
   /**
@@ -67,20 +65,11 @@ Page({
   },
 
   /**
-   * 点击进入二级页面
+   * 跳转订单详情页
    */
-  bindButton: function(event) {
+  navigateToDetail: function(event) {
     wx.navigateTo({
-      url: '../' + event.currentTarget.dataset.url,
-    })
-  },
-
-  /**
-   * 拨打客服电话
-   */
-  makePhoneCall: function(event) {
-    wx.makePhoneCall({
-      phoneNumber: this.data.customerPhone,
+      url: '../detail/detail',
     })
   }
 })

@@ -1,0 +1,68 @@
+/* pages/mine/order/index/index.wxss */
+
+.order-list {
+  margin-top: 24rpx;
+  width: 750rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-list .order {
+  width: 720rpx;
+  margin-left: 30rpx;
+  height: 196rpx;
+  border-bottom: 1rpx solid #eff0f1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.order-list .order .icon {
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-list .order .icon image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.order-list .order .icon .message {
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.order-list .order .content {
+  margin-left: 40rpx;
+  display: flex;
+  flex-direction: column;
+  width: 275rpx;
+}
+
+.order-list .order .content .title {
+  color: #181d24;
+  font-size: 34rpx;
+  line-height: 68rpx;
+  font-weight:bold;
+}
+
+.order-list .order .content .subtitle {
+  color: #707888;
+  font-size: 26rpx;
+}
+
+.order-list .order .value {
+  display: flex;
+  justify-content: flex-end;
+  width: 275rpx;
+  color: #707888;
+  font-size: 36rpx;
+}
+
+.order-list .noborder {
+  border: 0rpx;
+}

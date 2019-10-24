@@ -1,0 +1,163 @@
+/* pages/mine/order/detail/detail.wxss */
+
+.header {
+  margin-top: 24rpx;
+  width: 750rpx;
+  height: 196rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+}
+
+.header .icon {
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30rpx;
+}
+
+.header .icon image {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.header .icon .message {
+  width: 90rpx;
+  height: 90rpx;
+}
+
+.header .content {
+  width: 300rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction: column;
+  margin-left: 30rpx;
+  justify-content: center;
+}
+
+.header .content .title {
+  color: #181d24;
+  font-size: 34rpx;
+  line-height: 64rpx;
+  font-weight:bold;
+}
+
+.header .content .subtitle {
+  color: #707888;
+  font-size: 26rpx;
+}
+
+.header .value {
+  height: 70rpx;
+  width: 250rpx;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  color: #5fcd64;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40rpx;
+}
+
+.info-group .info-title {
+  color: #a3a4a6;
+  font-size: 26rpx;
+  margin-left: 30rpx;
+}
+
+.info-group .info-value {
+  width: 750rpx;
+  background-color: #fff;
+  display: felx;
+  margin-top: 24rpx;
+}
+
+.info-group .info-value .value-group {
+  margin-top: 48rpx;
+  margin-left: 30rpx;
+  width: 690rpx;
+  margin-bottom: 48rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-group .info-value .value-group .value-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 28rpx;
+}
+
+.info-group .info-value .value-group .value-line .name {
+  width: 148rpx;
+  color: #707888;
+  line-height: 68rpx;
+}
+
+.info-group .info-value .value-group .value-line .value {
+  color: #181d24;
+  line-height: 68rpx;
+}
+
+.info-group .info-value .value-group .pay-line{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
+  color: #181D24;
+  line-height: 68rpx;
+}
+
+.info-group .info-value .value-group .pay-sum-line{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 30rpx;
+  margin-bottom: 5rpx;
+}
+
+.info-group .info-value .value-group .pay-sum-line .name{
+  color: #181d24;
+  font-size: 28rpx;
+}
+
+.info-group .info-value .value-group .pay-sum-line .value{
+  color: #FFAF15;
+  font-size: 38rpx;
+  margin-left: 22rpx;
+  font-weight:bold;
+}
+
+.concat {
+  display: flex;
+  justify-content: center;
+  color: #707888;
+  font-size: 26rpx;
+  margin-top: 80rpx;
+}
+
+.concat button{
+  width: 160rpx;
+  height: 50rpx;
+  color: #707888;
+  font-size: 26rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  background-color: #f7f7f7;
+}
+
+.concat button::after{
+  border: 0;
+}

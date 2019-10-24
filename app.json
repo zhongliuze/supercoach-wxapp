@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/course/index/index",
     "pages/treaty/member/member",
     "pages/members/exchange/exchange",
     "pages/members/record/record",
@@ -14,13 +15,16 @@
     "pages/students/add/add",
     "pages/order/detail/detail",
     "pages/order/index/index",
-    "pages/course/index/index",
+    
     "pages/course/custom/custom",
     "pages/course/course/course",
     "pages/course/repeat/repeat",
     "pages/course/remind/remind",
     "pages/students/index/index",
     "pages/mine/index/index",
+    "pages/mine/order/index/index",
+    "pages/mine/order/detail/detail",
+
     "pages/index/index",
     "pages/logs/logs"
   ],

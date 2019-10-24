@@ -1,0 +1,78 @@
+<!--pages/mine/order/index/index.wxml-->
+<view class="order-list">
+  <view class="order" bindtap="navigateToDetail">
+    <view class="icon">
+      <image src="/images/mine-order-vip-1.png"></image>
+    </view>
+    <view class="content">
+      <text class="title">1个月VIP会员</text>
+      <text class="subtitle">2019-05-14 13:32:44</text>
+    </view>
+    <view class="value">
+      <text>￥9.00</text>
+    </view>
+  </view>
+  <view class="order">
+    <view class="icon">
+      <image src="/images/mine-order-vip-1.png"></image>
+    </view>
+    <view class="content">
+      <text class="title">1个月VIP会员</text>
+      <text class="subtitle">2019-05-14 13:32:44</text>
+    </view>
+    <view class="value">
+      <text>￥9.00</text>
+    </view>
+  </view>
+  <view class="order">
+    <view class="icon">
+      <image src="/images/mine-order-vip-3.png"></image>
+    </view>
+    <view class="content">
+      <text class="title">1个月VIP会员</text>
+      <text class="subtitle">2019-05-14 13:32:44</text>
+    </view>
+    <view class="value">
+      <text>￥9.00</text>
+    </view>
+  </view>
+  <view class="order">
+    <view class="icon">
+      <image src="/images/mine-order-vip-7.png"></image>
+    </view>
+    <view class="content">
+      <text class="title">1个月VIP会员</text>
+      <text class="subtitle">2019-05-14 13:32:44</text>
+    </view>
+    <view class="value">
+      <text>￥9.00</text>
+    </view>
+  </view>
+  <view class="order">
+    <view class="icon">
+      <image src="/images/mine-order-message.png" class="message"></image>
+    </view>
+    <view class="content">
+      <text class="title">1个月VIP会员</text>
+      <text class="subtitle">2019-05-14 13:32:44</text>
+    </view>
+    <view class="value">
+      <text>￥9.00</text>
+    </view>
+  </view>
+
+  <view class="order noborder">
+    <view class="icon">
+      <image src="/images/mine-order-vip-12.png" class="message"></image>
+    </view>
+    <view class="content">
+      <text class="title">1个月VIP会员</text>
+      <text class="subtitle">2019-05-14 13:32:44</text>
+    </view>
+    <view class="value">
+      <text>￥9.00</text>
+    </view>
+  </view>
+
+</view>
+<view class="common-bottom"></view>

@@ -47,6 +47,10 @@
 			"currentL": -1,
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 21,
 			"list": [
@@ -201,6 +205,27 @@
 					"id": -1,
 					"name": "pages/mine/index/index",
 					"pathName": "pages/mine/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/order/index/index",
+					"pathName": "pages/order/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/order/index/index",
+					"pathName": "pages/mine/order/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/order/detail/detail",
+					"pathName": "pages/mine/order/detail/detail",
 					"scene": null
 				}
 			]
