@@ -1,0 +1,97 @@
+<!--pages/mine/setting/common/common.wxml-->
+<view class="container-input">
+  <view class="common-input-group">
+    <view class="input-line">
+      <view class="name">
+        <view class="title">
+          <text>优先展示备注名</text>
+        </view>
+        <view class="subtitle">
+          <text>在学员列表中优先展示学员的备注名称</text>
+        </view>
+      </view>
+      <view class="value">
+        <switch></switch>
+      </view>
+    </view>
+  </view>
+
+  <view class="common-input-group">
+    <view class="input-line">
+      <view class="name">
+        <view class="title">
+          <text>自动完成课程</text>
+        </view>
+        <view class="subtitle">
+          <text>课程结束后自动修改课程状态为已完成</text>
+        </view>
+      </view>
+      <view class="value">
+        <switch></switch>
+      </view>
+    </view>
+  </view>
+
+  <view class="common-input-group">
+    <view class="input-line">
+      <view class="name">
+        <view class="title">
+          <text>课时提醒规则</text>
+        </view>
+        <view class="subtitle">
+          <text>当会员剩余课时小于3时在列表中标记提醒</text>
+        </view>
+      </view>
+      <view class="value">
+        <text>剩余3课时</text>
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="result-input-group">
+    <view class="input-line">
+      <view class="name">
+        <text>单节课默认时长</text>
+      </view>
+      <view class="value">
+        <text>1小时</text>
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+    <view class="input-line no-border">
+      <view class="name">
+        <text>学员列表副标题展示</text>
+      </view>
+      <view class="value">
+        <text>剩余课时数</text>
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="result-input-group">
+    <view class="input-line no-border">
+      <view class="name">
+        <text>学员通知方式</text>
+      </view>
+      <view class="value">
+        <text>短息通知</text>
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="result-input-group">
+    <view class="input-line no-border">
+      <view class="name">
+        <text>恢复默认课程模块内容</text>
+      </view>
+      <view class="value">
+        
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="common-bottom"></view>

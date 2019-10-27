@@ -1,0 +1,55 @@
+/* pages/mine/setting/account/index/index.wxss */
+
+.phone-line {
+  width: 750rpx;
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+  color: #181d24;
+  font-size: 34rpx;
+  background-color: #fff;
+}
+
+.phone-line .name {
+  width: 140rpx;
+  margin-left: 30rpx;
+}
+
+.phone-line .phone {
+  width: 300rpx;
+}
+
+.phone-line .change {
+  width: 250rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.phone-line .change .change-button {
+  min-width: 150rpx;
+  height: 52rpx;
+  background: #5fcd64;
+  border-radius: 26rpx;
+  color: #FFF;
+  font-size: 22rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+
+.login-out {
+  margin-top: 48rpx;
+  width: 750rpx;
+  height: 120rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 34rpx;
+  color: #FF3D3D;
+  font-weight: bold;
+  background-color: #FFF;
+}

@@ -1,0 +1,54 @@
+<!--pages/mine/setting/index/index.wxml-->
+<view class="container-input">
+  <view class="button-line-list">
+    <view class="button-line">
+      <view class="name">
+        <text>账号与安全</text>
+      </view>
+      <view class="more">
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+    <view class="button-line no-border">
+      <view class="name">
+        <text>通用</text>
+      </view>
+      <view class="more">
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="button-line-list">
+    <view class="button-line no-border">
+      <view class="name">
+        <text>清除缓存</text>
+      </view>
+      <view class="more">
+        <text>79M</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="button-line-list">
+    <view class="button-line">
+      <view class="name">
+        <text>帮助与反馈</text>
+      </view>
+      <view class="more">
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+    <view class="button-line no-border">
+      <view class="name">
+        <text>关于</text>
+      </view>
+      <view class="more">
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<view class="common-bottom"></view>

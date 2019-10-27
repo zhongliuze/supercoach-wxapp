@@ -1,0 +1,19 @@
+<!--pages/mine/setting/account/index/index.wxml-->
+<view class="container-input">
+  <view class="phone-line">
+    <view class="name">
+      <text>手机号</text>
+    </view>
+    <view class="phone">
+      <text>18020220001</text>
+    </view>
+    <view class="change">
+      <view class="change-button" bindtap="navigateToChange">
+        <text>更换手机号</text>
+      </view>
+    </view>
+  </view>
+  <view class="login-out">
+    <text>退出登录</text>
+  </view>
+</view>

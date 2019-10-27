@@ -1,0 +1,215 @@
+/* pages/login/login.wxss */
+
+page {
+  background-color: #fff;
+}
+
+.header {
+  width: 612rpx;
+  margin-left: 69rpx;
+  margin-top: 78rpx;
+}
+
+.header .title {
+  color: #181d24;
+  font-size: 56rpx;
+}
+
+.header .subtitle {
+  color: #707888;
+  font-size: 26rpx;
+  margin-top: 29rpx;
+}
+
+.login-group {
+  margin-top: 164rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-group .wechat {
+  width: 690rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 30rpx;
+}
+
+.login-group .wechat .recommend {
+  width: 88rpx;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  left: 39rpx;
+  top: 0rpx;
+  z-index: 9999;
+}
+
+.login-group .wechat .recommend image {
+  width: 88rpx;
+  height: 80rpx;
+}
+
+.login-group .wechat button {
+  width: 611rpx;
+  height: 98rpx;
+  background: #5fcd64;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-left: -50rpx;
+}
+
+.login-group .wechat button::after {
+  border: 0;
+}
+
+.login-group .vercode {
+  width: 690rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30rpx;
+  margin-top: 72rpx;
+}
+
+.login-group .vercode button {
+  width: 611rpx;
+  height: 98rpx;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #181d24;
+  font-size: 32rpx;
+  background-color: #fff;
+}
+
+.login-group .login-input {
+  width: 612rpx;
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 69rpx;
+  color: #181d24;
+  font-size: 34rpx;
+  border-bottom: 1rpx solid #eff0f1;
+  margin-bottom: 32rpx;
+}
+
+.login-group .login-input input {
+  width: 612rpx;
+}
+
+.login-group .input-placeholder {
+  color: #c9c9c9;
+}
+
+.login-group .verfiy-input {
+  width: 612rpx;
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 69rpx;
+  color: #181d24;
+  font-size: 34rpx;
+  border-bottom: 1rpx solid #eff0f1;
+  margin-bottom: 32rpx;
+}
+
+.login-group .verfiy-input input {
+  width: 312rpx;
+}
+
+.login-group .verfiy-input .verfiy {
+  width: 300rpx;
+  display: flex;
+  justify-content: flex-end;
+  color: #2b87ff;
+  font-size: 32rpx;
+}
+
+.login-group .verfiy-input .verfiy .get-verfiy{
+  color: #c9c9c9;
+}
+
+.login-group .login-button {
+  margin-top: 140rpx;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-group .login-button .disabled{
+  background-color: #D4D4D4;
+}
+
+.login-group .login-button button {
+  width: 610rpx;
+  height: 99rpx;
+  background: #5fcd64;
+  border-radius: 10rpx;
+  color: #fff;
+  font-size: 32rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+}
+
+.login-group .login-button button::after {
+  border: 0;
+}
+
+.login-group .change {
+  margin-top: 64rpx;
+  color: #707888;
+  font-size: 26rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.protocol {
+  display: flex;
+  align-items: center;
+  width: 750rpx;
+  justify-content: center;
+  flex-direction: row;
+  position: absolute;
+  bottom: 96rpx;
+}
+
+.protocol .check {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.protocol .check radio {
+  zoom: 0.5;
+}
+
+.protocol .content {
+  font-size: 24rpx;
+  color: #707888;
+  margin-left: 5rpx;
+}
+
+.protocol .content .link {
+  color: #2b87ff;
+}

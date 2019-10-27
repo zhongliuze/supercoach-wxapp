@@ -1,0 +1,35 @@
+/* pages/mine/setting/about/about.wxss */
+
+.header {
+  margin-top: 60rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 64rpx;
+}
+
+.header .icon {
+  width: 180rpx;
+  height: 180rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header .icon image {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 100%;
+}
+
+.header .version {
+  color: #cfcfcf;
+  font-size: 24rpx;
+  margin-top: 24rpx;
+  line-height: 24rpx;
+}
+
+.button-line-list .button-line .more{
+  color: #707888;
+}

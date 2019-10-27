@@ -1,0 +1,70 @@
+<!--pages/mine/setting/about/about.wxml-->
+<view class="header">
+  <view class="icon">
+    <image src="/images/avatar.jpeg"></image>
+  </view>
+  <view class="version">
+    <text>Version 1.0.0</text>
+  </view>
+</view>
+
+<view class="button-line-list">
+  <view class="button-line">
+    <view class="name">
+      <text>联系邮箱</text>
+    </view>
+    <view class="more">
+      <text>fit@xianshikeji.com</text>
+    </view>
+  </view>
+
+  <view class="button-line">
+    <view class="name">
+      <text>新浪微博</text>
+    </view>
+    <view class="more">
+      <text>超级私教Pro</text>
+    </view>
+  </view>
+
+  <view class="button-line no-border">
+    <view class="name">
+      <text>微信公众号</text>
+    </view>
+    <view class="more">
+      <text>超级私教Pro</text>
+    </view>
+  </view>
+</view>
+
+<view class="button-line-list">
+  <view class="button-line">
+    <view class="name">
+      <text>用户协议</text>
+    </view>
+    <view class="more">
+      <image src="/images/arrow-right.png"></image>
+    </view>
+  </view>
+  <view class="button-line no-border">
+    <view class="name">
+      <text>隐私政策</text>
+    </view>
+    <view class="more">
+      <image src="/images/arrow-right.png"></image>
+    </view>
+  </view>
+</view>
+
+<view class="button-line-list">
+  <view class="button-line no-border">
+    <view class="name">
+      <text>给私教小助手点赞</text>
+    </view>
+    <view class="more">
+      <image src="/images/arrow-right.png"></image>
+    </view>
+  </view>
+</view>
+
+<view class="common-bottom"></view>

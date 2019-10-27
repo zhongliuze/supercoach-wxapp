@@ -18,13 +18,20 @@
     
     "pages/course/custom/custom",
     "pages/course/course/course",
+    "pages/course/students/students",
     "pages/course/repeat/repeat",
     "pages/course/remind/remind",
     "pages/students/index/index",
     "pages/mine/index/index",
     "pages/mine/order/index/index",
+    "pages/mine/setting/index/index",
+    "pages/mine/setting/about/about",
+    "pages/mine/setting/common/common",
+    "pages/mine/setting/account/index/index",
+    "pages/mine/setting/account/change/change",
     "pages/mine/order/detail/detail",
-
+    "pages/login/login",
+    
     "pages/index/index",
     "pages/logs/logs"
   ],

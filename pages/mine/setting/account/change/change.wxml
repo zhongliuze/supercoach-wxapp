@@ -1,0 +1,46 @@
+<!--pages/mine/setting/account/change/change.wxml-->
+<view class="container-input">
+  <view class="input-common-cells-group">
+    <view class="input-cell">
+      <view class="name">
+        <text wx:if="{{verifyOld}}">新手机号</text>
+        <text wx:else>原手机号</text>
+      </view>
+      <view class="input">
+        <input placeholder="请输入新手机号码" placeholder-class="input-placeholder" value="{{phoneNumber}}" bindinput="inputPhoneNumber" wx:if="{{verifyOld}}"></input>
+        <input placeholder="请输入原手机号码" placeholder-class="input-placeholder" value="{{phoneNumber}}" bindinput="inputPhoneNumber" wx:else></input>
+      </view>
+    </view>
+    <view class="input-cell no-border">
+      <view class="name">
+        <text>验证码</text>
+      </view>
+      <view class="verify-input">
+        <input placeholder="请输入验证码" placeholder-class="input-placeholder" bindinput="inputVerify" value="{{verifyCode}}"></input>
+      </view>
+
+      <view class="verify-button" wx:if="{{phoneNumber}}">
+        <view class="verify disabled" wx:if="{{getVerifyCode && getVerifyTime > 0}}">
+          <text>重新获取 {{getVerifyTime}}秒</text>
+        </view>
+        <view class="verify" wx:elif="{{getVerifyCode && getVerifyTime < 1}}" bindtap="getVerifyCode">
+          <text>重新获取</text>
+        </view>
+        <view class="verify" bindtap="getVerifyCode" wx:else>
+          <text>获取验证码</text>
+        </view>
+      </view>
+      <view class="verify-button" wx:else>
+        <view class="verify disabled">
+          <text>获取验证码</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="input-common-button">
+    <button wx:if="{{phoneNumber && verifyCode && verifyOld}}" bindtap="verifyNewPhone">提交</button>
+    <button wx:elif="{{phoneNumber && verifyCode && !verifyOld}}" bindtap="verifyOldPhone">提交</button>
+    <button class="default-button" wx:else>提交</button>
+  </view>
+</view>

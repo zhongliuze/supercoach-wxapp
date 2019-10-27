@@ -1,0 +1,112 @@
+/* pages/mine/setting/account/change/change.wxss */
+
+.input-common-cells-group {
+  width: 750rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.input-common-cells-group .input-cell {
+  width: 720rpx;
+  height: 120rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1rpx solid #eff0f1;
+  color: #181d24;
+  font-size: 34rpx;
+}
+
+.input-common-cells-group .no-border {
+  border: 0;
+}
+
+.input-common-cells-group .input-cell .name {
+  width: 140rpx;
+  margin-left: 30rpx;
+  display: flex;
+}
+
+.input-common-cells-group .input-cell .input {
+  width: 518rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 32rpx;
+}
+
+.input-common-cells-group .input-cell .input input {
+  width: 518rpx;
+}
+
+.input-common-cells-group .input-cell .input-placeholder {
+  color: #cfcfcf;
+  font-size: 34rpx;
+}
+
+.input-common-cells-group .input-cell .verify-input {
+  width: 218rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 32rpx;
+}
+
+.input-common-cells-group .input-cell .verify-input input {
+  width: 218rpx;
+}
+
+.input-common-cells-group .input-cell .verify-button {
+  width: 300rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.input-common-cells-group .input-cell .verify-button .verify {
+  padding-left: 28rpx;
+  padding-right: 28rpx;
+  height: 52rpx;
+  border-radius: 26rpx;
+  background-color: #5fcd64;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 22rpx;
+}
+
+.input-common-cells-group .input-cell .verify-button .disabled {
+  background-color: #D4D4D4;
+}
+
+.input-common-button {
+  width: 100%;
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 48rpx;
+}
+
+.input-common-button button {
+  width: 690rpx;
+  height: 88rpx;
+  background: #5fcd64;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 32rpx;
+  border: 0;
+}
+
+.input-common-button button::after {
+  border: 0;
+}
+
+.input-common-button .default-button {
+  background: #C7C7C7;
+}

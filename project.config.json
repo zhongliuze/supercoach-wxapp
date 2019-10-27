@@ -52,7 +52,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 21,
+			"current": 31,
 			"list": [
 				{
 					"id": -1,
@@ -226,6 +226,55 @@
 					"id": -1,
 					"name": "pages/mine/order/detail/detail",
 					"pathName": "pages/mine/order/detail/detail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/setting/index/index",
+					"pathName": "pages/mine/setting/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/setting/about/about",
+					"pathName": "pages/mine/setting/about/about",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/setting/account/index/index",
+					"pathName": "pages/mine/setting/account/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/setting/account/change/change",
+					"pathName": "pages/mine/setting/account/change/change",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/setting/common/common",
+					"pathName": "pages/mine/setting/common/common",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/login/login",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/students/students",
+					"pathName": "pages/course/students/students",
 					"scene": null
 				}
 			]

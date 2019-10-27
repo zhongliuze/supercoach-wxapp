@@ -1,0 +1,226 @@
+<!--pages/course/students/students.wxml-->
+<view class="container">
+  <view class="search-group">
+    <view class="search">
+      <view class="icon">
+        <image src="/images/student-search.png"></image>
+      </view>
+      <view class="input">
+        <input placeholder="搜索" placeholder-class="search-placeholder"></input>
+      </view>
+    </view>
+  </view>
+  <view class="button-line">
+    <view class="icon">
+      <image src="/images/course-students-add.png"></image>
+    </view>
+    <view class="content">
+      <text>添加学员</text>
+    </view>
+    <view class="value">
+
+    </view>
+  </view>
+
+  <view class="button-line">
+    <view class="icon">
+      <image src="/images/course-students-sort.png" style="width:36rpx;height:28rpx;"></image>
+    </view>
+    <view class="content">
+      <text>排序方式</text>
+    </view>
+    <view class="value">
+      <text>按姓名首字母</text>
+    </view>
+  </view>
+  <view class="student-sort">
+    <image src="/images/student-attention.png"></image>
+    <text>特别关注</text>
+  </view>
+
+  <view class="student-group">
+    <block wx:for="{{studentList}}" wx:key="this">
+      <view class="student-line">
+        <view class="checked">
+          <radio></radio>
+        </view>
+        <view class="content {{index == studentList.length-1 ? 'no-border' : ''}}">
+          <view class="avatar">
+            <text>{{item.nameStr}}</text>
+          </view>
+          <view class="info">
+            <text>{{item.name}}</text>
+          </view>
+          <view class="subtitle">
+            <text wx:if="{{item.times}}">剩余{{item.times}}课时</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="student-sort">
+    <text>A</text>
+  </view>
+
+  <view class="student-group">
+    <view class="student-line">
+      <view class="checked">
+        <radio></radio>
+      </view>
+      <view class="content {{index == studentList.length-1 ? 'no-border' : ''}}">
+        <view class="avatar">
+          <text>泽中</text>
+        </view>
+        <view class="info">
+          <text>刘泽中</text>
+        </view>
+        <view class="subtitle">
+          <text>每周二上课</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="student-line">
+      <view class="checked">
+        <radio></radio>
+      </view>
+      <view class="content {{index == studentList.length-1 ? 'no-border' : ''}}">
+        <view class="avatar">
+          <text>泽中</text>
+        </view>
+        <view class="info">
+          <text>刘泽中</text>
+        </view>
+        <view class="subtitle">
+          <text>每周二上课</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="student-line">
+      <view class="checked">
+        <radio></radio>
+      </view>
+      <view class="content {{index == studentList.length-1 ? 'no-border' : ''}}">
+        <view class="avatar">
+          <text>泽中</text>
+        </view>
+        <view class="info">
+          <text>刘泽中</text>
+        </view>
+        <view class="subtitle">
+          <text>每周二上课</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="student-line">
+      <view class="checked">
+        <radio></radio>
+      </view>
+      <view class="content {{index == studentList.length-1 ? 'no-border' : ''}}">
+        <view class="avatar">
+          <text>泽中</text>
+        </view>
+        <view class="info">
+          <text>刘泽中</text>
+        </view>
+        <view class="subtitle">
+          <text>每周二上课</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <view class="student-sort">
+    <text>B</text>
+  </view>
+  <view class="student-group">
+    <view class="student-line">
+      <view class="checked">
+        <radio></radio>
+      </view>
+      <view class="content {{index == studentList.length-1 ? 'no-border' : ''}}">
+        <view class="avatar">
+          <text>泽中</text>
+        </view>
+        <view class="info">
+          <text>刘泽中</text>
+        </view>
+        <view class="subtitle">
+          <text>每周二上课</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="student-line">
+      <view class="checked">
+        <radio></radio>
+      </view>
+      <view class="content {{index == studentList.length-1 ? 'no-border' : ''}}">
+        <view class="avatar">
+          <text>泽中</text>
+        </view>
+        <view class="info">
+          <text>刘泽中</text>
+        </view>
+        <view class="subtitle">
+          <text>每周二上课</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="student-line">
+      <view class="checked">
+        <radio></radio>
+      </view>
+      <view class="content {{index == studentList.length-1 ? 'no-border' : ''}}">
+        <view class="avatar">
+          <text>泽中</text>
+        </view>
+        <view class="info">
+          <text>刘泽中</text>
+        </view>
+        <view class="subtitle">
+          <text>每周二上课</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="student-line">
+      <view class="checked">
+        <radio></radio>
+      </view>
+      <view class="content {{index == studentList.length-1 ? 'no-border' : ''}}">
+        <view class="avatar">
+          <text>泽中</text>
+        </view>
+        <view class="info">
+          <text>刘泽中</text>
+        </view>
+        <view class="subtitle">
+          <text>每周二上课</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+</view>
+<view class="total">
+  <text>120位学员</text>
+</view>
+<view class="common-bottom"></view>
+
+<view class="select-info" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
+  <view class="select">
+    <view class="title">
+      <text>已选择：<text class="name">刘泽中</text></text>
+    </view>
+    <view class="confirm">
+      <button>确认</button>
+    </view>
+  </view>
+</view>

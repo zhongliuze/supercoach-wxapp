@@ -339,3 +339,46 @@ page {
   left: 0;
 }
 
+.button-line-list {
+  background-color: #FFF;
+  width: 750rpx;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32rpx;
+}
+
+.button-line-list .button-line{
+  background-color: #FFF;
+  width: 720rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30rpx;
+  height: 120rpx;
+  border-bottom: 1rpx solid #EFF0F1;
+}
+
+.button-line-list .no-border{
+  border: 0;
+}
+
+.button-line-list .button-line .name{
+  font-size: 34rpx;
+  color: #181D24;
+  width: 390rpx;
+}
+
+.button-line-list .button-line .more{
+  font-size: 34rpx;
+  color: #CFCFCF;
+  width: 300rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+}
+
+.button-line-list .button-line .more image{
+  width: 14rpx;
+  height: 24rpx;
+}

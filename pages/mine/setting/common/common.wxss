@@ -1,0 +1,106 @@
+/* pages/mine/setting/common/common.wxss */
+
+.common-input-group {
+  width: 750rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32rpx;
+}
+
+.common-input-group .input-line {
+  width: 720rpx;
+  margin-left: 30rpx;
+  height: 168rpx;
+  display: flex;
+  align-items: center;
+}
+
+.common-input-group .input-line .name {
+  width: 490rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.common-input-group .input-line .name .title {
+  color: #181d24;
+  font-size: 34rpx;
+}
+
+.common-input-group .input-line .name .subtitle {
+  color: #707888;
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+
+.common-input-group .input-line .value {
+  width: 200rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+switch {
+  zoom: 0.9;
+}
+
+.common-input-group .input-line .value text {
+  font-size: 34rpx;
+  color: #CFCFCF;
+}
+
+.common-input-group .input-line .value image {
+  width: 14rpx;
+  height: 24rpx;
+  margin-left: 16rpx;
+}
+
+
+.result-input-group {
+  width: 750rpx;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32rpx;
+}
+
+.result-input-group .input-line {
+  width: 720rpx;
+  margin-left: 30rpx;
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #EFF0F1;
+}
+
+.result-input-group .no-border {
+  border: 0;
+}
+
+.result-input-group .input-line .name {
+  width: 390rpx;
+  display: flex;
+  flex-direction: column;
+  color: #181d24;
+  font-size: 34rpx;
+}
+
+
+.result-input-group .input-line .value {
+  width: 300rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+
+.result-input-group .input-line .value text {
+  font-size: 34rpx;
+  color: #CFCFCF;
+}
+
+.result-input-group .input-line .value image {
+  width: 14rpx;
+  height: 24rpx;
+  margin-left: 16rpx;
+}

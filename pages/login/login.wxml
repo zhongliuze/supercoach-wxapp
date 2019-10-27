@@ -1,0 +1,52 @@
+<!--pages/login/login.wxml-->
+<view class="header">
+  <view class="title">
+    <text>验证码登录</text>
+  </view>
+  <view class="subtitle">
+    <text>未注册手机号登录后自动成为超级私教用户</text>
+  </view>
+</view>
+
+<view class="login-group">
+  <block wx:if="{{verifyLogin}}">
+    <view class="login-input">
+      <input placeholder="请输入手机号码" placeholder-class="input-placeholder" bindinput="inputPhoneNumber"></input>
+    </view>
+    <view class="verfiy-input">
+      <input placeholder="请输入验证码" placeholder-class="input-placeholder" bindinput="inputVerify"></input>
+      <view class="verfiy" bindtap="getVerfiyCode">
+        <text wx:if="{{getVerifyCode == false}}">获取验证码</text>
+        <text wx:elif="{{getVerifyCode == true && getVerifyTime < 1}}">重新获取</text>
+        <text class="get-verfiy" wx:elif="{{getVerifyCode == true && getVerifyTime > 0}}">{{getVerifyTime}}s</text>
+      </view>
+    </view>
+    <view class="login-button">
+      <button wx:if="{{phoneNumber && verifyCode}}">登录</button>
+      <button class="disabled" wx:else>登录</button>
+    </view>
+    <view class="change" bindtap="changeLoginType">
+      <text>推荐使用微信快速登录</text>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="wechat">
+      <view class="recommend">
+        <image src="/images/login-recommend.png"></image>
+      </view>
+      <button>微信快速登录</button>
+    </view>
+    <view class="vercode" bindtap="changeLoginType">
+      <button>验证码登录</button>
+    </view>
+  </block>
+</view>
+
+<view class="protocol">
+  <view class="check">
+    <radio checked="true" />
+  </view>
+  <view class="content">
+    <text>我已阅读并同意<text class="link">《超级私教用户协议》</text></text>
+  </view>
+</view>
