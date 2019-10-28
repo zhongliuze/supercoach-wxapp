@@ -94,7 +94,7 @@
         </view>
         <view class="value">
           <view class="arrow">
-            <switch checked="{{birthdayRemind}}" bindchange="switchChange" wx:if="{{birthday}}"/>
+            <switch checked="{{birthdayRemind}}" bindchange="switchChange" wx:if="{{birthday}}" />
             <switch checked="{{birthdayRemind}}" bindchange="switchChange" wx:else disabled/>
           </view>
         </view>

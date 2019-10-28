@@ -1,4 +1,5 @@
 /* pages/students/basic/basic.wxss */
+
 .container {
   margin-top: 24rpx;
 }
@@ -15,14 +16,14 @@ switch {
   flex-direction: column;
 }
 
-.birthday-mark .title{
-  font-size:24rpx;
-font-weight:bold;
-color: #8893A8;
-line-height: 44rpx;
+.birthday-mark .title {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #8893a8;
+  line-height: 44rpx;
 }
 
-.birthday-mark .value{
-  font-size:22rpx;
-color: #8893A8;
+.birthday-mark .value {
+  font-size: 22rpx;
+  color: #8893a8;
 }

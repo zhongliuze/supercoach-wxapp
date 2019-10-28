@@ -382,3 +382,18 @@ page {
   width: 14rpx;
   height: 24rpx;
 }
+
+.add-button {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 100%;
+  position: fixed;
+  right: 30rpx;
+  bottom: 168rpx;
+}
+
+.add-button image {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 100%;
+}

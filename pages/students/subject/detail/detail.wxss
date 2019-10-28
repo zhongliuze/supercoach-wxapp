@@ -1,0 +1,66 @@
+/* pages/students/subject/detail/detail.wxss */
+
+.container {
+  margin-top: 24rpx;
+}
+
+switch {
+  zoom: 0.9;
+}
+
+.birthday-mark {
+  margin-top: 32rpx;
+  width: 690rpx;
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.birthday-mark .title {
+  font-size: 24rpx;
+  font-weight: bold;
+  color: #8893a8;
+  line-height: 44rpx;
+}
+
+.birthday-mark .value {
+  font-size: 22rpx;
+  color: #8893a8;
+}
+
+.course-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 88rpx;
+}
+
+.course-button button {
+  width: 690rpx;
+  height: 88rpx;
+  background: #5fcd64;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: bold;
+  border: 0;
+}
+
+.course-button button::after {
+  border: 0;
+}
+
+.common-bottom {
+  height: 200rpx;
+}
+
+.input-tips {
+  margin-left: 30rpx;
+  color: #2B87FF;
+  font-size: 26rpx;
+  margin-top: 32rpx;
+}

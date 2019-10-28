@@ -1,0 +1,117 @@
+.course-data {
+  width: 690rpx;
+  color: #a3a4a6;
+  font-size: 26rpx;
+  margin-left: 30rpx;
+  margin-top: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.course-data .right {
+  margin-left: 56rpx;
+}
+
+.course-group {
+  width: 750rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-group .course {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 750rpx;
+  background-color: #fff;
+  height: 186rpx;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(186rpx);
+  transform: translateX(186rpx);
+  margin-left: -186rpx;
+}
+
+.course-group .course .icon {
+  width: 164rpx;
+  height: 122rpx;
+  margin-left: 30rpx;
+  margin-right: 20rpx;
+}
+
+.course-group .course .icon image {
+  width: 164rpx;
+  height: 122rpx;
+  border-radius: 12rpx;
+}
+
+.course-group .course .info {
+  width: 506rpx;
+  height: 186rpx;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1rpx solid #eff0f1;
+  justify-content: center;
+}
+
+.course-group .course .info .title {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.course-group .course .info .title .name {
+  color: #181d24;
+  font-size: 34rpx;
+  font-weight: bold;
+}
+
+.course-group .course .info .title .time {
+  color: #8c95a7;
+  font-size: 26rpx;
+}
+
+.course-group .course .info .subtitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #8c95a7;
+  font-size: 24rpx;
+  margin-top: 26rpx;
+}
+
+.course-group .course .info .subtitle .num {
+  width: 176rpx;
+}
+
+.movable-area, .movable-view {
+  width: 750rpx;
+  height: 186rpx;
+}
+
+.touch-item {
+  display: flex;
+  overflow: hidden;
+}
+
+.touch-move-active .course, .touch-move-active .delete-button {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.delete-button {
+  background-color: #ff3d3d;
+  width: 186rpx;
+  height: 186rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  -webkit-transform: translateX(186rpx);
+  transform: translateX(186rpx);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  font-size: 26rpx;
+  font-weight: bold;
+}

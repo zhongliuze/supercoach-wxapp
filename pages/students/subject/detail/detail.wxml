@@ -1,0 +1,154 @@
+<!--pages/students/subject/detail/detail.wxml-->
+<view class="container">
+  <view class="input-cell-group">
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/students-subject-cours.png" style="width:28rpx;height:26rpx;"></image>
+      </view>
+      <view class="content input-cell-border">
+        <view class="title">
+          <text>课程名称</text>
+        </view>
+        <view class="value">
+          <input placeholder="请输入课程名称" placeholder-class="input-placeholder"></input>
+        </view>
+      </view>
+    </view>
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/students-subject-course.png" style="width:26rpx;height:30rpx;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>课程内容</text>
+        </view>
+        <view class="value">
+          <input placeholder="如蛙泳、自由泳(选填)" placeholder-class="input-placeholder" value=""></input>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="input-tips" wx:if="{{detailType == 0}}">
+    <text>以下信息选填</text>
+  </view>
+  <view class="input-cell-group input-cell-group-margin">
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/students-subject-price.png" style="width:28rpx;height:27rpx;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>客单价</text>
+        </view>
+        <picker mode="selector" bindchange="pricePickerChange" range="{{priceList}}" value="{{pricePicker}}">
+          <view class="value">
+            <text class="{{pricePickerFormat == '请选择课程单价' ? '' : 'hasValue'}}">{{pricePickerFormat}}</text>
+            <view class="arrow">
+              <image src="/images/arrow-right.png"></image>
+            </view>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="input-cell-group input-cell-group-margin">
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/students-subject-total.png" style="width:28rpx;height:26rpx;"></image>
+      </view>
+      <view class="content input-cell-border">
+        <view class="title">
+          <text>总课时数</text>
+        </view>
+        <picker mode="selector" bindchange="sumCoursePickerChange" range="{{courseList}}" value="{{sumPicker}}">
+          <view class="value">
+            <text class="{{sumPickerFormat == '请选择总课时数' ? '' : 'hasValue'}}">{{sumPickerFormat}}</text>
+            <view class="arrow">
+              <image src="/images/arrow-right.png"></image>
+            </view>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/students-subject-already.png" style="width:24rpx;height:28rpx;"></image>
+      </view>
+      <view class="content input-cell-border">
+        <view class="title">
+          <text>已上课时</text>
+        </view>
+        <picker mode="selector" bindchange="alreadyCoursePickerChange" range="{{courseList}}" value="{{alreadyPicker}}">
+          <view class="value">
+            <text class="{{alreadyPickerFormat == '请选择已上课时' ? '' : 'hasValue'}}">{{alreadyPickerFormat}}</text>
+            <view class="arrow">
+              <image src="/images/arrow-right.png"></image>
+            </view>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/students-subject-remaining.png" style="width:26rpx;height:28rpx;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>剩余课时</text>
+        </view>
+        <picker mode="selector" bindchange="lastCoursePickerChange" range="{{courseList}}" value="{{lastPicker}}">
+          <view class="value">
+            <text class="{{lastPickerFormat == '请选择剩余课时' ? '' : 'hasValue'}}">{{lastPickerFormat}}</text>
+            <view class="arrow">
+              <image src="/images/arrow-right.png"></image>
+            </view>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <view class="input-cell-group input-cell-group-margin">
+    <view class="input-cell">
+      <view class="icon">
+        <image src="/images/students-subject-purchase.png" style="width:28rpx;height:30rpx;"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>购课时间</text>
+        </view>
+        <picker mode="date" bindchange="timePickerChange" value="{{time}}">
+          <view class="value">
+            <text class="{{timeFormat == '请选择购课时间' ? '' : 'hasValue'}}">{{timeFormat}}</text>
+            <view class="arrow">
+              <image src="/images/arrow-right.png"></image>
+            </view>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <!-- <view class="textarea-cell-group">
+    <view class="textarea-cell">
+      <view class="title">
+        <view class="icon">
+          <image src="/images/student-remarks.png"></image>
+        </view>
+        <view class="name">
+          <text>备注信息</text>
+        </view>
+      </view>
+      <view class="input">
+        <textarea placeholder="此处可以输入备注信息" placeholder-class="textarea-placeholder"></textarea>
+      </view>
+    </view>
+  </view> -->
+  <view class="fixed-bottom-button" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;" wx:if="{{detailType == 0}}">
+    <button bindtap="bindSave">保存</button>
+  </view>
+</view>
+<view class="course-button" wx:if="{{detailType == 1}}" bindtap="bindSave">
+  <button>一键续课</button>
+</view>
+<view class="common-bottom"></view>

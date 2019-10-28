@@ -18,9 +18,11 @@
     
     "pages/course/custom/custom",
     "pages/course/course/course",
-    "pages/course/students/students",
+    "pages/course/students/students", 
     "pages/course/repeat/repeat",
     "pages/course/remind/remind",
+    "pages/students/subject/index/index",
+    "pages/students/subject/detail/detail",
     "pages/students/index/index",
     "pages/mine/index/index",
     "pages/mine/order/index/index",
