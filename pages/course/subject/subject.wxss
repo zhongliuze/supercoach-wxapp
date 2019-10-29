@@ -1,0 +1,103 @@
+/* pages/course/subject/subject.wxss */
+
+.subject-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32rpx;
+  margin-left: 30rpx;
+  width: 690rpx;
+}
+
+.subject-list .subject {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 690rpx;
+  height: 160rpx;
+  margin-bottom: 32rpx;
+  background-color: #fff;
+  border-radius: 12rpx;
+}
+
+.subject-list .subject .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 96rpx;
+  height: 96rpx;
+  margin-left: 32rpx;
+}
+
+.subject-list .subject .icon image {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 6rpx;
+}
+
+.subject-list .subject .content {
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+  width: 400rpx;
+}
+
+.subject-list .subject .content .title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #181d24;
+}
+
+.subject-list .subject .content .subtitle {
+  font-size: 26rpx;
+  color: #707888;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10rpx;
+}
+
+.subject-list .subject .content .subtitle .already {
+  width: 172rpx;
+}
+
+.subject-list .subject .value {
+  width: 106rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.subject-list .subject .value radio {
+  zoom: 0.9;
+}
+
+.subject-list .add-subject {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 690rpx;
+  height: 160rpx;
+  margin-bottom: 32rpx;
+  background-color: #fff;
+  border-radius: 12rpx;
+}
+
+.subject-list .add-subject .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.subject-list .add-subject .icon image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.subject-list .add-subject .name {
+  font-size: 30rpx;
+  color: #181d24;
+  margin-left: 15rpx;
+}

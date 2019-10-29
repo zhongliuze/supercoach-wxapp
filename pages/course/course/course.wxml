@@ -118,6 +118,42 @@
       </view>
     </view>
   </view>
+  <view class="course-cells-group course-other-info">
+    <view class="course-cells" wx:if="{{courseType == 0}}">
+      <view class="icon">
+        <image src="/images/students-subject-course.png"></image>
+      </view>
+      <view class="content">
+        <view class="title">
+          <text>课程类型</text>
+        </view>
+        <view class="value valuable" bindtap="navigateToSubject">
+          <text>请选择</text>
+        </view>
+        <view class="arrow">
+          <image src="/images/arrow-right.png"></image>
+        </view>
+      </view>
+    </view>
+    <view class="course-cells">
+      <view class="icon">
+        <image src="/images/student-course-type.png"></image>
+      </view>
+      <view class="content noborder">
+        <view class="title">
+          <text>上课内容</text>
+        </view>
+        <view class="value" bindtap="navigateToLesson">
+          <text>请选择</text>
+        </view>
+        <view class="arrow">
+          <image src="/images/arrow-right.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
   <view class="course-custom-color" wx:if="{{courseType == 2}}">
     <view class="custom-title">
       <text>自定义时间方块颜色</text>

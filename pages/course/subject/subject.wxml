@@ -1,0 +1,97 @@
+<!--pages/course/subject/subject.wxml-->
+<view class="subject-list">
+
+  <view class="subject">
+    <view class="icon">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
+    </view>
+    <view class="content">
+      <view class="title">
+        <text>康复训练课程</text>
+      </view>
+      <view class="subtitle">
+        <view class="already">
+          <text>已上25课时   </text>
+        </view>
+        <view class="last">
+          <text>剩余30课时</text>
+        </view>
+      </view>
+    </view>
+    <view class="value">
+      <radio></radio>
+    </view>
+  </view>
+  <view class="subject">
+    <view class="icon">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
+    </view>
+    <view class="content">
+      <view class="title">
+        <text>康复训练课程</text>
+      </view>
+      <view class="subtitle">
+        <view class="already">
+          <text>已上25课时   </text>
+        </view>
+        <view class="last">
+          <text>剩余30课时</text>
+        </view>
+      </view>
+    </view>
+    <view class="value">
+      <radio></radio>
+    </view>
+  </view>
+  <view class="subject">
+    <view class="icon">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
+    </view>
+    <view class="content">
+      <view class="title">
+        <text>康复训练课程</text>
+      </view>
+      <view class="subtitle">
+        <view class="already">
+          <text>已上25课时   </text>
+        </view>
+        <view class="last">
+          <text>剩余30课时</text>
+        </view>
+      </view>
+    </view>
+    <view class="value">
+      <radio></radio>
+    </view>
+  </view>
+  <view class="subject">
+    <view class="icon">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
+    </view>
+    <view class="content">
+      <view class="title">
+        <text>康复训练课程</text>
+      </view>
+      <view class="subtitle">
+        <view class="already">
+          <text>已上25课时   </text>
+        </view>
+        <view class="last">
+          <text>剩余30课时</text>
+        </view>
+      </view>
+    </view>
+    <view class="value">
+      <radio></radio>
+    </view>
+  </view>
+  <view class="add-subject" bindtap="navigateToAdd">
+    <view class="icon">
+      <image src="/images/course-subject-add.png"></image>
+    </view>
+    <view class="name">
+      <text>新增课程</text>
+    </view>
+  </view>
+</view>
+<view class="common-bottom"></view>

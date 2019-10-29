@@ -159,12 +159,18 @@ Page({
     })
   },
   
+  /**
+   * 进入编辑课程页面
+   */
   navigateToDetail: function () {
     wx.navigateTo({
       url: '../detail/detail?detailType=1',
     })
   },
 
+  /**
+   * 进入新增课程页面
+   */
   navigateToAdd: function () {
     wx.navigateTo({
       url: '../detail/detail?detailType=0',

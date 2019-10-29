@@ -301,6 +301,24 @@ Page({
   },
 
   /**
+   * 点击进入课程类型选择页
+   */
+  navigateToSubject: function(event) {
+    wx.navigateTo({
+      url: '../subject/subject',
+    })
+  },
+
+  /**
+   * 点击进入上课内容选择页
+   */
+  navigateToLesson: function (event) {
+    wx.navigateTo({
+      url: '../lesson/lesson',
+    })
+  },
+
+  /**
    * 保存/创建任务数据
    */
   bindSave: function (event) {
