@@ -1,0 +1,115 @@
+<!--pages/mine/action/index/index.wxml-->
+<view class="action-container">
+  <view class="module-list" style="height:{{windowHeight}}px;">
+    <view class="header"></view>
+    <view class="module {{selectModule == 0 ? 'selected' : ''}}" bindtap="selectModule" data-module="0">
+      <view class="icon">
+        <image src="/images/mine-action-warm-selected.png" style="width:34rpx; height:34rpx;" wx:if="{{selectModule == 0}}"></image>
+        <image src="/images/mine-action-warm.png" style="width:34rpx; height:34rpx;" wx:else></image>
+      </view>
+      <view class="name">
+        <text>热身训练</text>
+      </view>
+    </view>
+    <view class="module {{selectModule == 1 ? 'selected' : ''}}" bindtap="selectModule" data-module="1">
+      <view class="icon">
+        <image src="/images/mine-action-strength-selected.png" style="width:34rpx; height:34rpx;" wx:if="{{selectModule == 1}}"></image>
+        <image src="/images/mine-action-strength.png" style="width:34rpx; height:34rpx;" wx:else></image>
+      </view>
+      <view class="name">
+        <text>力量训练</text>
+      </view>
+    </view>
+    <view class="module {{selectModule == 2 ? 'selected' : ''}}" bindtap="selectModule" data-module="2">
+      <view class="icon">
+        <image src="/images/mine-action-aerobic-selected.png" style="width:37rpx; height:34rpx;" wx:if="{{selectModule == 2}}"></image>
+        <image src="/images/mine-action-aerobic.png" style="width:37rpx; height:34rpx;" wx:else></image>
+      </view>
+      <view class="name">
+        <text>有氧训练</text>
+      </view>
+    </view>
+    <view class="module {{selectModule == 3 ? 'selected' : ''}}" bindtap="selectModule" data-module="3">
+      <view class="icon">
+        <image src="/images/mine-action-stretch-selected.png" style="width:36rpx; height:34rpx;" wx:if="{{selectModule == 3}}"></image>
+        <image src="/images/mine-action-stretch.png" style="width:36rpx; height:34rpx;" wx:else></image>
+      </view>
+      <view class="name">
+        <text>拉伸训练</text>
+      </view>
+    </view>
+    <view class="module {{selectModule == 4 ? 'selected' : ''}}" bindtap="openConirmPopup" data-module="4" >
+      <view class="icon">
+        <image src="/images/mine-action-customize-selected.png" style="width:34rpx; height:30rpx;" wx:if="{{selectModule == 4}}"></image>
+        <image src="/images/mine-action-customize.png" style="width:34rpx; height:30rpx;" wx:else></image>
+      </view>
+      <view class="name">
+        <text>自定义</text>
+      </view>
+    </view>
+  </view>
+  <view class="action-list">
+    <view class="title">
+      <view class="name">
+        <text>动作内容</text>
+      </view>
+      <view class="edit">
+        <text>编辑</text>
+      </view>
+    </view>
+    <view class="actions-group">
+      <view class="action">
+        <text>力量训练</text>
+      </view>
+      <view class="action">
+        <text>有氧训练</text>
+      </view>
+      <view class="action no-warp">
+        <text>力量训练</text>
+      </view>
+      <view class="action">
+        <text>力量训练</text>
+      </view>
+      <view class="action">
+        <text>有氧训练</text>
+      </view>
+      <view class="action no-warp">
+        <text>力量训练</text>
+      </view>
+      <view class="action">
+        <text>力量训练</text>
+      </view>
+      <view class="action">
+        <text>有氧训练</text>
+      </view>
+      <view class="action no-warp">
+        <text>力量训练</text>
+      </view>
+    </view>
+    <view class="add-action">
+      <image src="/images/mine-action-increase.png"></image>
+      <text>新增</text>
+    </view>
+  </view>
+
+</view>
+
+<block wx:if="{{addModulePopup}}">
+  <view class="mongolia" catchtouchmove="catchtouchmove"></view>
+  <view class="popup-view" catchtap="closeConirmPopup" catchtouchmove="catchtouchmove">
+    <view class="popup" catchtap="catchtouchmove">
+      <view class="title">
+        <text>新增模块</text>
+      </view>
+      <view class="input">
+        <input placeholder="请输入模块名称" placeholder-class="placeholder-class"></input>
+      </view>
+      <view class="button" catchtap="submitRefuse">
+        <button>确定</button>
+      </view>
+    </view>
+    <view class="close-button" catchtap="closeConirmPopup">
+      <image src="/images/order-popup-close.png"></image>
+    </view>
+  </view>
+</block>

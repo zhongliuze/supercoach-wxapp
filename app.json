@@ -27,6 +27,7 @@
     "pages/students/subject/detail/detail",
     "pages/students/index/index",
     "pages/mine/index/index",
+    "pages/mine/action/index/index",
     "pages/mine/order/index/index",
     "pages/mine/setting/index/index",
     "pages/mine/setting/about/about",

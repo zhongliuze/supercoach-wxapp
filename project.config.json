@@ -52,7 +52,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 35,
+			"current": 36,
 			"list": [
 				{
 					"id": -1,
@@ -303,6 +303,13 @@
 					"id": -1,
 					"name": "pages/course/lesson/lesson",
 					"pathName": "pages/course/lesson/lesson",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/action/index/index",
+					"pathName": "pages/mine/action/index/index",
 					"scene": null
 				}
 			]

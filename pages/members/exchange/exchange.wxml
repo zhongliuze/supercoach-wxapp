@@ -24,29 +24,29 @@
 </view>
 
 <block wx:if="{{confirmPopup}}">
-<view class="mongolia" catchtouchmove="catchtouchmove"></view>
-<view class="popup-view" catchtap="closeConirmPopup" catchtouchmove="catchtouchmove">
-  <view class="popup"catchtap="catchtouchmove">
-    <view class="title">
-      <text>您的兑换码包含</text>
-    </view>
-    <view class="icon">
-      <image src="/images/vip-icon.png"></image>
-    </view>
-    <view class="content">
-      <view class="name">
-        <text>12个月会员</text>
+  <view class="mongolia" catchtouchmove="catchtouchmove"></view>
+  <view class="popup-view" catchtap="closeConirmPopup" catchtouchmove="catchtouchmove">
+    <view class="popup" catchtap="catchtouchmove">
+      <view class="title">
+        <text>您的兑换码包含</text>
       </view>
-      <view class="value">
-        <text>有效期至2020年08月05日</text>
+      <view class="icon">
+        <image src="/images/vip-icon.png"></image>
+      </view>
+      <view class="content">
+        <view class="name">
+          <text>12个月会员</text>
+        </view>
+        <view class="value">
+          <text>有效期至2020年08月05日</text>
+        </view>
+      </view>
+      <view class="button" catchtap="submitRefuse">
+        <button>确认兑换</button>
       </view>
     </view>
-    <view class="button" catchtap="submitRefuse">
-      <button>确认兑换</button>
+    <view class="close-button" catchtap="closeConirmPopup">
+      <image src="/images/order-popup-close.png"></image>
     </view>
   </view>
-  <view class="close-button" catchtap="closeConirmPopup">
-    <image src="/images/order-popup-close.png"></image>
-  </view>
-</view>
 </block>
