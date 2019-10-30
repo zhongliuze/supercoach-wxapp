@@ -15,8 +15,8 @@
         <block wx:for="{{tasksList}}">
           <movable-area class='movable-area'>
             <movable-view direction="horizontal" class='movable-view'>
-              <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}">
-                <view class="course {{item.isTouchMove ? 'touch-move-course' : ''}}" >
+              <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}" bindtap="navigateToCourse">
+                <view class="course {{item.isTouchMove ? 'touch-move-course' : ''}}">
                   <view class="icon">
                     <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
                   </view>

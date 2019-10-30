@@ -71,5 +71,25 @@ Page({
     wx.navigateTo({
       url: '../change/change',
     })
+  },
+
+  /**
+   * 退出登录
+   */
+  loginOut: function(event) {
+    wx.showActionSheet({
+      itemList: ['退出登录'],
+      itemColor: '#FF3D3D',
+      success(res) {
+        if (res.tapIndex == 0) {
+          wx.navigateBack({
+            delta: 2,
+          })
+        }
+      },
+      fail(res) {
+        console.log(res.errMsg)
+      }
+    })
   }
 })

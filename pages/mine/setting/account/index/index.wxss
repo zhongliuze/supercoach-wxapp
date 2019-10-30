@@ -50,6 +50,5 @@
   align-items: center;
   font-size: 34rpx;
   color: #FF3D3D;
-  font-weight: bold;
   background-color: #FFF;
 }

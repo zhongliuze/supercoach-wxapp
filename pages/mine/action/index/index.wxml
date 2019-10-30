@@ -38,7 +38,7 @@
         <text>拉伸训练</text>
       </view>
     </view>
-    <view class="module {{selectModule == 4 ? 'selected' : ''}}" bindtap="openConirmPopup" data-module="4" >
+    <view class="module {{selectModule == 4 ? 'selected' : ''}}" bindtap="openConirmPopup" data-module="4">
       <view class="icon">
         <image src="/images/mine-action-customize-selected.png" style="width:34rpx; height:30rpx;" wx:if="{{selectModule == 4}}"></image>
         <image src="/images/mine-action-customize.png" style="width:34rpx; height:30rpx;" wx:else></image>
@@ -51,42 +51,89 @@
   <view class="action-list">
     <view class="title">
       <view class="name">
-        <text>动作内容</text>
+        <text>动作名称</text>
       </view>
-      <view class="edit">
-        <text>编辑</text>
+      <view class="edit" bindtap="switchDeleteButton">
+        <text wx:if="{{deleteButton}}">取消</text>
+        <text wx:else>编辑</text>
       </view>
     </view>
+
     <view class="actions-group">
       <view class="action">
-        <text>力量训练</text>
+        <view class="delete" bindtap="deleteAction" data-action_id="0">
+          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}"></image>
+        </view>
+        <view class="span">
+          <text>力量训练</text>
+        </view>
       </view>
       <view class="action">
-        <text>有氧训练</text>
+        <view class="delete" bindtap="deleteAction" data-action_id="0">
+          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}"></image>
+        </view>
+        <view class="span">
+          <text>力量训练</text>
+        </view>
       </view>
       <view class="action no-warp">
-        <text>力量训练</text>
+        <view class="delete" bindtap="deleteAction" data-action_id="0">
+          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}"></image>
+        </view>
+        <view class="span">
+          <text>力量训练</text>
+        </view>
       </view>
       <view class="action">
-        <text>力量训练</text>
+        <view class="delete" bindtap="deleteAction" data-action_id="0">
+          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}"></image>
+        </view>
+        <view class="span">
+          <text>力量训练</text>
+        </view>
       </view>
       <view class="action">
-        <text>有氧训练</text>
+        <view class="delete" bindtap="deleteAction" data-action_id="0">
+          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}"></image>
+        </view>
+        <view class="span">
+          <text>力量训练</text>
+        </view>
       </view>
       <view class="action no-warp">
-        <text>力量训练</text>
+        <view class="delete" bindtap="deleteAction" data-action_id="0">
+          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}"></image>
+        </view>
+        <view class="span">
+          <text>力量训练</text>
+        </view>
       </view>
       <view class="action">
-        <text>力量训练</text>
+        <view class="delete" bindtap="deleteAction" data-action_id="0">
+          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}"></image>
+        </view>
+        <view class="span">
+          <text>力量训练</text>
+        </view>
       </view>
       <view class="action">
-        <text>有氧训练</text>
+        <view class="delete" bindtap="deleteAction" data-action_id="0">
+          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}"></image>
+        </view>
+        <view class="span">
+          <text>力量训练</text>
+        </view>
       </view>
       <view class="action no-warp">
-        <text>力量训练</text>
+        <view class="delete" bindtap="deleteAction" data-action_id="0">
+          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}"></image>
+        </view>
+        <view class="span">
+          <text>力量训练</text>
+        </view>
       </view>
     </view>
-    <view class="add-action">
+    <view class="add-action" bindtap="navigateToAdd" data-module="{{selectModule}}">
       <image src="/images/mine-action-increase.png"></image>
       <text>新增</text>
     </view>
@@ -102,10 +149,11 @@
         <text>新增模块</text>
       </view>
       <view class="input">
-        <input placeholder="请输入模块名称" placeholder-class="placeholder-class"></input>
+        <input placeholder="限制4个字符以内" placeholder-class="placeholder-class" maxlength="4" bindinput="inputModuleName"></input>
       </view>
-      <view class="button" catchtap="submitRefuse">
-        <button>确定</button>
+      <view class="button">
+        <button class="disabled" disabled wx:if="{{addModuleName == ''}}">确定</button>
+        <button catchtap="addModule" wx:else>确定</button>
       </view>
     </view>
     <view class="close-button" catchtap="closeConirmPopup">

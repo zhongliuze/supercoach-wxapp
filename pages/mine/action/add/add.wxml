@@ -1,0 +1,53 @@
+<!--pages/mine/action/add/add.wxml-->
+<view class="container-input">
+  <view class="result-input-group">
+    <view class="input-line no-border">
+      <view class="name">
+        <text>动作名称</text>
+      </view>
+      <view class="value">
+        <input placeholder="限制4个字符以内" placeholder-class="input-placeholder" maxlength="4" bindinput="inputActionName"></input>
+      </view>
+    </view>
+  </view>
+  <view class="result-input-group">
+    <view class="input-line">
+      <view class="name">
+        <text>所属模块</text>
+      </view>
+      <view class="value">
+        <picker bindchange="bindPickerModule" value="{{selectModule}}" range="{{moduleList}}">
+          <text class="{{selectModuleFormat != '请选择' ? 'select-value' : ''}}">{{selectModuleFormat}}</text>
+          <image src="/images/arrow-right.png"></image>
+        </picker>
+      </view>
+    </view>
+    <view class="input-line">
+      <view class="name" style="width:290rpx;">
+        <text>动作强度/类型</text>
+      </view>
+      <view class="value" style="width:400rpx;">
+        <picker bindchange="bindPickerIntensity" value="{{selectIntensity}}" range="{{intensityList}}">
+          <text class="{{selectIntensityFormat != '请选择' ? 'select-value' : ''}}">{{selectIntensityFormat}}</text>
+          <image src="/images/arrow-right.png"></image>
+        </picker>
+      </view>
+    </view>
+
+    <view class="input-line no-border">
+      <view class="name">
+        <text>重复次数/保持时间</text>
+      </view>
+      <view class="value">
+        <picker bindchange="bindPickerRepeat" value="{{selectRepeat}}" range="{{repeatList}}">
+          <text class="{{selectRepeatFormat != '请选择' ? 'select-value' : ''}}">{{selectRepeatFormat}}</text>
+          <image src="/images/arrow-right.png"></image>
+        </picker>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="button-default add-action">
+  <button bindtap="addAction" class="{{selectRepeatFormat != '请选择' && selectIntensityFormat != '请选择' && selectModuleFormat != '请选择' && actionName != '' ? '' : 'disabled'}}">确认</button>
+</view>

@@ -6,6 +6,7 @@ Page({
    */
   data: {
     confirmPopup: false, // 确认兑换弹窗
+    inputCode: '', // 输入兑换码
   },
 
   /**
@@ -67,7 +68,7 @@ Page({
   /**
    * 打开确认弹窗
    */
-  openConirmPopup: function(event) {
+  openConirmPopup: function (event) {
     this.setData({
       confirmPopup: true,
     });
@@ -86,4 +87,30 @@ Page({
    * 弹窗后禁止滚动
    */
   catchtouchmove: function () { },
+
+  /**
+   * 输入验证码
+   */
+  inputCode: function (event) {
+    this.setData({
+      inputCode: event.detail.value,
+    });
+  },
+
+  /**
+   * 兑换VIP会员
+   */
+  exchangeVIP: function (event) {
+    wx.showToast({
+      title: '兑换成功',
+      icon: 'success',
+      success: function (res) {
+        setTimeout(function () {
+          wx.navigateBack({
+            delta: 1,
+          });
+        }, 1500);
+      }
+    })
+  }
 })

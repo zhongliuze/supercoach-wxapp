@@ -1,0 +1,122 @@
+<!--pages/mine/lesson/index/index.wxml-->
+<view class="lesson-list">
+  <view class="lesson">
+    <view class="checked">
+    </view>
+    <view class="background">
+      <view class="icon">
+        <image src="/images/course-lesson-add.png"></image>
+      </view>
+      <view class="name">
+        <text>新增备课</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="lesson">
+    <view class="checked">
+    </view>
+    <view class="background">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
+    </view>
+    <view class="marks">
+    </view>
+    <view class="title">
+      <text>测试课程</text>
+    </view>
+    <view class="times">
+      <text>已使用39次</text>
+    </view>
+  </view>
+
+  <view class="lesson no-margin">
+    <view class="checked">
+    </view>
+    <view class="background">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
+    </view>
+    <view class="marks">
+    </view>
+    <view class="title">
+      <text>测试课程</text>
+    </view>
+    <view class="times">
+      <text>已使用39次</text>
+    </view>
+  </view>
+
+  <view class="lesson">
+    <view class="checked">
+    </view>
+    <view class="background">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
+    </view>
+    <view class="marks">
+    </view>
+    <view class="title">
+      <text>测试课程</text>
+    </view>
+    <view class="times">
+      <text>已使用39次</text>
+    </view>
+  </view>
+  <view class="lesson">
+    <view class="checked">
+    </view>
+    <view class="background">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
+    </view>
+    <view class="marks">
+    </view>
+    <view class="title">
+      <text>测试课程</text>
+    </view>
+    <view class="times">
+      <text>已使用39次</text>
+    </view>
+  </view>
+  <view class="lesson no-margin">
+    <view class="checked">
+    </view>
+    <view class="background">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
+    </view>
+    <view class="marks">
+    </view>
+    <view class="title">
+      <text>测试课程</text>
+    </view>
+    <view class="times">
+      <text>已使用39次</text>
+    </view>
+  </view>
+
+
+  <view class="lesson">
+    <view class="checked">
+    </view>
+    <view class="background">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1571581209373&di=54ff12a74ee2609014dfc73b0ad4abc6&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn09%2F348%2Fw702h446%2F20180323%2Fca44-fysnevk9526575.jpg" mode="aspectFill"></image>
+    </view>
+    <view class="marks">
+    </view>
+    <view class="title">
+      <text>测试课程</text>
+    </view>
+    <view class="times">
+      <text>已使用39次</text>
+    </view>
+  </view>
+</view>
+
+<view class="mark">
+  <view class="tip">
+    <text>【免费版】最多只能创建5份备课记录</text>
+  </view>
+  <view class="vip">
+    <text>开通会员，尊享特权</text>
+    <image src="/images/mine-lesson-more.png"></image>
+  </view>
+</view>
+
+<view class="common-bottom"></view>

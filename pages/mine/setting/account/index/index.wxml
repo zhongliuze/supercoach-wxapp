@@ -13,7 +13,7 @@
       </view>
     </view>
   </view>
-  <view class="login-out">
+  <view class="login-out" bindtap="loginOut">
     <text>退出登录</text>
   </view>
 </view>

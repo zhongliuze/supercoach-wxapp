@@ -71,5 +71,14 @@ Page({
     wx.makePhoneCall({
       phoneNumber: event.currentTarget.dataset.phone,
     })
-  }
+  },
+
+  /**
+ * 点击进入二级页面
+ */
+  bindButton: function (event) {
+    wx.navigateTo({
+      url: '../' + event.currentTarget.dataset.url,
+    })
+  },
 })

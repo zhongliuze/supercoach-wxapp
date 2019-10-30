@@ -19,7 +19,7 @@
     <block wx:for="{{studentList}}" wx:key="this">
       <movable-area class='movable-area'>
         <movable-view direction="horizontal" class='movable-view'>
-          <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}">
+          <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}" bindtap="navigateToBasic">
             <view class="student-line">
               <view class="avatar">
                 <text>{{item.nameStr}}</text>

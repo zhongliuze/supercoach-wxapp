@@ -1,0 +1,29 @@
+.mark {
+  width: 750rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 26rpx;
+  margin-top: 30rpx;
+}
+
+.mark .tip{
+  color: #707888;
+}
+
+.mark .vip{
+  color: #5FCD64;
+  font-weight: bold;
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.mark .vip image{
+  width: 22rpx;
+  height: 22rpx;
+  margin-left: 10rpx;
+}
+

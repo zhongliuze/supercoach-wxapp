@@ -1,7 +1,7 @@
 <!--pages/mine/setting/index/index.wxml-->
 <view class="container-input">
   <view class="button-line-list">
-    <view class="button-line">
+    <view class="button-line" bindtap="bindButton" data-url="account/index/index">
       <view class="name">
         <text>账号与安全</text>
       </view>
@@ -9,7 +9,7 @@
         <image src="/images/arrow-right.png"></image>
       </view>
     </view>
-    <view class="button-line no-border">
+    <view class="button-line no-border" bindtap="bindButton" data-url="common/common">
       <view class="name">
         <text>通用</text>
       </view>
@@ -19,7 +19,7 @@
     </view>
   </view>
 
-  <view class="button-line-list">
+  <!-- <view class="button-line-list">
     <view class="button-line no-border">
       <view class="name">
         <text>清除缓存</text>
@@ -28,18 +28,18 @@
         <text>79M</text>
       </view>
     </view>
-  </view>
+  </view> -->
 
   <view class="button-line-list">
-    <view class="button-line">
+    <!-- <view class="button-line" bindtap="bintButton" data-url="common/common">
       <view class="name">
         <text>帮助与反馈</text>
       </view>
       <view class="more">
         <image src="/images/arrow-right.png"></image>
       </view>
-    </view>
-    <view class="button-line no-border">
+    </view> -->
+    <view class="button-line no-border" bindtap="bindButton" data-url="about/about">
       <view class="name">
         <text>关于</text>
       </view>

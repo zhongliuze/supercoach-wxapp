@@ -88,7 +88,7 @@
         <text>恢复默认课程模块内容</text>
       </view>
       <view class="value">
-        
+
         <image src="/images/arrow-right.png"></image>
       </view>
     </view>

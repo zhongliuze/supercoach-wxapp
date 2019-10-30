@@ -172,4 +172,10 @@ Page({
       icon: 'success'
     })
   },
+
+  navigateToCourse: function(event) {
+    wx.navigateTo({
+      url: '../course/course',
+    })
+  }
 })

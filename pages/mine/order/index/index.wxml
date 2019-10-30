@@ -12,7 +12,7 @@
       <text>￥9.00</text>
     </view>
   </view>
-  <view class="order">
+  <view class="order" bindtap="navigateToDetail">
     <view class="icon">
       <image src="/images/mine-order-vip-1.png"></image>
     </view>
@@ -24,7 +24,7 @@
       <text>￥9.00</text>
     </view>
   </view>
-  <view class="order">
+  <view class="order" bindtap="navigateToDetail">
     <view class="icon">
       <image src="/images/mine-order-vip-3.png"></image>
     </view>
@@ -36,7 +36,7 @@
       <text>￥9.00</text>
     </view>
   </view>
-  <view class="order">
+  <view class="order" bindtap="navigateToDetail">
     <view class="icon">
       <image src="/images/mine-order-vip-7.png"></image>
     </view>
@@ -48,7 +48,7 @@
       <text>￥9.00</text>
     </view>
   </view>
-  <view class="order">
+  <view class="order" bindtap="navigateToDetail">
     <view class="icon">
       <image src="/images/mine-order-message.png" class="message"></image>
     </view>
@@ -61,7 +61,7 @@
     </view>
   </view>
 
-  <view class="order noborder">
+  <view class="order noborder" bindtap="navigateToDetail">
     <view class="icon">
       <image src="/images/mine-order-vip-12.png" class="message"></image>
     </view>

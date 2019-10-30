@@ -7,8 +7,8 @@
         <text wx:else>原手机号</text>
       </view>
       <view class="input">
-        <input placeholder="请输入新手机号码" placeholder-class="input-placeholder" value="{{phoneNumber}}" bindinput="inputPhoneNumber" wx:if="{{verifyOld}}"></input>
-        <input placeholder="请输入原手机号码" placeholder-class="input-placeholder" value="{{phoneNumber}}" bindinput="inputPhoneNumber" wx:else></input>
+        <input placeholder="请输入新手机号码" placeholder-class="input-placeholder" value="{{phoneNumber}}" bindinput="inputPhoneNumber" wx:if="{{verifyOld}}" maxlength='11'></input>
+        <input placeholder="请输入原手机号码" placeholder-class="input-placeholder" value="{{phoneNumber}}" bindinput="inputPhoneNumber" wx:else  maxlength='11'></input>
       </view>
     </view>
     <view class="input-cell no-border">
@@ -16,7 +16,7 @@
         <text>验证码</text>
       </view>
       <view class="verify-input">
-        <input placeholder="请输入验证码" placeholder-class="input-placeholder" bindinput="inputVerify" value="{{verifyCode}}"></input>
+        <input placeholder="请输入验证码" placeholder-class="input-placeholder" bindinput="inputVerify" value="{{verifyCode}}"  maxlength='4'></input>
       </view>
 
       <view class="verify-button" wx:if="{{phoneNumber}}">

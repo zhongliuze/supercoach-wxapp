@@ -22,7 +22,7 @@
         </view>
       </view>
       <view class="other">
-        <view class="vip-button">
+        <view class="vip-button" bindtap="navigateToRecord">
           <text>开通记录</text>
         </view>
       </view>
@@ -36,7 +36,7 @@
       <view class="main">
         <text>会员套餐</text>
       </view>
-      <view class="title-link">
+      <view class="title-link" bindtap="navigateToExchange">
         <text>使用兑换码</text>
       </view>
     </view>
@@ -86,7 +86,7 @@
 
     <view class="agreement">
       <radio checked="{{agreement}}" bindtap="bindRadio" />
-      <view class="content">
+      <view class="content" catchtap="bindTreaty">
         <text>我已经阅读并同意<text class="link-content">《会员服务协议》</text></text>
       </view>
     </view>

@@ -81,7 +81,7 @@
   justify-content: flex-end;
 }
 
-.header .userinfo .other .vip-button{
+.header .userinfo .other .vip-button {
   width: 140rpx;
   height: 60rpx;
   display: flex;
@@ -196,7 +196,7 @@
 }
 
 .data-center .data-list .data .add {
-  color: #FF6969;
+  color: #ff6969;
   font-size: 26rpx;
   font-weight: bold;
   position: relative;
@@ -206,7 +206,7 @@
 }
 
 .button-group {
-  background-color: #FFF;
+  background-color: #fff;
   margin-top: 32rpx;
   display: flex;
   flex-direction: column;
@@ -227,7 +227,7 @@
   justify-content: space-between;
 }
 
-.button-group .button-list .button{
+.button-group .button-list .button {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -235,7 +235,20 @@
   width: 120rpx;
 }
 
-.button-group .button-list .button .icon{
+.button-group .button-list .button navigator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120rpx;
+}
+
+.navigator-hover {
+  background-color: #FFF;
+  opacity: 1;
+}
+
+.button-group .button-list .button .icon {
   width: 54rpx;
   height: 54rpx;
   display: flex;
@@ -243,29 +256,29 @@
   align-items: center;
 }
 
-.button-group .button-list .button .icon image{
+.button-group .button-list .button .icon image {
   width: 54rpx;
   height: 54rpx;
 }
 
-.button-group .button-list .button .name{
-  color: #181D24;
+.button-group .button-list .button .name {
+  color: #181d24;
   font-size: 28rpx;
   margin-top: 15rpx;
 }
-.button-group .button-list .button button{
+
+.button-group .button-list .button button {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 120rpx;
   padding: 0;
-line-height: inherit;
-
-  background-color: #FFF;
+  line-height: inherit;
+  background-color: #fff;
   border: 0;
 }
 
-.button-group .button-list .button button::after{
+.button-group .button-list .button button::after {
   border: 0;
 }

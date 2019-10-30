@@ -1,25 +1,18 @@
-// pages/mine/index/index.js
+// pages/mine/lesson/index/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    customerPhone: '10010', // 客服电话
-    tgcAppId: "wx8abaf00ee8c3202e",  // 吐个槽小程序ID
-    tgcExtraData : {
-      // 把1221数字换成你的产品ID，否则会跳到别的产品
-      id: "98007",
-    }
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      'customerPhone': '+8618020220001', // 客服电话
-    });
+
   },
 
   /**
@@ -69,23 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  /**
-   * 点击进入二级页面
-   */
-  bindButton: function(event) {
-    wx.navigateTo({
-      url: '../' + event.currentTarget.dataset.url,
-    })
-  },
-
-  /**
-   * 拨打客服电话
-   */
-  makePhoneCall: function(event) {
-    wx.makePhoneCall({
-      phoneNumber: this.data.customerPhone,
-    })
   }
 })

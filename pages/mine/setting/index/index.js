@@ -62,5 +62,14 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  /**
+   * 点击菜单按钮
+   */
+  bindButton: function (event) {
+    wx.navigateTo({
+      url: '../' + event.currentTarget.dataset.url,
+    })
+  },
 })

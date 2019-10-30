@@ -32,7 +32,7 @@
   </view>
 
   <view class="activity-group">
-    <view class="activity border">
+    <view class="activity border" bindtap="bindButton" data-url="../members/index/index">
       <view class="icon">
         <image src="/images/mine-vip.png" style="width:56rpx;height:46rpx;"></image>
       </view>
@@ -115,7 +115,7 @@
       </view>
     </view>
     <view class="button-list">
-      <view class="button">
+      <view class="button" bindtap="bindButton" data-url="action/index/index">
         <view class="icon">
           <image src="/images/mine-action.png" style="width:50rpx;height:52rpx;"></image>
         </view>
@@ -170,7 +170,7 @@
 
   <view class="button-group">
     <view class="button-list last-list">
-      <view class="button">
+      <view class="button" bindtap="bindButton" data-url="setting/index/index">
         <view class="icon">
           <image src="/images/mine-setting.png" style="width:48rpx;height:52rpx;"></image>
         </view>
@@ -178,25 +178,26 @@
           <text>设置</text>
         </view>
       </view>
-      <view class="button" bindtap="makePhoneCall">
-        
+      <view class="button">
+        <button open-type="contact">
           <view class="icon">
             <image src="/images/mine-contact.png" style="width:56rpx;height:52rpx;"></image>
           </view>
           <view class="name">
             <text>联系客服</text>
           </view>
-        
+        </button>
+
       </view>
       <view class="button">
-      <button open-type="contact">
-        <view class="icon">
-          <image src="/images/mine-feedback.png" style="width:53rpx;height:51rpx;"></image>
-        </view>
-        <view class="name">
-          <text>建议反馈</text>
-        </view>
-        </button>
+        <navigator target="miniProgram" open-type="navigate" app-id="{{tgcAppId}}" extra-data="{{tgcExtraData}}" version="release">
+          <view class="icon">
+            <image src="/images/mine-feedback.png" style="width:53rpx;height:51rpx;"></image>
+          </view>
+          <view class="name">
+            <text>建议反馈</text>
+          </view>
+        </navigator>
       </view>
     </view>
   </view>

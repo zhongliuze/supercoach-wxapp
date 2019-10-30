@@ -7,6 +7,8 @@ Page({
   data: {
     selectModule: 0, // 选中模块下标
     addModulePopup: false, // 新增模块弹窗
+    deleteButton: false, // 是否打开删除按钮
+    addModuleName: '', // 新增模块输入内容
   },
 
   /**
@@ -100,4 +102,61 @@ Page({
    * 弹窗后禁止滚动
    */
   catchtouchmove: function () { },
+
+  /**
+   * 进入新增动作页面
+   */
+  navigateToAdd: function(event) {
+    // 携带模块ID过去
+    wx.navigateTo({
+      url: '../add/add?module=' + event.currentTarget.dataset.module,
+    })
+  },
+
+  /**
+   * 打开或关闭删除按钮
+   */
+  switchDeleteButton: function(event) {
+    this.setData({
+      'deleteButton': !this.data.deleteButton,
+    });
+  },
+
+  /**
+   * 删除动作按钮
+   */
+  deleteAction: function(event) {
+    wx.showToast({
+      title: '已删除',
+      icon: 'success',
+    })
+  },
+
+  /**
+   * 新增模块名称
+   */
+  addModule: function(event) {
+    var _this = this;
+    wx.showToast({
+      title: '创建成功',
+      icon: 'success',
+      success: function (res) {
+        setTimeout(function () {
+          _this.setData({
+            'addModulePopup': false,
+            'addModuleName': '',
+          });
+        }, 1500);
+      }
+    })
+  },
+
+  /**
+   * 新增模块名称
+   */
+  inputModuleName: function(event) {
+    this.setData({
+      'addModuleName': event.detail.value,
+    });
+  }
 })

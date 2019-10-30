@@ -56,7 +56,7 @@
 </view>
 
 <view class="button-cell-group">
-  <view class="button-cell">
+  <view class="button-cell"  bindtap="bindButton" data-url="basic/basic">
     <view class="icon">
       <image src="/images/student-info-basic.png" style="width:26rpx;height:30rpx;"></image>
     </view>
@@ -69,7 +69,7 @@
       </view>
     </view>
   </view>
-  <view class="button-cell">
+  <view class="button-cell" bindtap="bindButton" data-url="subject/index/index">
     <view class="icon">
       <image src="/images/student-info-course.png" style="width:27rpx;height:28rpx;"></image>
     </view>
@@ -82,7 +82,7 @@
       </view>
     </view>
   </view>
-  <view class="button-cell">
+  <view class="button-cell" bindtap="bindButton" data-url="record/record">
     <view class="icon">
       <image src="/images/student-info-record.png" style="width:28rpx;height:28rpx;"></image>
     </view>
@@ -98,7 +98,7 @@
 </view>
 
 <view class="button-cell-group">
-  <view class="button-cell">
+  <view class="button-cell"  bindtap="bindButton" data-url="stamina/stamina">
     <view class="icon">
       <image src="/images/student-info-data.png" style="width:28rpx;height:26rpx;"></image>
     </view>
@@ -114,7 +114,7 @@
 </view>
 
 <view class="button-cell-group">
-  <view class="button-cell">
+  <view class="button-cell" bindtap="bindButton" data-url="other/other">
     <view class="icon">
       <image src="/images/student-info-more.png" style="width:28rpx;height:24rpx;"></image>
     </view>

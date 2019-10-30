@@ -28,6 +28,8 @@
     "pages/students/index/index",
     "pages/mine/index/index",
     "pages/mine/action/index/index",
+    "pages/mine/action/add/add",
+    "pages/mine/lesson/index/index",
     "pages/mine/order/index/index",
     "pages/mine/setting/index/index",
     "pages/mine/setting/about/about",
@@ -72,5 +74,8 @@
     "selectedColor": "#2B313D",
     "backgroundColor": "#FFFFFF",
     "borderStyle": "white"
-  }
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx8abaf00ee8c3202e"
+  ]
 }

@@ -156,10 +156,22 @@ Page({
     
   },
 
+  /**
+   * 进入新增学员页面
+   */
   navigateToAdd: function() {
     wx.navigateTo({
       url: '../add/add',
     })
-  }
+  },
+
+  /**
+   * 进入学员信息页面
+   */
+  navigateToBasic: function(event) {
+    wx.navigateTo({
+      url: '../student/student',
+    })
+  },
 
 })

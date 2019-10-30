@@ -7,11 +7,12 @@
     <text>兑换码</text>
   </view>
   <view class="input">
-    <input placeholder="请输入兑换码，区分大小写" placeholder-class="input-placeholder"></input>
+    <input placeholder="请输入兑换码，区分大小写" placeholder-class="input-placeholder" bindinput="inputCode" value="{{inputCode}}"></input>
   </view>
 </view>
-<view class="exchange-button" bindtap="openConirmPopup">
-  <button>立即兑换</button>
+<view class="exchange-button">
+  <button class="disabled" disabled="" wx:if="{{inputCode == ''}}">立即兑换</button>
+  <button bindtap="openConirmPopup" wx:else>立即兑换</button>
 </view>
 
 <view class="remarks">
@@ -19,7 +20,7 @@
     <text>如何获取兑换码？</text>
   </view>
   <view class="content">
-    <text>我们会不定期举行一些活动，届时就会有兑换码砸向幸运的你啦~请注意关注我们的公众号“私教小助手”哦。</text>
+    <text>我们会不定期举行一些活动，届时就会有兑换码砸向幸运的你啦~请注意关注我们的公众号“超级私教Pro”哦。</text>
   </view>
 </view>
 
@@ -41,7 +42,7 @@
           <text>有效期至2020年08月05日</text>
         </view>
       </view>
-      <view class="button" catchtap="submitRefuse">
+      <view class="button" catchtap="exchangeVIP">
         <button>确认兑换</button>
       </view>
     </view>

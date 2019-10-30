@@ -52,7 +52,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 36,
+			"current": 38,
 			"list": [
 				{
 					"id": -1,
@@ -310,6 +310,20 @@
 					"id": -1,
 					"name": "pages/mine/action/index/index",
 					"pathName": "pages/mine/action/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/action/add/add",
+					"pathName": "pages/mine/action/add/add",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/lesson/index/index",
+					"pathName": "pages/mine/lesson/index/index",
 					"scene": null
 				}
 			]

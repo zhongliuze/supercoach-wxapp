@@ -73,7 +73,7 @@ Page({
   /**
    * 选择套餐
    */
-  selectPrice: function(event) {
+  selectPrice: function (event) {
     this.setData({
       selectPrice: event.currentTarget.dataset.price,
     });
@@ -82,7 +82,7 @@ Page({
   /**
    * 勾选服务协议
    */
-  bindRadio: function(event) {
+  bindRadio: function (event) {
     this.setData({
       agreement: !this.data.agreement,
     });
@@ -95,11 +95,38 @@ Page({
     this.setData({
       'orderPopup': false,
     });
-  }, 
+  },
 
-  openPopup: function(event) {
+  openPopup: function (event) {
     this.setData({
       'orderPopup': true,
     });
-  }, 
+  },
+
+  /**
+   * 打开协议页面
+   */
+  bindTreaty: function (event) {
+    wx.navigateTo({
+      url: '../../treaty/member/member?treatyType=2',
+    })
+  },
+
+  /**
+   * 打开开通记录页面
+   */
+  navigateToRecord: function(event) {
+    wx.navigateTo({
+      url: '../record/record',
+    })
+  },
+
+  /**
+   * 打开兑换码页面
+   */
+  navigateToExchange: function (event) {
+    wx.navigateTo({
+      url: '../exchange/exchange',
+    })
+  }
 })

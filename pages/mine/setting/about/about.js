@@ -62,5 +62,14 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 打开协议页面
+   */
+  bindTreaty: function (event) {
+    wx.navigateTo({
+      url: '../../../treaty/member/member?treatyType=' + event.currentTarget.dataset.type,
+    })
   }
 })

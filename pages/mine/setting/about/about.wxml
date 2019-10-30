@@ -38,7 +38,7 @@
 </view>
 
 <view class="button-line-list">
-  <view class="button-line">
+  <view class="button-line" bindtap="bindTreaty" data-type="0">
     <view class="name">
       <text>用户协议</text>
     </view>
@@ -46,7 +46,7 @@
       <image src="/images/arrow-right.png"></image>
     </view>
   </view>
-  <view class="button-line no-border">
+  <view class="button-line no-border" bindtap="bindTreaty" data-type="1">
     <view class="name">
       <text>隐私政策</text>
     </view>

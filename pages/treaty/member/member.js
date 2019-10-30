@@ -12,7 +12,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (options.treatyType == 0) {
+      // 用户协议
+      wx.setNavigationBarTitle({
+        title: '用户协议',
+      })
+    } else if (options.treatyType == 1){
+       // 隐私协议
+      wx.setNavigationBarTitle({
+        title: '隐私政策',
+      })
+    } else if (options.treatyType == 2) {
+      // 会员协议
+      wx.setNavigationBarTitle({
+        title: '会员服务协议',
+      })
+    }
   },
 
   /**
