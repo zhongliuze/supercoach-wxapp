@@ -1,0 +1,77 @@
+<!--pages/mine/lesson/add/add.wxml-->
+<view class="container-input">
+  <view class="input-lesson">
+    <view class="title">
+      <text>课程名称</text>
+    </view>
+    <view class="input">
+      <input placeholder="请输入课程名称" placeholder-class="input-placeholder"></input>
+    </view>
+  </view>
+
+  <view class="select-part">
+    <view class="title">
+      <text>训练部位</text>
+    </view>
+    <view class="part-group">
+      <view class="part">
+        <view class="delete">
+          <image src="/images/mine-action-delete.png"></image>
+        </view>
+        <view class="span">
+          <text>臂</text>
+        </view>
+      </view>
+      <view class="part">
+        <view class="delete">
+          <image src="/images/mine-action-delete.png"></image>
+        </view>
+        <view class="span">
+          <text>胸</text>
+        </view>
+      </view>
+      <view class="part">
+        <view class="delete">
+          <image src="/images/mine-action-delete.png"></image>
+        </view>
+        <view class="span">
+          <text>肩</text>
+        </view>
+      </view>
+      <view class="part">
+        <view class="delete">
+          <image src="/images/mine-action-delete.png"></image>
+        </view>
+        <view class="span">
+          <text>腹</text>
+        </view>
+      </view>
+      <view class="part">
+        <view class="delete">
+          <image src="/images/mine-action-delete.png"></image>
+        </view>
+        <view class="span">
+          <text>臀</text>
+        </view>
+      </view>
+      <view class="part">
+        <view class="delete">
+          <image src="/images/mine-action-delete.png"></image>
+        </view>
+        <view class="span">
+          <text>腿</text>
+        </view>
+      </view>
+      <view class="part no-warp" >
+        <view class="delete">
+          <image src="/images/mine-action-delete.png"></image>
+        </view>
+        <view class="span">
+          <text>腿</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+</view>
