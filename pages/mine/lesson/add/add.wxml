@@ -62,7 +62,7 @@
           <text>腿</text>
         </view>
       </view>
-      <view class="part no-warp" >
+      <view class="part no-warp">
         <view class="delete">
           <image src="/images/mine-action-delete.png"></image>
         </view>
@@ -70,8 +70,202 @@
           <text>腿</text>
         </view>
       </view>
+      <view class="part">
+        <view class="delete">
+          <image src="/images/mine-action-delete.png"></image>
+        </view>
+        <view class="span">
+          <text>臂</text>
+        </view>
+      </view>
+      <view class="part">
+        <view class="delete">
+        </view>
+        <view class="span">
+          <text>臂</text>
+        </view>
+      </view>
+      <view class="part">
+        <view class="delete">
+        </view>
+        <view class="span">
+          <text>臂</text>
+        </view>
+      </view>
+      <view class="part">
+        <view class="delete">
+        </view>
+        <view class="span">
+          <text>臂</text>
+        </view>
+      </view>
     </view>
 
   </view>
 
+  <view class="lesson-content">
+    <view class="title">
+      <text>训练内容</text>
+    </view>
+    <view class="content-area">
+      <view class="module">
+        <view class="name">
+          <text>热身训练</text>
+        </view>
+        <view class="action-list">
+          <view class="action">
+            <view class="action-name">
+              <text>器械推肩</text>
+            </view>
+            <view class="value">
+              <view class="frequency">
+                <text>1组 x 10秒</text>
+              </view>
+              <view class="situation">
+                <text>保持稳定</text>
+              </view>
+              <view class="icon">
+                <image src="/images/mine-action-increase.png"></image>
+              </view>
+            </view>
+          </view>
+
+          <view class="action">
+            <view class="action-name">
+              <text>哑铃侧平举</text>
+            </view>
+            <view class="value">
+              <view class="frequency">
+                <text>3组 x 12次</text>
+              </view>
+              <view class="situation">
+                <text>保持稳定</text>
+              </view>
+              <view class="icon">
+                <image src="/images/mine-action-increase.png"></image>
+              </view>
+            </view>
+          </view>
+
+          <view class="action">
+            <view class="action-name">
+              <text>动态胸部伸展</text>
+            </view>
+            <view class="value">
+              <view class="frequency">
+                <text>1组 x 10秒</text>
+              </view>
+              <view class="situation">
+                <text>至酸胀感</text>
+              </view>
+              <view class="icon">
+                <image src="/images/mine-action-increase.png"></image>
+              </view>
+            </view>
+          </view>
+
+        </view>
+
+
+      </view>
+
+      <view class="module">
+        <view class="name">
+          <text>热身训练</text>
+        </view>
+        <view class="action-list">
+          <view class="action">
+            <view class="action-name">
+              <text>器械推肩</text>
+            </view>
+            <view class="value">
+              <view class="frequency">
+                <text>1组 x 10秒</text>
+              </view>
+              <view class="situation">
+                <text>保持稳定</text>
+              </view>
+              <view class="icon">
+                <image src="/images/mine-action-increase.png"></image>
+              </view>
+            </view>
+          </view>
+
+          <view class="action">
+            <view class="action-name">
+              <text>哑铃侧平举</text>
+            </view>
+            <view class="value">
+              <view class="frequency">
+                <text>3组 x 12次</text>
+              </view>
+              <view class="situation">
+                <text>保持稳定</text>
+              </view>
+              <view class="icon">
+                <image src="/images/mine-action-increase.png"></image>
+              </view>
+            </view>
+          </view>
+
+          <view class="action">
+            <view class="action-name">
+              <text>动态胸部伸展</text>
+              <image src="/images/mine-lesson-add-close.png"></image>
+            </view>
+            <view class="value">
+              <view class="frequency">
+                <text>1组 x 10秒</text>
+              </view>
+              <view class="situation">
+                <text>至酸胀感</text>
+              </view>
+              <view class="icon-list">
+                <image src="/images/mine-lesson-add-close.png"></image>
+                <image src="/images/mine-action-increase.png" class="right"></image>
+              </view>
+            </view>
+            <view class="value">
+              <view class="frequency">
+                <text>1组 x 10秒</text>
+              </view>
+              <view class="situation">
+                <text>至酸胀感</text>
+              </view>
+              <view class="icon-list">
+                <image src="/images/mine-lesson-add-close.png"></image>
+                <image src="/images/mine-action-increase.png" class="right"></image>
+              </view>
+            </view>
+            <view class="value">
+              <view class="frequency">
+                <text>1组 x 10秒</text>
+              </view>
+              <view class="situation">
+                <text>至酸胀感</text>
+              </view>
+              <view class="icon-list">
+                <image src="/images/mine-lesson-add-close.png"></image>
+                <image src="/images/mine-action-increase.png" class="right"></image>
+              </view>
+            </view>
+          </view>
+
+        </view>
+
+
+      </view>
+
+      <view class="add-content">
+        <image src="/images/mine-action-increase.png"></image>
+        <text>新增</text>
+      </view>
+
+    </view>
+
+  </view>
 </view>
+<view class="common-bottom"></view>
+<view class="fixed-bottom-button" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
+    <button bindtap="bindSave">保存</button>
+  </view>

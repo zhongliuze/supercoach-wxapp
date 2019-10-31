@@ -6,47 +6,47 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #FFF;
+  background-color: #fff;
 }
 
-.input-lesson .title{
+.input-lesson .title {
   margin-left: 30rpx;
-  color: #181D24;
+  color: #181d24;
   font-size: 34rpx;
   width: 172rpx;
 }
 
-.input-lesson .input{
+.input-lesson .input {
   width: 518rpx;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.input-lesson .input input{
+.input-lesson .input input {
   width: 518rpx;
 }
 
-.input-lesson .input .input-placeholder{
-  color: #CFCFCF;
+.input-lesson .input .input-placeholder {
+  color: #cfcfcf;
 }
 
 .select-part {
   margin-top: 32rpx;
   width: 750rpx;
-  background-color: #FFF;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
 }
 
-.select-part .title{
-  margin-top: 58rpx;
+.select-part .title {
+  margin-top: 48rpx;
   margin-left: 30rpx;
-  color: #181D24;
+  color: #181d24;
   font-size: 34rpx;
 }
 
-.select-part .part-group{
+.select-part .part-group {
   margin-top: 48rpx;
   margin-left: 30rpx;
   width: 690rpx;
@@ -57,7 +57,7 @@
   margin-bottom: 20rpx;
 }
 
-.select-part .part-group .part{
+.select-part .part-group .part {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -70,7 +70,7 @@
   margin-right: 0;
 }
 
-.select-part .part-group .part .delete{
+.select-part .part-group .part .delete {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,20 +82,168 @@
   right: -6rpx;
 }
 
-.select-part .part-group .part .delete image{
+.select-part .part-group .part .delete image {
   width: 34rpx;
   height: 34rpx;
 }
 
-.select-part .part-group .part .span{
+.select-part .part-group .part .span {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 80rpx;
   height: 80rpx;
-  color: #181D24;
+  color: #181d24;
   font-size: 28rpx;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
   border-radius: 100%;
   margin-top: -24rpx;
+}
+
+.lesson-content {
+  width: 750rpx;
+  display: flex;
+  flex-direction: column;
+  margin-top: 32rpx;
+  background-color: #FFF;
+}
+
+.lesson-content .title {
+  margin-top: 48rpx;
+  margin-left: 30rpx;
+  color: #181d24;
+  font-size: 34rpx;
+}
+
+.lesson-content .content-area {
+  width: 690rpx;
+  display: flex;
+  flex-direction: column;
+  margin-left: 30rpx;
+  margin-top: 48rpx;
+  margin-bottom: 52rpx;
+}
+
+.lesson-content .content-area .add-content {
+  width: 690rpx;
+  height: 80rpx;
+  background: rgba#FFF;
+  border: 1px solid #C0C0C0;
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #707888;
+  font-size: 26rpx;
+  margin-top: 16rpx;
+}
+
+.lesson-content .content-area .add-content image{
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.lesson-content .content-area .add-content text{
+  margin-left: 16rpx;
+}
+
+.lesson-content .content-area .module{
+  width: 690rpx;
+  background-color: #F7F7F7;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32rpx;
+}
+
+.lesson-content .content-area .module .name{
+  color: #707888;
+  font-size: 22rpx;
+  font-weight:bold;
+  margin-top: 32rpx;
+  margin-left: 32rpx;
+}
+
+.lesson-content .content-area .module .action-list {
+  width: 626rpx;
+  margin-bottom: 10rpx;
+  display: flex;
+  flex-direction: column;
+  margin-left: 32rpx;
+  margin-top: 32rpx;
+}
+
+.lesson-content .content-area .module .action{
+  width: 626rpx;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40rpx;
+}
+
+.lesson-content .content-area .module .action .action-name{
+  color: #181D24;
+  font-size: 32rpx;
+  line-height: 32rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+.lesson-content .content-area .module .action .action-name image{
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.lesson-content .content-area .module .action .value{
+  color: #707888;
+  font-size: 26rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.lesson-content .content-area .module .action .value .frequency{
+  width: 244rpx;
+}
+
+.lesson-content .content-area .module .action .value .situation{
+  width: 254rpx;
+}
+
+.lesson-content .content-area .module .action .value .icon{
+  width: 128rpx;
+  height: 40rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.lesson-content .content-area .module .action .value .icon image{
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.lesson-content .content-area .module .action .value .icon-list{
+  width: 122rpx;
+  height: 40rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.lesson-content .content-area .module .action .value .icon-list image{
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.lesson-content .content-area .module .action .value .icon-list .right{
+  margin-left: 30rpx;
+}
+
+.common-bottom {
+  height: 200rpx;
 }

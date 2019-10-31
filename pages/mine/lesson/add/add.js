@@ -5,14 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    fixedBottomButtonMargin: 0, // 吸底按钮的自适应高度
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      fixedBottomButtonMargin: wx.getStorageSync('fixedBottomButtonMargin'), // 设置吸底按钮自适应高度
+    });
   },
 
   /**
