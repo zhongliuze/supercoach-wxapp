@@ -99,6 +99,14 @@
           <text>臂</text>
         </view>
       </view>
+       <view class="part">
+        <view class="delete">
+        </view>
+        <view class="span">
+          <image src="/images/mine-lesson-part-add.png"></image>
+        </view>
+      </view>
+      
     </view>
 
   </view>
@@ -221,8 +229,8 @@
                 <text>至酸胀感</text>
               </view>
               <view class="icon-list">
-                <image src="/images/mine-lesson-add-close.png"></image>
-                <image src="/images/mine-action-increase.png" class="right"></image>
+                <image src="/images/mine-lesson-open-delete.png"></image>
+                <image src="/images/mine-lesson-open-add.png" class="right"></image>
               </view>
             </view>
             <view class="value">
@@ -233,8 +241,8 @@
                 <text>至酸胀感</text>
               </view>
               <view class="icon-list">
-                <image src="/images/mine-lesson-add-close.png"></image>
-                <image src="/images/mine-action-increase.png" class="right"></image>
+                <image src="/images/mine-lesson-open-delete.png"></image>
+                <image src="/images/mine-lesson-open-add.png" class="right"></image>
               </view>
             </view>
             <view class="value">
@@ -245,8 +253,8 @@
                 <text>至酸胀感</text>
               </view>
               <view class="icon-list">
-                <image src="/images/mine-lesson-add-close.png"></image>
-                <image src="/images/mine-action-increase.png" class="right"></image>
+                <image src="/images/mine-lesson-open-delete.png"></image>
+                <image src="/images/mine-lesson-open-add.png" class="right"></image>
               </view>
             </view>
           </view>

@@ -100,6 +100,11 @@
   margin-top: -24rpx;
 }
 
+.select-part .part-group .part .span image{
+  width: 26rpx;
+  height: 26rpx;
+}
+
 .lesson-content {
   width: 750rpx;
   display: flex;
