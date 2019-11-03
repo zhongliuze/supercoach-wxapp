@@ -95,18 +95,18 @@
       <view class="part">
         <view class="delete">
         </view>
-        <view class="span">
+        <view class="span select">
           <text>臂</text>
         </view>
       </view>
-       <view class="part">
+      <view class="part">
         <view class="delete">
         </view>
         <view class="span">
           <image src="/images/mine-lesson-part-add.png"></image>
         </view>
       </view>
-      
+
     </view>
 
   </view>
@@ -275,5 +275,5 @@
 </view>
 <view class="common-bottom"></view>
 <view class="fixed-bottom-button" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
-    <button bindtap="bindSave">保存</button>
-  </view>
+  <button bindtap="bindSave">保存</button>
+</view>

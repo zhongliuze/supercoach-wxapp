@@ -1,0 +1,202 @@
+<!--pages/mine/lesson/action/action.wxml-->
+<view class="container-action">
+
+
+  <view class="select-area">
+    <view class="title">
+      <text>学习/训练类型</text>
+    </view>
+    <view class="value">
+      <view class="module-list">
+        <scroll-view class="scroll-view" scroll-x>
+          <view class="inline-view">
+            <view class="module selected">
+              <image src="/images/mine-action-warm.png"></image>
+              <text>热身训练</text>
+            </view>
+          </view>
+          <view class="inline-view">
+            <view class="module">
+              <image src="/images/mine-action-strength.png"></image>
+              <text>热身训练</text>
+            </view>
+          </view>
+          <view class="inline-view">
+            <view class="module">
+              <image src="/images/mine-action-aerobic.png" style="width:54rpx;height:50rpx;"></image>
+              <text>热身训练</text>
+            </view>
+          </view>
+          <view class="inline-view">
+            <view class="module">
+              <image src="/images/mine-action-stretch.png" style="width:54rpx;height:50rpx;"></image>
+              <text>热身训练</text>
+            </view>
+          </view>
+          <view class="inline-view">
+            <view class="module">
+              <image src="/images/mine-action-customize.png" style="width:50rpx;height:45rpx;"></image>
+              <text>自定义</text>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+
+  <view class="select-area">
+    <view class="title">
+      <view class="main">
+        <text>训练动作</text>
+      </view>
+      <view class="add-title">
+        <image src="/images/mine-lesson-action-add.png"></image>
+        <text>新增模块</text>
+      </view>
+    </view>
+    <view class="value">
+      <view class="action-list">
+        <view class="action">
+          <text>热身训练</text>
+        </view>
+        <view class="action selected">
+          <text>热身训练</text>
+        </view>
+        <view class="action">
+          <text>热身训练</text>
+        </view>
+        <view class="action nowarp">
+          <text>热身训练</text>
+        </view>
+        <view class="action">
+          <text>热身训练</text>
+        </view>
+        <view class="action">
+          <text>热身训练</text>
+        </view>
+        <view class="action">
+          <text>热身训练</text>
+        </view>
+        <view class="action nowarp">
+          <text>热身训练</text>
+        </view>
+        <view class="action">
+          <text>热身训练</text>
+        </view>
+        <view class="action">
+          <text>热身训练</text>
+        </view>
+        <view class="action">
+          <text>热身训练</text>
+        </view>
+        <view class="action nowarp">
+          <text>热身训练</text>
+        </view>
+      </view>
+      <view class="show-more">
+        <image src="/images/mine-lesson-action-more.png"></image>
+        <text>展开更多</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="select-area">
+    <view class="title">
+      <view class="main">
+        <text>组数（组）</text>
+      </view>
+    </view>
+    <view class="value">
+      <view class="action-list">
+        <view class="action no-bottom">
+          <text>1</text>
+        </view>
+        <view class="action selected no-bottom">
+          <text>3</text>
+        </view>
+        <view class="action no-bottom">
+          <text>5</text>
+        </view>
+        <view class="action nowarp no-bottom">
+          <text>自定义</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="select-area">
+    <view class="title">
+      <view class="main">
+        <text>次数（次）</text>
+      </view>
+    </view>
+    <view class="value">
+      <view class="action-list">
+        <view class="action no-bottom">
+          <text>1</text>
+        </view>
+        <view class="action selected no-bottom">
+          <text>3</text>
+        </view>
+        <view class="action no-bottom">
+          <text>5</text>
+        </view>
+        <view class="action nowarp no-bottom">
+          <text>自定义</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="select-area">
+    <view class="title">
+      <view class="main">
+        <text>强度（kg/侧）</text>
+      </view>
+    </view>
+    <view class="value">
+      <view class="action-list">
+        <view class="action no-bottom">
+          <text>1</text>
+        </view>
+        <view class="action selected no-bottom">
+          <text>3</text>
+        </view>
+        <view class="action no-bottom">
+          <text>5</text>
+        </view>
+        <view class="action nowarp no-bottom">
+          <text>自定义</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="select-area">
+    <view class="title">
+      <view class="main">
+        <text>间歇（秒）</text>
+      </view>
+    </view>
+    <view class="value">
+      <view class="action-list">
+        <view class="action no-bottom">
+          <text>1</text>
+        </view>
+        <view class="action selected no-bottom">
+          <text>3</text>
+        </view>
+        <view class="action no-bottom">
+          <text>5</text>
+        </view>
+        <view class="action nowarp no-bottom">
+          <text>自定义</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="common-bottom"></view>
+<view class="fixed-bottom-button" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
+  <button bindtap="bindSave">保存</button>
+</view>

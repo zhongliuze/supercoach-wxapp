@@ -31,6 +31,7 @@
     "pages/mine/action/add/add",
     "pages/mine/lesson/index/index",
     "pages/mine/lesson/add/add",
+    "pages/mine/lesson/action/action",
     "pages/mine/order/index/index",
     "pages/mine/setting/index/index",
     "pages/mine/setting/about/about",

@@ -1,0 +1,159 @@
+/* pages/mine/lesson/action/action.wxss */
+
+page {
+  background-color: #fff;
+}
+
+.container-action {
+  margin-top: 32rpx;
+}
+
+.select-area {
+  width: 720rpx;
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 72rpx;
+}
+
+.select-area .title {
+  width: 690rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.select-area .title .main {
+  color: #181d24;
+  font-size: 34rpx;
+  font-weight:bold;
+}
+
+.select-area .title .add-title {
+  color: #2b87ff;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.select-area .title .add-title image {
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 8rpx;
+}
+
+.select-area .value {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32rpx;
+}
+
+.select-area .value .module-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.select-area .value .module-list .scroll-view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+  width: 720rpx;
+  height: 162rpx;
+}
+
+.select-area .value .module-list .scroll-view .inline-view {
+  display: inline-block;
+  width: 160rpx;
+  height: 162rpx;
+  margin-right: 16rpx;
+}
+
+.select-area .value .module-list .scroll-view .module {
+  width: 160rpx;
+  height: 160rpx;
+  background: #f5f5f5;
+  border-radius: 6rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #181d24;
+}
+
+.select-area .value .module-list .scroll-view .module image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.select-area .value .module-list .scroll-view .module text {
+  font-size: 24rpx;
+  margin-top: 16rpx;
+}
+
+.select-area .value .module-list .scroll-view .selected {
+  background: #E5F7E6;
+  color: #2EAB34;
+  border: 1rpx solid #5FCD64;
+}
+
+.select-area .value .action-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 692rpx;
+  flex-wrap: wrap;
+}
+
+
+.select-area .value .action-list .action {
+  background-color: #f5f5f5;
+  width: 150rpx;
+  height: 70rpx;
+  border-radius: 6rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #181d24;
+  font-size: 24rpx;
+  margin-right: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.select-area .value .action-list .no-bottom{
+  margin-bottom: 0rpx;
+}
+
+.select-area .value .action-list .selected{
+  background-color: #E5F7E6;
+  border: 1rpx solid #5FCD64;
+  color: #2EAB34;
+}
+
+
+.select-area .value .action-list .nowarp {
+  margin-right: 0rpx;
+}
+
+.select-area .value .show-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  color: #707888;
+  font-size: 20rpx;
+  margin-top: 6rpx;
+}
+
+.select-area .value  .show-more image{
+  width: 20rpx;
+  height: 18rpx;
+  margin-right: 15rpx;
+}
+
+.common-bottom {
+  height: 200rpx;
+}
