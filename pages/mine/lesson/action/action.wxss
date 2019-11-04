@@ -123,6 +123,18 @@ page {
   margin-bottom: 30rpx;
 }
 
+.select-area .value .action-list .action input{
+  width: 110rpx;
+  height: 70rpx;
+  text-align: center;
+}
+
+.select-area .value .action-list .action .input-placeholder{
+  color: #181d24;
+  font-size: 24rpx;
+  text-align: center;
+}
+
 .select-area .value .action-list .no-bottom{
   margin-bottom: 0rpx;
 }

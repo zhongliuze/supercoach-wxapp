@@ -9,36 +9,18 @@
     <view class="value">
       <view class="module-list">
         <scroll-view class="scroll-view" scroll-x>
-          <view class="inline-view">
-            <view class="module selected">
-              <image src="/images/mine-action-warm.png"></image>
-              <text>热身训练</text>
+          <block wx:for="{{moduleList}}">
+            <view class="inline-view" bindtap="selectModule" data-index="{{index}}">
+              <view class="module {{index == selectModule ? 'selected' : ''}}">
+                <image src="/images/mine-action-warm{{index == selectModule ? '-selected' : ''}}.png" wx:if="{{index == 0}}"></image>
+                <image src="/images/mine-action-strength{{index == selectModule ? '-selected' : ''}}.png" wx:elif="{{index == 1}}"></image>
+                <image src="/images/mine-action-aerobic{{index == selectModule ? '-selected' : ''}}.png" style="width:54rpx;height:50rpx;" wx:elif="{{index == 2}}"></image>
+                <image src="/images/mine-action-stretch{{index == selectModule ? '-selected' : ''}}.png" style="width:54rpx;height:50rpx;" wx:elif="{{index == 3}}"></image>
+                <image src="/images/mine-action-customize{{index == selectModule ? '-selected' : ''}}.png" style="width:54rpx;height:50rpx;" wx:else></image>
+                <text>{{item.name}}</text>
+              </view>
             </view>
-          </view>
-          <view class="inline-view">
-            <view class="module">
-              <image src="/images/mine-action-strength.png"></image>
-              <text>热身训练</text>
-            </view>
-          </view>
-          <view class="inline-view">
-            <view class="module">
-              <image src="/images/mine-action-aerobic.png" style="width:54rpx;height:50rpx;"></image>
-              <text>热身训练</text>
-            </view>
-          </view>
-          <view class="inline-view">
-            <view class="module">
-              <image src="/images/mine-action-stretch.png" style="width:54rpx;height:50rpx;"></image>
-              <text>热身训练</text>
-            </view>
-          </view>
-          <view class="inline-view">
-            <view class="module">
-              <image src="/images/mine-action-customize.png" style="width:50rpx;height:45rpx;"></image>
-              <text>自定义</text>
-            </view>
-          </view>
+          </block>
         </scroll-view>
       </view>
     </view>
@@ -56,44 +38,25 @@
     </view>
     <view class="value">
       <view class="action-list">
-        <view class="action">
-          <text>热身训练</text>
-        </view>
-        <view class="action selected">
-          <text>热身训练</text>
-        </view>
-        <view class="action">
-          <text>热身训练</text>
-        </view>
-        <view class="action nowarp">
-          <text>热身训练</text>
-        </view>
-        <view class="action">
-          <text>热身训练</text>
-        </view>
-        <view class="action">
-          <text>热身训练</text>
-        </view>
-        <view class="action">
-          <text>热身训练</text>
-        </view>
-        <view class="action nowarp">
-          <text>热身训练</text>
-        </view>
-        <view class="action">
-          <text>热身训练</text>
-        </view>
-        <view class="action">
-          <text>热身训练</text>
-        </view>
-        <view class="action">
-          <text>热身训练</text>
-        </view>
-        <view class="action nowarp">
-          <text>热身训练</text>
-        </view>
+        <block wx:for="{{actionList}}">
+          <block wx:if="{{showMoreAction}}">
+            <view class="action {{index%4 == 3 ? 'nowarp' : ''}}">
+              <text>{{item.name}}</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="action {{index%4 == 3 ? 'nowarp' : ''}}" wx:if="{{index < 12}}">
+              <text>{{item.name}}</text>
+            </view>
+          </block>
+
+        </block>
       </view>
-      <view class="show-more">
+      <view class="show-more" bindtap="showMoreAction" wx:if="{{showMoreAction}}">
+        <image src="/images/mine-lesson-action-more.png"></image>
+        <text>收起列表</text>
+      </view>
+      <view class="show-more" bindtap="showMoreAction" wx:else>
         <image src="/images/mine-lesson-action-more.png"></image>
         <text>展开更多</text>
       </view>
@@ -118,7 +81,8 @@
           <text>5</text>
         </view>
         <view class="action nowarp no-bottom">
-          <text>自定义</text>
+          <!-- <text>自定义</text> -->
+          <input placeholder="自定义" placeholder-class="input-placeholder"></input>
         </view>
       </view>
     </view>

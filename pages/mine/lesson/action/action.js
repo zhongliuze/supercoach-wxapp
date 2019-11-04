@@ -6,6 +6,38 @@ Page({
    */
   data: {
     fixedBottomButtonMargin: 0, // 吸底按钮的自适应高度
+    moduleList: [{
+      name: '热身训练',
+      id: 0
+    },
+    {
+      name: '热身训练',
+      id: 1
+    },
+    {
+      name: '热身训练',
+      id: 2
+    },
+    {
+      name: '热身训练',
+      id: 3
+    },
+    {
+      name: '热身训练',
+      id: 4
+    },
+    {
+      name: '热身训练',
+      id: 5
+    },
+    ],
+    selectModule: 0,
+
+    actionList: [
+      { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' }, { name: '热身训练' },
+    ],
+    selectAction: -1,
+    showMoreAction: false, // 展开更多动作
   },
 
   /**
@@ -64,5 +96,23 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 选择训练类型
+   */
+  selectModule: function (event) {
+    this.setData({
+      'selectModule': event.currentTarget.dataset.index,
+    });
+  },
+
+  /**
+   * 展示更多的动作
+   */
+  showMoreAction: function(evnet) {
+    this.setData({
+      'showMoreAction': !this.data.showMoreAction,
+    });
   }
 })
