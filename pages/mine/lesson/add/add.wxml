@@ -264,7 +264,7 @@
 
       </view>
 
-      <view class="add-content">
+      <view class="add-content" bindtap="addAction">
         <image src="/images/mine-action-increase.png"></image>
         <text>新增</text>
       </view>

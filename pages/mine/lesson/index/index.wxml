@@ -1,6 +1,6 @@
 <!--pages/mine/lesson/index/index.wxml-->
 <view class="lesson-list">
-  <view class="lesson">
+  <view class="lesson" bindtap="addLesson">
     <view class="checked">
     </view>
     <view class="background">

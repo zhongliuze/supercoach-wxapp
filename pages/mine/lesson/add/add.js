@@ -64,5 +64,14 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 新增动作
+   */
+  addAction: function() {
+    wx.navigateTo({
+      url: '../action/action',
+    })
   }
 })

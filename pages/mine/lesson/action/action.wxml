@@ -40,12 +40,12 @@
       <view class="action-list">
         <block wx:for="{{actionList}}">
           <block wx:if="{{showMoreAction}}">
-            <view class="action {{index%4 == 3 ? 'nowarp' : ''}}">
+            <view class="action {{index%4 == 3 ? 'nowarp' : ''}} {{selectAction == index ? 'selected' : ''}}" bindtap="selectAction" data-index="{{index}}">
               <text>{{item.name}}</text>
             </view>
           </block>
           <block wx:else>
-            <view class="action {{index%4 == 3 ? 'nowarp' : ''}}" wx:if="{{index < 12}}">
+            <view class="action {{index%4 == 3 ? 'nowarp' : ''}} {{selectAction == index ? 'selected' : ''}}" wx:if="{{index < 12}}" bindtap="selectAction" data-index="{{index}}">
               <text>{{item.name}}</text>
             </view>
           </block>
@@ -53,7 +53,7 @@
         </block>
       </view>
       <view class="show-more" bindtap="showMoreAction" wx:if="{{showMoreAction}}">
-        <image src="/images/mine-lesson-action-more.png"></image>
+        <image src="/images/mine-lesson-action-less.png"></image>
         <text>收起列表</text>
       </view>
       <view class="show-more" bindtap="showMoreAction" wx:else>
@@ -71,18 +71,25 @@
     </view>
     <view class="value">
       <view class="action-list">
-        <view class="action no-bottom">
+        <view class="action no-bottom {{selectGroup == 0 ? 'selected' : ''}}" bindtap="selectGroup" data-id="0">
           <text>1</text>
         </view>
-        <view class="action selected no-bottom">
+        <view class="action no-bottom {{selectGroup == 1 ? 'selected' : ''}}"  bindtap="selectGroup" data-id="1">
           <text>3</text>
         </view>
-        <view class="action no-bottom">
+        <view class="action no-bottom {{selectGroup == 2 ? 'selected' : ''}}"  bindtap="selectGroup" data-id="2">
           <text>5</text>
         </view>
-        <view class="action nowarp no-bottom">
-          <!-- <text>自定义</text> -->
-          <input placeholder="自定义" placeholder-class="input-placeholder"></input>
+        <view class="action nowarp no-bottom {{selectGroup == 3 ? 'selected' : ''}}"  bindtap="selectGroup" data-id="3">
+          <block wx:if="{{selectGroup == 3}}">
+            <input placeholder="请输入" placeholder-class="input-placeholder" bindinput="inputGroup" value='{{inputGroup}}'></input>
+          </block>
+          <block wx:elif="{{inputGroup != ''}}">
+            <text>{{inputGroup}}</text>
+          </block>
+          <block wx:else>
+            <text>自定义</text>
+          </block>
         </view>
       </view>
     </view>
@@ -96,17 +103,22 @@
     </view>
     <view class="value">
       <view class="action-list">
-        <view class="action no-bottom">
+        <view class="action no-bottom {{selectTimes == 0 ? 'selected' : ''}}"  bindtap="selectTimes" data-id="0">
           <text>1</text>
         </view>
-        <view class="action selected no-bottom">
+        <view class="action no-bottom {{selectTimes == 1 ? 'selected' : ''}}"  bindtap="selectTimes" data-id="1">
           <text>3</text>
         </view>
-        <view class="action no-bottom">
+        <view class="action no-bottom {{selectTimes == 2 ? 'selected' : ''}}"  bindtap="selectTimes" data-id="2">
           <text>5</text>
         </view>
-        <view class="action nowarp no-bottom">
-          <text>自定义</text>
+        <view class="action nowarp no-bottom {{selectTimes == 3 ? 'selected' : ''}}"  bindtap="selectTimes" data-id="3">
+          <block wx:if="{{selectTimes == 3}}">
+            <input placeholder="请输入" placeholder-class="input-placeholder" bindinput="inputTimes" value='{{inputTimes}}'></input>
+          </block>
+          <block wx:else>
+            <text>自定义</text>
+          </block>
         </view>
       </view>
     </view>
@@ -120,17 +132,22 @@
     </view>
     <view class="value">
       <view class="action-list">
-        <view class="action no-bottom">
+        <view class="action no-bottom {{selectStrength == 0 ? 'selected' : ''}}" bindtap="selectStrength" data-id="0">
           <text>1</text>
         </view>
-        <view class="action selected no-bottom">
+        <view class="action no-bottom {{selectStrength == 1 ? 'selected' : ''}}" bindtap="selectStrength" data-id="1">
           <text>3</text>
         </view>
-        <view class="action no-bottom">
+        <view class="action no-bottom {{selectStrength == 2 ? 'selected' : ''}}" bindtap="selectStrength" data-id="2">
           <text>5</text>
         </view>
-        <view class="action nowarp no-bottom">
-          <text>自定义</text>
+        <view class="action nowarp no-bottom {{selectStrength == 3 ? 'selected' : ''}}" bindtap="selectStrength" data-id="3">
+          <block wx:if="{{selectStrength == 3}}">
+            <input placeholder="请输入" placeholder-class="input-placeholder" bindinput="inputStrength" value='{{inputStrength}}'></input>
+          </block>
+          <block wx:else>
+            <text>自定义</text>
+          </block>
         </view>
       </view>
     </view>
@@ -144,17 +161,22 @@
     </view>
     <view class="value">
       <view class="action-list">
-        <view class="action no-bottom">
+        <view class="action no-bottom {{selectInterval == 0 ? 'selected' : ''}}" bindtap="selectInterval" data-id="0">
           <text>1</text>
         </view>
-        <view class="action selected no-bottom">
+        <view class="action no-bottom {{selectInterval == 1 ? 'selected' : ''}}" bindtap="selectInterval" data-id="1">
           <text>3</text>
         </view>
-        <view class="action no-bottom">
+        <view class="action no-bottom {{selectInterval == 2 ? 'selected' : ''}}" bindtap="selectInterval" data-id="2">
           <text>5</text>
         </view>
-        <view class="action nowarp no-bottom">
-          <text>自定义</text>
+        <view class="action nowarp no-bottom {{selectInterval == 3 ? 'selected' : ''}}" bindtap="selectInterval" data-id="3">
+          <block wx:if="{{selectInterval == 3}}">
+            <input placeholder="请输入" placeholder-class="input-placeholder" bindinput="inputInterval" value='{{inputInterval}}'></input>
+          </block>
+          <block wx:else>
+            <text>自定义</text>
+          </block>
         </view>
       </view>
     </view>

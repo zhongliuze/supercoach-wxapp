@@ -62,5 +62,14 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 新增备课
+   */
+  addLesson: function() {
+    wx.navigateTo({
+      url: '../add/add',
+    })
   }
 })

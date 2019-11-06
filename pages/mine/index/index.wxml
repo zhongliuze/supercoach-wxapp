@@ -123,7 +123,7 @@
           <text>动作管理</text>
         </view>
       </view>
-      <view class="button">
+      <view class="button" bindtap="bindButton" data-url="lesson/index/index">
         <view class="icon">
           <image src="/images/mine-lesson.png" style="width:44rpx;height:52rpx;"></image>
         </view>

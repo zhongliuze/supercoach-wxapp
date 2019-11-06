@@ -130,7 +130,8 @@ page {
 }
 
 .select-area .value .action-list .action .input-placeholder{
-  color: #181d24;
+  /* color: #181d24; */
+  color: #2EAB34;
   font-size: 24rpx;
   text-align: center;
 }
@@ -142,6 +143,7 @@ page {
 .select-area .value .action-list .selected{
   background-color: #E5F7E6;
   border: 1rpx solid #5FCD64;
+  box-sizing: border-box;
   color: #2EAB34;
 }
 
