@@ -1,0 +1,69 @@
+<!--pages/mine/message/index/index.wxml-->
+<view class="container-input">
+  <view class="select-user">
+    <view class="title">
+      <text>学员名单</text>
+    </view>
+    <view class="value">
+      <view class="content">
+        <text>请选择</text>
+      </view>
+      <view class="arrow">
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="message-content">
+    <view class="header">
+      <view class="title">
+        <text>短信内容</text>
+        <text class="subtitle">限制150字符以内</text>
+      </view>
+      <view class="tempset">
+        <text>模板管理</text>
+      </view>
+    </view>
+    <scroll-view class="templist" scroll-x>
+        <view class="span-inline">
+          <view class="span selected">
+            <text>课时统计</text>
+          </view>
+        </view>
+        <view class="span-inline">
+          <view class="span">
+            <text>课时总价统计 </text>
+          </view>
+        </view>
+        <view class="span-inline">
+          <view class="span">
+            <text>课时总价统计 </text>
+          </view>
+        </view>
+        <view class="span-inline">
+          <view class="span">
+            <text>课时总价统计 </text>
+          </view>
+        </view>
+        <view class="span-inline">
+          <view class="span">
+            <text>课时总价统计 </text>
+          </view>
+        </view>
+      </scroll-view>
+      <view class="message-input">
+        <view class="textarea">
+          <textarea placeholder="请输入群发短信内容"></textarea>
+        </view>
+        <view class="input-info">
+          <view class="info-button">
+            <text>保存为新模板</text>
+            <text>清空输入</text>
+          </view>
+          <view class="input-length">
+            <text>0/150</text>
+          </view>
+        </view>
+      </view>
+  </view>
+</view>

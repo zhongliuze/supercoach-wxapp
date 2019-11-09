@@ -338,6 +338,13 @@
 					"id": -1,
 					"name": "pages/mine/lesson/action/action",
 					"pathName": "pages/mine/lesson/action/action",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/message/index/index",
+					"pathName": "pages/mine/message/index/index",
 					"scene": null
 				}
 			]
