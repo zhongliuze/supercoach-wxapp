@@ -25,45 +25,78 @@
       </view>
     </view>
     <scroll-view class="templist" scroll-x>
-        <view class="span-inline">
-          <view class="span selected">
-            <text>课时统计</text>
-          </view>
-        </view>
-        <view class="span-inline">
-          <view class="span">
-            <text>课时总价统计 </text>
-          </view>
-        </view>
-        <view class="span-inline">
-          <view class="span">
-            <text>课时总价统计 </text>
-          </view>
-        </view>
-        <view class="span-inline">
-          <view class="span">
-            <text>课时总价统计 </text>
-          </view>
-        </view>
-        <view class="span-inline">
-          <view class="span">
-            <text>课时总价统计 </text>
-          </view>
-        </view>
-      </scroll-view>
-      <view class="message-input">
-        <view class="textarea">
-          <textarea placeholder="请输入群发短信内容"></textarea>
-        </view>
-        <view class="input-info">
-          <view class="info-button">
-            <text>保存为新模板</text>
-            <text>清空输入</text>
-          </view>
-          <view class="input-length">
-            <text>0/150</text>
-          </view>
+      <view class="span-inline">
+        <view class="span selected">
+          <text>课时统计</text>
         </view>
       </view>
+      <view class="span-inline">
+        <view class="span">
+          <text>课时总价统计 </text>
+        </view>
+      </view>
+      <view class="span-inline">
+        <view class="span">
+          <text>课时总价统计 </text>
+        </view>
+      </view>
+      <view class="span-inline">
+        <view class="span">
+          <text>课时总价统计 </text>
+        </view>
+      </view>
+      <view class="span-inline">
+        <view class="span">
+          <text>课时总价统计 </text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="message-input">
+      <view class="textarea">
+        <textarea placeholder="请输入群发短信内容" placeholder-style="textarea-placeholder"></textarea>
+      </view>
+      <view class="input-info">
+        <view class="info-button">
+          <text class="special">保存为新模板</text>
+          <text>清空输入</text>
+        </view>
+        <view class="input-length">
+          <text>0/150</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="vip-info">
+    <view class="vip-message">
+      <text>开通VIP，每月免费领取50条短信额度</text>
+      <image src="/images/mine-message-vip-more.png"></image>
+    </view>
+    <view class="message-info">
+      <view class="message-num">
+        <text>剩余短信额度：200条</text>
+        <text class="special">立即充值</text>
+      </view>
+      <view class="message-record">
+        <image src="/images/mine-message-vip-record.png"></image>
+        <text>群发记录</text>
+      </view>
+    </view>
+    <view class="send-message">
+      <text>立即发送</text>
+    </view>
+  </view>
+
+  <view class="message-remark">
+    <view class="title">
+      <image src="/images/mine-message-vip-explanation.png"></image>
+      <text>短信群发说明</text>
+    </view>
+    <view class="content">
+      <text>1.每一个群发对象占用一条短信额度；
+      2.因短信服务商规定，短信内容每超过40个字符则额外占用一条短信额度，以此类推;
+      3.群发短信有一定延迟，学员接收时间以实际为准。</text>
+    </view>
   </view>
 </view>
+<view class="common-bottom"></view>
