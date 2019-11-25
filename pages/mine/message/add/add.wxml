@@ -1,0 +1,43 @@
+<!--pages/mine/message/add/add.wxml-->
+<view class="container-input">
+  <view class="select-user">
+    <view class="title">
+      <text>模板名称</text>
+    </view>
+    <view class="value">
+      <input placeholder="请输入模板名称" placeholder-class="input-placeholder"></input>
+    </view>
+  </view>
+
+  <view class="message-content">
+    <view class="header">
+      <view class="title">
+        <text>短信内容</text>
+        <text class="subtitle">限制150字符以内</text>
+      </view>
+    </view>
+    <view class="message-input">
+      <view class="textarea">
+        <textarea placeholder="请输入群发短信内容" placeholder-style="textarea-placeholder"></textarea>
+      </view>
+      <view class="input-info">
+        <view class="info-button">
+          <text>清空输入</text>
+        </view>
+        <view class="input-length">
+          <text>0/150</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="vip-info">
+    <view class="send-message">
+      <text>保存</text>
+    </view>
+    <view class="delete-message">
+      <text>删除</text>
+    </view>
+  </view>
+</view>
+<view class="common-bottom"></view>

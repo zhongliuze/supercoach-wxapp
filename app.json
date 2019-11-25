@@ -41,7 +41,9 @@
     "pages/mine/order/detail/detail",
     "pages/login/login",
     "pages/mine/message/index/index",
-    
+    "pages/mine/message/template/template",
+    "pages/mine/message/add/add",
+    "pages/mine/message/record/record",
     "pages/index/index",
     "pages/logs/logs"
   ],

@@ -1,0 +1,88 @@
+/* pages/mine/message/template/template.wxss */
+
+.add-template {
+  margin-top: 24rpx;
+  width: 750rpx;
+  background-color: #FFFFFF;
+  height: 136rpx;
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+}
+
+.add-template .icon{
+  margin-left: 30rpx;
+  width: 44rpx;
+  height: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-template .icon image{
+  width: 38rpx;
+  height: 38rpx;
+}
+
+.add-template .content{
+  margin-left: 24rpx;
+  width: 622rpx;
+  color: #181D24;
+  font-size: 34rpx;
+}
+
+.template-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32rpx;
+}
+
+.template-list .template{
+  width: 750rpx;
+  background-color: #FFFFFF;
+  margin-bottom: 40rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.template-list .template .title{
+  color: #A3A4A6;
+  font-size: 28rpx;
+  margin-left: 30rpx;
+  width: 118rpx;
+}
+
+.template-list .template .content{
+  color: #181D24;
+  font-size: 28rpx;
+  margin-left: 40rpx;
+  width: 532rpx;
+  line-height: 50rpx;
+}
+
+.template-list .template .template-title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 48rpx;
+}
+
+.template-list .template .template-title .content{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.template-list .template .template-title .content .times{
+  color: #A3A4A6;
+  font-size: 22rpx;
+}
+
+.template-list .template .template-content{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-top: 40rpx;
+  margin-bottom: 48rpx;
+}

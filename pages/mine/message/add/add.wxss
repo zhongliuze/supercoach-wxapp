@@ -1,0 +1,139 @@
+/* pages/mine/message/add/add.wxss */
+.select-user {
+  width: 750rpx;
+  height: 120rpx;
+  background-color: #FFF;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.select-user .title {
+  margin-left: 30rpx;
+  width: 140rpx;
+  color: #181D24;
+  font-size: 34rpx;
+}
+
+.select-user .value {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 520rpx;
+  margin-left: 30rpx;
+}
+
+.select-user .value input{
+  width: 520rpx;
+}
+
+.select-user .value .input-placeholder {
+  color: #CFCFCF;
+  font-size: 34rpx;
+}
+
+.message-content {
+  display: flex;
+  width: 750rpx;
+  background-color: #FFF;
+  flex-direction: column;
+  margin-top: 30rpx;
+}
+
+.message-content .header{
+  display: flex;
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 48rpx;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.message-content .header .title{
+  color: #181D24;
+  font-size: 34rpx;
+}
+
+.message-content .header .title .subtitle{
+  color: #CFCFCF;
+  font-size: 22rpx;
+  margin-left: 30rpx;
+}
+
+.message-content .message-input {
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 40rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: #F7F7F7;
+  margin-bottom: 52rpx;
+}
+
+.message-content .message-input textarea {
+  margin-top: 40rpx;
+  margin-left: 40rpx;
+  width: 610rpx;
+  height: 300rpx;
+  color: #181D24;
+  font-size: 28rpx;
+}
+
+.message-content .message-input .textarea-placeholder {
+  color: #CFCFCF;
+  font-size: 28rpx;
+}
+
+.message-content .message-input .input-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 24rpx;
+  color: #CFCFCF;
+  width: 610rpx;
+  margin-left: 40rpx;
+  justify-content: space-between;
+  margin-top: 30rpx;
+  margin-bottom: 32rpx;
+}
+
+.message-content .message-input .input-info .info-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.vip-info {
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 40rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.vip-info .send-message {
+  width: 690rpx;
+  height: 88rpx;
+  background-color: #5FCD64;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+  font-size: 32rpx;
+  margin-top: 55rpx;
+  border-radius:10rpx;
+}
+
+
+.vip-info .delete-message {
+  width: 690rpx;
+  height: 88rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #A3A4A6;
+  font-size: 32rpx;
+  margin-top: 55rpx;
+  border-radius:10rpx;
+}

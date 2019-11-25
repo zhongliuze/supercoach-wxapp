@@ -1,0 +1,74 @@
+/* pages/mine/message/record/record.wxss */
+
+.record-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.record-list .record-time {
+  color: #707888;
+  font-size: 26rpx;
+  margin-top: 24rpx;
+  margin-left: 30rpx;
+}
+
+.record-list .record-content {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  margin-top: 24rpx;
+}
+
+.record-list .record-content .receive{
+  margin-left: 30rpx;
+  width: 720rpx;
+  margin-top: 48rpx;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1rpx solid #E5E5E5;
+}
+
+.record-list .record-content .send{
+  margin-left: 30rpx;
+  width: 720rpx;
+  margin-top: 42rpx;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8rpx;
+}
+
+.record-list .record-content .title{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #181D24;
+  font-size: 32rpx;
+}
+
+
+.record-list .record-content .title .icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 16rpx;
+}
+
+.record-list .record-content .title .icon image{
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.record-list .record-content .content{
+  color: #707888;
+  font-size: 28rpx;
+  margin-top: 30rpx;
+  margin-bottom: 38rpx;
+  line-height:44rpx;
+  width: 690rpx;
+}
+
+
+
+

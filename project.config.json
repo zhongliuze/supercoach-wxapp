@@ -52,7 +52,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 40,
+			"current": 44,
 			"list": [
 				{
 					"id": -1,
@@ -345,6 +345,27 @@
 					"id": -1,
 					"name": "pages/mine/message/index/index",
 					"pathName": "pages/mine/message/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/message/template/template",
+					"pathName": "pages/mine/message/template/template",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/message/add/add",
+					"pathName": "pages/mine/message/add/add",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/message/record/record",
+					"pathName": "pages/mine/message/record/record",
 					"scene": null
 				}
 			]

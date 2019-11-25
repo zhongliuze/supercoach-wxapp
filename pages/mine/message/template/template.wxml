@@ -1,0 +1,34 @@
+<!--pages/mine/message/template/template.wxml-->
+<view class="add-template">
+  <view class="icon">
+    <image src="/images/mine-message-template-add.png"></image>
+  </view>
+  <view class="content">
+    <text>新增模板</text>
+  </view>
+</view>
+
+<view class="template-list">
+
+  <view class="template" wx:for="{{templateList}}">
+    <view class="template-title">
+      <view class="title">
+        <text>模板名称</text>
+      </view>
+      <view class="content">
+        <text>{{item.name}}</text>
+        <text class="times">已使用{{item.times}}次</text>
+      </view>
+    </view>
+
+    <view class="template-content">
+      <view class="title">
+        <text>短信内容</text>
+      </view>
+      <view class="content">
+        <text>{{item.content}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="common-bottom"></view>

@@ -1,0 +1,35 @@
+<!--pages/mine/message/record/record.wxml-->
+<view class="record-list" wx:for="{{recordList}}">
+  <view class="record-time">
+    <text>{{item.time}}</text>
+  </view>
+  <view class="record-content">
+    <view class="receive">
+      <view class="title">
+        <view class="icon">
+          <image src="/images/mine-message-record-user.png" style="width:28rpx;height:28rpx;"></image>
+        </view>
+        <view class="name">
+          <text>接收人</text>
+        </view>
+      </view>
+      <view class="content">
+        <text>{{item.user}}</text>
+      </view>
+    </view>
+    <view class="send">
+      <view class="title">
+        <view class="icon">
+          <image src="/images/mine-message-record-message.png" style="width:32rpx;height:24rpx;"></image>
+        </view>
+        <view class="name">
+          <text>短信内容</text>
+        </view>
+      </view>
+      <view class="content">
+        <text>{{item.message}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="common-bottom"></view>
