@@ -52,7 +52,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 44,
+			"current": 46,
 			"list": [
 				{
 					"id": -1,
@@ -366,6 +366,20 @@
 					"id": -1,
 					"name": "pages/mine/message/record/record",
 					"pathName": "pages/mine/message/record/record",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/strategy/index/index",
+					"pathName": "pages/mine/strategy/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/strategy/content/content",
+					"pathName": "pages/mine/strategy/content/content",
 					"scene": null
 				}
 			]

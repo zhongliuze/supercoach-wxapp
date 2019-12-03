@@ -75,7 +75,7 @@
     <view class="message-info">
       <view class="message-num">
         <text>剩余短信额度：200条</text>
-        <text class="special">立即充值</text>
+        <text class="special" bindtap="openPopup">立即充值</text>
       </view>
       <view class="message-record">
         <image src="/images/mine-message-vip-record.png"></image>
@@ -100,3 +100,71 @@
   </view>
 </view>
 <view class="common-bottom"></view>
+
+<block wx:if="{{orderPopup}}">
+  <view class="mongolia" catchtouchmove="catchtouchmove"></view>
+  <view class="popup-view" catchtap="closePopup" catchtouchmove="catchtouchmove">
+    <view class="popup" catchtap="catchtouchmove">
+      <view class="title">
+        <view class="name">
+          <text>订单确认</text>
+        </view>
+        <view class="close" bindtap="closePopup">
+          <image src="/images/vip-close.png"></image>
+        </view>
+      </view>
+
+      <view class="order-list">
+        <view class="info">
+          <view class="name">
+            <text>套餐A<text class="subname">（20条短信）</text></text>
+          </view>
+          <view class="value">
+            <text>￥15.00</text>
+            <radio color="#5fcd64" />
+          </view>
+        </view>
+        <view class="info">
+          <view class="name">
+            <text>套餐B<text class="subname">（50条短信）</text></text>
+          </view>
+          <view class="value">
+            <text>￥35.00</text>
+            <radio color="#5fcd64" />
+          </view>
+        </view>
+        <view class="info">
+          <view class="name">
+            <text>套餐C<text class="subname">（100条短信）</text></text>
+          </view>
+          <view class="value">
+            <text>￥60.00</text>
+            <radio color="#5fcd64" />
+          </view>
+        </view>
+      </view>
+      <view class="pay-type">
+        <view class="subtitle">
+          <text>支付方式</text>
+        </view>
+        <view class="type-list">
+          <view class="type">
+            <view class="icon">
+              <image src="/images/pay-wechat.png"></image>
+            </view>
+            <view class="name">
+              <text>微信支付</text>
+            </view>
+            <view class="select">
+              <radio checked color="#5fcd64" />
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="open-button" catchtap="closePopup" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
+      <button>确认支付99元</button>
+    </view>
+  </view>
+
+</block>

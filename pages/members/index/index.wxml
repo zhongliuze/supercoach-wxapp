@@ -8,7 +8,7 @@
         </view>
         <view class='vip-status'>
           <image src="/images/member-vip.png"></image>
-           <!-- <image src="/images/member-novip.png"></image> -->
+          <!-- <image src="/images/member-novip.png"></image> -->
         </view>
       </view>
       <view class="info">

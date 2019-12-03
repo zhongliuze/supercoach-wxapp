@@ -1,0 +1,39 @@
+/* pages/mine/strategy/index/index.wxss */
+
+page {
+  background-color: #fff;
+}
+
+.strategy-list {
+  margin-left: 30rpx;
+  width: 690rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.strategy-list .strategy {
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 34rpx;
+  color: #181d24;
+  border-bottom: 1rpx solid #eff0f1;
+  line-height: 54rpx;
+}
+
+.customer {
+  width: 110rpx;
+  height: 110rpx;
+  background: #5fcd64;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+  font-size: 26rpx;
+  position: fixed;
+  right: 30rpx;
+  bottom: 200rpx;
+}

@@ -1,0 +1,41 @@
+<!--pages/mine/strategy/index/index.wxml-->
+<view class="strategy-list">
+  <view class="strategy">
+    <text>怎么创建课程？</text>
+  </view>
+  <view class="strategy">
+    <text>如何设置自定义何设置自定义何设置自定义何设置自定义何设置自定义完成？</text>
+  </view>
+  <view class="strategy">
+    <text>如何设置自定义完成？</text>
+  </view>
+  <view class="strategy">
+    <text>如何设置自定义完成？</text>
+  </view>
+  <view class="strategy">
+    <text>怎么创建课程？</text>
+  </view>
+  <view class="strategy">
+    <text>如何设置自定义完成？</text>
+  </view>
+  <view class="strategy">
+    <text>如何设置自定义完成？</text>
+  </view>
+  <view class="strategy">
+    <text>如何设置自定义完成？</text>
+  </view>
+  <view class="strategy">
+    <text>如何设置自定义完成如何设置自定义完成如何设置自定义完成如何设置自定义完成完成如何设置自定义？</text>
+  </view>
+  <view class="strategy">
+    <text>怎么创建课程么创建课么创建课么创建课么创建课？</text>
+  </view>
+  <view class="strategy">
+    <text>怎么创建课程？</text>
+  </view>
+</view>
+<view class="customer">
+  <text>联系
+  客服</text>
+</view>
+<view class="common-bottom"></view>

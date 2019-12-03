@@ -255,3 +255,176 @@
   margin-top: 24rpx;
   line-height: 42rpx;
 }
+
+.popup-view {
+  width: 750rpx;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.popup {
+  width: 750rpx;
+  background-color: #fff;
+}
+
+.popup .title {
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 40rpx;
+  display: flex;
+  align-items: center;
+}
+
+.popup .title .name {
+  width: 590rpx;
+  margin-left: 50rpx;
+  display: flex;
+  justify-content: center;
+  color: #2b313d;
+  font-weight: bold;
+  font-size: 36rpx;
+}
+
+.popup .title .close {
+  width: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup .title .close image {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.popup .order-list {
+  width: 686rpx;
+  margin-left: 32rpx;
+  margin-top: 64rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup .order-list .info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 34rpx;
+  width: 686rpx;
+  height: 120rpx;
+  border-bottom: 1rpx solid #eff0f1;
+}
+
+.popup .order-list .info .name {
+  color: #181D24;
+  font-size: 34rpx;
+}
+
+.popup .order-list .info .subname {
+  color: #707888;
+  font-size: 26rpx;
+}
+
+.popup .order-list .info .value {
+  color: #ff5050;
+  font-weight: bold;
+  font-size: 34rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.popup .order-list .info .value radio{
+  zoom: 0.8;
+  margin-left: 32rpx;
+}
+
+.popup .pay-type {
+  margin-top: 70rpx;
+  width: 690rpx;
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup .subtitle {
+  font-size: 26rpx;
+  color: #707888;
+}
+
+.popup .type-list {
+  margin-top: 40rpx;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 80rpx;
+}
+
+.popup .type-list .type {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 690rpx;
+}
+
+.popup .type-list .type .icon {
+  width: 35rpx;
+  height: 35rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup .type-list .type .icon image {
+  width: 34rpx;
+  height: 32rpx;
+}
+
+.popup .type-list .type .name {
+  color: #181d24;
+  margin-left: 16rpx;
+  font-size: 34rpx;
+  width: 355rpx;
+}
+
+.popup .type-list .type .select {
+  width: 300rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.popup .type-list .type .select radio {
+  zoom: 0.8;
+}
+
+.popup-view .open-button {
+  background-color: #5fcd64;
+}
+
+.popup-view .open-button button {
+  background-color: #5fcd64;
+  color: #fff;
+  border-radius: 0rpx;
+  border: 0rpx;
+  font-size: 34rpx;
+  font-weight: 500;
+  width: 750rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-view .open-button button::after {
+  border: 0rpx;
+}

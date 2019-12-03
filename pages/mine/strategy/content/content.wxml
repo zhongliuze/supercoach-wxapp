@@ -1,0 +1,34 @@
+<!--pages/mine/strategy/content/content.wxml-->
+<view class="title">
+  <text>公众账号迁移流程指引</text>
+</view>
+<view class="content">
+  <text>前登录公众平台有3种方法：
+1、若您注册使用的是QQ号，可直接使用QQ帐号+QQ密码进行登录；
+2、若您注册使用的是邮箱，可使用绑定的邮箱+公众号独立密码进行登录；
+3、若您有设置微信ID，也可直接使用微信ID+公众号独立密码进行登录使用。
+温馨提示：
+1）请勿直接输入公众帐号的中文昵称作为登录名；
+2）手机个人微信号非公众平台帐号，无法在此网页登录。</text>
+  <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575374193606&di=226a9d3f0c0669a80f1380333f0d14d9&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201307%2F05%2F20130705161634_uUfLy.jpeg" mode="aspectFill"></image>
+</view>
+
+<view class="solve">
+  <view class="solve-title">
+    <text>以上信息是否解决了您的问题？</text>
+  </view>
+  <view class="solve-button">
+    <view class="button" style="margin-right:104rpx;">
+      <image src="/images/mine-strategy-solved.png"></image>
+      <text>已解决</text>
+    </view>
+
+    <view class="button order">
+      <image src="/images/mine-strategy-no-solved-s.png"></image>
+      <text>已解决</text>
+    </view>
+  </view>
+</view>
+
+<view class="common-bottom"></view>
+<view class="common-bottom"></view>
