@@ -1,0 +1,43 @@
+<!--pages/mine/poster/index/index.wxml-->
+<scroll-view class="templist" scroll-x>
+  <view class="span-inline">
+    <view class="span selected">
+      <text>全部</text>
+    </view>
+  </view>
+  <view class="span-inline">
+    <view class="span">
+      <text>课时总价统计 </text>
+    </view>
+  </view>
+  <view class="span-inline">
+    <view class="span">
+      <text>课时总价统计 </text>
+    </view>
+  </view>
+  <view class="span-inline">
+    <view class="span">
+      <text>课时总价统计 </text>
+    </view>
+  </view>
+  <view class="span-inline">
+    <view class="span">
+      <text>课时总价统计 </text>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="poster-list">
+  <view class="poster">
+    <view class="vip">
+      <text>VIP</text>
+    </view>
+    <view class="image">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575374193606&di=226a9d3f0c0669a80f1380333f0d14d9&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201307%2F05%2F20130705161634_uUfLy.jpeg" mode="aspectFill"></image>
+    </view>
+    <view class="title">
+      <text class="main">海报标题文案</text>
+      <text class="sub">已有52人使用</text>
+    </view>
+  </view>
+</view>

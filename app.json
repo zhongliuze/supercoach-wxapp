@@ -45,6 +45,7 @@
     "pages/mine/message/add/add",
     "pages/mine/message/record/record",
     "pages/mine/strategy/index/index",
+    "pages/mine/poster/index/index",
     "pages/mine/strategy/content/content",
     "pages/index/index",
     "pages/logs/logs"
