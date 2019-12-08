@@ -53,6 +53,12 @@ page {
   display: flex;
   flex-direction: column;
   width:214rpx;
+  margin-right: 24rpx;
+  margin-bottom: 72rpx;
+}
+
+.poster-list .no-margin {
+  margin-right: 0rpx;
 }
 
 .poster-list .poster .vip {
@@ -64,6 +70,13 @@ page {
   color: #FFFFFF;
   background-color: #FF6561;
   border-radius:0rpx 12rpx 0rpx 12rpx;
+  width:66rpx;
+  height:34rpx;
+  position: relative;
+  left: 148rpx;
+}
+
+.poster-list .poster .no-vip {
   width:66rpx;
   height:34rpx;
   position: relative;
@@ -102,5 +115,5 @@ border-radius:12rpx;
 
 .poster-list .poster .title .sub{
   color: #707888;
-  font-size: 24rpx;
+  font-size: 22rpx;
 }

@@ -1,0 +1,78 @@
+/* pages/mine/poster/detail/detail.wxss */
+page {
+  background-color: #FFFFFF;
+}
+.image {
+  margin-top: 40rpx;
+  width: 690rpx;
+  height: 967rpx;
+  margin-left: 30rpx;
+  border-radius:12rpx;
+}
+
+.image image{
+  width: 690rpx;
+  height: 967rpx;
+  border-radius:12rpx;
+}
+
+.input-form {
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 55rpx;
+}
+
+.input-form .title{
+  color: #707888;
+  font-size: 26rpx;
+}
+
+.input-form .input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-form .input-line {
+  display: flex;
+  flex-direction: row;
+  height: 120rpx;
+  align-items: center;
+  border-bottom: 1rpx solid #EFF0F1;
+}
+
+.input-form .input-line .name {
+  color: #181D24;
+  font-size: 34rpx;
+  width: 140rpx;
+  margin-right: 32rpx;
+}
+
+.input-form .input-line .value {
+  color: #181D24;
+  font-size: 34rpx;
+  width: 518rpx;
+}
+
+.input-form .input-line .value .placeholder{
+  color: #CFCFCF;
+  font-size: 34rpx;
+}
+
+.create-poster {
+  width: 750rpx;
+  height: 98rpx;
+  background-color: #5FCD64;
+  color: #FFFFFF;
+  font-size: 34rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0rpx;
+  bottom:0rpx;
+}
+
+.common-bottom {
+  width: 750rpx;
+  height: 300rpx;
+}

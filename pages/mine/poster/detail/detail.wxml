@@ -1,0 +1,41 @@
+<!--pages/mine/poster/detail/detail.wxml-->
+<view class="image">
+  <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575374193606&di=226a9d3f0c0669a80f1380333f0d14d9&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201307%2F05%2F20130705161634_uUfLy.jpeg" mode="aspectFill"></image>
+</view>
+
+<view class="input-form">
+  <view class="title">
+    <text>填写海报内容</text>
+  </view>
+  <view class="input-group">
+    <view class="input-line">
+      <view class="name">
+        <text>姓名</text>
+      </view>
+      <view class="value">
+        <input placeholder="请输入您的姓名" placeholder-class="placeholder"></input>
+      </view>
+    </view>
+    <view class="input-line">
+      <view class="name">
+        <text>手机号</text>
+      </view>
+      <view class="value">
+        <input placeholder="请输入您的姓名" placeholder-class="placeholder"></input>
+      </view>
+    </view>
+    <view class="input-line">
+      <view class="name">
+        <text>所在门店</text>
+      </view>
+      <view class="value">
+        <input placeholder="请输入您的姓名" placeholder-class="placeholder"></input>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="common-bottom"></view>
+<view class="create-poster">
+  <text>生成我的专属海报</text>
+</view>

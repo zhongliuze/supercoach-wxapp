@@ -46,8 +46,12 @@
     "pages/mine/message/record/record",
     "pages/mine/strategy/index/index",
     "pages/mine/poster/index/index",
+    "pages/mine/poster/detail/detail",
+    "pages/mine/poster/save/save",
     "pages/mine/strategy/content/content",
     "pages/index/index",
+    "pages/mine/personal/index/index",
+    "pages/mine/personal/edit/edit",
     "pages/logs/logs"
   ],
   "window": {

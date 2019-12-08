@@ -1,0 +1,220 @@
+/* pages/mine/personal/index/index.wxss */
+
+.header-image {
+  width: 750rpx;
+  height: 530rpx;
+}
+
+.header-image swiper {
+  width: 750rpx;
+  height: 530rpx;
+}
+
+.header-image image {
+  width: 750rpx;
+  height: 530rpx;
+}
+
+.base-info {
+  background-color: #fff;
+  width: 750rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.base-info .name-info {
+  width: 690rpx;
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 56rpx;
+}
+
+.base-info .name-info .left {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.base-info .name-info .left .name {
+  color: #181d24;
+  font-size: 38rpx;
+  margin-right: 30rpx;
+}
+
+.base-info .name-info .left .title {
+  color: #181d24;
+  font-size: 26rpx;
+}
+
+.base-info .name-info .right {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.base-info .name-info .right image {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.base-info .pone-number {
+  margin-top: 40rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #181d24;
+  font-size: 30rpx;
+  width: 690rpx;
+  margin-left: 30rpx;
+}
+
+.base-info .pone-number image {
+  width: 16rpx;
+  height: 24rpx;
+  margin-right: 12rpx;
+}
+
+.base-info .introduce {
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 40rpx;
+  color: #707888;
+  font-size: 26rpx;
+  line-height: 40rpx;
+}
+
+.base-info .span-list {
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 48rpx;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-bottom: 36rpx;
+}
+
+.base-info .span-list .span {
+  color: #181d24;
+  font-size: 24rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  background-color: #f3f3f3;
+  height: 58rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30rpx;
+  margin-right: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.personal {
+  margin-top: 24rpx;
+  width: 750rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.personal .title-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 48rpx;
+  color: #181d24;
+  font-size: 38rpx;
+  font-weight: bold;
+}
+
+.personal .title-line .icon {
+  width: 8rpx;
+  height: 36rpx;
+  background: #5fcd64;
+  margin-right: 16rpx;
+}
+
+.experience .experience-list {
+  width: 690rpx;
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 48rpx;
+  margin-bottom: 60rpx;
+  justify-content: space-around;
+}
+
+.experience .experience-list .experience-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.experience .experience-list .experience-data .number {
+  color: #181d24;
+  font-size: 44rpx;
+  font-weight: bold;
+  line-height: 20rpx;
+}
+
+.experience .experience-list .experience-data .name {
+  color: #707888;
+  font-size: 26rpx;
+  margin-top: 24rpx;
+}
+
+.experience .experience-list .experience-data .default {
+  color: #181d24;
+  font-size: 22rpx;
+  margin-left: 8rpx;
+}
+
+.certificate-list {
+  margin-top: 40rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30rpx;
+  width: 720rpx;
+  white-space: nowrap;
+  margin-bottom: 60rpx;
+}
+
+.certificate-list .certificate-inline {
+  display: inline-block;
+  margin-right: 32rpx;
+  width: 240rpx;
+}
+
+.certificate-list .certificate-inline .certificate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 240rpx;
+}
+
+.certificate-list .certificate-inline .certificate image {
+  width: 240rpx;
+  height: 180rpx;
+  border: 1rpx solid #d6d6d6;
+  border-radius: 10rpx;
+}
+
+.certificate-list .certificate-inline .certificate .name {
+  color: #181d24;
+  font-size: 24rpx;
+  margin-top: 24rpx;
+  width: 240rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  white-space: pre-wrap;
+  text-align: center;
+}

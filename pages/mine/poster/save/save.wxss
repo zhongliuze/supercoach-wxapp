@@ -1,0 +1,41 @@
+/* pages/mine/poster/save/save.wxss */
+
+page {
+  background-color: #FFFFFF;
+}
+.image {
+  width: 630rpx;
+  height: 880rpx;
+  border-radius: 12rpx;
+  margin-top: 40rpx;
+  margin-left: 60rpx;
+}
+
+.image image {
+  width: 630rpx;
+  height: 880rpx;
+  border-radius: 12rpx;
+}
+
+.save {
+  width: 690rpx;
+  height: 88rpx;
+  background: #5fcd64;
+  border-radius: 10rpx;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70rpx;
+  margin-left: 30rpx;
+}
+
+.ad {
+  color: #5fcd64;
+  font-size: 26rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 48rpx;
+}
+

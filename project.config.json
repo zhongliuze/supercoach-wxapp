@@ -52,7 +52,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 47,
+			"current": 50,
 			"list": [
 				{
 					"id": -1,
@@ -387,6 +387,27 @@
 					"id": -1,
 					"name": "pages/mine/poster/index/index",
 					"pathName": "pages/mine/poster/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/poster/detail/detail",
+					"pathName": "pages/mine/poster/detail/detail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/poster/save/save",
+					"pathName": "pages/mine/poster/save/save",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/personal/index/index",
+					"pathName": "pages/mine/personal/index/index",
 					"scene": null
 				}
 			]
