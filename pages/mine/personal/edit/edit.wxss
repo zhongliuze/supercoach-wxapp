@@ -1,1 +1,162 @@
 /* pages/mine/personal/edit/edit.wxss */
+
+.edit-area {
+  width: 750rpx;
+  margin-bottom: 8rpx;
+  margin-top: 24rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.edit-area .title-line {
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 48rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.edit-area .title-line .title {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.edit-area .title-line .title .icon {
+  background-color: #5fcd64;
+  width: 6rpx;
+  height: 36rpx;
+}
+
+.edit-area .title-line .title .name {
+  color: #181d24;
+  font-size: 38rpx;
+  margin-left: 16rpx;
+  font-weight: bold;
+  line-height: 38rpx;
+}
+
+.edit-area .title-line .subtitle {
+  color: #cfcfcf;
+  font-size: 24rpx;
+  margin-left: 32rpx;
+}
+
+.basic-info {
+  display: flex;
+  flex-direction: column;
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 20rpx;
+}
+
+.basic-info .personal-input-line {
+  display: flex;
+  flex-direction: row;
+  height: 120rpx;
+  border-bottom: 1rpx solid #eff0f1;
+  align-items: center;
+}
+
+.basic-info .personal-input-line .name {
+  width: 160rpx;
+  color: #181d24;
+  font-size: 34rpx;
+}
+
+.basic-info .personal-input-line .value {
+  margin-left: 30rpx;
+  width: 500rpx;
+  color: #181d24;
+  font-size: 34rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.basic-info .personal-input-line .value input {
+  width: 500rpx;
+  color: #181d24;
+  font-size: 34rpx;
+  text-align: right;
+}
+
+.basic-info .personal-input-line .value .input-placeholder {
+  color: #cfcfcf;
+  font-size: 34rpx;
+}
+
+.basic-info .no-border {
+  border: 0rpx;
+}
+
+.basic-info .personal-input-line .value image {
+  width: 14rpx;
+  height: 24rpx;
+  margin-left: 16rpx;
+}
+
+.basic-info .personal-input-line .value .choose {
+  color: #cfcfcf;
+}
+
+.basic-info .personal-input-line .value .sex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #181d24;
+  font-size: 34rpx;
+  margin-left: 40rpx;
+}
+
+.basic-info .personal-input-line .value .sex radio {
+  zoom: 0.9;
+  margin-right: 10rpx;
+}
+
+.introduce-info {
+  margin-top: 36rpx;
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-bottom: 52rpx;
+  min-height: 180rpx;
+}
+
+.introduce-info textarea {
+  width: 690rpx;
+  color: #181d24;
+  font-size: 34rpx;
+  line-height: 60rpx;
+}
+
+.introduce-info .textarea-placeholder {
+  color: #cfcfcf;
+  font-size: 34rpx;
+}
+
+.good-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 720rpx;
+  margin-left: 30rpx;
+  margin-top: 48rpx;
+}
+
+.good-info .good-span {
+  width: 149rpx;
+  height: 58rpx;
+  border: 1rpx solid #bbb;
+  border-radius: 6rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #707888;
+  font-size: 24rpx;
+  margin-right: 30rpx;
+  margin-bottom: 30rpx;
+}

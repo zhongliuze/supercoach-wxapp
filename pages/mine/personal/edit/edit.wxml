@@ -1,2 +1,243 @@
 <!--pages/mine/personal/edit/edit.wxml-->
-<text>pages/mine/personal/edit/edit.wxml</text>
+<view class="edit-area">
+  <view class="title-line">
+    <view class="title">
+      <view class="icon"></view>
+      <view class="name">
+        <text>基本信息</text>
+      </view>
+    </view>
+    <view class="subtitle">
+      <text>请输入真实有效信息</text>
+    </view>
+  </view>
+  <view class="basic-info">
+    <view class="personal-input-line">
+      <view class="name">
+        <text>真实姓名</text>
+      </view>
+      <view class="value">
+        <input placeholder="请输入您的姓名" placeholder-class="input-placeholder"></input>
+      </view>
+    </view>
+    <view class="personal-input-line">
+      <view class="name">
+        <text>性别</text>
+      </view>
+      <view class="value">
+        <view class="sex">
+          <radio></radio>
+          <text>男</text>
+        </view>
+        <view class="sex">
+          <radio></radio>
+          <text>女</text>
+        </view>
+      </view>
+    </view>
+    <view class="personal-input-line">
+      <view class="name">
+        <text>职位/头衔</text>
+      </view>
+      <view class="value">
+        <text class="choose">请选择</text>
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+    <view class="personal-input-line no-border">
+      <view class="name">
+        <text>手机号码</text>
+      </view>
+      <view class="value">
+        <input placeholder="请输入手机号码" placeholder-class="input-placeholder"></input>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="edit-area">
+  <view class="title-line">
+    <view class="title">
+      <view class="icon"></view>
+      <view class="name">
+        <text>荣誉介绍</text>
+      </view>
+    </view>
+    <view class="subtitle">
+      <text>限150个字符以内</text>
+    </view>
+  </view>
+  <view class="introduce-info">
+    <textarea placeholder="示例：国家二级运动员、国家职业资格游泳救生员、国家职业资格游泳教练、国家职业健美操教练、中大水中普拉提认证教练、中大水中康复认证教练。" placeholder-class="textarea-placeholder" maxlength="150" auto-height="true"></textarea>
+  </view>
+</view>
+
+<view class="edit-area">
+  <view class="title-line">
+    <view class="title">
+      <view class="icon"></view>
+      <view class="name">
+        <text>擅长领域</text>
+      </view>
+    </view>
+    <view class="subtitle">
+      <text>最多选择4项</text>
+    </view>
+  </view>
+  <view class="good-info">
+    <view class="good-span">
+      <text>减脂</text>
+    </view>
+    <view class="good-span">
+      <text>塑型</text>
+    </view>
+    <view class="good-span">
+      <text>增肌</text>
+    </view>
+    <view class="good-span">
+      <text>体态调整</text>
+    </view>
+    <view class="good-span">
+      <text>体能训练</text>
+    </view>
+    <view class="good-span">
+      <text>产后恢复</text>
+    </view>
+    <view class="good-span">
+      <text>臀腿训练</text>
+    </view>
+    <view class="good-span">
+      <text>腹部训练</text>
+    </view>
+    <view class="good-span">
+      <text>孕期锻炼</text>
+    </view>
+    <view class="good-span">
+      <text>力量训练</text>
+    </view>
+    <view class="good-span">
+      <text>有氧训练</text>
+    </view>
+    <view class="good-span">
+      <text>康复训练</text>
+    </view>
+    <view class="good-span">
+      <text>饮食营养</text>
+    </view>
+    <view class="good-span">
+      <text>+ 自定义</text>
+    </view>
+  </view>
+</view>
+
+<view class="edit-area">
+  <view class="title-line">
+    <view class="title">
+      <view class="icon"></view>
+      <view class="name">
+        <text>教学经历</text>
+      </view>
+    </view>
+    <view class="subtitle">
+      <text>请如实选择，否则会降低可信度</text>
+    </view>
+  </view>
+  <view class="basic-info">
+    <view class="personal-input-line">
+      <view class="name">
+        <text>入行时间</text>
+      </view>
+      <view class="value">
+        <text class="choose">请选择</text>
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+    <view class="personal-input-line">
+      <view class="name">
+        <text>授课人数</text>
+      </view>
+      <view class="value">
+        <text class="choose">请选择</text>
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+    <view class="personal-input-line no-border">
+      <view class="name">
+        <text>授课时长</text>
+      </view>
+      <view class="value">
+        <text class="choose">请选择</text>
+        <image src="/images/arrow-right.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="edit-area">
+  <view class="title-line">
+    <view class="title">
+      <view class="icon"></view>
+      <view class="name">
+        <text>个人相册</text>
+      </view>
+    </view>
+    <view class="subtitle">
+      <text>请上传您的真实形象照</text>
+    </view>
+  </view>
+  <view class="album-info">
+    
+  </view>
+</view>
+
+<view class="edit-area">
+  <view class="title-line">
+    <view class="title">
+      <view class="icon"></view>
+      <view class="name">
+        <text>微信二维码</text>
+      </view>
+    </view>
+    <view class="subtitle">
+      <text>请按图示裁剪，否则会影响展示效果</text>
+    </view>
+  </view>
+  <view class="wxcode-info">
+    
+  </view>
+</view>
+
+<view class="edit-area">
+  <view class="title-line">
+    <view class="title">
+      <view class="icon"></view>
+      <view class="name">
+        <text>资质证明</text>
+      </view>
+    </view>
+    <view class="subtitle">
+      <text>限制10份以内</text>
+    </view>
+  </view>
+  <view class="certificate-info">
+    
+  </view>
+</view>
+
+
+<view class="edit-area">
+  <view class="title-line">
+    <view class="title">
+      <view class="icon"></view>
+      <view class="name">
+        <text>授课门店</text>
+      </view>
+    </view>
+    <view class="subtitle">
+      <text>限制5个以内</text>
+    </view>
+  </view>
+  <view class="store-info">
+    
+  </view>
+</view>

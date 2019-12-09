@@ -1,9 +1,9 @@
 <!--pages/mine/personal/index/index.wxml-->
 <view class="header-image">
-  <swiper indicator-dots="true" autoplay="true" indicator-active-color="#FFFFFF">
+  <swiper indicator-dots="true" autoplay="true" indicator-active-color="#FFFFFF" >
     <block wx:for="{{headerImages}}" wx:key="*this">
       <swiper-item>
-        <image src="{{item.url}}" mode="aspectFill"></image>
+        <image src="{{item.url}}" mode="aspectFill" bindtap="previewSwiperImage" data-urlid="{{index}}"></image>
       </swiper-item>
     </block>
   </swiper>
@@ -15,11 +15,11 @@
       <text class="name">常文静</text>
       <text class="title">高级游泳教练</text>
     </view>
-    <view class="right">
+    <view class="right" bindtap="openWxcodePopup">
       <image src="/images/ercode.png"></image>
     </view>
   </view>
-  <view class="pone-number">
+  <view class="phone-number" bindtap="callphone">
     <image src="/images/mine-personal-phone.png"></image>
     <text>18020220001</text>
   </view>
@@ -30,8 +30,8 @@
     <view class="span">康复训练</view>
     <view class="span">减脂</view>
     <view class="span">塑形</view>
-    <view class="span">体态调整</view>
-    <view class="span">体态调整</view>
+    <view class="span">体态</view>
+    <view class="span">体态调</view>
     <view class="span">体态调整</view>
     <view class="span">体态调整</view>
   </view>
@@ -49,7 +49,7 @@
     </view>
     <view class="experience-data">
       <text class="number">50<text class="default">人</text></text>
-      <text class="name">执业年限</text>
+      <text class="name">授课学员</text>
     </view>
     <view class="experience-data">
       <text class="number">3600<text class="default">小时</text></text>
@@ -65,7 +65,7 @@
   </view>
   <scroll-view class="certificate-list" scroll-x>
     <view class="certificate-inline">
-      <view class="certificate">
+      <view class="certificate" bindtap="previewImage" data-url="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg">
         <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg" mode="aspectFill"></image>
         <view class="name">
           <text>国家健身教练职健身教健身教健身教</text>
@@ -74,7 +74,7 @@
     </view>
 
     <view class="certificate-inline">
-      <view class="certificate">
+      <view class="certificate" bindtap="previewImage" data-url="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg">
         <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg" mode="aspectFill"></image>
         <view class="name">
           <text>国家健身教练职业资格认证教练职业资格认</text>
@@ -83,7 +83,7 @@
     </view>
 
     <view class="certificate-inline">
-      <view class="certificate">
+      <view class="certificate" bindtap="previewImage" data-url="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg">
         <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg" mode="aspectFill"></image>
         <view class="name">
           <text>国家健身教练职</text>
@@ -92,7 +92,7 @@
     </view>
 
     <view class="certificate-inline">
-      <view class="certificate">
+      <view class="certificate" bindtap="previewImage" data-url="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg">
         <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg" mode="aspectFill"></image>
         <view class="name">
           <text>国家业资格认</text>
@@ -110,6 +110,174 @@
     <text>授课门店</text>
   </view>
   <view class="location-list">
-    
+    <view class="location">
+      <view class="location-image">
+        <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg" mode="aspectFill" bindtap="previewImage" data-url="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg"></image>
+      </view>
+      <view class="location-info">
+        <view class="name">
+          <text>中健银座（无锡皇冠假日店）</text>
+        </view>
+        <view class="tel">
+          <text>0512-88380073</text>
+        </view>
+      </view>
+    </view>
+
+
+    <view class="location">
+      <view class="location-image">
+        <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg" mode="aspectFill" bindtap="previewImage" data-url="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg"></image>
+      </view>
+      <view class="location-info">
+        <view class="name">
+          <text>中健银座（无锡皇冠假日店）</text>
+        </view>
+        <view class="tel">
+          <text>0512-88380073</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="location no-border">
+      <view class="location-image">
+        <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg" mode="aspectFill" bindtap="previewImage" data-url="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg"></image>
+      </view>
+      <view class="location-info">
+        <view class="name">
+          <text>中健银座（无锡皇冠假日店）</text>
+        </view>
+        <view class="tel">
+          <text>0512-88380073</text>
+        </view>
+      </view>
+    </view>
   </view>
 </view>
+
+<view class="fabulous personal">
+  <view class="fabulous-title">
+    <view class="number">
+      <text>已有12名学员点赞</text>
+    </view>
+    <view class="button">
+      <image src="/images/mine-personal-nolike.png"></image>
+      <text>赞Ta</text>
+    </view>
+    <!-- <view class="button fabulous-already">
+      <image src="/images/mine-personal-like.png"></image>
+      <text>已赞</text>
+    </view> -->
+  </view>
+  <view class="fabulous-list">
+    <view class="fabulous-user">
+      <image src="/images/avatar.jpeg"></image>
+    </view>
+    <view class="fabulous-user">
+      <image src="/images/avatar.jpeg"></image>
+    </view>
+    <view class="fabulous-user">
+      <image src="/images/avatar.jpeg"></image>
+    </view>
+    <view class="fabulous-user">
+      <image src="/images/avatar.jpeg"></image>
+    </view>
+    <view class="fabulous-user">
+      <image src="/images/avatar.jpeg"></image>
+    </view>
+    <view class="fabulous-user">
+      <image src="/images/avatar.jpeg"></image>
+    </view>
+    <view class="fabulous-user">
+      <image src="/images/avatar.jpeg"></image>
+    </view>
+    <view class="fabulous-user">
+      <image src="/images/avatar.jpeg"></image>
+    </view>
+    <view class="fabulous-user">
+      <image src="/images/avatar.jpeg"></image>
+    </view>
+    <view class="fabulous-user">
+      <image src="/images/avatar.jpeg"></image>
+    </view>
+    <view class="fabulous-user">
+      <image src="/images/avatar.jpeg"></image>
+    </view>
+    <view class="fabulous-user">
+      <image src="/images/avatar.jpeg"></image>
+    </view>
+  </view>
+</view>
+
+<view class="personal-botton">
+  <view class="botton-area">
+    <!-- <view class="user-share">
+      <text>分享名片</text>
+    </view> -->
+    <view class="course-edit">
+      <text>编辑</text>
+    </view>
+    <view class="course-share" bindtap="openSharePopup">
+      <text>分享好友</text>
+    </view>
+  </view>
+  <view class="create-card">
+    <image src="/images/mine-personal-card.png"></image>
+    <text>生成我的私教名片</text>
+  </view>
+</view>
+<view class="common-bottom"></view>
+
+
+<block wx:if="{{wxcodePopup}}">
+  <view class="mongolia" catchtouchmove="catchtouchmove"></view>
+  <view class="popup-view" catchtap="closeWxcodePopup" catchtouchmove="catchtouchmove">
+    <view class="popup" catchtap="catchtouchmove">
+      <view class="userinfo">
+        <view class="header-image">
+          <image src="/images/avatar.jpeg"></image>
+        </view>
+        <view class="userinfo-basic">
+          <text class="name">常文静</text>
+          <text class="title">高级游泳教练</text>
+        </view>
+      </view>
+      <view class="qcrode">
+        <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg" mode="aspectFill" bindtap="previewImage" data-url="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg"></image>
+      </view>
+      <view class="tips">
+        <text>扫一扫二维码图案，添加微信好友</text>
+      </view>
+    </view>
+    <view class="close-button" catchtap="closeWxcodePopup">
+      <image src="/images/order-popup-close.png"></image>
+    </view>
+  </view>
+</block>
+
+
+<block wx:if="{{sharePopup}}">
+  <view class="mongolia" catchtouchmove="catchtouchmove"></view>
+  <view class="share-popup-view" catchtap="closeSharePopup" catchtouchmove="catchtouchmove">
+    <view class="share-popup" catchtap="catchtouchmove">
+      <view class="share-type">
+        <view class="type">
+          <image src="/images/mine-personal-share-picture.png"></image>
+          <text>生成图片海报</text>
+        </view>
+
+        <view class="type">
+          <button open-type="share">
+            <image src="/images/mine-personal-share-wx.png"></image>
+            <text>分享微信好友</text>
+          </button>
+        </view>
+
+      </view>
+    </view>
+    <view class="share-margin"></view>
+    <view class="open-button" catchtap="closeSharePopup" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
+      <button>取消</button>
+    </view>
+  </view>
+</block>

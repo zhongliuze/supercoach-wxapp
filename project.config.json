@@ -408,6 +408,13 @@
 					"id": -1,
 					"name": "pages/mine/personal/index/index",
 					"pathName": "pages/mine/personal/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/personal/edit/edit",
+					"pathName": "pages/mine/personal/edit/edit",
 					"scene": null
 				}
 			]

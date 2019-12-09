@@ -188,7 +188,6 @@
           <image src="/images/vip-close.png"></image>
         </view>
       </view>
-
       <view class="order-list">
         <view class="info">
           <view class="name">
@@ -238,5 +237,4 @@
       <button>确认支付99元</button>
     </view>
   </view>
-
 </block>
