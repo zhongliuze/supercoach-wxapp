@@ -85,7 +85,7 @@
     </view>
   </view>
   <view class="good-info">
-    <view class="good-span">
+    <view class="good-span select">
       <text>减脂</text>
     </view>
     <view class="good-span">
@@ -94,7 +94,7 @@
     <view class="good-span">
       <text>增肌</text>
     </view>
-    <view class="good-span">
+    <view class="good-span select">
       <text>体态调整</text>
     </view>
     <view class="good-span">
@@ -103,7 +103,7 @@
     <view class="good-span">
       <text>产后恢复</text>
     </view>
-    <view class="good-span">
+    <view class="good-span select">
       <text>臀腿训练</text>
     </view>
     <view class="good-span">
@@ -121,7 +121,7 @@
     <view class="good-span">
       <text>康复训练</text>
     </view>
-    <view class="good-span">
+    <view class="good-span select">
       <text>饮食营养</text>
     </view>
     <view class="good-span">
@@ -186,7 +186,23 @@
     </view>
   </view>
   <view class="album-info">
-    
+    <view class="album-image">
+      <image src="/images/mine-personal-album.png" mode="aspectFill"></image>
+    </view>
+    <view class="album-image">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg" mode="aspectFill"></image>
+    </view>
+    <view class="album-image">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg" mode="aspectFill"></image>
+    </view>
+
+    <view class="album-image">
+      <image src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575817323376&di=d9cbe6c7c8548c59ca9adb103194b94d&imgtype=0&src=http%3A%2F%2Fwww.sinaimg.cn%2Fdy%2Fslidenews%2F20_img%2F2017_20%2F87296_5673538_263293.jpg" mode="aspectFill"></image>
+    </view>
+    <view class="upload-image">
+      <image src="/images/mine-lesson-part-add.png"></image>
+      <text>上传照片</text>
+    </view>
   </view>
 </view>
 
@@ -202,8 +218,14 @@
       <text>请按图示裁剪，否则会影响展示效果</text>
     </view>
   </view>
-  <view class="wxcode-info">
-    
+  <view class="album-info">
+    <view class="album-image">
+      <image src="/images/mine-personal-album.png" mode="aspectFill"></image>
+    </view>
+    <view class="upload-image">
+      <image src="/images/mine-lesson-part-add.png"></image>
+      <text>上传照片</text>
+    </view>
   </view>
 </view>
 
@@ -220,7 +242,27 @@
     </view>
   </view>
   <view class="certificate-info">
-    
+    <view class="certificate">
+      <view class="certificate-name">
+        <view class="name">
+          <text>证书名称：</text>
+        </view>
+        <view class="value">
+          <input placeholder="请填写证书名称" placeholder-class="input-placeholder"></input>
+        </view>
+      </view>
+      <view class="certificate-image">
+        <view class="name">
+          <text>证书图片：</text>
+        </view>
+        <view class="value">
+          <view class="upload-image">
+            <image src="/images/mine-lesson-part-add.png"></image>
+            <text>上传照片</text>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 </view>
 
@@ -238,6 +280,6 @@
     </view>
   </view>
   <view class="store-info">
-    
+
   </view>
 </view>

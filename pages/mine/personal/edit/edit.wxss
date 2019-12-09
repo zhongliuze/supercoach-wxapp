@@ -160,3 +160,131 @@
   margin-right: 30rpx;
   margin-bottom: 30rpx;
 }
+
+.good-info .select {
+  background-color: #e5f7e6;
+  color: #2eab34;
+  border: 1rpx solid #5fcd64;
+}
+
+.album-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 720rpx;
+  margin-left: 30rpx;
+  margin-top: 55rpx;
+  margin-bottom: 22rpx;
+  
+}
+
+.album-info .album-image {
+  width: 210rpx;
+  height: 210rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.album-info .album-image image {
+  width: 210rpx;
+  height: 210rpx;
+}
+
+.album-info .upload-image {
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+  width: 210rpx;
+  height: 210rpx;
+  color: #a7a7a7;
+  font-size: 26rpx;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.album-info .upload-image image {
+  width: 64rpx;
+  height: 64rpx;
+  margin-bottom: 24rpx;
+  margin-top: 20rpx;
+}
+
+.certificate-info {
+  display: flex;
+  flex-direction: column;
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 20rpx;
+}
+
+.certificate-info .certificate{
+  margin-bottom: 40rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.certificate-info .certificate .certificate-name{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 40rpx;
+}
+
+.certificate-info .certificate .name{
+  color: #181D24;
+  font-size: 34rpx;
+  width: 170rpx;
+}
+
+.certificate-info .certificate .certificate-name .value{
+  color: #181D24;
+  font-size: 34rpx;
+  margin-left: 32rpx;
+  width: 488rpx;
+}
+
+.certificate-info .certificate .certificate-name .value input{
+  color: #181D24;
+  font-size: 34rpx;
+  width: 488rpx;
+}
+
+.certificate-info .certificate .certificate-name .value .input-placeholder{
+  color: #CFCFCF;
+  font-size: 34rpx;
+}
+
+.certificate-info .certificate .certificate-image{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 40rpx;
+}
+
+.certificate-info .certificate .certificate-image .value .upload-image{
+  margin-left: 32rpx;
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+  width: 210rpx;
+  height: 210rpx;
+  color: #a7a7a7;
+  font-size: 26rpx;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.certificate-info .certificate .certificate-image .value .upload-image image {
+  width: 64rpx;
+  height: 64rpx;
+  margin-bottom: 24rpx;
+  margin-top: 20rpx;
+}
