@@ -1,0 +1,20 @@
+<!--pages/students/physical/index/index.wxml-->
+<view class="data-map">
+  <view class="data-select">
+    <view class="select-span select">
+      <text>体重</text>
+    </view>
+    <view class="select-span">
+      <text>骨骼肌</text>
+    </view>
+    <view class="select-span">
+      <text>体脂率</text>
+    </view>
+    <view class="select-span">
+      <text>BMI</text>
+    </view>
+  </view>
+  <view class="ff-data">
+    <ff-canvas id="area" canvas-id="area" opts="{{ opts }}"></ff-canvas>
+  </view>
+</view>

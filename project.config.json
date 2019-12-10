@@ -6,10 +6,12 @@
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
+		"enhance": true,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
+		"nodeModules": true,
 		"autoAudits": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
@@ -415,6 +417,13 @@
 					"id": -1,
 					"name": "pages/mine/personal/edit/edit",
 					"pathName": "pages/mine/personal/edit/edit",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/students/physical/index/index",
+					"pathName": "pages/students/physical/index/index",
 					"scene": null
 				}
 			]

@@ -122,7 +122,7 @@
   width: 690rpx;
   margin-left: 30rpx;
   margin-bottom: 52rpx;
-  min-height: 180rpx;
+  min-height: 80rpx;
 }
 
 .introduce-info textarea {
@@ -156,7 +156,7 @@
   justify-content: center;
   align-items: center;
   color: #707888;
-  font-size: 24rpx;
+  font-size: 26rpx;
   margin-right: 30rpx;
   margin-bottom: 30rpx;
 }
@@ -224,9 +224,9 @@
 }
 
 .certificate-info .certificate{
-  margin-bottom: 40rpx;
   display: flex;
   flex-direction: column;
+  border-bottom: 1rpx solid #EFF0F1;
 }
 
 .certificate-info .certificate .certificate-name{
@@ -279,7 +279,7 @@
   justify-content: center;
   align-items: center;
   margin-right: 30rpx;
-  margin-bottom: 30rpx;
+  margin-bottom: 40rpx;
 }
 
 .certificate-info .certificate .certificate-image .value .upload-image image {
@@ -287,4 +287,53 @@
   height: 64rpx;
   margin-bottom: 24rpx;
   margin-top: 20rpx;
+}
+
+.certificate-info .certificate-add {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width:690rpx;
+height:80rpx;
+border:1rpx solid #C0C0C0;
+border-radius:10rpx;
+color: #707888;
+font-size: 26rpx;
+justify-content: center;
+margin-top: 12rpx;
+margin-bottom: 52rpx;
+}
+
+.certificate-info .certificate-add image{
+  width:26rpx;
+height:26rpx;
+margin-right: 16rpx;
+}
+
+.certificate-info .no-border {
+  border: 0rpx;
+}
+
+.open-button {
+  background-color: #5FCD64;
+  margin-top: 48rpx;
+  /* position: fixed;
+  bottom: 0; */
+}
+
+.open-button button {
+  background-color: #5FCD64;
+  color: #FFFFFF;
+  border-radius: 0rpx;
+  border: 0rpx;
+  font-size: 34rpx;
+  width: 750rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.open-button button::after {
+  border: 0rpx;
 }

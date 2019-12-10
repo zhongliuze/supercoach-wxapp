@@ -26,6 +26,7 @@
     "pages/students/subject/index/index",
     "pages/students/subject/detail/detail",
     "pages/students/index/index",
+    "pages/students/physical/index/index",
     "pages/mine/index/index",
     "pages/mine/action/index/index",
     "pages/mine/action/add/add",
