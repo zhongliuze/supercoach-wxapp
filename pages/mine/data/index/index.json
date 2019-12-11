@@ -2,5 +2,7 @@
   "navigationBarTitleText": "数据中心",
   "navigationBarBackgroundColor": "#5FCD64",
   "navigationBarTextStyle": "white",
-  "usingComponents": {}
+  "usingComponents": {
+    "ff-canvas": "../../../../components/f2-canvas/f2-canvas"
+  }
 }

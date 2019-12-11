@@ -51,7 +51,7 @@
       <text>课时统计</text>
     </view>
     <view class="accuracy-select">
-      <view class="day">
+      <view class="day selected">
         <text>日</text>
       </view>
       <view class="month">
@@ -64,13 +64,241 @@
   </view>
   <view class="date-select">
     <view class="date-select-year">
-      <text>2019</text>
+      <text>2019年</text>
       <image src="/images/course-list-arrow-down.png"></image>
     </view>
-
-    <view class="date-select-year date-select-month">
-      <text>08</text>
+    <view class="date-select-year">
+      <text>08月</text>
       <image src="/images/course-list-arrow-down.png"></image>
     </view>
   </view>
+  <view class="data-ff">
+    <ff-canvas id="area" canvas-id="area" opts="{{classHour}}"></ff-canvas>
+  </view>
 </view>
+
+<view class="data-area">
+  <view class="header-line">
+    <view class="header-title">
+      <text>课时总价统计</text>
+    </view>
+    <view class="accuracy-select">
+      <view class="day">
+        <text>日</text>
+      </view>
+      <view class="month selected">
+        <text>月</text>
+      </view>
+      <view class="year">
+        <text>年</text>
+      </view>
+    </view>
+  </view>
+  <view class="date-select-one">
+    <view class="date-select-year">
+      <text>2019年</text>
+      <image src="/images/course-list-arrow-down.png"></image>
+    </view>
+  </view>
+  <view class="data-ff">
+    <ff-canvas id="area" canvas-id="area" opts="{{classHourTotalPrice}}"></ff-canvas>
+  </view>
+</view>
+
+<view class="data-area">
+  <view class="header-line">
+    <view class="header-title">
+      <text>学员新增统计</text>
+    </view>
+    <view class="accuracy-select">
+      <view class="day">
+        <text>日</text>
+      </view>
+      <view class="month selected">
+        <text>月</text>
+      </view>
+      <view class="year">
+        <text>年</text>
+      </view>
+    </view>
+  </view>
+  <view class="data-ff">
+    <ff-canvas id="area" canvas-id="area" opts="{{studentIncrease}}"></ff-canvas>
+  </view>
+</view>
+
+<view class="data-area">
+  <view class="header-line">
+    <view class="header-title">
+      <text>新增用户来源</text>
+    </view>
+    <view class="accuracy-select">
+      <view class="date-select-year">
+        <text>2019年</text>
+        <image src="/images/course-list-arrow-down.png"></image>
+      </view>
+      <view class="date-select-year date-select-month">
+        <text>08月</text>
+        <image src="/images/course-list-arrow-down.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="data-ff">
+    <ff-canvas id="area" canvas-id="area" opts="{{userSourse}}"></ff-canvas>
+  </view>
+</view>
+
+<view class="data-area">
+  <view class="header-line">
+    <view class="header-title">
+      <text>客单价占比分析</text>
+    </view>
+    <view class="accuracy-select">
+      <view class="date-select-year">
+        <text>2019年</text>
+        <image src="/images/course-list-arrow-down.png"></image>
+      </view>
+      <view class="date-select-year date-select-month">
+        <text>08月</text>
+        <image src="/images/course-list-arrow-down.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="data-ff">
+    <ff-canvas id="area" canvas-id="area" opts="{{unitPrice}}"></ff-canvas>
+  </view>
+</view>
+
+<view class="data-area">
+  <view class="header-line">
+    <view class="header-title">
+      <text>课程占比分析</text>
+    </view>
+    <view class="accuracy-select">
+      <view class="date-select-year">
+        <text>2019年</text>
+        <image src="/images/course-list-arrow-down.png"></image>
+      </view>
+      <view class="date-select-year date-select-month">
+        <text>08月</text>
+        <image src="/images/course-list-arrow-down.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="data-ff">
+    <ff-canvas id="area" canvas-id="area" opts="{{curriculum}}"></ff-canvas>
+  </view>
+</view>
+
+
+<view class="data-area">
+  <view class="header-line">
+    <view class="header-title">
+      <text>上课时段分布</text>
+    </view>
+    <view class="accuracy-select">
+      <view class="date-select-year">
+        <text>2019年</text>
+        <image src="/images/course-list-arrow-down.png"></image>
+      </view>
+      <view class="date-select-year date-select-month">
+        <text>08月</text>
+        <image src="/images/course-list-arrow-down.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="data-ff">
+    <ff-canvas id="area" canvas-id="area" opts="{{classTime}}"></ff-canvas>
+  </view>
+</view>
+
+<view class="data-area">
+  <view class="header-line">
+    <view class="header-title">
+      <text>工作事项占比</text>
+    </view>
+    <view class="accuracy-select">
+      <view class="date-select-year">
+        <text>2019年</text>
+        <image src="/images/course-list-arrow-down.png"></image>
+      </view>
+      <view class="date-select-year date-select-month">
+        <text>08月</text>
+        <image src="/images/course-list-arrow-down.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="data-ff">
+    <ff-canvas id="area" canvas-id="area" opts="{{workMatters}}"></ff-canvas>
+  </view>
+</view>
+
+<view class="data-area">
+  <view class="header-line">
+    <view class="header-title">
+      <text>上课学员排行</text>
+    </view>
+    <view class="accuracy-select">
+      <view class="date-select-year">
+        <text>2019年</text>
+        <image src="/images/course-list-arrow-down.png"></image>
+      </view>
+      <view class="date-select-year date-select-month">
+        <text>08月</text>
+        <image src="/images/course-list-arrow-down.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="data-ff">
+    <ff-canvas id="area" canvas-id="area" opts="{{studentRank}}"></ff-canvas>
+  </view>
+</view>
+
+<view class="data-area">
+  <view class="header-line">
+    <view class="header-title">
+      <text>学员性别比例</text>
+    </view>
+  </view>
+  <view class="data-ff">
+    <ff-canvas id="area" canvas-id="area" opts="{{studentSex}}"></ff-canvas>
+  </view>
+</view>
+
+<view class="data-area">
+  <view class="header-line">
+    <view class="header-title">
+      <text>个人名片浏览数据</text>
+    </view>
+    <view class="accuracy-select">
+      <view class="day selected">
+        <text>日</text>
+      </view>
+      <view class="month">
+        <text>月</text>
+      </view>
+      <view class="year">
+        <text>年</text>
+      </view>
+    </view>
+  </view>
+  <view class="date-select">
+    <view class="date-select-year">
+      <text>2019年</text>
+      <image src="/images/course-list-arrow-down.png"></image>
+    </view>
+    <view class="date-select-year">
+      <text>08月</text>
+      <image src="/images/course-list-arrow-down.png"></image>
+    </view>
+  </view>
+  <view class="data-ff">
+    <ff-canvas id="area" canvas-id="area" opts="{{browseData}}"></ff-canvas>
+  </view>
+</view>
+
+<view class="contact">
+  <button>建议反馈</button>
+</view>
+
+<view class="common-bottom"></view>

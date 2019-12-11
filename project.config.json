@@ -54,7 +54,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 50,
+			"current": 55,
 			"list": [
 				{
 					"id": -1,
@@ -431,6 +431,13 @@
 					"id": -1,
 					"name": "pages/students/physical/test/test",
 					"pathName": "pages/students/physical/test/test",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/data/index/index",
+					"pathName": "pages/mine/data/index/index",
 					"query": "",
 					"scene": null
 				},

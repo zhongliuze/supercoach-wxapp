@@ -84,7 +84,7 @@
   align-items: center;
   margin-left: 30rpx;
   width: 720rpx;
-  height: 62rpx;
+  height: 60rpx;
   white-space: nowrap;
 }
 
@@ -112,6 +112,7 @@
   background-color: #e5f7e6;
   color: #2eab34;
   border: 1rpx solid #5fcd64;
+  box-sizing: border-box;
 }
 
 .data-area {
@@ -145,7 +146,18 @@
   align-items: center;
 }
 
-.data-area .header-line .accuracy-select .day, .month, .year {
+.data-area .header-line .accuracy-select .day {
+  border-radius: 8rpx 0rpx 0rpx 8rpx;
+  width: 72rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid #919db4;
+  border-right: 0rpx;
+}
+
+.data-area .header-line .accuracy-select .month {
   width: 72rpx;
   height: 40rpx;
   display: flex;
@@ -154,17 +166,15 @@
   border: 1rpx solid #919db4;
 }
 
-.data-area .header-line .accuracy-select .day {
-  border-radius: 8rpx 0rpx 0rpx 8rpx;
-}
-
-.data-area .header-line .accuracy-select .month {
-  margin-left: -1rpx;
-}
-
 .data-area .header-line .accuracy-select .year {
   border-radius: 0rpx 8rpx 8rpx 0rpx;
-   margin-left: -2rpx;
+  width: 72rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid #919db4;
+  border-left: 0rpx;
 }
 
 .data-area .header-line .accuracy-select .selected {
@@ -176,35 +186,87 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   margin-top: 42rpx;
   color: #919db4;
   font-size: 20rpx;
   font-weight: bold;
-  margin-bottom: 40rpx;
+  height: 40rpx;
+  width: 246rpx;
+  margin-left: 252rpx;
 }
 
-.data-area .date-select .date-select-year {
+.data-area .date-select-one {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 42rpx;
+  color: #919db4;
+  font-size: 20rpx;
+  font-weight: bold;
+  height: 40rpx;
+  width: 110rpx;
+  margin-left: 320rpx;
+}
+
+.data-area .date-select-year {
   width: 80rpx;
   height: 40rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 42rpx;
   color: #919db4;
   font-size: 20rpx;
   padding-left: 15rpx;
   padding-right: 15rpx;
-  border: 2rpx solid #919db4;
+  border: 1rpx solid #919db4;
   border-radius: 8rpx;
 }
 
-.data-area .date-select image {
+.data-area image {
   width: 14rpx;
   height: 12rpx;
 }
 
-.data-area .date-select .date-select-month {
+.data-area .data-ff {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  margin-top: 20rpx;
+  margin-bottom: 32rpx;
+}
+
+ff-canvas {
+  width: 720rpx;
+  height: 400rpx;
+}
+
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16rpx;
+}
+
+.contact button{
+  border: 0rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #707888;
+  font-size: 24rpx;
+  padding: 0rpx;
+  background-color: #F7F7F7;
+}
+
+.contact button::after{
+  border: 0rpx;
+}
+
+.date-select-month {
   margin-left: 16rpx;
 }
