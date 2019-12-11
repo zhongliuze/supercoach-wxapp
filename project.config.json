@@ -11,7 +11,7 @@
 		"minified": true,
 		"newFeature": true,
 		"coverView": true,
-		"nodeModules": true,
+		"nodeModules": false,
 		"autoAudits": false,
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
@@ -424,6 +424,20 @@
 					"id": -1,
 					"name": "pages/students/physical/index/index",
 					"pathName": "pages/students/physical/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/students/physical/test/test",
+					"pathName": "pages/students/physical/test/test",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/data/index/index",
+					"pathName": "pages/mine/data/index/index",
 					"scene": null
 				}
 			]

@@ -1,0 +1,76 @@
+<!--pages/mine/data/index/index.wxml-->
+<view class="header-background">
+  <view class="data-select">
+    <text>2019年07月</text>
+    <image src="/images/mine-data-date-arrow.png"></image>
+  </view>
+</view>
+
+<view class="header-data">
+  <view class="data-margin">
+    <view class="data-line">
+      <view class="data-num">
+        <text>120</text>
+      </view>
+      <view class="data-name">
+        <text>已上课时</text>
+      </view>
+    </view>
+    <view class="data-line">
+      <view class="data-num">
+        <text>26900</text>
+      </view>
+      <view class="data-name">
+        <text>课时总价</text>
+      </view>
+    </view>
+    <view class="data-line">
+      <view class="data-num">
+        <text>20</text>
+      </view>
+      <view class="data-name">
+        <text>新增学员</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="templist-line">
+  <scroll-view class="templist" scroll-x>
+    <view class="span-inline" wx:for="{{dataTypeList}}">
+      <view class="span {{item.selected ? 'selected' : ''}}">
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<view class="data-area">
+  <view class="header-line">
+    <view class="header-title">
+      <text>课时统计</text>
+    </view>
+    <view class="accuracy-select">
+      <view class="day">
+        <text>日</text>
+      </view>
+      <view class="month">
+        <text>月</text>
+      </view>
+      <view class="year">
+        <text>年</text>
+      </view>
+    </view>
+  </view>
+  <view class="date-select">
+    <view class="date-select-year">
+      <text>2019</text>
+      <image src="/images/course-list-arrow-down.png"></image>
+    </view>
+
+    <view class="date-select-year date-select-month">
+      <text>08</text>
+      <image src="/images/course-list-arrow-down.png"></image>
+    </view>
+  </view>
+</view>

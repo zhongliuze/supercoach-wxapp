@@ -18,3 +18,122 @@
     <ff-canvas id="area" canvas-id="area" opts="{{ opts }}"></ff-canvas>
   </view>
 </view>
+
+<view class="data-list">
+  <block wx:for="{{physicalList}}">
+    <view class="data-line">
+      <view class="data-time">
+        <text>{{item.time}}</text>
+      </view>
+      <movable-area class='movable-area'>
+        <movable-view direction="horizontal" class='movable-view'>
+          <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}">
+            <view class="data-detail {{item.isTouchMove ? 'touch-move-course' : ''}}">
+              <view class="data-margin">
+                <view class="data-number">
+                  <view class="number">
+                    <text>{{item.tizhong}}</text>
+                  </view>
+                  <view class="name">
+                    <text>体重(kg)</text>
+                  </view>
+                </view>
+                <view class="data-number">
+                  <view class="number">
+                    <text>{{item.guge}}</text>
+                  </view>
+                  <view class="name">
+                    <text>骨骼肌(kg)</text>
+                  </view>
+                </view>
+                <view class="data-number">
+                  <view class="number">
+                    <text>{{item.tizhi}}</text>
+                  </view>
+                  <view class="name">
+                    <text>体脂率(%)</text>
+                  </view>
+                </view>
+                <view class="data-number">
+                  <view class="number">
+                    <text>{{item.bmi}}</text>
+                  </view>
+                  <view class="name">
+                    <text>BMI</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+            <view class="delete-button" catchtap="catchDelete" data-index="{{index}}">删除</view>
+
+          </view>
+        </movable-view>
+      </movable-area>
+
+    </view>
+
+  </block>
+
+
+</view>
+<view class="common-bottom"></view>
+<view class="open-button" catchtap="openPopup" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
+  <button>记录体测数据</button>
+</view>
+
+<block wx:if="{{addPopup}}">
+  <view class="mongolia" catchtouchmove="catchtouchmove"></view>
+  <view class="popup-view" catchtap="closePopup" catchtouchmove="catchtouchmove">
+    <view class="popup" catchtap="catchtouchmove">
+      <view class="title">
+        <view class="name">
+          <text>录入体测数据</text>
+        </view>
+        <view class="close" bindtap="closePopup">
+          <image src="/images/vip-close.png"></image>
+        </view>
+      </view>
+      <view class="order-list">
+        <view class="info">
+          <view class="name">
+            <text>日期</text>
+          </view>
+          <view class="value no-value">
+            <text>请选择</text>
+            <image src="/images/arrow-right.png"></image>
+          </view>
+        </view>
+        <view class="info">
+          <view class="name">
+            <text>体重(kg)</text>
+          </view>
+          <view class="value no-value">
+            <text>请选择</text>
+            <image src="/images/arrow-right.png"></image>
+          </view>
+        </view>
+        <view class="info">
+          <view class="name">
+            <text>骨骼肌(kg)</text>
+          </view>
+          <view class="value no-value">
+            <text>请选择</text>
+            <image src="/images/arrow-right.png"></image>
+          </view>
+        </view>
+        <view class="info">
+          <view class="name">
+            <text>体脂率(kg)</text>
+          </view>
+          <view class="value no-value">
+            <text>请选择</text>
+            <image src="/images/arrow-right.png"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="popup-add-button" catchtap="closePopup" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
+      <button>保存</button>
+    </view>
+  </view>
+</block>

@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "体测数据",
   "usingComponents": {
-    "ff-canvas": "@antv/f2-canvas"
+    "ff-canvas": "../../../../components/f2-canvas/f2-canvas"
   }
 }

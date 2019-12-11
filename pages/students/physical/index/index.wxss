@@ -47,6 +47,238 @@
 }
 
 ff-canvas {
-  width: 690rpx;
+  width: 720rpx;
   height: 400rpx;
+}
+
+.data-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.data-list .data-line{
+  display: flex;
+  flex-direction: column;
+}
+
+.data-list .data-line .data-time{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #A3A4A6;
+  font-size: 26rpx;
+  height: 80rpx;
+  margin-left: 30rpx;
+}
+
+.data-detail{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #FFFFFF;
+  height: 175rpx;
+  width: 750rpx;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(175rpx);
+  transform: translateX(175rpx);
+  margin-left: -174rpx;
+}
+
+.data-list .data-line .data-detail .data-margin{
+  width: 690rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 30rpx;
+}
+
+
+.data-list .data-line .data-detail .data-number{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.data-list .data-line .data-detail .data-number .number{
+  color: #249029;
+  font-size: 40rpx;
+  font-weight: bold;
+}
+
+.data-list .data-line .data-detail .data-number .name{
+  color: #707888;
+  font-size: 24rpx;
+  margin-top: 8rpx;
+}
+
+.open-button {
+  background-color: #5FCD64;
+  margin-top: 48rpx;
+  position: fixed;
+  bottom: 0;
+}
+
+.open-button button {
+  background-color: #5FCD64;
+  color: #FFFFFF;
+  border-radius: 0rpx;
+  border: 0rpx;
+  font-size: 34rpx;
+  width: 750rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.open-button button::after {
+  border: 0rpx;
+}
+
+.common-bottom {
+  width: 750rpx;
+  height: 200rpx;
+}
+
+.movable-area, .movable-view {
+  width: 750rpx;
+  height: 175rpx;
+}
+
+.touch-item {
+  display: flex;
+  overflow: hidden;
+}
+
+.touch-move-active .data-detail, .touch-move-active .delete-button {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.delete-button {
+  background-color: #ff3d3d;
+  width: 175rpx;
+  height: 175rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  -webkit-transform: translateX(175rpx);
+  transform: translateX(175rpx);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  font-size: 26rpx;
+  font-weight: bold;
+}
+
+.popup-view {
+  width: 750rpx;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.popup {
+  width: 750rpx;
+  background-color: #fff;
+  padding-bottom: 80rpx;
+}
+
+.popup .title {
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-top: 40rpx;
+  display: flex;
+  align-items: center;
+}
+
+.popup .title .name {
+  width: 590rpx;
+  margin-left: 50rpx;
+  display: flex;
+  justify-content: center;
+  color: #2b313d;
+  font-weight: bold;
+  font-size: 36rpx;
+}
+
+.popup .title .close {
+  width: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup .title .close image {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.popup .order-list {
+  width: 686rpx;
+  margin-left: 32rpx;
+  margin-top: 64rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup .order-list .info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 34rpx;
+  width: 686rpx;
+  height: 120rpx;
+  border-bottom: 1rpx solid #eff0f1;
+}
+
+.popup .order-list .info .name {
+  color: #181D24;
+}
+
+.popup .order-list .info .value {
+  color: #181d24;
+}
+
+.popup .order-list .info .value image {
+  width: 14rpx;
+  height: 24rpx;
+  margin-left: 16rpx;
+}
+
+.popup .order-list .info .no-value {
+  color: #CFCFCF;
+}
+
+.popup-view .popup-add-button {
+  background-color: #5fcd64;
+}
+
+.popup-view .popup-add-button button {
+  background-color: #5fcd64;
+  color: #fff;
+  border-radius: 0rpx;
+  border: 0rpx;
+  font-size: 34rpx;
+  font-weight: 500;
+  width: 750rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-view .popup-add-button button::after {
+  border: 0rpx;
 }

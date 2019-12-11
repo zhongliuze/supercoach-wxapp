@@ -1,44 +1,49 @@
 // pages/students/physical/index/index.js
-function initChart(canvas, width, height, F2) {
+import F2 from '../../../../components/f2-canvas/lib/f2';
+
+function initChart(canvas, width, height) {
   const data = [{
-    time: '2020-12-01 00:00:00',
-    tem: 85
+    time: 'Jan.',
+    tem: 1000
   }, {
-      time: '2020-12-01 00:10:00',
-    tem: 70
+    time: 'Feb.',
+    tem: 2200
   }, {
-      time: '2020-12-02 00:30:00',
-    tem: 95
+    time: 'Mar.',
+    tem: 2000
   }, {
-      time: '2020-12-08 00:35:00',
-    tem: 102
+    time: 'Apr.',
+    tem: 2600
   }, {
-      time: '2020-12-09 01:00:00',
-    tem: 98
+    time: 'May.',
+    tem: 2000
   }, {
-      time: '2020-12-09 01:20:00',
-    tem: 89
+    time: 'Jun.',
+    tem: 2600
   }, {
-      time: '2020-12-10 01:40:00',
-    tem: 105
+    time: 'Jul.',
+    tem: 2800
   }, {
-    time: '2020-12-10 02:00:00',
-    tem: 92
-  }, {
-    time: '2020-12-10 02:20:00',
-    tem: 95
+    time: 'Aug.',
+    tem: 2000
   }];
-  
+
 
   const chart = new F2.Chart({
     el: canvas,
     width,
     height
   });
-  chart.source(data, {
+  chart.source(data);
+
+
+  // tooltip 与图例结合
+  chart.tooltip({
+    showCrosshairs: true,
+  });
+
+  chart.scale({
     time: {
-      type: 'timeCat',
-      tickCount: 3,
       range: [0, 1]
     },
     tem: {
@@ -46,7 +51,6 @@ function initChart(canvas, width, height, F2) {
       min: 0
     }
   });
-
   chart.axis('time', {
     label: function label(text, index, total) {
       const textCfg = {};
@@ -58,16 +62,12 @@ function initChart(canvas, width, height, F2) {
       return textCfg;
     }
   });
-  chart.tooltip({
-    showCrosshairs: true
-  });
 
-  chart.area().position('time*tem').color('l(90) 0:#1890FF 1:#f7f7f7').shape('smooth');
-  chart.line().position('time*tem').color('l(90) 0:#1890FF 1:#f7f7f7').shape('smooth');
+  chart.area().position('time*tem');
+  chart.line().position('time*tem');
   chart.render();
   return chart;
 }
-
 
 Page({
 
@@ -77,14 +77,29 @@ Page({
   data: {
     opts: {
       onInit: initChart
-    }
+    },
+    fixedBottomButtonMargin: 0, // 吸底按钮的自适应高度
+    physicalList: [
+      { 'time': '2019年06月28日 18:32', 'tizhong': '60.82', 'guge': '32.40', 'tizhi': '20.19', 'bmi': '23.22', 'isTouchMove': false },
+      { 'time': '2019年06月28日 18:32', 'tizhong': '60.82', 'guge': '32.40', 'tizhi': '20.19', 'bmi': '23.22', 'isTouchMove': false },
+      { 'time': '2019年06月28日 18:32', 'tizhong': '60.82', 'guge': '32.40', 'tizhi': '20.19', 'bmi': '23.22', 'isTouchMove': false },
+      { 'time': '2019年06月28日 18:32', 'tizhong': '60.82', 'guge': '32.40', 'tizhi': '20.19', 'bmi': '23.22', 'isTouchMove': false },
+      { 'time': '2019年06月28日 18:32', 'tizhong': '60.82', 'guge': '32.40', 'tizhi': '20.19', 'bmi': '23.22', 'isTouchMove': false },
+      { 'time': '2019年06月28日 18:32', 'tizhong': '60.82', 'guge': '32.40', 'tizhi': '20.19', 'bmi': '23.22', 'isTouchMove': false },
+      { 'time': '2019年06月28日 18:32', 'tizhong': '60.82', 'guge': '32.40', 'tizhi': '20.19', 'bmi': '23.22', 'isTouchMove': false },
+      { 'time': '2019年06月28日 18:32', 'tizhong': '60.82', 'guge': '32.40', 'tizhi': '20.19', 'bmi': '23.22', 'isTouchMove': false },
+      { 'time': '2019年06月28日 18:32', 'tizhong': '60.82', 'guge': '32.40', 'tizhi': '20.19', 'bmi': '23.22', 'isTouchMove': false },
+    ],
+    addPopup: false, // 确认弹窗
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      fixedBottomButtonMargin: wx.getStorageSync('fixedBottomButtonMargin'), // 设置吸底按钮自适应高度
+    });
   },
 
   /**
@@ -134,5 +149,87 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  //手指触摸动作开始 记录起点X坐标
+  touchStart: function (e) {
+    //开始触摸时 重置所有删除
+    var physicalList = this.data.physicalList;
+    physicalList.forEach(function (v, i) {
+      if (v.isTouchMove) //只操作为true的
+        v.isTouchMove = false;
+    })
+    this.setData({
+      startX: e.changedTouches[0].clientX,
+      startY: e.changedTouches[0].clientY,
+      physicalList: physicalList
+    })
+  },
+  //滑动事件处理
+  touchMove: function (e) {
+    var physicalList = this.data.physicalList;
+    var that = this,
+      index = e.currentTarget.dataset.index, //当前索引
+      startX = that.data.startX, //开始X坐标
+      startY = that.data.startY, //开始Y坐标
+      touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
+      touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
+      //获取滑动角度
+      angle = that.angle({
+        X: startX,
+        Y: startY
+      }, {
+          X: touchMoveX,
+          Y: touchMoveY
+        });
+    physicalList.forEach(function (v, i) {
+      v.isTouchMove = false
+      //滑动超过30度角 return
+      if (Math.abs(angle) > 30) return;
+      if (i == index) {
+        if (touchMoveX > startX) //右滑
+          v.isTouchMove = false
+        else //左滑
+          v.isTouchMove = true
+      }
+    })
+    //更新数据
+    that.setData({
+      physicalList: physicalList
+    })
+  },
+
+  /**
+  * 计算滑动角度
+  * @param {Object} start 起点坐标
+  * @param {Object} end 终点坐标
+  */
+  angle: function (start, end) {
+    var _X = end.X - start.X,
+      _Y = end.Y - start.Y
+    //返回角度 /Math.atan()返回数字的反正切值
+    return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
+  },
+
+  catchDelete: function (event) {
+    wx.showToast({
+      title: '删除成功',
+      icon: 'success'
+    })
+  },
+
+  catchtouchmove: function () { },
+
+  closePopup: function (event) {
+    console.log(event);
+    this.setData({
+      'addPopup': false,
+    });
+  },
+
+  openPopup: function (event) {
+    this.setData({
+      'addPopup': true,
+    });
+  },
 })

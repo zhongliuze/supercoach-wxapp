@@ -1,0 +1,210 @@
+/* pages/mine/data/index/index.wxss */
+
+.header-background {
+  background-color: #5fcd64;
+  width: 750rpx;
+  height: 238rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-background .data-select {
+  width: 690rpx;
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  color: #fff;
+  font-size: 24rpx;
+  margin-top: 30rpx;
+}
+
+.header-background .data-select image {
+  width: 20rpx;
+  height: 12rpx;
+  margin-left: 16rpx;
+}
+
+.header-data {
+  width: 690rpx;
+  background-color: #fff;
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30rpx;
+  margin-top: -130rpx;
+}
+
+.header-data .data-margin {
+  width: 570rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 56rpx;
+  margin-bottom: 56rpx;
+  margin-left: 60rpx;
+}
+
+.header-data .data-margin .data-line {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-data .data-margin .data-line .data-num {
+  color: #181d24;
+  font-size: 44rpx;
+  font-weight: bold;
+}
+
+.header-data .data-margin .data-line .data-name {
+  color: #707888;
+  font-size: 26rpx;
+  margin-top: 10rpx;
+}
+
+.templist-line {
+  width: 750rpx;
+  background-color: #fff;
+  margin-top: 40rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 120rpx;
+  border-bottom: 1rpx solid #eff0f1;
+}
+
+.templist {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30rpx;
+  width: 720rpx;
+  height: 62rpx;
+  white-space: nowrap;
+}
+
+.templist .span-inline {
+  display: inline-block;
+  height: 60rpx;
+  margin-right: 32rpx;
+}
+
+.templist .span-inline .span {
+  height: 60rpx;
+  background-color: #f5f5f5;
+  color: #181d24;
+  font-size: 24rpx;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  border-radius: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.templist .span-inline .selected {
+  background-color: #e5f7e6;
+  color: #2eab34;
+  border: 1rpx solid #5fcd64;
+}
+
+.data-area {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  margin-bottom: 32rpx;
+}
+
+.data-area .header-line {
+  width: 690rpx;
+  margin-left: 30rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 50rpx;
+}
+
+.data-area .header-line .header-title {
+  color: #181d24;
+  font-size: 38rpx;
+  font-weight: bold;
+}
+
+.data-area .header-line .accuracy-select {
+  color: #919db4;
+  font-size: 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.data-area .header-line .accuracy-select .day, .month, .year {
+  width: 72rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid #919db4;
+}
+
+.data-area .header-line .accuracy-select .day {
+  border-radius: 8rpx 0rpx 0rpx 8rpx;
+}
+
+.data-area .header-line .accuracy-select .month {
+  margin-left: -1rpx;
+}
+
+.data-area .header-line .accuracy-select .year {
+  border-radius: 0rpx 8rpx 8rpx 0rpx;
+   margin-left: -2rpx;
+}
+
+.data-area .header-line .accuracy-select .selected {
+  background-color: #919db4;
+  color: #fff;
+}
+
+.data-area .date-select {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 42rpx;
+  color: #919db4;
+  font-size: 20rpx;
+  font-weight: bold;
+  margin-bottom: 40rpx;
+}
+
+.data-area .date-select .date-select-year {
+  width: 80rpx;
+  height: 40rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 42rpx;
+  color: #919db4;
+  font-size: 20rpx;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+  border: 2rpx solid #919db4;
+  border-radius: 8rpx;
+}
+
+.data-area .date-select image {
+  width: 14rpx;
+  height: 12rpx;
+}
+
+.data-area .date-select .date-select-month {
+  margin-left: 16rpx;
+}
