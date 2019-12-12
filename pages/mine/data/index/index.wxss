@@ -210,7 +210,7 @@
 }
 
 .data-area .date-select-year {
-  width: 80rpx;
+  width: 86rpx;
   height: 40rpx;
   display: flex;
   flex-direction: row;
@@ -218,8 +218,8 @@
   justify-content: space-between;
   color: #919db4;
   font-size: 20rpx;
-  padding-left: 15rpx;
-  padding-right: 15rpx;
+  padding-left: 12rpx;
+  padding-right: 12rpx;
   border: 1rpx solid #919db4;
   border-radius: 8rpx;
 }
@@ -240,8 +240,40 @@
   margin-bottom: 32rpx;
 }
 
+.data-area .data-lock {
+  width: 730rpx;
+  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  margin-top: -432rpx;
+  margin-left: 10rpx;
+  z-index: 999;
+  margin-bottom: 32rpx;
+}
+
+.data-area .data-lock .data-lock-name {
+  color: #38b53e;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.data-area .data-lock .data-lock-button {
+  width: 160rpx;
+  height: 55rpx;
+  background: #5fcd64;
+  border-radius: 10rpx;
+  color: #fff;
+  font-size: 22rpx;
+  text-align: center;
+  margin-top: 46rpx;
+  line-height: 55rpx;
+}
+
 ff-canvas {
-  width: 720rpx;
+  width: 730rpx;
   height: 400rpx;
 }
 
@@ -252,7 +284,7 @@ ff-canvas {
   margin-top: 16rpx;
 }
 
-.contact button{
+.contact button {
   border: 0rpx;
   display: flex;
   justify-content: center;
@@ -260,10 +292,10 @@ ff-canvas {
   color: #707888;
   font-size: 24rpx;
   padding: 0rpx;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 }
 
-.contact button::after{
+.contact button::after {
   border: 0rpx;
 }
 

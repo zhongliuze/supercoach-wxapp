@@ -1,4 +1,9 @@
 <!--pages/mine/personal/index/index.wxml-->
+<view class="fixed-return" style="height: {{menuButtonInfoData.bottom + 8}}px;">
+  <view class="return-button" style="margin-top: {{menuButtonInfoData.top}}px; height: {{menuButtonInfoData.height}}px;" bindtap="bindReturn">
+    <image src="/images/return-page.png"></image>
+  </view>
+</view>
 <view class="header-image">
   <swiper indicator-dots="true" autoplay="true" indicator-active-color="#FFFFFF" >
     <block wx:for="{{headerImages}}" wx:key="*this">

@@ -69,5 +69,14 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  /**
+ * 打开新增模板页
+ */
+  navigateToAdd: function () {
+    wx.navigateTo({
+      url: '../add/add',
+    })
+  },
 })

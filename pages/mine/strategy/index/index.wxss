@@ -23,7 +23,7 @@ page {
   line-height: 54rpx;
 }
 
-.customer {
+button {
   width: 110rpx;
   height: 110rpx;
   background: #5fcd64;
@@ -36,4 +36,10 @@ page {
   position: fixed;
   right: 30rpx;
   bottom: 200rpx;
+  padding: 0rpx;
+  line-height: 36rpx;
+}
+
+button::after {
+  border: 0rpx;
 }

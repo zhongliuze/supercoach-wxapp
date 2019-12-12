@@ -22,7 +22,7 @@
         </view>
       </view>
       <view class="other">
-        <view class="vip-button">
+        <view class="vip-button" bindtap="bindButton" data-url="personal/index/index">
           <text>我的主页</text>
         </view>
       </view>
@@ -41,7 +41,7 @@
         <text class="subtitle">尊享12大特权</text>
       </view>
     </view>
-    <view class="activity">
+    <view class="activity" bindtap="bindButton" data-url="invit/index/index">
       <view class="icon">
         <image src="/images/mine-invite.png" style="width:56rpx;height:50rpx;"></image>
       </view>
@@ -56,7 +56,7 @@
     <view class="title">
       <text>本月数据</text>
     </view>
-    <view class="data-list">
+    <view class="data-list" bindtap="bindButton" data-url="data/index/index">
       <view class="data">
         <view class="num">
           <text>16</text>
@@ -89,7 +89,7 @@
 
   <view class="button-group">
     <view class="button-list">
-      <view class="button">
+      <view class="button" bindtap="bindPopupTips" data-message='学员端即将上线，吾皇敬请期待！'>
         <view class="icon">
           <image src="/images/mine-invite-student.png" style="width:52rpx;height:52rpx;"></image>
         </view>
@@ -97,7 +97,7 @@
           <text>邀请学员</text>
         </view>
       </view>
-      <view class="button">
+      <view class="button" bindtap="bindButton" data-url="data/index/index">
         <view class="icon">
           <image src="/images/mine-data-center.png" style="width:54rpx;height:52rpx;"></image>
         </view>
@@ -105,7 +105,7 @@
           <text>数据中心</text>
         </view>
       </view>
-      <view class="button">
+      <view class="button" bindtap="bindButton" data-url="personal/edit/edit">
         <view class="icon">
           <image src="/images/mine-homepage.png" style="width:54rpx;height:52rpx;"></image>
         </view>
@@ -141,7 +141,7 @@
       </view>
     </view>
     <view class="button-list last-list">
-      <view class="button">
+      <view class="button" bindtap="bindButton" data-url="poster/index/index">
         <view class="icon">
           <image src="/images/mine-admission.png" style="width:42rpx;height:52rpx;"></image>
         </view>
@@ -149,7 +149,7 @@
           <text>招生海报</text>
         </view>
       </view>
-      <view class="button">
+      <view class="button" bindtap="bindButton" data-url="message/index/index">
         <view class="icon">
           <image src="/images/mine-homepage.png" style="width:52rpx;height:52rpx;"></image>
         </view>
@@ -157,7 +157,7 @@
           <text>短信群发</text>
         </view>
       </view>
-      <view class="button">
+      <view class="button" bindtap="bindButton" data-url="strategy/index/index">
         <view class="icon">
           <image src="/images/mine-novice.png" style="width:48rpx;height:52rpx;"></image>
         </view>

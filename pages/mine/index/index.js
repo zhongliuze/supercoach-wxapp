@@ -87,5 +87,18 @@ Page({
     wx.makePhoneCall({
       phoneNumber: this.data.customerPhone,
     })
-  }
+  },
+
+    /**
+   * 提示窗
+   */
+  bindPopupTips: function (event) {
+    wx.showModal({
+      title: '启奏陛下',
+      content: event.currentTarget.dataset.message,
+      showCancel: false,
+      confirmText: '爱卿平身',
+      confirmColor: '#5FCD64',
+    })
+  },
 })

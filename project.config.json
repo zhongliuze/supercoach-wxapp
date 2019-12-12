@@ -445,6 +445,13 @@
 					"id": -1,
 					"name": "pages/mine/data/index/index",
 					"pathName": "pages/mine/data/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/mine/invit/index/index",
+					"pathName": "pages/mine/invit/index/index",
 					"scene": null
 				}
 			]

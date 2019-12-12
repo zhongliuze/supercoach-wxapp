@@ -20,7 +20,7 @@
         <text>短信内容</text>
         <text class="subtitle">限制150字符以内</text>
       </view>
-      <view class="tempset">
+      <view class="tempset" bindtap="navigateToTemplate">
         <text>模板管理</text>
       </view>
     </view>
@@ -57,7 +57,7 @@
       </view>
       <view class="input-info">
         <view class="info-button">
-          <text class="special">保存为新模板</text>
+          <text class="special" bindtap="navigateToAdd">保存为新模板</text>
           <text>清空输入</text>
         </view>
         <view class="input-length">
@@ -68,7 +68,7 @@
   </view>
 
   <view class="vip-info">
-    <view class="vip-message">
+    <view class="vip-message" bindtap="navigateToMember">
       <text>开通VIP，每月免费领取50条短信额度</text>
       <image src="/images/mine-message-vip-more.png"></image>
     </view>
@@ -77,7 +77,7 @@
         <text>剩余短信额度：200条</text>
         <text class="special" bindtap="openPopup">立即充值</text>
       </view>
-      <view class="message-record">
+      <view class="message-record" bindtap="navigateToRecord">
         <image src="/images/mine-message-vip-record.png"></image>
         <text>群发记录</text>
       </view>

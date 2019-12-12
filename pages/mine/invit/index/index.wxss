@@ -1,0 +1,203 @@
+/* pages/mine/invit/index/index.wxss */
+
+page {
+  background-color: #ff584f;
+}
+
+.header-image {
+  width: 750rpx;
+  height: 678rpx;
+}
+
+.header-image image {
+  width: 750rpx;
+  height: 678rpx;
+}
+
+.invit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 750rpx;
+}
+
+.invit-button button {
+  width: 670rpx;
+  height: 88rpx;
+  background: #fff;
+  box-shadow: 0rpx 11rpx 16rpx 0rpx rgba(178, 11, 20, 0.35);
+  border-radius: 44rpx;
+  font-size: 36rpx;
+  font-family: MFTongXin_Noncommercial;
+  font-weight: bold;
+  color: #ff584f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.invit-background {
+  width: 645rpx;
+  height: 637rpx;
+  background: rgba(251, 133, 127, 0.6);
+  border-radius: 20rpx 100rpx 20rpx 10rpx;
+  margin-top: 159rpx;
+  margin-left: 64rpx;
+  z-index: 10;
+}
+
+.invit-list {
+  display: flex;
+  flex-direction: column;
+  width: 650rpx;
+  margin-left: 40rpx;
+  margin-top: -690rpx;
+}
+
+.invit-list .header {
+  display: flex;
+  flex-direction: column;
+}
+
+.invit-list .header image {
+  width: 650rpx;
+  height: 94rpx;
+}
+
+.invit-list .header text {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #fff;
+  position: relative;
+  top: -103rpx;
+  left: 55rpx;
+}
+
+.invit-list .bottom {
+  display: flex;
+  flex-direction: column;
+}
+
+.invit-list .bottom image {
+  width: 650rpx;
+  height: 97rpx;
+}
+
+.invit-list .invit-body {
+  width: 650rpx;
+  background-image: url(http://imgbj.xianshikeji.com/mine-invit-success-center.png);
+  border: 0rpx;
+  background-size: 100% 100%;
+  margin-top: -40rpx;
+  margin-bottom: -40rpx;
+}
+
+.invit-list .invit-body .body-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 56rpx;
+  flex-wrap: wrap;
+  padding-top: 20rpx;
+}
+
+.invit-list .invit-body .body-list .body-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100rpx;
+  height: 100rpx;
+  background: rgba(255, 255, 255, 0.42);
+  border-radius: 100%;
+  margin-right: 12rpx;
+  margin-bottom: 24rpx;
+}
+
+.invit-list .invit-body .body-list .body-user .avatar {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 100%;
+}
+
+.invit-list .invit-body .body-list .body-user .add {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 100%;
+  background-color: #ff584f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.invit-list .invit-body .body-list .body-user .add .addicon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.content-background {
+  width: 645rpx;
+  height: 900rpx;
+  background:rgba(253,107,99,0.6);
+  border-radius: 20rpx 100rpx 20rpx 100rpx;
+  margin-top: 190rpx;
+  margin-left: 64rpx;
+}
+
+.content-area {
+  display: flex;
+  flex-direction: column;
+  width: 650rpx;
+  margin-left: 40rpx;
+  margin-top: -964rpx;
+}
+
+.content-area .content-header{
+  width: 650rpx;
+  height: 180rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-area .content-header image{
+  width: 650rpx;
+  height: 180rpx;
+}
+
+.content-area .content-bottom{
+  width: 650rpx;
+  height: 130rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-area .content-bottom image{
+  width: 650rpx;
+  height: 130rpx;
+}
+
+.content-area .content-body{
+  width: 650rpx;
+  display: flex;
+  flex-direction: column;
+  background-image: url(http://imgbj.xianshikeji.com/mine-invit-success-center.png);
+  border: 0rpx;
+  background-size: 100% 100%;
+  margin-top: -65rpx;
+  margin-bottom: -45rpx;
+}
+
+.content-area .content-text{
+  width: 580rpx;
+  display: flex;
+  flex-direction: column;
+  color: #FFFFFF;
+  font-size: 24rpx;
+  margin-left: 50rpx;
+  line-height: 42rpx;
+}
+.content-area .content-text text{
+  margin-bottom: 20rpx;
+}
+

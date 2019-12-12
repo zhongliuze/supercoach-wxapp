@@ -1,5 +1,5 @@
 <!--pages/mine/message/template/template.wxml-->
-<view class="add-template">
+<view class="add-template" bindtap="navigateToAdd">
   <view class="icon">
     <image src="/images/mine-message-template-add.png"></image>
   </view>
@@ -10,7 +10,7 @@
 
 <view class="template-list">
 
-  <view class="template" wx:for="{{templateList}}">
+  <view class="template" wx:for="{{templateList}}" bindtap="navigateToAdd">
     <view class="template-title">
       <view class="title">
         <text>模板名称</text>

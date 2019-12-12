@@ -71,5 +71,14 @@ Page({
     wx.navigateTo({
       url: '../add/add',
     })
+  },
+
+  /**
+   * 进入会员中心
+   */
+  navigateToMembers: function() {
+    wx.navigateTo({
+      url: '../../../members/index/index',
+    })
   }
 })

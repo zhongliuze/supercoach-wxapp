@@ -60,6 +60,7 @@ margin-top: 50rpx;
   padding: 16rpx 24rpx 16rpx 24rpx;
   border: 1rpx solid #9FA9BD;
   border-radius: 12rpx;
+  box-sizing: border-box;
 }
 
 .solve .solve-button .order {

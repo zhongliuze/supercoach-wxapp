@@ -55,7 +55,7 @@
     "pages/mine/personal/edit/edit",
 
     "pages/mine/data/index/index",
-    
+    "pages/mine/invit/index/index",
     "pages/logs/logs"
   ],
   "window": {

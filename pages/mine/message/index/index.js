@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    orderPopup: true, // 确认弹窗
+    orderPopup: false, // 确认弹窗
     fixedBottomButtonMargin: 0, // 吸底按钮的自适应高度
   },
 
@@ -78,5 +78,41 @@ Page({
     this.setData({
       'orderPopup': true,
     });
+  },
+
+  /**
+   * 打开模板页
+   */
+  navigateToTemplate: function() {
+    wx.navigateTo({
+      url: '../template/template',
+    })
+  },
+
+  /**
+   * 打开保存模板页
+   */
+  navigateToAdd: function () {
+    wx.navigateTo({
+      url: '../add/add',
+    })
+  },
+
+  /**
+   * 打开群发记录
+   */
+  navigateToRecord: function () {
+    wx.navigateTo({
+      url: '../record/record',
+    })
+  },
+
+  /**
+   * 打开会员中心
+   */
+  navigateToMember: function () {
+    wx.navigateTo({
+      url: '../../../members/index/index',
+    })
   },
 })

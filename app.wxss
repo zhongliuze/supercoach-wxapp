@@ -570,3 +570,25 @@ page {
   border-radius: 0rpx 0rpx 12rpx 12rpx;
   margin-top: -48rpx;
 }
+
+.fixed-return {
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0);
+  color: rgba(255, 255, 255, 1);
+  width: 375px;
+  z-index: 999;
+}
+
+.return-button {
+  margin-left: 15px;
+  display: flex;
+  align-items: center;
+  width: 345px;
+}
+
+.return-button image {
+  width: 18rpx;
+  height: 36rpx;
+}

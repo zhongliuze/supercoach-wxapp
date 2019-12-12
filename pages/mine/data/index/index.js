@@ -353,80 +353,62 @@ function initUnitPrice(canvas, width, height) {
 }
 
 function initCurriculum(canvas, width, height) {
-  const map = {
-    '芳华': '40%',
-    '妖猫传': '20%',
-    '机器之血': '18%',
-    '心理罪': '15%',
-    '寻梦环游记': '5%',
-    '其他': '2%'
-  };
   const data = [{
-    name: '芳华',
-    percent: 0.4,
-    a: '1'
+    name: '其他消费',
+    y: 6371664,
+    const: 'const'
   }, {
-    name: '妖猫传',
-    percent: 0.2,
-    a: '1'
+    name: '生活用品',
+    y: 7216301,
+    const: 'const'
   }, {
-    name: '机器之血',
-    percent: 0.18,
-    a: '1'
+    name: '通讯物流',
+    y: 1500621,
+    const: 'const'
   }, {
-    name: '心理罪',
-    percent: 0.15,
-    a: '1'
+    name: '交通出行',
+    y: 586622,
+    const: 'const'
   }, {
-    name: '寻梦环游记',
-    percent: 0.05,
-    a: '1'
-  }, {
-    name: '其他',
-    percent: 0.02,
-    a: '1'
+    name: '饮食',
+    y: 900000,
+    const: 'const'
   }];
+
   const chart = new F2.Chart({
     el: canvas,
     width,
-    height
+    height,
   });
-  chart.source(data, {
-    percent: {
-      formatter: function formatter(val) {
-        return val * 100 + '%';
-      }
-    }
-  });
-  chart.legend({
-    position: 'right',
-    itemFormatter: function itemFormatter(val) {
-      return val + '  ' + map[val];
-    }
-  });
-  chart.tooltip(false);
+
+  chart.source(data);
   chart.coord('polar', {
     transposed: true,
-    radius: 0.85
+    radius: 0.75
   });
+  chart.legend(false);
   chart.axis(false);
-  chart.interval()
-    .position('a*percent')
-    .color('name', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864', '#8543E0'])
-    .adjust('stack')
-    .style({
-      lineWidth: 1,
-      stroke: '#fff',
-      lineJoin: 'round',
-      lineCap: 'round'
-    })
-    .animate({
-      appear: {
-        duration: 1200,
-        easing: 'bounceOut'
-      }
-    });
+  chart.tooltip(false);
 
+  // 添加饼图文本
+  chart.pieLabel({
+    sidePadding: 40,
+    label1: function label1(data, color) {
+      return {
+        text: data.name,
+        fill: color
+      };
+    },
+    label2: function label2(data) {
+      return {
+        text: '￥' + String(Math.floor(data.y * 100) / 100).replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+        fill: '#808080',
+        fontWeight: 'bold'
+      };
+    }
+  });
+
+  chart.interval().position('const*y').color('name', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864']).adjust('stack');
   chart.render();
   return chart;
 }
@@ -494,80 +476,57 @@ function initClassTime(canvas, width, height) {
 }
 
 function initWorkMatters(canvas, width, height) {
-  const map = {
-    '芳华': '40%',
-    '妖猫传': '20%',
-    '机器之血': '18%',
-    '心理罪': '15%',
-    '寻梦环游记': '5%',
-    '其他': '2%'
-  };
-  const data = [{
-    name: '芳华',
-    percent: 0.4,
-    a: '1'
-  }, {
-    name: '妖猫传',
-    percent: 0.2,
-    a: '1'
-  }, {
-    name: '机器之血',
-    percent: 0.18,
-    a: '1'
-  }, {
-    name: '心理罪',
-    percent: 0.15,
-    a: '1'
-  }, {
-    name: '寻梦环游记',
-    percent: 0.05,
-    a: '1'
-  }, {
-    name: '其他',
-    percent: 0.02,
-    a: '1'
-  }];
+  const data = [
+    { name: '芳华', percent: 0.4, type: '1' },
+    { name: '妖猫传', percent: 0.2, type: '1' },
+    { name: '机器之血', percent: 0.18, type: '1' },
+    { name: '心理罪', percent: 0.15, type: '1' },
+    { name: '寻梦环游记', percent: 0.05, type: '1' },
+    { name: '其他', percent: 0.12, type: '1' },
+    { name: '芳华', percent: 0.4, type: '2' },
+    { name: '妖猫传', percent: 0.2, type: '2' },
+    { name: '机器之血', percent: 0.18, type: '2' },
+    { name: '心理罪', percent: 0.15, type: '2' },
+    { name: '寻梦环游记', percent: 0.05, type: '2' },
+    { name: '其他', percent: 0.12, type: '2' }
+  ];
+
   const chart = new F2.Chart({
     el: canvas,
     width,
-    height
+    height,
   });
-  chart.source(data, {
-    percent: {
-      formatter: function formatter(val) {
-        return val * 100 + '%';
-      }
-    }
-  });
+  chart.source(data);
   chart.legend({
-    position: 'right',
-    itemFormatter: function itemFormatter(val) {
-      return val + '  ' + map[val];
-    }
+    position: 'right'
   });
   chart.tooltip(false);
   chart.coord('polar', {
     transposed: true,
-    radius: 0.85
+    radius: 0.8,
+    inner: 0.5
   });
   chart.axis(false);
   chart.interval()
-    .position('a*percent')
-    .color('name', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864', '#8543E0'])
-    .adjust('stack')
-    .style({
-      lineWidth: 1,
-      stroke: '#fff',
-      lineJoin: 'round',
-      lineCap: 'round'
-    })
-    .animate({
-      appear: {
-        duration: 1200,
-        easing: 'bounceOut'
-      }
-    });
+    .position('type*percent')
+    .color('name', [
+      '#1890FF',
+      '#13C2C2',
+      '#2FC25B',
+      '#FACC14',
+      '#F04864',
+      '#8543E0'
+    ])
+    .adjust('stack');
 
+  chart.interaction('pie-select', {
+    startEvent: 'tap',
+    animate: {
+      duration: 300,
+      easing: 'backOut'
+    },
+    cancelable: true
+  });
   chart.render();
   return chart;
 }
@@ -618,79 +577,50 @@ function initStudentRank(canvas, width, height) {
 }
 
 function initStudentSex(canvas, width, height) {
-  const map = {
-    '芳华': '40%',
-    '妖猫传': '20%',
-    '机器之血': '18%',
-    '心理罪': '15%',
-    '寻梦环游记': '5%',
-    '其他': '2%'
-  };
   const data = [{
-    name: '芳华',
-    percent: 0.4,
-    a: '1'
+    name: '男性',
+    y: 6371664,
+    const: 'const'
   }, {
-    name: '妖猫传',
-    percent: 0.2,
-    a: '1'
-  }, {
-    name: '机器之血',
-    percent: 0.18,
-    a: '1'
-  }, {
-    name: '心理罪',
-    percent: 0.15,
-    a: '1'
-  }, {
-    name: '寻梦环游记',
-    percent: 0.05,
-    a: '1'
-  }, {
-    name: '其他',
-    percent: 0.02,
-    a: '1'
+    name: '女性',
+    y: 7216301,
+    const: 'const'
   }];
+
   const chart = new F2.Chart({
     el: canvas,
     width,
-    height
+    height,
   });
-  chart.source(data, {
-    percent: {
-      formatter: function formatter(val) {
-        return val * 100 + '%';
-      }
-    }
-  });
-  chart.legend({
-    position: 'right',
-    itemFormatter: function itemFormatter(val) {
-      return val + '  ' + map[val];
-    }
-  });
-  chart.tooltip(false);
+
+  chart.source(data);
   chart.coord('polar', {
     transposed: true,
-    radius: 0.85
+    radius: 0.75
   });
+  chart.legend(false);
   chart.axis(false);
-  chart.interval()
-    .position('a*percent')
-    .color('name', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864', '#8543E0'])
-    .adjust('stack')
-    .style({
-      lineWidth: 1,
-      stroke: '#fff',
-      lineJoin: 'round',
-      lineCap: 'round'
-    })
-    .animate({
-      appear: {
-        duration: 1200,
-        easing: 'bounceOut'
-      }
-    });
+  chart.tooltip(false);
+
+  // 添加饼图文本
+  chart.pieLabel({
+    sidePadding: 40,
+    label1: function label1(data, color) {
+      return {
+        text: data.name,
+        fill: color
+      };
+    },
+    label2: function label2(data) {
+      return {
+        text: '￥' + String(Math.floor(data.y * 100) / 100).replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+        fill: '#808080',
+        fontWeight: 'bold'
+      };
+    }
+  });
+
+  chart.interval().position('const*y').color('name', ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864']).adjust('stack');
   chart.render();
   return chart;
 }
@@ -947,6 +877,12 @@ Page({
     // 个人主页浏览数据
     browseData: {
       onInit: initBrowseData
+    },
+
+    tgcAppId: "wx8abaf00ee8c3202e",  // 吐个槽小程序ID
+    tgcExtraData: {
+      // 把1221数字换成你的产品ID，否则会跳到别的产品
+      id: "98007",
     }
   },
 
@@ -1003,6 +939,18 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    return {
+      title: '我的私教数据',
+      path: 'pages/mine/data/index/index',
+    }
+  },
 
+  /**
+   * 进入开通会员页
+   */
+  navigateToMember: function() {
+    wx.navigateTo({
+      url: '../../../members/index/index',
+    })
   }
 })

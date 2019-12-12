@@ -1,0 +1,141 @@
+<!--pages/mine/invit/index/index.wxml-->
+<view class="fixed-return" style="height: {{menuButtonInfoData.bottom + 8}}px;">
+  <view class="return-button" style="margin-top: {{menuButtonInfoData.top}}px; height: {{menuButtonInfoData.height}}px;" bindtap="bindReturn">
+    <image src="/images/return-page.png"></image>
+  </view>
+</view>
+
+<view class="header-image">
+  <image src="/images/mine-invit-header.png"></image>
+</view>
+
+<view class="invit-button">
+  <button open-type="share">立即邀请</button>
+</view>
+
+<view class="invit-background"></view>
+
+<view class="invit-list">
+  <view class="header">
+    <image src="/images/mine-invit-success-top.png"></image>
+    <text>已成功邀请16人，累计享70天VIP会员</text>
+  </view>
+  <view class="invit-body" plain='true'>
+    <view class="body-list">
+      <view class="body-user">
+        <image class="avatar" src="/images/avatar.jpeg"></image>
+      </view>
+      <view class="body-user">
+        <image class="avatar" src="/images/avatar.jpeg"></image>
+      </view>
+      <view class="body-user">
+        <image class="avatar" src="/images/avatar.jpeg"></image>
+      </view>
+      <view class="body-user">
+        <image class="avatar" src="/images/avatar.jpeg"></image>
+      </view>
+      <view class="body-user">
+        <image class="avatar" src="/images/avatar.jpeg"></image>
+      </view>
+      <view class="body-user">
+        <image class="avatar" src="/images/avatar.jpeg"></image>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+      <view class="body-user">
+        <view class="add">
+          <image class="addicon" src="/images/mine-invit-add.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="bottom">
+    <image src="/images/mine-invit-success-bottom.png"></image>
+  </view>
+</view>
+
+<view class="content-background"></view>
+
+<view class="content-area">
+  <view class="content-header">
+    <image src="/images/mine-invit-content-header.png"></image>
+  </view>
+  <view class="content-body">
+    <view class="content-text">
+      <text>1.分享你的小程序邀请卡片给好友，邀请好友成为超级私教（教练端）新用户，你和好友各得7天会员奖励；</text>
+      <text>2.受邀者需未注册过超级私教，并只能被邀请一次；</text>
+      <text>3.邀请人可以邀请多位好友参加活动，奖励会员天数可累计；</text>
+      <text>4.邀请奖励上限：单日最多邀请5个好友，单个账号最多邀请20个好友，超过限制后邀请人不再获得奖励；</text>
+      <text>5.同一个登录账号，同一个手机号，同一终端设备号，同一支付账号，同一IP或其它合理显示为同一用户的情形，均视为同一用户；</text>
+      <text>6.对于任何以不正当方式参与活动的用户，包括但不限于侵犯第三人合法权益、作弊、扰乱系统、实施网络攻击、批量注册、用机器注册账户、用机器模拟客户端等，超级私教有权取消其参与和活动奖励资格，情节严重者永久封号；</text>
+      <text>7.活动最终解释权归超级私教所有。</text>
+    </view>
+  </view>
+  <view class="content-bottom">
+    <image src="/images/mine-invit-content-bottom.png"></image>
+  </view>
+</view>
+<view class="common-bottom"></view>

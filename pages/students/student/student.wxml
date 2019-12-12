@@ -98,13 +98,13 @@
 </view>
 
 <view class="button-cell-group">
-  <view class="button-cell"  bindtap="bindButton" data-url="stamina/stamina">
+  <view class="button-cell"  bindtap="bindButton" data-url="physical/physical">
     <view class="icon">
       <image src="/images/student-info-data.png" style="width:28rpx;height:26rpx;"></image>
     </view>
     <view class="content">
       <view class="name">
-        <text>体侧信息</text>
+        <text>体测信息</text>
       </view>
       <view class="more">
         <image src="/images/arrow-right.png"></image>

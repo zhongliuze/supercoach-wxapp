@@ -65,11 +65,11 @@
   <view class="date-select">
     <view class="date-select-year">
       <text>2019年</text>
-      <image src="/images/course-list-arrow-down.png"></image>
+      <image src="/images/mine-data-time-select.png"></image>
     </view>
     <view class="date-select-year">
       <text>08月</text>
-      <image src="/images/course-list-arrow-down.png"></image>
+      <image src="/images/mine-data-time-select.png"></image>
     </view>
   </view>
   <view class="data-ff">
@@ -97,12 +97,20 @@
   <view class="date-select-one">
     <view class="date-select-year">
       <text>2019年</text>
-      <image src="/images/course-list-arrow-down.png"></image>
+      <image src="/images/mine-data-time-select.png"></image>
     </view>
   </view>
   <view class="data-ff">
     <ff-canvas id="area" canvas-id="area" opts="{{classHourTotalPrice}}"></ff-canvas>
   </view>
+  <cover-view class="data-lock">
+    <cover-view class="data-lock-name">
+      开通VIP会员，查看完整数据统计
+    </cover-view>
+    <cover-view class="data-lock-button" bindtap="navigateToMember">
+      前往开通
+    </cover-view>
+  </cover-view>
 </view>
 
 <view class="data-area">
@@ -125,6 +133,14 @@
   <view class="data-ff">
     <ff-canvas id="area" canvas-id="area" opts="{{studentIncrease}}"></ff-canvas>
   </view>
+  <cover-view class="data-lock">
+    <cover-view class="data-lock-name">
+      开通VIP会员，查看完整数据统计
+    </cover-view>
+    <cover-view class="data-lock-button" bindtap="navigateToMember">
+      前往开通
+    </cover-view>
+  </cover-view>
 </view>
 
 <view class="data-area">
@@ -135,17 +151,25 @@
     <view class="accuracy-select">
       <view class="date-select-year">
         <text>2019年</text>
-        <image src="/images/course-list-arrow-down.png"></image>
+        <image src="/images/mine-data-time-select.png"></image>
       </view>
       <view class="date-select-year date-select-month">
         <text>08月</text>
-        <image src="/images/course-list-arrow-down.png"></image>
+        <image src="/images/mine-data-time-select.png"></image>
       </view>
     </view>
   </view>
   <view class="data-ff">
     <ff-canvas id="area" canvas-id="area" opts="{{userSourse}}"></ff-canvas>
   </view>
+  <cover-view class="data-lock">
+    <cover-view class="data-lock-name">
+      开通VIP会员，查看完整数据统计
+    </cover-view>
+    <cover-view class="data-lock-button" bindtap="navigateToMember">
+      前往开通
+    </cover-view>
+  </cover-view>
 </view>
 
 <view class="data-area">
@@ -156,11 +180,11 @@
     <view class="accuracy-select">
       <view class="date-select-year">
         <text>2019年</text>
-        <image src="/images/course-list-arrow-down.png"></image>
+        <image src="/images/mine-data-time-select.png"></image>
       </view>
       <view class="date-select-year date-select-month">
         <text>08月</text>
-        <image src="/images/course-list-arrow-down.png"></image>
+        <image src="/images/mine-data-time-select.png"></image>
       </view>
     </view>
   </view>
@@ -177,17 +201,25 @@
     <view class="accuracy-select">
       <view class="date-select-year">
         <text>2019年</text>
-        <image src="/images/course-list-arrow-down.png"></image>
+        <image src="/images/mine-data-time-select.png"></image>
       </view>
       <view class="date-select-year date-select-month">
         <text>08月</text>
-        <image src="/images/course-list-arrow-down.png"></image>
+        <image src="/images/mine-data-time-select.png"></image>
       </view>
     </view>
   </view>
   <view class="data-ff">
     <ff-canvas id="area" canvas-id="area" opts="{{curriculum}}"></ff-canvas>
   </view>
+  <cover-view class="data-lock">
+    <cover-view class="data-lock-name">
+      开通VIP会员，查看完整数据统计
+    </cover-view>
+    <cover-view class="data-lock-button" bindtap="navigateToMember">
+      前往开通
+    </cover-view>
+  </cover-view>
 </view>
 
 
@@ -199,11 +231,11 @@
     <view class="accuracy-select">
       <view class="date-select-year">
         <text>2019年</text>
-        <image src="/images/course-list-arrow-down.png"></image>
+        <image src="/images/mine-data-time-select.png"></image>
       </view>
       <view class="date-select-year date-select-month">
         <text>08月</text>
-        <image src="/images/course-list-arrow-down.png"></image>
+        <image src="/images/mine-data-time-select.png"></image>
       </view>
     </view>
   </view>
@@ -220,11 +252,11 @@
     <view class="accuracy-select">
       <view class="date-select-year">
         <text>2019年</text>
-        <image src="/images/course-list-arrow-down.png"></image>
+        <image src="/images/mine-data-time-select.png"></image>
       </view>
       <view class="date-select-year date-select-month">
         <text>08月</text>
-        <image src="/images/course-list-arrow-down.png"></image>
+        <image src="/images/mine-data-time-select.png"></image>
       </view>
     </view>
   </view>
@@ -241,11 +273,11 @@
     <view class="accuracy-select">
       <view class="date-select-year">
         <text>2019年</text>
-        <image src="/images/course-list-arrow-down.png"></image>
+        <image src="/images/mine-data-time-select.png"></image>
       </view>
       <view class="date-select-year date-select-month">
         <text>08月</text>
-        <image src="/images/course-list-arrow-down.png"></image>
+        <image src="/images/mine-data-time-select.png"></image>
       </view>
     </view>
   </view>
@@ -285,11 +317,11 @@
   <view class="date-select">
     <view class="date-select-year">
       <text>2019年</text>
-      <image src="/images/course-list-arrow-down.png"></image>
+      <image src="/images/mine-data-time-select.png"></image>
     </view>
     <view class="date-select-year">
       <text>08月</text>
-      <image src="/images/course-list-arrow-down.png"></image>
+      <image src="/images/mine-data-time-select.png"></image>
     </view>
   </view>
   <view class="data-ff">
@@ -298,7 +330,9 @@
 </view>
 
 <view class="contact">
-  <button>建议反馈</button>
+  <navigator target="miniProgram" open-type="navigate" app-id="{{tgcAppId}}" extra-data="{{tgcExtraData}}" version="release">
+    <button>建议反馈</button>
+  </navigator>
 </view>
 
 <view class="common-bottom"></view>
