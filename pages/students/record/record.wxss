@@ -196,3 +196,23 @@
   border-top-right-radius: 12rpx;
   border-bottom-right-radius: 12rpx;
 }
+
+.null-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50%;
+}
+
+.null-data image{
+  width: 344rpx;
+  height: 308rpx;
+  margin-left: -20rpx;
+}
+
+.null-data text{
+  color: #707888;
+  font-size: 26rpx;
+  margin-top: 30rpx;
+}

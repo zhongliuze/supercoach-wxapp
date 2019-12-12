@@ -1,5 +1,5 @@
 <!--pages/mine/order/index/index.wxml-->
-<view class="order-list">
+<!-- <view class="order-list">
   <view class="order" bindtap="navigateToDetail">
     <view class="icon">
       <image src="/images/mine-order-vip-1.png"></image>
@@ -75,4 +75,9 @@
   </view>
 
 </view>
-<view class="common-bottom"></view>
+<view class="common-bottom"></view> -->
+
+<view class="null-data">
+    <image src="/images/null_order.png"></image>
+    <text>您还未产生过订单</text>
+  </view>

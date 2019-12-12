@@ -232,7 +232,8 @@
           <text>{{courseList[selectReduceCalendarWeekIndex]['weekList'][selectReduceCalendarDayIndex]['dateWeek']}}</text>
         </view>
         <!-- 任务列表 -->
-        <view class="tasks">
+        <view class="tasks" wx:if="{{courseList[selectReduceCalendarWeekIndex]['weekList'][selectReduceCalendarDayIndex]['hasTask']}}">
+        
           <block wx:for="{{courseList[selectReduceCalendarWeekIndex]['weekList'][selectReduceCalendarDayIndex]['tableList']}}" wx:key="this">
             <movable-area class='movable-area' wx:if="{{item.hasTask}}">
               <movable-view direction="horizontal" class='movable-view'>
@@ -267,6 +268,12 @@
               </movable-view>
             </movable-area>
           </block>
+        </view>
+        <view class="tasks" wx:else>
+          <view class="null-data">
+            <image src="/images/null_class_schedule.png"></image>
+            <text>暂无课程安排</text>
+          </view>
         </view>
         <view class="tasks-bottom"></view>
         <view class="unwind-button" catchtap="catchUnwind">

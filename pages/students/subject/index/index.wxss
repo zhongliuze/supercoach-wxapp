@@ -115,3 +115,27 @@
   font-size: 26rpx;
   font-weight: bold;
 }
+
+.null-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50%;
+}
+
+.null-data image{
+  width: 318rpx;
+  height: 308rpx;
+  margin-left: -50rpx;
+}
+
+.null-data text{
+  color: #707888;
+  font-size: 26rpx;
+  margin-top: 30rpx;
+}
+/* 
+page {
+  background-color: #FFFFFF;
+} */

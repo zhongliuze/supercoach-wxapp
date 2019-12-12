@@ -145,6 +145,8 @@ Page({
       timeList: this.realTimeList(), // 更新当前时间展示颜色
       movableMessageY: 1029 + (this.data.statusBarHeight - 20), // 设置可移动预约消息框初始Y轴坐标
     });
+    console.log('**************');
+    console.log(this.data.courseList[this.data.selectReduceCalendarWeekIndex]['weekList'][this.data.selectReduceCalendarDayIndex]);
   },
 
   /**

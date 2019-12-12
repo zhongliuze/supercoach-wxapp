@@ -11,7 +11,7 @@
   <view class="weui-tab__panel">
     <!--  待完成  -->
     <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-      <view class="course-group">
+      <!-- <view class="course-group">
         <block wx:for="{{tasksList}}">
           <movable-area class='movable-area'>
             <movable-view direction="horizontal" class='movable-view'>
@@ -40,6 +40,10 @@
 
         </block>
 
+      </view> -->
+      <view class="null-data">
+        <image src="/images/null_class_record.png"></image>
+        <text>暂无待完成课程</text>
       </view>
     </view>
     <!--  已完成  -->

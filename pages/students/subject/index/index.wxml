@@ -43,3 +43,9 @@
   <image src="/images/course-unwind.png"></image>
 </view>
 <view class="common-bottom"></view>
+
+
+<!-- <view class="null-data">
+  <image src="/images/null_setting.png"></image>
+  <text>还未有课程，赶紧添加一个吧</text>
+</view> -->

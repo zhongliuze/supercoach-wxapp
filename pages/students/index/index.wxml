@@ -1,4 +1,4 @@
-<view class="container">
+<view class="container" wx:if="{{!studentList}}">
   <view class="search-group">
     <view class="search">
       <view class="icon">
@@ -194,7 +194,14 @@
     </view>
   </view>
 </view>
-<view class="total">
+
+<view class="container" wx:else>
+  <view class="null-data">
+    <image src="/images/null_student.png"></image>
+    <text>您还未有学员，赶紧添加一个吧~</text>
+  </view>
+</view>
+<view class="total" wx:if="{{!studentList}}">
   <text>120位学员</text>
 </view>
 <view class="common-bottom "></view>

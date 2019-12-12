@@ -1,4 +1,8 @@
 <!--pages/students/physical/index/index.wxml-->
+<!-- <view class="null-data">
+  <image src="/images/null_physical_record.png"></image>
+  <text>未有体测记录，赶紧记录一下吧~</text>
+</view> -->
 <view class="data-map">
   <view class="data-select">
     <view class="select-span select">
