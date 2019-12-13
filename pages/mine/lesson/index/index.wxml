@@ -5,7 +5,7 @@
     </view>
     <view class="background">
       <view class="icon">
-        <image src="/images/course-lesson-add.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-lesson-add.png"></image>
       </view>
       <view class="name">
         <text>新增备课</text>
@@ -115,7 +115,7 @@
   </view>
   <view class="vip" bindtap="navigateToMembers">
     <text>开通会员，尊享特权</text>
-    <image src="/images/mine-lesson-more.png"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-lesson-more.png"></image>
   </view>
 </view>
 

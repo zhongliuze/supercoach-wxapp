@@ -1,7 +1,7 @@
 <!--pages/mine/order/detail/detail.wxml-->
 <view class="header">
   <view class="icon">
-    <image src="/images/mine-order-vip-7.png"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-order-vip-7.png"></image>
   </view>
   <view class="content">
     <text class="title">1个月VIP会员</text>

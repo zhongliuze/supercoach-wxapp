@@ -82,7 +82,7 @@
       </view>
     </view>
     <view class="close-button" catchtap="closePopup">
-      <image src="/images/order-popup-close.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/order-popup-close.png"></image>
     </view>
   </view>
 </block>

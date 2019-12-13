@@ -2,7 +2,7 @@
 <view class="header-background">
   <view class="data-select">
     <text>2019年07月</text>
-    <image src="/images/mine-data-date-arrow.png"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-date-arrow.png"></image>
   </view>
 </view>
 
@@ -65,11 +65,11 @@
   <view class="date-select">
     <view class="date-select-year">
       <text>2019年</text>
-      <image src="/images/mine-data-time-select.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
     </view>
     <view class="date-select-year">
       <text>08月</text>
-      <image src="/images/mine-data-time-select.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
     </view>
   </view>
   <view class="data-ff">
@@ -97,7 +97,7 @@
   <view class="date-select-one">
     <view class="date-select-year">
       <text>2019年</text>
-      <image src="/images/mine-data-time-select.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
     </view>
   </view>
   <view class="data-ff">
@@ -151,11 +151,11 @@
     <view class="accuracy-select">
       <view class="date-select-year">
         <text>2019年</text>
-        <image src="/images/mine-data-time-select.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
       </view>
       <view class="date-select-year date-select-month">
         <text>08月</text>
-        <image src="/images/mine-data-time-select.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
       </view>
     </view>
   </view>
@@ -180,11 +180,11 @@
     <view class="accuracy-select">
       <view class="date-select-year">
         <text>2019年</text>
-        <image src="/images/mine-data-time-select.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
       </view>
       <view class="date-select-year date-select-month">
         <text>08月</text>
-        <image src="/images/mine-data-time-select.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
       </view>
     </view>
   </view>
@@ -201,11 +201,11 @@
     <view class="accuracy-select">
       <view class="date-select-year">
         <text>2019年</text>
-        <image src="/images/mine-data-time-select.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
       </view>
       <view class="date-select-year date-select-month">
         <text>08月</text>
-        <image src="/images/mine-data-time-select.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
       </view>
     </view>
   </view>
@@ -231,11 +231,11 @@
     <view class="accuracy-select">
       <view class="date-select-year">
         <text>2019年</text>
-        <image src="/images/mine-data-time-select.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
       </view>
       <view class="date-select-year date-select-month">
         <text>08月</text>
-        <image src="/images/mine-data-time-select.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
       </view>
     </view>
   </view>
@@ -252,11 +252,11 @@
     <view class="accuracy-select">
       <view class="date-select-year">
         <text>2019年</text>
-        <image src="/images/mine-data-time-select.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
       </view>
       <view class="date-select-year date-select-month">
         <text>08月</text>
-        <image src="/images/mine-data-time-select.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
       </view>
     </view>
   </view>
@@ -273,11 +273,11 @@
     <view class="accuracy-select">
       <view class="date-select-year">
         <text>2019年</text>
-        <image src="/images/mine-data-time-select.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
       </view>
       <view class="date-select-year date-select-month">
         <text>08月</text>
-        <image src="/images/mine-data-time-select.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
       </view>
     </view>
   </view>
@@ -317,11 +317,11 @@
   <view class="date-select">
     <view class="date-select-year">
       <text>2019年</text>
-      <image src="/images/mine-data-time-select.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
     </view>
     <view class="date-select-year">
       <text>08月</text>
-      <image src="/images/mine-data-time-select.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-time-select.png"></image>
     </view>
   </view>
   <view class="data-ff">

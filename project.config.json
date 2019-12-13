@@ -452,6 +452,13 @@
 					"id": -1,
 					"name": "pages/mine/invit/index/index",
 					"pathName": "pages/mine/invit/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/members/index/index",
+					"pathName": "pages/members/index/index",
 					"scene": null
 				}
 			]

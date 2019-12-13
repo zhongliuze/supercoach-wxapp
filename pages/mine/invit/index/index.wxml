@@ -1,12 +1,12 @@
 <!--pages/mine/invit/index/index.wxml-->
 <view class="fixed-return" style="height: {{menuButtonInfoData.bottom + 8}}px;">
   <view class="return-button" style="margin-top: {{menuButtonInfoData.top}}px; height: {{menuButtonInfoData.height}}px;" bindtap="bindReturn">
-    <image src="/images/return-page.png"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/back-page-white.png"></image>
   </view>
 </view>
 
 <view class="header-image">
-  <image src="/images/mine-invit-header.png"></image>
+  <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-header.png"></image>
 </view>
 
 <view class="invit-button">
@@ -17,103 +17,103 @@
 
 <view class="invit-list">
   <view class="header">
-    <image src="/images/mine-invit-success-top.png"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-success-top.png"></image>
     <text>已成功邀请16人，累计享70天VIP会员</text>
   </view>
   <view class="invit-body" plain='true'>
     <view class="body-list">
       <view class="body-user">
-        <image class="avatar" src="/images/avatar.jpeg"></image>
+        <image class="avatar" src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
       </view>
       <view class="body-user">
-        <image class="avatar" src="/images/avatar.jpeg"></image>
+        <image class="avatar" src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
       </view>
       <view class="body-user">
-        <image class="avatar" src="/images/avatar.jpeg"></image>
+        <image class="avatar" src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
       </view>
       <view class="body-user">
-        <image class="avatar" src="/images/avatar.jpeg"></image>
+        <image class="avatar" src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
       </view>
       <view class="body-user">
-        <image class="avatar" src="/images/avatar.jpeg"></image>
+        <image class="avatar" src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
       </view>
       <view class="body-user">
-        <image class="avatar" src="/images/avatar.jpeg"></image>
+        <image class="avatar" src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
       <view class="body-user">
         <view class="add">
-          <image class="addicon" src="/images/mine-invit-add.png"></image>
+          <image class="addicon" src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-add.png"></image>
         </view>
       </view>
     </view>
   </view>
   <view class="bottom">
-    <image src="/images/mine-invit-success-bottom.png"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-success-bottom.png"></image>
   </view>
 </view>
 
@@ -121,7 +121,7 @@
 
 <view class="content-area">
   <view class="content-header">
-    <image src="/images/mine-invit-content-header.png"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-content-header.png"></image>
   </view>
   <view class="content-body">
     <view class="content-text">
@@ -135,7 +135,7 @@
     </view>
   </view>
   <view class="content-bottom">
-    <image src="/images/mine-invit-content-bottom.png"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-content-bottom.png"></image>
   </view>
 </view>
 <view class="common-bottom"></view>

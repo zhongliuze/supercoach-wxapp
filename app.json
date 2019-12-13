@@ -50,13 +50,11 @@
     "pages/mine/poster/detail/detail",
     "pages/mine/poster/save/save",
     "pages/mine/strategy/content/content",
-    "pages/index/index",
     "pages/mine/personal/index/index",
     "pages/mine/personal/edit/edit",
 
     "pages/mine/data/index/index",
-    "pages/mine/invit/index/index",
-    "pages/logs/logs"
+    "pages/mine/invit/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

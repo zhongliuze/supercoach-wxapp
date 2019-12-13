@@ -589,6 +589,6 @@ page {
 }
 
 .return-button image {
-  width: 18rpx;
+  width: 20rpx;
   height: 36rpx;
 }

@@ -3,7 +3,7 @@
   <view class="input-cell-group">
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/students-subject-cours.png" style="width:28rpx;height:26rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/students-subject-cours.png" style="width:28rpx;height:26rpx;"></image>
       </view>
       <view class="content input-cell-border">
         <view class="title">
@@ -16,7 +16,7 @@
     </view>
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/students-subject-course.png" style="width:26rpx;height:30rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/students-subject-course.png" style="width:26rpx;height:30rpx;"></image>
       </view>
       <view class="content">
         <view class="title">
@@ -34,7 +34,7 @@
   <view class="input-cell-group input-cell-group-margin">
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/students-subject-price.png" style="width:28rpx;height:27rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/students-subject-price.png" style="width:28rpx;height:27rpx;"></image>
       </view>
       <view class="content">
         <view class="title">
@@ -44,7 +44,7 @@
           <view class="value">
             <text class="{{pricePickerFormat == '请选择课程单价' ? '' : 'hasValue'}}">{{pricePickerFormat}}</text>
             <view class="arrow">
-              <image src="/images/arrow-right.png"></image>
+              <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
             </view>
           </view>
         </picker>
@@ -55,7 +55,7 @@
   <view class="input-cell-group input-cell-group-margin">
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/students-subject-total.png" style="width:28rpx;height:26rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/students-subject-total.png" style="width:28rpx;height:26rpx;"></image>
       </view>
       <view class="content input-cell-border">
         <view class="title">
@@ -65,7 +65,7 @@
           <view class="value">
             <text class="{{sumPickerFormat == '请选择总课时数' ? '' : 'hasValue'}}">{{sumPickerFormat}}</text>
             <view class="arrow">
-              <image src="/images/arrow-right.png"></image>
+              <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
             </view>
           </view>
         </picker>
@@ -73,7 +73,7 @@
     </view>
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/students-subject-already.png" style="width:24rpx;height:28rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/students-subject-already.png" style="width:24rpx;height:28rpx;"></image>
       </view>
       <view class="content input-cell-border">
         <view class="title">
@@ -83,7 +83,7 @@
           <view class="value">
             <text class="{{alreadyPickerFormat == '请选择已上课时' ? '' : 'hasValue'}}">{{alreadyPickerFormat}}</text>
             <view class="arrow">
-              <image src="/images/arrow-right.png"></image>
+              <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
             </view>
           </view>
         </picker>
@@ -91,7 +91,7 @@
     </view>
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/students-subject-remaining.png" style="width:26rpx;height:28rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/students-subject-remaining.png" style="width:26rpx;height:28rpx;"></image>
       </view>
       <view class="content">
         <view class="title">
@@ -101,7 +101,7 @@
           <view class="value">
             <text class="{{lastPickerFormat == '请选择剩余课时' ? '' : 'hasValue'}}">{{lastPickerFormat}}</text>
             <view class="arrow">
-              <image src="/images/arrow-right.png"></image>
+              <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
             </view>
           </view>
         </picker>
@@ -112,7 +112,7 @@
   <view class="input-cell-group input-cell-group-margin">
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/students-subject-purchase.png" style="width:28rpx;height:30rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/students-subject-purchase.png" style="width:28rpx;height:30rpx;"></image>
       </view>
       <view class="content">
         <view class="title">
@@ -122,7 +122,7 @@
           <view class="value">
             <text class="{{timeFormat == '请选择购课时间' ? '' : 'hasValue'}}">{{timeFormat}}</text>
             <view class="arrow">
-              <image src="/images/arrow-right.png"></image>
+              <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
             </view>
           </view>
         </picker>
@@ -133,7 +133,7 @@
     <view class="textarea-cell">
       <view class="title">
         <view class="icon">
-          <image src="/images/student-remarks.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-remarks.png"></image>
         </view>
         <view class="name">
           <text>备注信息</text>

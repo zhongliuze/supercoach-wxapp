@@ -1,6 +1,6 @@
 <!--pages/students/physical/index/index.wxml-->
 <!-- <view class="null-data">
-  <image src="/images/null_physical_record.png"></image>
+  <image src="http://superimage.xianshikeji.com/icon/superwxapp/null_physical_record.png"></image>
   <text>未有体测记录，赶紧记录一下吧~</text>
 </view> -->
 <view class="data-map">
@@ -94,7 +94,7 @@
           <text>录入体测数据</text>
         </view>
         <view class="close" bindtap="closePopup">
-          <image src="/images/vip-close.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-close.png"></image>
         </view>
       </view>
       <view class="order-list">
@@ -104,7 +104,7 @@
           </view>
           <view class="value no-value">
             <text>请选择</text>
-            <image src="/images/arrow-right.png"></image>
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
           </view>
         </view>
         <view class="info">
@@ -113,7 +113,7 @@
           </view>
           <view class="value no-value">
             <text>请选择</text>
-            <image src="/images/arrow-right.png"></image>
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
           </view>
         </view>
         <view class="info">
@@ -122,7 +122,7 @@
           </view>
           <view class="value no-value">
             <text>请选择</text>
-            <image src="/images/arrow-right.png"></image>
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
           </view>
         </view>
         <view class="info">
@@ -131,7 +131,7 @@
           </view>
           <view class="value no-value">
             <text>请选择</text>
-            <image src="/images/arrow-right.png"></image>
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
           </view>
         </view>
       </view>

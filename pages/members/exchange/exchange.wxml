@@ -32,7 +32,7 @@
         <text>您的兑换码包含</text>
       </view>
       <view class="icon">
-        <image src="/images/vip-icon.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-icon.png"></image>
       </view>
       <view class="content">
         <view class="name">
@@ -47,7 +47,7 @@
       </view>
     </view>
     <view class="close-button" catchtap="closeConirmPopup">
-      <image src="/images/order-popup-close.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/order-popup-close.png"></image>
     </view>
   </view>
 </block>

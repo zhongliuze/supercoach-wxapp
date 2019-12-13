@@ -1,6 +1,6 @@
 <!--pages/students/student/student.wxml-->
 <view class="background">
-  <image src="/images/student-info-bg.png"></image>
+  <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-bg.png"></image>
 </view>
 
 <view class="info">
@@ -17,7 +17,7 @@
     </view>
   </view>
   <view class="phone" bindtap="makePhoneCall" data-phone="18020220001">
-    <image src="/images/student-info-phone.png"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-phone.png"></image>
     <text>18020220001</text>
   </view>
   <view class="data-group">
@@ -58,56 +58,56 @@
 <view class="button-cell-group">
   <view class="button-cell"  bindtap="bindButton" data-url="basic/basic">
     <view class="icon">
-      <image src="/images/student-info-basic.png" style="width:26rpx;height:30rpx;"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-basic.png" style="width:26rpx;height:30rpx;"></image>
     </view>
     <view class="content border">
       <view class="name">
         <text>基本信息</text>
       </view>
       <view class="more">
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
   </view>
   <view class="button-cell" bindtap="bindButton" data-url="subject/index/index">
     <view class="icon">
-      <image src="/images/student-info-course.png" style="width:27rpx;height:28rpx;"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-course.png" style="width:27rpx;height:28rpx;"></image>
     </view>
     <view class="content border">
       <view class="name">
         <text>课程管理</text>
       </view>
       <view class="more">
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
   </view>
   <view class="button-cell" bindtap="bindButton" data-url="record/record">
     <view class="icon">
-      <image src="/images/student-info-record.png" style="width:28rpx;height:28rpx;"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-record.png" style="width:28rpx;height:28rpx;"></image>
     </view>
     <view class="content">
       <view class="name">
         <text>上课记录</text>
       </view>
       <view class="more">
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
   </view>
 </view>
 
 <view class="button-cell-group">
-  <view class="button-cell"  bindtap="bindButton" data-url="physical/physical">
+  <view class="button-cell"  bindtap="bindButton" data-url="physical/index/index">
     <view class="icon">
-      <image src="/images/student-info-data.png" style="width:28rpx;height:26rpx;"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-data.png" style="width:28rpx;height:26rpx;"></image>
     </view>
     <view class="content">
       <view class="name">
         <text>体测信息</text>
       </view>
       <view class="more">
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
   </view>
@@ -116,14 +116,14 @@
 <view class="button-cell-group">
   <view class="button-cell" bindtap="bindButton" data-url="other/other">
     <view class="icon">
-      <image src="/images/student-info-more.png" style="width:28rpx;height:24rpx;"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-more.png" style="width:28rpx;height:24rpx;"></image>
     </view>
     <view class="content">
       <view class="name">
         <text>其它信息</text>
       </view>
       <view class="more">
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
   </view>

@@ -1,7 +1,7 @@
 <!--pages/mine/personal/index/index.wxml-->
 <view class="fixed-return" style="height: {{menuButtonInfoData.bottom + 8}}px;">
   <view class="return-button" style="margin-top: {{menuButtonInfoData.top}}px; height: {{menuButtonInfoData.height}}px;" bindtap="bindReturn">
-    <image src="/images/return-page.png"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/back-page-white.png"></image>
   </view>
 </view>
 <view class="header-image">
@@ -21,11 +21,11 @@
       <text class="title">高级游泳教练</text>
     </view>
     <view class="right" bindtap="openWxcodePopup">
-      <image src="/images/ercode.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/ercode.png"></image>
     </view>
   </view>
   <view class="phone-number" bindtap="callphone">
-    <image src="/images/mine-personal-phone.png"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-personal-phone.png"></image>
     <text>18020220001</text>
   </view>
   <view class="introduce">
@@ -166,50 +166,50 @@
       <text>已有12名学员点赞</text>
     </view>
     <view class="button">
-      <image src="/images/mine-personal-nolike.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-personal-nolike.png"></image>
       <text>赞Ta</text>
     </view>
     <!-- <view class="button fabulous-already">
-      <image src="/images/mine-personal-like.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-personal-like.png"></image>
       <text>已赞</text>
     </view> -->
   </view>
   <view class="fabulous-list">
     <view class="fabulous-user">
-      <image src="/images/avatar.jpeg"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
     </view>
     <view class="fabulous-user">
-      <image src="/images/avatar.jpeg"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
     </view>
     <view class="fabulous-user">
-      <image src="/images/avatar.jpeg"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
     </view>
     <view class="fabulous-user">
-      <image src="/images/avatar.jpeg"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
     </view>
     <view class="fabulous-user">
-      <image src="/images/avatar.jpeg"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
     </view>
     <view class="fabulous-user">
-      <image src="/images/avatar.jpeg"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
     </view>
     <view class="fabulous-user">
-      <image src="/images/avatar.jpeg"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
     </view>
     <view class="fabulous-user">
-      <image src="/images/avatar.jpeg"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
     </view>
     <view class="fabulous-user">
-      <image src="/images/avatar.jpeg"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
     </view>
     <view class="fabulous-user">
-      <image src="/images/avatar.jpeg"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
     </view>
     <view class="fabulous-user">
-      <image src="/images/avatar.jpeg"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
     </view>
     <view class="fabulous-user">
-      <image src="/images/avatar.jpeg"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
     </view>
   </view>
 </view>
@@ -227,7 +227,7 @@
     </view>
   </view>
   <view class="create-card">
-    <image src="/images/mine-personal-card.png"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-personal-card.png"></image>
     <text>生成我的私教名片</text>
   </view>
 </view>
@@ -240,7 +240,7 @@
     <view class="popup" catchtap="catchtouchmove">
       <view class="userinfo">
         <view class="header-image">
-          <image src="/images/avatar.jpeg"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
         </view>
         <view class="userinfo-basic">
           <text class="name">常文静</text>
@@ -255,7 +255,7 @@
       </view>
     </view>
     <view class="close-button" catchtap="closeWxcodePopup">
-      <image src="/images/order-popup-close.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/order-popup-close.png"></image>
     </view>
   </view>
 </block>
@@ -267,13 +267,13 @@
     <view class="share-popup" catchtap="catchtouchmove">
       <view class="share-type">
         <view class="type">
-          <image src="/images/mine-personal-share-picture.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-personal-share-picture.png"></image>
           <text>生成图片海报</text>
         </view>
 
         <view class="type">
           <button open-type="share">
-            <image src="/images/mine-personal-share-wx.png"></image>
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-personal-share-wx.png"></image>
             <text>分享微信好友</text>
           </button>
         </view>

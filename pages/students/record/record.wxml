@@ -42,7 +42,7 @@
 
       </view> -->
       <view class="null-data">
-        <image src="/images/null_class_record.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/null_class_record.png"></image>
         <text>暂无待完成课程</text>
       </view>
     </view>

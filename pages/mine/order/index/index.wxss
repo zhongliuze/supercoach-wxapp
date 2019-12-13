@@ -66,10 +66,10 @@
 .order-list .noborder {
   border: 0rpx;
 }
-
+/* 
 page {
   background-color: #FFFFFF;
-}
+} */
 
 .null-data {
   display: flex;

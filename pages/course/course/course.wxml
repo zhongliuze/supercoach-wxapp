@@ -3,7 +3,7 @@
   <view class="course-cells-group course-custom-group" wx:if="{{courseType == 2}}">
     <view class="course-cells" wx:if="{{courseType != 0}}">
       <view class="icon">
-        <image src="/images/course-custom-title.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-custom-title.png"></image>
       </view>
       <view class="content noborder">
         <view class="custom-title">
@@ -22,7 +22,7 @@
   <view class="course-cells-group course-time-group">
     <view class="course-cells" wx:if="{{courseType != 0}}">
       <view class="icon">
-        <image src="/images/course-all-day.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-all-day.png"></image>
       </view>
       <view class="content">
         <view class="title">
@@ -42,8 +42,8 @@
           </view>
         </picker>
         <view class="arrow-icon" style="height:{{fullDaySwitch ? '120' : '154'}}rpx;">
-          <image src="/images/course-course-arrow4.png" style="height:72rpx;width:12rpx;" wx:if="{{fullDaySwitch}}"></image>
-          <image src="/images/course-course-arrow.png" style="height:106rpx;width:18rpx;" wx:elif="{{!fullDaySwitch}}"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-course-arrow4.png" style="height:72rpx;width:12rpx;" wx:if="{{fullDaySwitch}}"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-course-arrow.png" style="height:106rpx;width:18rpx;" wx:elif="{{!fullDaySwitch}}"></image>
         </view>
         <picker mode="multiSelector" bindchange="bindEndTimePickerChange" value="{{endTimePickerIndex}}" range="{{endTimePickerArray}}">
           <view class="end-time" style="height:{{fullDaySwitch ? '120' : '154'}}rpx;">
@@ -56,7 +56,7 @@
   </view>
   <view class="course-student" wx:if="{{courseType == 0}}">
     <view class="icon">
-      <image src="/images/student-name.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-name.png"></image>
     </view>
     <view class="title">
       <text>上课学员</text>
@@ -80,14 +80,14 @@
       </view> -->
     </view>
     <view class="arrow">
-      <image src="/images/arrow-right.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
     </view>
   </view>
 
   <view class="course-cells-group course-other-info">
     <view class="course-cells" wx:if="{{courseType == 0}}">
       <view class="icon">
-        <image src="/images/course-course-reminder.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-course-reminder.png"></image>
       </view>
       <view class="content">
         <view class="title">
@@ -97,13 +97,13 @@
           <text>{{remindArray[remindType]}}</text>
         </view>
         <view class="arrow">
-          <image src="/images/arrow-right.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
         </view>
       </view>
     </view>
     <view class="course-cells">
       <view class="icon">
-        <image src="/images/course-course-repeat.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-course-repeat.png"></image>
       </view>
       <view class="content noborder">
         <view class="title">
@@ -113,7 +113,7 @@
           <text>{{repeatArray[repeatType]}}</text>
         </view>
         <view class="arrow">
-          <image src="/images/arrow-right.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
         </view>
       </view>
     </view>
@@ -121,7 +121,7 @@
   <view class="course-cells-group course-other-info">
     <view class="course-cells" wx:if="{{courseType == 0}}">
       <view class="icon">
-        <image src="/images/students-subject-course.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/students-subject-course.png"></image>
       </view>
       <view class="content">
         <view class="title">
@@ -131,13 +131,13 @@
           <text>请选择</text>
         </view>
         <view class="arrow">
-          <image src="/images/arrow-right.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
         </view>
       </view>
     </view>
     <view class="course-cells">
       <view class="icon">
-        <image src="/images/student-course-type.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-course-type.png"></image>
       </view>
       <view class="content noborder">
         <view class="title">
@@ -147,7 +147,7 @@
           <text>请选择</text>
         </view>
         <view class="arrow">
-          <image src="/images/arrow-right.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
         </view>
       </view>
     </view>

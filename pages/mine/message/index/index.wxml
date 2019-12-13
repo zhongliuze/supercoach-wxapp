@@ -9,7 +9,7 @@
         <text>请选择</text>
       </view>
       <view class="arrow">
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
   </view>
@@ -70,7 +70,7 @@
   <view class="vip-info">
     <view class="vip-message" bindtap="navigateToMember">
       <text>开通VIP，每月免费领取50条短信额度</text>
-      <image src="/images/mine-message-vip-more.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-message-vip-more.png"></image>
     </view>
     <view class="message-info">
       <view class="message-num">
@@ -78,7 +78,7 @@
         <text class="special" bindtap="openPopup">立即充值</text>
       </view>
       <view class="message-record" bindtap="navigateToRecord">
-        <image src="/images/mine-message-vip-record.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-message-vip-record.png"></image>
         <text>群发记录</text>
       </view>
     </view>
@@ -89,7 +89,7 @@
 
   <view class="message-remark">
     <view class="title">
-      <image src="/images/mine-message-vip-explanation.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-message-vip-explanation.png"></image>
       <text>短信群发说明</text>
     </view>
     <view class="content">
@@ -110,7 +110,7 @@
           <text>订单确认</text>
         </view>
         <view class="close" bindtap="closePopup">
-          <image src="/images/vip-close.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-close.png"></image>
         </view>
       </view>
 
@@ -150,7 +150,7 @@
         <view class="type-list">
           <view class="type">
             <view class="icon">
-              <image src="/images/pay-wechat.png"></image>
+              <image src="http://superimage.xianshikeji.com/icon/superwxapp/pay-wechat.png"></image>
             </view>
             <view class="name">
               <text>微信支付</text>

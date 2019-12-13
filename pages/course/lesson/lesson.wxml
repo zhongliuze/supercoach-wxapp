@@ -123,7 +123,7 @@
     </view>
     <view class="background">
       <view class="icon">
-        <image src="/images/course-lesson-add.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-lesson-add.png"></image>
       </view>
       <view class="name">
         <text>新增备课</text>

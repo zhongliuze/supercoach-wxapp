@@ -32,7 +32,7 @@
   <block wx:else>
     <view class="wechat">
       <view class="recommend">
-        <image src="/images/login-recommend.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/login-recommend.png"></image>
       </view>
       <button>微信快速登录</button>
     </view>

@@ -79,6 +79,18 @@
   width: 220rpx;
   display: flex;
   justify-content: flex-end;
+  flex-direction: column;
+}
+
+.header .userinfo .other .vip-other-button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.header .userinfo .other .vip-other-button .vip-other-margin {
+  width:134rpx;
+  height:1rpx;
 }
 
 .header .userinfo .other .vip-button {
@@ -300,6 +312,8 @@
   flex-direction: column;
   width: 690rpx;
   margin-left: 30rpx;
+  margin-top: 20rpx;
+  margin-bottom: 30rpx;
 }
 
 .explain .content text {
@@ -309,6 +323,11 @@
   margin-bottom: 56rpx;
   margin-top: 40rpx;
 }
+
+.explain .content .member-content {
+  color: #2B87FF
+}
+
 
 .popup-view {
   width: 750rpx;

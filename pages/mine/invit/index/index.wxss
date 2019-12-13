@@ -85,7 +85,7 @@ page {
 
 .invit-list .invit-body {
   width: 650rpx;
-  background-image: url(http://imgbj.xianshikeji.com/mine-invit-success-center.png);
+  background-image: url(http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-success-center.png);
   border: 0rpx;
   background-size: 100% 100%;
   margin-top: -40rpx;
@@ -181,7 +181,7 @@ page {
   width: 650rpx;
   display: flex;
   flex-direction: column;
-  background-image: url(http://imgbj.xianshikeji.com/mine-invit-success-center.png);
+  background-image: url(http://superimage.xianshikeji.com/icon/superwxapp/mine-invit-success-center.png);
   border: 0rpx;
   background-size: 100% 100%;
   margin-top: -65rpx;

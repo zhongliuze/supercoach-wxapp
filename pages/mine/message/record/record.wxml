@@ -7,7 +7,7 @@
     <view class="receive">
       <view class="title">
         <view class="icon">
-          <image src="/images/mine-message-record-user.png" style="width:28rpx;height:28rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-message-record-user.png" style="width:28rpx;height:28rpx;"></image>
         </view>
         <view class="name">
           <text>接收人</text>
@@ -20,7 +20,7 @@
     <view class="send">
       <view class="title">
         <view class="icon">
-          <image src="/images/mine-message-record-message.png" style="width:32rpx;height:24rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-message-record-message.png" style="width:32rpx;height:24rpx;"></image>
         </view>
         <view class="name">
           <text>短信内容</text>

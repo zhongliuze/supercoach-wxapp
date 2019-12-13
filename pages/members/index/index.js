@@ -128,5 +128,16 @@ Page({
     wx.navigateTo({
       url: '../exchange/exchange',
     })
+  },
+
+  /**
+   * 打开会员服务协议页
+   */
+
+  bindTreaty: function(event) {
+    console.log('dddd');
+    wx.navigateTo({
+      url: '../../treaty/member/member',
+    })
   }
 })

@@ -4,8 +4,8 @@
     <view class="header"></view>
     <view class="module {{selectModule == 0 ? 'selected' : ''}}" bindtap="selectModule" data-module="0">
       <view class="icon">
-        <image src="/images/mine-action-warm-selected.png" style="width:34rpx; height:34rpx;" wx:if="{{selectModule == 0}}"></image>
-        <image src="/images/mine-action-warm.png" style="width:34rpx; height:34rpx;" wx:else></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-warm-selected.png" style="width:34rpx; height:34rpx;" wx:if="{{selectModule == 0}}"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-warm.png" style="width:34rpx; height:34rpx;" wx:else></image>
       </view>
       <view class="name">
         <text>热身训练</text>
@@ -13,8 +13,8 @@
     </view>
     <view class="module {{selectModule == 1 ? 'selected' : ''}}" bindtap="selectModule" data-module="1">
       <view class="icon">
-        <image src="/images/mine-action-strength-selected.png" style="width:34rpx; height:34rpx;" wx:if="{{selectModule == 1}}"></image>
-        <image src="/images/mine-action-strength.png" style="width:34rpx; height:34rpx;" wx:else></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-strength-selected.png" style="width:34rpx; height:34rpx;" wx:if="{{selectModule == 1}}"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-strength.png" style="width:34rpx; height:34rpx;" wx:else></image>
       </view>
       <view class="name">
         <text>力量训练</text>
@@ -22,8 +22,8 @@
     </view>
     <view class="module {{selectModule == 2 ? 'selected' : ''}}" bindtap="selectModule" data-module="2">
       <view class="icon">
-        <image src="/images/mine-action-aerobic-selected.png" style="width:37rpx; height:34rpx;" wx:if="{{selectModule == 2}}"></image>
-        <image src="/images/mine-action-aerobic.png" style="width:37rpx; height:34rpx;" wx:else></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-aerobic-selected.png" style="width:37rpx; height:34rpx;" wx:if="{{selectModule == 2}}"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-aerobic.png" style="width:37rpx; height:34rpx;" wx:else></image>
       </view>
       <view class="name">
         <text>有氧训练</text>
@@ -31,8 +31,8 @@
     </view>
     <view class="module {{selectModule == 3 ? 'selected' : ''}}" bindtap="selectModule" data-module="3">
       <view class="icon">
-        <image src="/images/mine-action-stretch-selected.png" style="width:36rpx; height:34rpx;" wx:if="{{selectModule == 3}}"></image>
-        <image src="/images/mine-action-stretch.png" style="width:36rpx; height:34rpx;" wx:else></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-stretch-selected.png" style="width:36rpx; height:34rpx;" wx:if="{{selectModule == 3}}"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-stretch.png" style="width:36rpx; height:34rpx;" wx:else></image>
       </view>
       <view class="name">
         <text>拉伸训练</text>
@@ -40,8 +40,8 @@
     </view>
     <view class="module {{selectModule == 4 ? 'selected' : ''}}" bindtap="openConirmPopup" data-module="4">
       <view class="icon">
-        <image src="/images/mine-action-customize-selected.png" style="width:34rpx; height:30rpx;" wx:if="{{selectModule == 4}}"></image>
-        <image src="/images/mine-action-customize.png" style="width:34rpx; height:30rpx;" wx:else></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-customize-selected.png" style="width:34rpx; height:30rpx;" wx:if="{{selectModule == 4}}"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-customize.png" style="width:34rpx; height:30rpx;" wx:else></image>
       </view>
       <view class="name">
         <text>自定义</text>
@@ -62,7 +62,7 @@
     <view class="actions-group">
       <view class="action">
         <view class="delete" >
-          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}" bindtap="deleteAction" data-action_id="0"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png" wx:if="{{deleteButton}}" bindtap="deleteAction" data-action_id="0"></image>
         </view>
         <view class="span">
           <text>力量训练</text>
@@ -70,7 +70,7 @@
       </view>
       <view class="action">
         <view class="delete">
-          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}"  bindtap="deleteAction" data-action_id="0"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png" wx:if="{{deleteButton}}"  bindtap="deleteAction" data-action_id="0"></image>
         </view>
         <view class="span">
           <text>力量训练</text>
@@ -78,7 +78,7 @@
       </view>
       <view class="action no-warp">
         <view class="delete" >
-          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}" bindtap="deleteAction" data-action_id="0"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png" wx:if="{{deleteButton}}" bindtap="deleteAction" data-action_id="0"></image>
         </view>
         <view class="span">
           <text>力量训练</text>
@@ -86,7 +86,7 @@
       </view>
       <view class="action">
         <view class="delete" >
-          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}" bindtap="deleteAction" data-action_id="0"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png" wx:if="{{deleteButton}}" bindtap="deleteAction" data-action_id="0"></image>
         </view>
         <view class="span">
           <text>力量训练</text>
@@ -94,7 +94,7 @@
       </view>
       <view class="action">
         <view class="delete" >
-          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}" bindtap="deleteAction" data-action_id="0"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png" wx:if="{{deleteButton}}" bindtap="deleteAction" data-action_id="0"></image>
         </view>
         <view class="span">
           <text>力量训练</text>
@@ -102,7 +102,7 @@
       </view>
       <view class="action no-warp">
         <view class="delete" >
-          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}" bindtap="deleteAction" data-action_id="0"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png" wx:if="{{deleteButton}}" bindtap="deleteAction" data-action_id="0"></image>
         </view>
         <view class="span">
           <text>力量训练</text>
@@ -110,7 +110,7 @@
       </view>
       <view class="action">
         <view class="delete" >
-          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}" bindtap="deleteAction" data-action_id="0"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png" wx:if="{{deleteButton}}" bindtap="deleteAction" data-action_id="0"></image>
         </view>
         <view class="span">
           <text>力量训练</text>
@@ -118,7 +118,7 @@
       </view>
       <view class="action">
         <view class="delete">
-          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}"  bindtap="deleteAction" data-action_id="0"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png" wx:if="{{deleteButton}}"  bindtap="deleteAction" data-action_id="0"></image>
         </view>
         <view class="span">
           <text>力量训练</text>
@@ -126,7 +126,7 @@
       </view>
       <view class="action no-warp">
         <view class="delete">
-          <image src="/images/mine-action-delete.png" wx:if="{{deleteButton}}"  bindtap="deleteAction" data-action_id="0"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png" wx:if="{{deleteButton}}"  bindtap="deleteAction" data-action_id="0"></image>
         </view>
         <view class="span">
           <text>力量训练</text>
@@ -134,7 +134,7 @@
       </view>
     </view>
     <view class="add-action" bindtap="navigateToAdd" data-module="{{selectModule}}">
-      <image src="/images/mine-action-increase.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-increase.png"></image>
       <text>新增</text>
     </view>
   </view>
@@ -157,7 +157,7 @@
       </view>
     </view>
     <view class="close-button" catchtap="closeConirmPopup">
-      <image src="/images/order-popup-close.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/order-popup-close.png"></image>
     </view>
   </view>
 </block>

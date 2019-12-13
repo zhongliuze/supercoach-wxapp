@@ -11,19 +11,19 @@
           <view class="navigation-bar-menu" catchtap="catchMenuButtonBubbling" wx:if="{{menuButtonPopup}}">
             <view class="bar-menu-button-top"></view>
             <view class="bar-menu-button" catchtap="catchChangeView">
-              <image src='/images/course-menu-change.png'></image>
+              <image src='http://superimage.xianshikeji.com/icon/superwxapp/course-menu-change.png'></image>
               <text>切换视图</text>
             </view>
             <view class="bar-menu-button" catchtap="catchGenerateImages">
-              <image src='/images/course-menu-image.png'></image>
+              <image src='http://superimage.xianshikeji.com/icon/superwxapp/course-menu-image.png'></image>
               <text>生成图片</text>
             </view>
             <view class="bar-menu-button" catchtap="catchNavigateOrder">
-              <image src='/images/course-menu-message.png'></image>
+              <image src='http://superimage.xianshikeji.com/icon/superwxapp/course-menu-message.png'></image>
               <text>预约消息</text>
             </view>
             <view class="bar-menu-button" catchtap="catchCurrentTableChange" wx:if="{{currentTableWeekIndex != currentTableScrollIndex}}">
-              <image src='/images/course-menu-change.png'></image>
+              <image src='http://superimage.xianshikeji.com/icon/superwxapp/course-menu-change.png'></image>
               <text>返回本周</text>
             </view>
             <view class="bar-menu-button-bottom"></view>
@@ -113,34 +113,34 @@
                   <view class="content">
                     <block wx:if="{{tableButtonPopupType == 0}}">
                       <view class="button" catchtap="clickTableCourse" data-index="0">
-                        <image src="/images/course-table-button-course.png"></image>
+                        <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-course.png"></image>
                         <text>排课</text>
                       </view>
                       <view class="button" catchtap="clickTableCourse" data-index="1">
-                        <image src="/images/course-table-button-rest.png"></image>
+                        <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-rest.png"></image>
                         <text>休息</text>
                       </view>
                       <view class="button" catchtap="clickTableCourse" data-index="2">
-                        <image src="/images/course-table-button-custom.png"></image>
+                        <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-custom.png"></image>
                         <text>自定义</text>
                       </view>
                     </block>
                     <block wx:else>
                       <view class="button" catchtap="clickTableEdit">
-                        <image src="/images/course-table-button-edit.png"></image>
+                        <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-edit.png"></image>
                         <text>编辑</text>
                       </view>
                       <view class="button" catchtap="clickTableDelete">
-                        <image src="/images/course-table-button-delete.png"></image>
+                        <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-delete.png"></image>
                         <text>删除</text>
                       </view>
                     </block>
                   </view>
                   <view class="arrow" style="{{tableButtonPopupArrowStyle}}" wx:if="{{tableButtonPopupDirection == 'left'}}">
-                    <image src="/images/course-table-arrow-right.png"></image>
+                    <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-arrow-right.png"></image>
                   </view>
                   <view class="arrow" style="{{tableButtonPopupArrowStyle}}" wx:else="{{tableButtonPopupDirection == 'right'}}">
-                    <image src="/images/course-table-arrow-left.png"></image>
+                    <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-arrow-left.png"></image>
                   </view>
                 </view>
                 <view class='time-line' style="left:0rpx; top:{{timeLinePosition}}rpx;" wx:if="{{timeLinePosition != -1}}">
@@ -221,8 +221,8 @@
 
         <!-- 展开、收起按钮 -->
         <view class="spread" catchtap="switchCalendarView">
-          <image src="/images/course-list-arrow-down.png" wx:if="{{calendarView == false}}"></image>
-          <image src="/images/course-list-arrow-up.png" wx:elif="{{calendarView == true}}"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-list-arrow-down.png" wx:if="{{calendarView == false}}"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-list-arrow-up.png" wx:elif="{{calendarView == true}}"></image>
         </view>
       </view>
       <!-- 任务列表展示 -->
@@ -271,13 +271,13 @@
         </view>
         <view class="tasks" wx:else>
           <view class="null-data">
-            <image src="/images/null_class_schedule.png"></image>
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/null_class_schedule.png"></image>
             <text>暂无课程安排</text>
           </view>
         </view>
         <view class="tasks-bottom"></view>
         <view class="unwind-button" catchtap="catchUnwind">
-          <image src="/images/course-unwind.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-unwind.png"></image>
         </view>
 
       </view>
@@ -296,15 +296,15 @@
   <view class="unwind-button-group">
     <view class="button" catchtap="catchCourse">
       <text>排课</text>
-      <image src="/images/course-table-button-course.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-course.png"></image>
     </view>
     <view class="button" catchtap="catchRest">
       <text>休息</text>
-      <image src="/images/course-table-button-rest.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-rest.png"></image>
     </view>
     <view class="button" catchtap="catchCustom">
       <text>自定义</text>
-      <image src="/images/course-table-button-custom.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-custom.png"></image>
     </view>
   </view>
 </block>

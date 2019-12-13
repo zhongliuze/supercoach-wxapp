@@ -8,7 +8,7 @@
           <text>{{remindArray[0].name}}</text>
         </view>
         <view class="arrow">
-          <image src="/images/course-selected.png" wx:if="{{remindArray[0].selected}}"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-selected.png" wx:if="{{remindArray[0].selected}}"></image>
         </view>
       </view>
     </view>
@@ -22,7 +22,7 @@
             <text>{{item.name}}</text>
           </view>
           <view class="arrow">
-            <image src="/images/course-selected.png" wx:if="{{item.selected}}"></image>
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-selected.png" wx:if="{{item.selected}}"></image>
           </view>
         </view>
       </view>

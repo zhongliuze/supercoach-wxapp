@@ -16,7 +16,7 @@
     <view class="part-group">
       <view class="part">
         <view class="delete">
-          <image src="/images/mine-action-delete.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png"></image>
         </view>
         <view class="span">
           <text>臂</text>
@@ -24,7 +24,7 @@
       </view>
       <view class="part">
         <view class="delete">
-          <image src="/images/mine-action-delete.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png"></image>
         </view>
         <view class="span">
           <text>胸</text>
@@ -32,7 +32,7 @@
       </view>
       <view class="part">
         <view class="delete">
-          <image src="/images/mine-action-delete.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png"></image>
         </view>
         <view class="span">
           <text>肩</text>
@@ -40,7 +40,7 @@
       </view>
       <view class="part">
         <view class="delete">
-          <image src="/images/mine-action-delete.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png"></image>
         </view>
         <view class="span">
           <text>腹</text>
@@ -48,7 +48,7 @@
       </view>
       <view class="part">
         <view class="delete">
-          <image src="/images/mine-action-delete.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png"></image>
         </view>
         <view class="span">
           <text>臀</text>
@@ -56,7 +56,7 @@
       </view>
       <view class="part">
         <view class="delete">
-          <image src="/images/mine-action-delete.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png"></image>
         </view>
         <view class="span">
           <text>腿</text>
@@ -64,7 +64,7 @@
       </view>
       <view class="part no-warp">
         <view class="delete">
-          <image src="/images/mine-action-delete.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png"></image>
         </view>
         <view class="span">
           <text>腿</text>
@@ -72,7 +72,7 @@
       </view>
       <view class="part">
         <view class="delete">
-          <image src="/images/mine-action-delete.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-delete.png"></image>
         </view>
         <view class="span">
           <text>臂</text>
@@ -103,7 +103,7 @@
         <view class="delete">
         </view>
         <view class="span">
-          <image src="/images/mine-lesson-part-add.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-lesson-part-add.png"></image>
         </view>
       </view>
 
@@ -133,7 +133,7 @@
                 <text>保持稳定</text>
               </view>
               <view class="icon">
-                <image src="/images/mine-action-increase.png"></image>
+                <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-increase.png"></image>
               </view>
             </view>
           </view>
@@ -150,7 +150,7 @@
                 <text>保持稳定</text>
               </view>
               <view class="icon">
-                <image src="/images/mine-action-increase.png"></image>
+                <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-increase.png"></image>
               </view>
             </view>
           </view>
@@ -167,7 +167,7 @@
                 <text>至酸胀感</text>
               </view>
               <view class="icon">
-                <image src="/images/mine-action-increase.png"></image>
+                <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-increase.png"></image>
               </view>
             </view>
           </view>
@@ -194,7 +194,7 @@
                 <text>保持稳定</text>
               </view>
               <view class="icon">
-                <image src="/images/mine-action-increase.png"></image>
+                <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-increase.png"></image>
               </view>
             </view>
           </view>
@@ -211,7 +211,7 @@
                 <text>保持稳定</text>
               </view>
               <view class="icon">
-                <image src="/images/mine-action-increase.png"></image>
+                <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-increase.png"></image>
               </view>
             </view>
           </view>
@@ -219,7 +219,7 @@
           <view class="action">
             <view class="action-name">
               <text>动态胸部伸展</text>
-              <image src="/images/mine-lesson-add-close.png"></image>
+              <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-lesson-add-close.png"></image>
             </view>
             <view class="value">
               <view class="frequency">
@@ -229,20 +229,8 @@
                 <text>至酸胀感</text>
               </view>
               <view class="icon-list">
-                <image src="/images/mine-lesson-open-delete.png"></image>
-                <image src="/images/mine-lesson-open-add.png" class="right"></image>
-              </view>
-            </view>
-            <view class="value">
-              <view class="frequency">
-                <text>1组 x 10秒</text>
-              </view>
-              <view class="situation">
-                <text>至酸胀感</text>
-              </view>
-              <view class="icon-list">
-                <image src="/images/mine-lesson-open-delete.png"></image>
-                <image src="/images/mine-lesson-open-add.png" class="right"></image>
+                <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-lesson-open-delete.png"></image>
+                <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-lesson-open-add.png" class="right"></image>
               </view>
             </view>
             <view class="value">
@@ -253,8 +241,20 @@
                 <text>至酸胀感</text>
               </view>
               <view class="icon-list">
-                <image src="/images/mine-lesson-open-delete.png"></image>
-                <image src="/images/mine-lesson-open-add.png" class="right"></image>
+                <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-lesson-open-delete.png"></image>
+                <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-lesson-open-add.png" class="right"></image>
+              </view>
+            </view>
+            <view class="value">
+              <view class="frequency">
+                <text>1组 x 10秒</text>
+              </view>
+              <view class="situation">
+                <text>至酸胀感</text>
+              </view>
+              <view class="icon-list">
+                <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-lesson-open-delete.png"></image>
+                <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-lesson-open-add.png" class="right"></image>
               </view>
             </view>
           </view>
@@ -265,7 +265,7 @@
       </view>
 
       <view class="add-content" bindtap="addAction">
-        <image src="/images/mine-action-increase.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-increase.png"></image>
         <text>新增</text>
       </view>
 

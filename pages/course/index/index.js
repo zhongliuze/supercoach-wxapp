@@ -450,7 +450,9 @@ Page({
    * 打开预约消息列表
    */
   catchNavigateOrder: function(event) {
-    console.log('打开预约消息列表');
+    wx.navigateTo({
+      url: '../../order/index/index',
+    })
   },
 
   /**

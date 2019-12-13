@@ -4,11 +4,11 @@
     <view class="userinfo">
       <view class="avatar">
         <view class="user-avatar">
-          <image src="/images/avatar.jpeg" mode="aspectFill"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg" mode="aspectFill"></image>
         </view>
         <view class='vip-status'>
-          <image src="/images/member-vip.png"></image>
-          <!-- <image src="/images/member-novip.png"></image> -->
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-vip.png"></image>
+          <!-- <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-novip.png"></image> -->
         </view>
       </view>
       <view class="info">
@@ -34,7 +34,7 @@
   <view class="activity-group">
     <view class="activity border" bindtap="bindButton" data-url="../members/index/index">
       <view class="icon">
-        <image src="/images/mine-vip.png" style="width:56rpx;height:46rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-vip.png" style="width:56rpx;height:46rpx;"></image>
       </view>
       <view class="content">
         <text class="title">开通VIP会员</text>
@@ -43,7 +43,7 @@
     </view>
     <view class="activity" bindtap="bindButton" data-url="invit/index/index">
       <view class="icon">
-        <image src="/images/mine-invite.png" style="width:56rpx;height:50rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invite.png" style="width:56rpx;height:50rpx;"></image>
       </view>
       <view class="content">
         <text class="title">邀请好友</text>
@@ -91,7 +91,7 @@
     <view class="button-list">
       <view class="button" bindtap="bindPopupTips" data-message='学员端即将上线，吾皇敬请期待！'>
         <view class="icon">
-          <image src="/images/mine-invite-student.png" style="width:52rpx;height:52rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-invite-student.png" style="width:52rpx;height:52rpx;"></image>
         </view>
         <view class="name">
           <text>邀请学员</text>
@@ -99,7 +99,7 @@
       </view>
       <view class="button" bindtap="bindButton" data-url="data/index/index">
         <view class="icon">
-          <image src="/images/mine-data-center.png" style="width:54rpx;height:52rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-data-center.png" style="width:54rpx;height:52rpx;"></image>
         </view>
         <view class="name">
           <text>数据中心</text>
@@ -107,7 +107,7 @@
       </view>
       <view class="button" bindtap="bindButton" data-url="personal/edit/edit">
         <view class="icon">
-          <image src="/images/mine-homepage.png" style="width:54rpx;height:52rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-homepage.png" style="width:54rpx;height:52rpx;"></image>
         </view>
         <view class="name">
           <text>编辑主页</text>
@@ -117,7 +117,7 @@
     <view class="button-list">
       <view class="button" bindtap="bindButton" data-url="action/index/index">
         <view class="icon">
-          <image src="/images/mine-action.png" style="width:50rpx;height:52rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action.png" style="width:50rpx;height:52rpx;"></image>
         </view>
         <view class="name">
           <text>动作管理</text>
@@ -125,7 +125,7 @@
       </view>
       <view class="button" bindtap="bindButton" data-url="lesson/index/index">
         <view class="icon">
-          <image src="/images/mine-lesson.png" style="width:44rpx;height:52rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-lesson.png" style="width:44rpx;height:52rpx;"></image>
         </view>
         <view class="name">
           <text>备课管理</text>
@@ -133,7 +133,7 @@
       </view>
       <view class="button" bindtap="bindButton" data-url="order/index/index">
         <view class="icon">
-          <image src="/images/mine-order.png" style="width:52rpx;height:52rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-order.png" style="width:52rpx;height:52rpx;"></image>
         </view>
         <view class="name">
           <text>订单管理</text>
@@ -143,7 +143,7 @@
     <view class="button-list last-list">
       <view class="button" bindtap="bindButton" data-url="poster/index/index">
         <view class="icon">
-          <image src="/images/mine-admission.png" style="width:42rpx;height:52rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-admission.png" style="width:42rpx;height:52rpx;"></image>
         </view>
         <view class="name">
           <text>招生海报</text>
@@ -151,7 +151,7 @@
       </view>
       <view class="button" bindtap="bindButton" data-url="message/index/index">
         <view class="icon">
-          <image src="/images/mine-homepage.png" style="width:52rpx;height:52rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-homepage.png" style="width:52rpx;height:52rpx;"></image>
         </view>
         <view class="name">
           <text>短信群发</text>
@@ -159,7 +159,7 @@
       </view>
       <view class="button" bindtap="bindButton" data-url="strategy/index/index">
         <view class="icon">
-          <image src="/images/mine-novice.png" style="width:48rpx;height:52rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-novice.png" style="width:48rpx;height:52rpx;"></image>
         </view>
         <view class="name">
           <text>新手攻略</text>
@@ -172,7 +172,7 @@
     <view class="button-list last-list">
       <view class="button" bindtap="bindButton" data-url="setting/index/index">
         <view class="icon">
-          <image src="/images/mine-setting.png" style="width:48rpx;height:52rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-setting.png" style="width:48rpx;height:52rpx;"></image>
         </view>
         <view class="name">
           <text>设置</text>
@@ -181,7 +181,7 @@
       <view class="button">
         <button open-type="contact">
           <view class="icon">
-            <image src="/images/mine-contact.png" style="width:56rpx;height:52rpx;"></image>
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-contact.png" style="width:56rpx;height:52rpx;"></image>
           </view>
           <view class="name">
             <text>联系客服</text>
@@ -192,7 +192,7 @@
       <view class="button">
         <navigator target="miniProgram" open-type="navigate" app-id="{{tgcAppId}}" extra-data="{{tgcExtraData}}" version="release">
           <view class="icon">
-            <image src="/images/mine-feedback.png" style="width:53rpx;height:51rpx;"></image>
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-feedback.png" style="width:53rpx;height:51rpx;"></image>
           </view>
           <view class="name">
             <text>建议反馈</text>

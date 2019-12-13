@@ -1,7 +1,7 @@
 <!--pages/mine/setting/about/about.wxml-->
 <view class="header">
   <view class="icon">
-    <image src="/images/avatar.jpeg"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
   </view>
   <view class="version">
     <text>Version 1.0.0</text>
@@ -43,7 +43,7 @@
       <text>用户协议</text>
     </view>
     <view class="more">
-      <image src="/images/arrow-right.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
     </view>
   </view>
   <view class="button-line no-border" bindtap="bindTreaty" data-type="1">
@@ -51,7 +51,7 @@
       <text>隐私政策</text>
     </view>
     <view class="more">
-      <image src="/images/arrow-right.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
     </view>
   </view>
 </view>
@@ -62,7 +62,7 @@
       <text>给私教小助手点赞</text>
     </view>
     <view class="more">
-      <image src="/images/arrow-right.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
     </view>
   </view>
 </view>

@@ -18,7 +18,7 @@
       <view class="value">
         <picker bindchange="bindPickerModule" value="{{selectModule}}" range="{{moduleList}}">
           <text class="{{selectModuleFormat != '请选择' ? 'select-value' : ''}}">{{selectModuleFormat}}</text>
-          <image src="/images/arrow-right.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
         </picker>
       </view>
     </view>
@@ -29,7 +29,7 @@
       <view class="value" style="width:400rpx;">
         <picker bindchange="bindPickerIntensity" value="{{selectIntensity}}" range="{{intensityList}}">
           <text class="{{selectIntensityFormat != '请选择' ? 'select-value' : ''}}">{{selectIntensityFormat}}</text>
-          <image src="/images/arrow-right.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
         </picker>
       </view>
     </view>
@@ -41,7 +41,7 @@
       <view class="value">
         <picker bindchange="bindPickerRepeat" value="{{selectRepeat}}" range="{{repeatList}}">
           <text class="{{selectRepeatFormat != '请选择' ? 'select-value' : ''}}">{{selectRepeatFormat}}</text>
-          <image src="/images/arrow-right.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
         </picker>
       </view>
     </view>

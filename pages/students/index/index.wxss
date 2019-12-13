@@ -79,7 +79,7 @@
   transition: all 0.4s;
   -webkit-transform: translateX(135rpx);
   transform: translateX(135rpx);
-  margin-left: -135rpx;
+  margin-left: -134rpx;
 }
 
 .student-line .avatar {
@@ -198,4 +198,14 @@
   color: #707888;
   font-size: 26rpx;
   margin-top: 12rpx;
+}
+
+.page {
+  display: block;
+  min-height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  
 }

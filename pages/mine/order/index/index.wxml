@@ -1,8 +1,8 @@
 <!--pages/mine/order/index/index.wxml-->
-<!-- <view class="order-list">
+<view class="order-list">
   <view class="order" bindtap="navigateToDetail">
     <view class="icon">
-      <image src="/images/mine-order-vip-1.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-order-vip-1.png"></image>
     </view>
     <view class="content">
       <text class="title">1个月VIP会员</text>
@@ -14,7 +14,7 @@
   </view>
   <view class="order" bindtap="navigateToDetail">
     <view class="icon">
-      <image src="/images/mine-order-vip-1.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-order-vip-1.png"></image>
     </view>
     <view class="content">
       <text class="title">1个月VIP会员</text>
@@ -26,7 +26,7 @@
   </view>
   <view class="order" bindtap="navigateToDetail">
     <view class="icon">
-      <image src="/images/mine-order-vip-3.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-order-vip-3.png"></image>
     </view>
     <view class="content">
       <text class="title">1个月VIP会员</text>
@@ -38,7 +38,7 @@
   </view>
   <view class="order" bindtap="navigateToDetail">
     <view class="icon">
-      <image src="/images/mine-order-vip-7.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-order-vip-7.png"></image>
     </view>
     <view class="content">
       <text class="title">1个月VIP会员</text>
@@ -50,7 +50,7 @@
   </view>
   <view class="order" bindtap="navigateToDetail">
     <view class="icon">
-      <image src="/images/mine-order-message.png" class="message"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-order-message.png" class="message"></image>
     </view>
     <view class="content">
       <text class="title">1个月VIP会员</text>
@@ -63,7 +63,7 @@
 
   <view class="order noborder" bindtap="navigateToDetail">
     <view class="icon">
-      <image src="/images/mine-order-vip-12.png" class="message"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-order-vip-12.png" class="message"></image>
     </view>
     <view class="content">
       <text class="title">1个月VIP会员</text>
@@ -75,9 +75,9 @@
   </view>
 
 </view>
-<view class="common-bottom"></view> -->
+<view class="common-bottom"></view>
 
-<view class="null-data">
-    <image src="/images/null_order.png"></image>
+<!-- <view class="null-data">
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/null_order.png"></image>
     <text>您还未产生过订单</text>
-  </view>
+  </view> -->

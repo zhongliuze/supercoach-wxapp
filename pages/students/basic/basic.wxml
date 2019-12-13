@@ -3,7 +3,7 @@
   <view class="input-cell-group">
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/student-name.png" style="width:28rpx;height:32rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-name.png" style="width:28rpx;height:32rpx;"></image>
       </view>
       <view class="content input-cell-border">
         <view class="title">
@@ -16,7 +16,7 @@
     </view>
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/student-info-basic-remark.png" style="width:27rpx;height:30rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-basic-remark.png" style="width:27rpx;height:30rpx;"></image>
       </view>
       <view class="content">
         <view class="title">
@@ -32,7 +32,7 @@
   <view class="input-cell-group input-cell-group-margin">
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/student-phone.png" style="width:24rpx;height:32rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-phone.png" style="width:24rpx;height:32rpx;"></image>
       </view>
       <view class="content">
         <view class="title">
@@ -48,7 +48,7 @@
   <view class="input-cell-group input-cell-group-margin">
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/student-from.png" style="width:28rpx;height:28rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-from.png" style="width:28rpx;height:28rpx;"></image>
       </view>
       <view class="content">
         <view class="title">
@@ -57,7 +57,7 @@
         <view class="value">
           <text>请选择</text>
           <view class="arrow">
-            <image src="/images/arrow-right.png"></image>
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
           </view>
         </view>
       </view>
@@ -67,7 +67,7 @@
   <view class="input-cell-group input-cell-group-margin">
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/student-basic-birthday.png" style="width:30rpx;height:26rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-basic-birthday.png" style="width:30rpx;height:26rpx;"></image>
       </view>
       <view class="content input-cell-border">
         <view class="title">
@@ -77,7 +77,7 @@
           <view class="value">
             <text class="{{birthdayFormat == '请选择' ? '' : 'hasValue'}}">{{birthdayFormat}}</text>
             <view class="arrow">
-              <image src="/images/arrow-right.png"></image>
+              <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
             </view>
           </view>
         </picker>
@@ -86,7 +86,7 @@
 
     <view class="input-cell">
       <view class="icon">
-        <image src="/images/student-info-basic-reminder.png" style="width:26rpx;height:28rpx;"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-basic-reminder.png" style="width:26rpx;height:28rpx;"></image>
       </view>
       <view class="content">
         <view class="title">
@@ -110,7 +110,7 @@
     <view class="textarea-cell">
       <view class="title">
         <view class="icon">
-          <image src="/images/student-remarks.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-remarks.png"></image>
         </view>
         <view class="name">
           <text>备注信息</text>

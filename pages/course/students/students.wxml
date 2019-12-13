@@ -3,7 +3,7 @@
   <view class="search-group">
     <view class="search">
       <view class="icon">
-        <image src="/images/student-search.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-search.png"></image>
       </view>
       <view class="input">
         <input placeholder="搜索" placeholder-class="search-placeholder"></input>
@@ -12,7 +12,7 @@
   </view>
   <view class="button-line">
     <view class="icon">
-      <image src="/images/course-students-add.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-students-add.png"></image>
     </view>
     <view class="content">
       <text>添加学员</text>
@@ -24,7 +24,7 @@
 
   <view class="button-line">
     <view class="icon">
-      <image src="/images/course-students-sort.png" style="width:36rpx;height:28rpx;"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-students-sort.png" style="width:36rpx;height:28rpx;"></image>
     </view>
     <view class="content">
       <text>排序方式</text>
@@ -34,7 +34,7 @@
     </view>
   </view>
   <view class="student-sort">
-    <image src="/images/student-attention.png"></image>
+    <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-attention.png"></image>
     <text>特别关注</text>
   </view>
 

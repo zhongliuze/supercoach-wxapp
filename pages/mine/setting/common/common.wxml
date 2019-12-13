@@ -44,7 +44,7 @@
       </view>
       <view class="value">
         <text>剩余3课时</text>
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
   </view>
@@ -56,7 +56,7 @@
       </view>
       <view class="value">
         <text>1小时</text>
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
     <view class="input-line no-border">
@@ -65,7 +65,7 @@
       </view>
       <view class="value">
         <text>剩余课时数</text>
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
   </view>
@@ -77,7 +77,7 @@
       </view>
       <view class="value">
         <text>短息通知</text>
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
   </view>
@@ -89,7 +89,7 @@
       </view>
       <view class="value">
 
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
   </view>

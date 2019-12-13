@@ -6,7 +6,7 @@
         <text>账号与安全</text>
       </view>
       <view class="more">
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
     <view class="button-line no-border" bindtap="bindButton" data-url="common/common">
@@ -14,7 +14,7 @@
         <text>通用</text>
       </view>
       <view class="more">
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
   </view>
@@ -36,7 +36,7 @@
         <text>帮助与反馈</text>
       </view>
       <view class="more">
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view> -->
     <view class="button-line no-border" bindtap="bindButton" data-url="about/about">
@@ -44,7 +44,7 @@
         <text>关于</text>
       </view>
       <view class="more">
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
   </view>

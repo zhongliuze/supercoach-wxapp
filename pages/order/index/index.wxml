@@ -80,7 +80,7 @@
     </view>
   </view>
 
-  <view class="order">
+  <view class="order" bindtap="navigateToDetail">
     <view class="title-group">
       <view class="user">
         <view class="avatar">
@@ -125,7 +125,7 @@
     </view>
   </view>
 
-  <view class="order">
+  <view class="order"  bindtap="navigateToDetail">
     <view class="title-group">
       <view class="user">
         <view class="avatar">
@@ -185,7 +185,7 @@
       </view>
     </view>
     <view class="close-button" catchtap="closePopup">
-      <image src="/images/order-popup-close.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/order-popup-close.png"></image>
     </view>
   </view>
 </block>

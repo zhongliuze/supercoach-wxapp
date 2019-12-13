@@ -19,12 +19,12 @@
   </view>
   <view class="solve-button">
     <view class="button" style="margin-right:104rpx;">
-      <image src="/images/mine-strategy-solved.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-strategy-solved.png"></image>
       <text>已解决</text>
     </view>
 
     <view class="button order">
-      <image src="/images/mine-strategy-no-solved-s.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-strategy-no-solved-s.png"></image>
       <text>已解决</text>
     </view>
   </view>

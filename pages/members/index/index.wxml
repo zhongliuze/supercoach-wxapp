@@ -4,11 +4,11 @@
     <view class="userinfo">
       <view class="avatar">
         <view class="user-avatar">
-          <image src="/images/avatar.jpeg" mode="aspectFill"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg" mode="aspectFill"></image>
         </view>
         <view class='vip-status'>
-          <image src="/images/member-vip.png"></image>
-          <!-- <image src="/images/member-novip.png"></image> -->
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-vip.png"></image>
+          <!-- <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-novip.png"></image> -->
         </view>
       </view>
       <view class="info">
@@ -22,9 +22,13 @@
         </view>
       </view>
       <view class="other">
-        <view class="vip-button" bindtap="navigateToRecord">
-          <text>开通记录</text>
+        <view class="vip-other-button">
+          <view class="vip-other-margin"></view>
+          <view class="vip-button" bindtap="navigateToRecord">
+            <text>开通记录</text>
+          </view>
         </view>
+
       </view>
 
     </view>
@@ -99,60 +103,60 @@
     <view class="power-group">
       <view class="power-line">
         <view class="power">
-          <image src="/images/vip-student.png" style="width:46rpx;height:48rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-student.png" style="width:46rpx;height:48rpx;"></image>
           <text>无限添加学员</text>
         </view>
         <view class="power">
-          <image src="/images/vip-sms.png" style="width:48rpx;height:48rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-sms.png" style="width:48rpx;height:48rpx;"></image>
           <text>课前短信通知</text>
         </view>
         <view class="power">
-          <image src="/images/vip-card.png" style="width:52rpx;height:42rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-card.png" style="width:52rpx;height:42rpx;"></image>
           <text>专属个人名片</text>
         </view>
       </view>
 
       <view class="power-line">
         <view class="power">
-          <image src="/images/vip-statistics.png" style="width:46rpx;height:46rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-statistics.png" style="width:46rpx;height:46rpx;"></image>
           <text>课时统计分析</text>
         </view>
         <view class="power">
-          <image src="/images/vip-customize.png" style="width:52rpx;height:46rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-customize.png" style="width:52rpx;height:46rpx;"></image>
           <text>自定义动作库</text>
         </view>
         <view class="power">
-          <image src="/images/vip-lessons.png" style="width:46rpx;height:50rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-lessons.png" style="width:46rpx;height:50rpx;"></image>
           <text>无限创建备课</text>
         </view>
       </view>
 
       <view class="power-line">
         <view class="power">
-          <image src="/images/vip-birthday.png" style="width:48rpx;height:44rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-birthday.png" style="width:48rpx;height:44rpx;"></image>
           <text>学员生日提醒</text>
         </view>
         <view class="power">
-          <image src="/images/vip-poster.png" style="width:52rpx;height:42rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-poster.png" style="width:52rpx;height:42rpx;"></image>
           <text>专属招生海报</text>
         </view>
         <view class="power">
-          <image src="/images/vip-notice.png" style="width:52rpx;height:44rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-notice.png" style="width:52rpx;height:44rpx;"></image>
           <text>50条免费短信</text>
         </view>
       </view>
 
       <view class="power-line">
         <view class="power">
-          <image src="/images/vip-ad.png" style="width:52rpx;height:40rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-ad.png" style="width:52rpx;height:40rpx;"></image>
           <text>去除广告</text>
         </view>
         <view class="power">
-          <image src="/images/vip-service.png" style="width:48rpx;height:48rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-service.png" style="width:48rpx;height:48rpx;"></image>
           <text>会员专属客服</text>
         </view>
         <view class="power">
-          <image src="/images/vip-honorable.png" style="width:52rpx;height:48rpx;"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-honorable.png" style="width:52rpx;height:48rpx;"></image>
           <text>会员尊贵标识</text>
         </view>
       </view>
@@ -164,9 +168,9 @@
       <text>开通说明</text>
     </view>
     <view class="content">
-      <text>1、购买成功后，会员服务立即生效；
-      2、会员服务已经开通后，不支持退款；
-      3、会员开通成功代表您已阅读并同意《会员服务协议》。</text>
+      <view><text>1、购买成功后，会员服务立即生效；</text></view>
+      <view><text>2、会员服务已经开通后，不支持退款；</text></view>
+      <view bindtap="bindTreaty"><text>3、会员开通成功代表您已阅读并同意<text class="member-content">《会员服务协议》</text>。</text></view>
     </view>
   </view>
 </view>
@@ -185,7 +189,7 @@
           <text>订单确认</text>
         </view>
         <view class="close" bindtap="closePopup">
-          <image src="/images/vip-close.png"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/vip-close.png"></image>
         </view>
       </view>
       <view class="order-list">
@@ -221,7 +225,7 @@
         <view class="type-list">
           <view class="type">
             <view class="icon">
-              <image src="/images/pay-wechat.png"></image>
+              <image src="http://superimage.xianshikeji.com/icon/superwxapp/pay-wechat.png"></image>
             </view>
             <view class="name">
               <text>微信支付</text>

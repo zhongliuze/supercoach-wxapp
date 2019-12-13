@@ -41,7 +41,7 @@
       </view>
       <view class="value">
         <text class="choose">请选择</text>
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
     <view class="personal-input-line no-border">
@@ -149,7 +149,7 @@
       </view>
       <view class="value">
         <text class="choose">请选择</text>
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
     <view class="personal-input-line">
@@ -158,7 +158,7 @@
       </view>
       <view class="value">
         <text class="choose">请选择</text>
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
     <view class="personal-input-line no-border">
@@ -167,7 +167,7 @@
       </view>
       <view class="value">
         <text class="choose">请选择</text>
-        <image src="/images/arrow-right.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
   </view>
@@ -187,10 +187,10 @@
   </view>
   <view class="album-info">
     <view class="album-image">
-      <image src="/images/mine-personal-album.png" mode="aspectFill"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-personal-album.png" mode="aspectFill"></image>
     </view>
     <view class="upload-image">
-      <image src="/images/mine-personal-add-image.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-personal-add-image.png"></image>
       <text>上传照片</text>
     </view>
   </view>
@@ -210,10 +210,10 @@
   </view>
   <view class="album-info">
     <view class="album-image">
-      <image src="/images/mine-personal-album.png" mode="aspectFill"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-personal-album.png" mode="aspectFill"></image>
     </view>
     <view class="upload-image">
-      <image src="/images/mine-personal-add-image.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-personal-add-image.png"></image>
       <text>上传二维码</text>
     </view>
   </view>
@@ -247,7 +247,7 @@
         </view>
         <view class="value">
           <view class="upload-image">
-            <image src="/images/mine-personal-add-image.png"></image>
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-personal-add-image.png"></image>
             <text>上传图片</text>
           </view>
         </view>
@@ -268,14 +268,14 @@
         </view>
         <view class="value">
           <view class="upload-image">
-            <image src="/images/mine-personal-add-image.png"></image>
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-personal-add-image.png"></image>
             <text>上传图片</text>
           </view>
         </view>
       </view>
     </view>
     <view class="certificate-add">
-      <image src="/images/mine-action-increase.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-increase.png"></image>
       <text>继续添加</text>
     </view>
   </view>
@@ -318,14 +318,14 @@
         </view>
         <view class="value">
           <view class="upload-image">
-            <image src="/images/mine-personal-add-image.png"></image>
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-personal-add-image.png"></image>
             <text>上传照片</text>
           </view>
         </view>
       </view>
     </view>
     <view class="certificate-add">
-      <image src="/images/mine-action-increase.png"></image>
+      <image src="http://superimage.xianshikeji.com/icon/superwxapp/mine-action-increase.png"></image>
       <text>继续添加</text>
     </view>
   </view>

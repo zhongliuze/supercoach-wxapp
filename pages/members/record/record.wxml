@@ -4,13 +4,13 @@
   <view class="record">
     <view class="header">
       <view class="icon">
-        <image src="/images/member-vip.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-vip.png"></image>
       </view>
       <view class="title">
         <text>VIP会员3天</text>
       </view>
       <view class="other">
-        <image src="/images/member-record-free.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-record-free.png"></image>
       </view>
     </view>
     <view class="value-list">
@@ -35,13 +35,13 @@
   <view class="record">
     <view class="header">
       <view class="icon">
-        <image src="/images/member-vip.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-vip.png"></image>
       </view>
       <view class="title">
         <text>VIP会员3天</text>
       </view>
       <view class="other">
-        <image src="/images/member-record-free.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-record-free.png"></image>
       </view>
     </view>
     <view class="value-list">
@@ -66,13 +66,13 @@
   <view class="record">
     <view class="header">
       <view class="icon">
-        <image src="/images/member-vip.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-vip.png"></image>
       </view>
       <view class="title">
         <text>VIP会员3天</text>
       </view>
       <view class="other">
-        <image src="/images/member-record-free.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-record-free.png"></image>
       </view>
     </view>
     <view class="value-list">
@@ -97,13 +97,13 @@
   <view class="record">
     <view class="header">
       <view class="icon">
-        <image src="/images/member-vip.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-vip.png"></image>
       </view>
       <view class="title">
         <text>VIP会员3天</text>
       </view>
       <view class="other">
-        <image src="/images/member-record-free.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-record-free.png"></image>
       </view>
     </view>
     <view class="value-list">
@@ -128,13 +128,13 @@
   <view class="record">
     <view class="header">
       <view class="icon">
-        <image src="/images/member-vip.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-vip.png"></image>
       </view>
       <view class="title">
         <text>VIP会员3天</text>
       </view>
       <view class="other">
-        <image src="/images/member-record-free.png"></image>
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-record-free.png"></image>
       </view>
     </view>
     <view class="value-list">
