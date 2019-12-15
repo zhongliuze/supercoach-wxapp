@@ -329,8 +329,8 @@ Page({
         'coachid': wx.getStorageSync('coachid'),
         'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
         'timestamp': timestamp, //时间戳
-        'begin': '2019-10-17 09:00', // 开始时间（格式 yyyy-MM-dd HH:mm）
-        'end': '2019-10-17 10:00', // 结束时间（格式 yyyy-MM-dd HH:mm）
+        'begin': '2019-12-15 09:00', // 开始时间（格式 yyyy-MM-dd HH:mm）
+        'end': '2019-12-15 10:00', // 结束时间（格式 yyyy-MM-dd HH:mm）
         'coachStudentId': 0, // 教练与学员关系 ID
         'courseContentId': 0, // 上课内容ID
         'courseRecordId': 0, // 购课记录ID

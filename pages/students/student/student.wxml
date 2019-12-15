@@ -1,6 +1,6 @@
 <!--pages/students/student/student.wxml-->
 <view class="background">
-  <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-bg.png"></image>
+  <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-bg2.png"></image>
 </view>
 
 <view class="info">
