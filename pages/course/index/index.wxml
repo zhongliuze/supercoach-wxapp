@@ -263,7 +263,7 @@
                       </view>
                     </view>
                   </view>
-                  <view class="delete-button" catchtap="clickTableDelete" data-index="{{index}}">删除</view>
+                  <view class="delete-button" catchtap="clickTableDelete" data-index="{{index}}" data-task_id="{{item.taskId}}">删除</view>
                 </view>
               </movable-view>
             </movable-area>

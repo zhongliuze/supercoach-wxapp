@@ -135,7 +135,7 @@
         </view>
       </view>
     </view>
-    <view class="course-cells">
+    <view class="course-cells" wx:if="{{courseType == 0}}">
       <view class="icon">
         <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-course-type.png"></image>
       </view>

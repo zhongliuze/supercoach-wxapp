@@ -628,6 +628,7 @@ Page({
    * 表格视图：点击弹窗中删除按钮
    */
   clickTableDelete: function(event) {
+    var _this = this;
     wx.showModal({
       title: '确认要删除吗？',
       content: '相关联的课程数据也将被删除',
@@ -638,8 +639,42 @@ Page({
       success(res) {
         if (res.confirm) {
           console.log('用户点击确定')
+          
+          
+
         } else if (res.cancel) {
           console.log('用户点击取消')
+          let timestamp = moment().valueOf();
+          $.delete(
+            'task/plan', {
+              'coachid': wx.getStorageSync('coachid'),
+              'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+              'timestamp': timestamp, //时间戳
+              'taskId': event.currentTarget.dataset.task_id,
+            },
+            function (res) {
+              console.log(res.data);
+              if (res.data.code == 0) {
+                // 获取成功
+                wx.showToast({
+                  title: '已删除',
+                  icon: 'success',
+                  success: function () {
+                    setTimeout(function () {
+                      wx.navigateBack({
+                        delta: '1'
+                      })
+                    }, 1500);
+                  }
+                })
+              } else {
+                wx.showToast({
+                  title: '删除失败',
+                  icon: 'none'
+                })
+              }
+            }
+          )
         }
       }
     })
