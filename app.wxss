@@ -119,6 +119,33 @@ page {
   bottom: 0;
 }
 
+.fixed-bottom-button-default {
+  position: fixed;
+  left: 0rpx;
+  bottom: 0rpx;
+  background-color: #C7C7C7;
+}
+
+.fixed-bottom-button-default button {
+  background-color: #C7C7C7;
+  color: #fff;
+  border-radius: 0rpx;
+  border: 0rpx;
+  font-size: 34rpx;
+  font-weight: 500;
+  width: 750rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fixed-bottom-button-default button::after {
+  border-radius: 0rpx;
+  border: 0rpx;
+  bottom: 0;
+}
+
 .movable-area, .movable-view {
   width: 750rpx;
   height: 120rpx;
