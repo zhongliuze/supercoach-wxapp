@@ -2,14 +2,15 @@
 <view class="input-cell-group-default">
   <view class="input-cell">
     <view class="title">
-      <text>来源名称</text>
+      <text>{{inputName}}</text>
     </view>
     <view class="value">
-      <input placeholder="请输入名称" placeholder-class="input-placeholder" value="{{customValue}}" bindinput="customInput"></input>
+      <input placeholder="请输入名称" placeholder-class="input-placeholder" value="{{customValue}}" bindinput="customInput" maxlength="6"></input>
     </view>
   </view>
 </view>
 
 <view class="button-group">
-  <button class="{{customValue?'enabled':''}}">确定</button>
+  <button class="enabled" wx:if="{{customValue}}" bindtap="saveCustom">确定</button>
+  <button wx:else>确定</button>
 </view>

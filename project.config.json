@@ -459,6 +459,20 @@
 					"id": -1,
 					"name": "pages/members/index/index",
 					"pathName": "pages/members/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/common/custom/custom",
+					"pathName": "pages/common/custom/custom",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/course/custom/custom",
+					"pathName": "pages/course/custom/custom",
 					"scene": null
 				}
 			]

@@ -1,27 +1,22 @@
 // pages/students/source/source.js
+const moment = require('../../../vendor/moment/moment.js');
+import $ from '../../../common/common.js';
+const util = require('../../../utils/util')
+const md5 = require('../../../vendor/md5/md5.min.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    sourceList: [
-      { name: '自定义来源', selected: false, canDelete: true },
-      { name: '学员转介绍', selected: false, canDelete: false },
-      { name: '门店同事转介绍', selected: false, canDelete: false },
-      { name: '电话约访', selected: false, canDelete: false },
-      { name: '自访', selected: false, canDelete: false },
-      { name: '场开', selected: false, canDelete: false },
-      { name: '其它', selected: false, canDelete: false },
-
-    ],
+    sourceList: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -35,7 +30,31 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var _this = this;
+    let timestamp = moment().valueOf();
+    $.get(
+      'listStudentSource', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, // 时间戳
+        'pageNumber ': 1, // 第几页
+        'pageSize ': 100, // 每页多少条
+      },
+      function (res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功
+          _this.setData({
+            sourceList: res.data.data.content,
+          });
+        } else {
+          wx.showToast({
+            title: '来源获取失败',
+            icon: 'none'
+          })
+        }
+      }
+    )
   },
 
   /**
@@ -133,15 +152,50 @@ Page({
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   },
 
+  /**
+   * 删除
+   */
   catchDelete: function (event) {
-    wx.showToast({
-      title: '删除成功',
-      icon: 'success'
-    })
+    var _this = this;
+    let timestamp = moment().valueOf();
+    $.delete(
+      'studentSource', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, // 时间戳
+        'sourceId': event.currentTarget.dataset.sourceid, // 学员来源ID
+      },
+      function (res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success'
+          })
+          _this.onShow();
+        } else {
+          wx.showToast({
+            title: '删除失败',
+            icon: 'none'
+          })
+        }
+      }
+    )
+
+
+    
   },
 
 
-  // 选择提醒类型
+  // 自定义来源
+  customSource: function (event) {
+    wx.navigateTo({
+      url: '../../common/custom/custom?customType=1',
+    })
+  },
+
+  // 选择
   selectSource: function (event) {
     var index = event.currentTarget.dataset.index;
     var sourceList = this.data.sourceList;
