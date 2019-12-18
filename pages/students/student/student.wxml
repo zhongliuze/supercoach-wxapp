@@ -12,9 +12,9 @@
       <text class="main">刘泽中</text>
       <text class="sub">（刘小泽的爸爸）</text>
     </view>
-    <view class="status">
+    <!-- <view class="status">
       <text>未绑定公众号</text>
-    </view>
+    </view> -->
   </view>
   <view class="phone" bindtap="makePhoneCall" data-phone="18020220001">
     <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-phone.png"></image>
@@ -51,12 +51,12 @@
   </view>
 </view>
 
-<view class="ad">
+<!-- <view class="ad">
   <text>邀请学员绑定，领3天VIP会员</text>
-</view>
+</view> -->
 
 <view class="button-cell-group">
-  <view class="button-cell"  bindtap="bindButton" data-url="basic/basic">
+  <view class="button-cell" bindtap="bindButton" data-url="basic/basic">
     <view class="icon">
       <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-basic.png" style="width:26rpx;height:30rpx;"></image>
     </view>
@@ -97,8 +97,8 @@
   </view>
 </view>
 
-<view class="button-cell-group">
-  <view class="button-cell"  bindtap="bindButton" data-url="physical/index/index">
+<!-- <view class="button-cell-group">
+  <view class="button-cell" bindtap="bindButton" data-url="physical/index/index">
     <view class="icon">
       <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-data.png" style="width:28rpx;height:26rpx;"></image>
     </view>
@@ -111,7 +111,7 @@
       </view>
     </view>
   </view>
-</view>
+</view> -->
 
 <view class="button-cell-group">
   <view class="button-cell" bindtap="bindButton" data-url="other/other">

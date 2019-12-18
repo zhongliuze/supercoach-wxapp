@@ -123,7 +123,7 @@
       <view class="icon">
         <image src="http://superimage.xianshikeji.com/icon/superwxapp/students-subject-course.png"></image>
       </view>
-      <view class="content">
+      <view class="content noborder">
         <view class="title">
           <text>课程类型</text>
         </view>
@@ -135,7 +135,7 @@
         </view>
       </view>
     </view>
-    <view class="course-cells" wx:if="{{courseType == 0}}">
+    <!-- <view class="course-cells" wx:if="{{courseType == 0}}">
       <view class="icon">
         <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-course-type.png"></image>
       </view>
@@ -150,7 +150,7 @@
           <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
         </view>
       </view>
-    </view>
+    </view> -->
   </view>
 
 

@@ -1,5 +1,5 @@
 <!--pages/mine/setting/account/index/index.wxml-->
-<view class="container-input">
+<!-- <view class="container-input">
   <view class="phone-line">
     <view class="name">
       <text>手机号</text>
@@ -16,4 +16,8 @@
   <view class="login-out" bindtap="loginOut">
     <text>退出登录</text>
   </view>
-</view>
+</view> -->
+
+<view class="login-out" bindtap="loginOut">
+    <text>退出登录</text>
+  </view>

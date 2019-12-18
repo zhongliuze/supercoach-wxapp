@@ -14,14 +14,14 @@
               <image src='http://superimage.xianshikeji.com/icon/superwxapp/course-menu-change.png'></image>
               <text>切换视图</text>
             </view>
-            <view class="bar-menu-button" catchtap="catchGenerateImages">
+            <!-- <view class="bar-menu-button" catchtap="catchGenerateImages">
               <image src='http://superimage.xianshikeji.com/icon/superwxapp/course-menu-image.png'></image>
               <text>生成图片</text>
             </view>
             <view class="bar-menu-button" catchtap="catchNavigateOrder">
               <image src='http://superimage.xianshikeji.com/icon/superwxapp/course-menu-message.png'></image>
               <text>预约消息</text>
-            </view>
+            </view> -->
             <view class="bar-menu-button" catchtap="catchCurrentTableChange" wx:if="{{currentTableWeekIndex != currentTableScrollIndex}}">
               <image src='http://superimage.xianshikeji.com/icon/superwxapp/course-menu-change.png'></image>
               <text>返回本周</text>
