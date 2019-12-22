@@ -10,7 +10,7 @@
           <text>标题</text>
         </view>
         <view class="custom-value">
-          <input placeholder="输入自定义事项名称" placeholder-class="custom-value-placeholder" value="{{customTitle}}"></input>
+          <input placeholder="输入自定义事项名称" placeholder-class="custom-value-placeholder" value="{{customTitle}}" bindinput="inputCustomTitle"></input>
         </view>
         <view class="custom-button" bindtap="navigateToCustomList">
           <text>常用</text>

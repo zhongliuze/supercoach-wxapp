@@ -1,17 +1,57 @@
+const moment = require('../../../vendor/moment/moment.js');
+import $ from '../../../common/common.js';
+const util = require('../../../utils/util')
+const md5 = require('../../../vendor/md5/md5.min.js');
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    studentList: [
-      { nameStr: '泽中', name: '刘泽中', phone: '18020220001', times: '05', isTouchMove: false },
-      { nameStr: '商量', name: '商量', phone: '18598632214', times: '13', isTouchMove: false },
-      { nameStr: '晓东', name: '周晓东', phone: '', times: '05', isTouchMove: false },
-      { nameStr: '龙哥', name: '龙哥', phone: '18020220001', times: '00', isTouchMove: false },
-      { nameStr: '老公', name: '山东老公', phone: '', times: '', isTouchMove: false },
-      { nameStr: '盖伦', name: '德玛西亚之力', phone: '18020220001', times: '05', isTouchMove: false },
-      
+    studentList: [{
+        nameStr: '泽中',
+        name: '刘泽中',
+        phone: '18020220001',
+        times: '05',
+        isTouchMove: false
+      },
+      {
+        nameStr: '商量',
+        name: '商量',
+        phone: '18598632214',
+        times: '13',
+        isTouchMove: false
+      },
+      {
+        nameStr: '晓东',
+        name: '周晓东',
+        phone: '',
+        times: '05',
+        isTouchMove: false
+      },
+      {
+        nameStr: '龙哥',
+        name: '龙哥',
+        phone: '18020220001',
+        times: '00',
+        isTouchMove: false
+      },
+      {
+        nameStr: '老公',
+        name: '山东老公',
+        phone: '',
+        times: '',
+        isTouchMove: false
+      },
+      {
+        nameStr: '盖伦',
+        name: '德玛西亚之力',
+        phone: '18020220001',
+        times: '05',
+        isTouchMove: false
+      },
+
     ],
     customIndex: 0,
   },
@@ -19,64 +59,85 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
+    var _this = this;
+    let timestamp = moment().valueOf();
 
+    $.get(
+      'coachStudentList', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, //时间戳
+      },
+      function(res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功
+          _this.bulidStudenList(res.data.data.coachStudentList);
+        } else {
+          wx.showToast({
+            title: '学员获取失败',
+            icon: 'none'
+          })
+        }
+      }
+    )
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
   //手指触摸动作开始 记录起点X坐标
-  touchStart: function (e) {
+  touchStart: function(e) {
     //开始触摸时 重置所有删除
     var studentList = this.data.studentList;
-    studentList.forEach(function (v, i) {
+    studentList.forEach(function(v, i) {
       if (v.isTouchMove) //只操作为true的
         v.isTouchMove = false;
     })
@@ -87,7 +148,7 @@ Page({
     })
   },
   //滑动事件处理
-  touchMove: function (e) {
+  touchMove: function(e) {
     var studentList = this.data.studentList;
     var that = this,
       index = e.currentTarget.dataset.index, //当前索引
@@ -100,10 +161,10 @@ Page({
         X: startX,
         Y: startY
       }, {
-          X: touchMoveX,
-          Y: touchMoveY
-        });
-    studentList.forEach(function (v, i) {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
+    studentList.forEach(function(v, i) {
       v.isTouchMove = false
       //滑动超过30度角 return
       if (Math.abs(angle) > 30) return;
@@ -121,18 +182,18 @@ Page({
   },
 
   /**
-  * 计算滑动角度
-  * @param {Object} start 起点坐标
-  * @param {Object} end 终点坐标
-  */
-  angle: function (start, end) {
+   * 计算滑动角度
+   * @param {Object} start 起点坐标
+   * @param {Object} end 终点坐标
+   */
+  angle: function(start, end) {
     var _X = end.X - start.X,
       _Y = end.Y - start.Y
     //返回角度 /Math.atan()返回数字的反正切值
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   },
 
-  catchDelete: function (event) {
+  catchDelete: function(event) {
     wx.showModal({
       title: '确认要删除吗？',
       content: '该操作将清空学员的所有信息',
@@ -143,7 +204,7 @@ Page({
       success(res) {
         if (res.confirm) {
           console.log('用户点击确定')
-          
+
         } else if (res.cancel) {
           console.log('用户点击取消')
           wx.showToast({
@@ -153,7 +214,7 @@ Page({
         }
       }
     })
-    
+
   },
 
   /**
@@ -174,4 +235,49 @@ Page({
     })
   },
 
+  /**
+   * 处理服务器返回学员列表
+   */
+  bulidStudenList: function(getStudentList) {
+    // 特别关注列表
+    var starStudentList = [];
+    // 普通列表
+    var customStudentList = {};
+
+    for (var i = 0; i < getStudentList.length; i++) {
+      if (getStudentList[i]['getStudentList']) {
+        // 是特别关注学员
+        starStudentList.push(getStudentList[i]);
+      } else {
+        // 普通学员
+        if (getStudentList[i]['namePinYinHeadChar'][0]) {
+          // 存在拼音缩写字符串
+          // 判断是否有所属大写字母列
+          if (!customStudentList[getStudentList[i]['namePinYinHeadChar'][0].toUpperCase()]) {
+            // 没有，先创建列
+            customStudentList[getStudentList[i]['namePinYinHeadChar'][0].toUpperCase()] = [];
+          }
+          // 写入数据
+          customStudentList[getStudentList[i]['namePinYinHeadChar'][0].toUpperCase()].push(getStudentList[i]);
+        } else {
+          // 不存在
+          // 判断是否有#列
+          if (!customStudentList['#']) {
+            // 没有，先创建列
+            customStudentList['#'] = [];
+          }
+          // 写入数据
+          customStudentList['#'].push(getStudentList[i]);
+        }
+      }
+    }
+
+
+
+    this.setData({
+      starStudentList: starStudentList,
+      customStudentList: customStudentList,
+    });
+    console.log(customStudentList);
+  }
 })

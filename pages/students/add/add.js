@@ -114,41 +114,66 @@ Page({
       })
       return;
     }
-    // $.post(
-    //   'coachStudent', {
-    //     'coachid': wx.getStorageSync('coachid'),
-    //     'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-    //     'timestamp': timestamp, // 时间戳
-    //     'name': '溜小狗', // 学员姓名
-    //     'mobile': '', // 学员手机号
-    //     'courseTypeId': '', // 课程类型
-    //     'courseNumber': '', // 总课时数
-    //     'sourceId': '', // 学员来源ID
-    //     'remark': '', // 备注信息
-    //   },
-    //   function (res) {
-    //     console.log(res.data);
-    //     if (res.data.code == 0) {
-    //       // 获取成功
-    //       wx.showToast({
-    //         title: '创建成功',
-    //         icon: 'success',
-    //         success: function () {
-    //           setTimeout(function () {
-    //             wx.navigateBack({
-    //               delta: '1'
-    //             })
-    //           }, 1500);
-    //         }
 
-    //       })
-    //     } else {
-    //       wx.showToast({
-    //         title: '创建失败',
-    //         icon: 'none'
-    //       })
-    //     }
-    //   }
-    // )
+    if (event.detail.value.mobile) {
+      var mobile = event.detail.value.mobile;
+    }else {
+      var mobile = '';
+    }
+
+    if (event.detail.value.courseTypeId) {
+      var courseTypeId = event.detail.value.courseTypeId;
+    } else {
+      var courseTypeId = '';
+    }
+
+    if (event.detail.value.courseNumber) {
+      var courseNumber = event.detail.value.courseNumber;
+    } else {
+      var courseNumber = '';
+    }
+    
+    if (event.detail.value.sourceId) {
+      var sourceId = event.detail.value.sourceId;
+    } else {
+      var sourceId = '';
+    }
+
+    $.post(
+      'coachStudent', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, // 时间戳
+        'name': event.detail.value.name, // 学员姓名
+        'mobile': mobile, // 学员手机号
+        'courseTypeId': courseTypeId, // 课程类型
+        'courseNumber': courseNumber, // 总课时数
+        'sourceId': sourceId, // 学员来源ID
+        'remark': '', // 备注信息
+      },
+      function (res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功
+          wx.showToast({
+            title: '创建成功',
+            icon: 'success',
+            success: function () {
+              setTimeout(function () {
+                wx.navigateBack({
+                  delta: '1'
+                })
+              }, 1500);
+            }
+
+          })
+        } else {
+          wx.showToast({
+            title: '创建失败',
+            icon: 'none'
+          })
+        }
+      }
+    )
   }
 })

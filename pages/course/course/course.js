@@ -292,7 +292,7 @@ Page({
 
     endTimeShowArray[3] = timeShowDate;
 
-    
+
     this.setData({
       'startTimePickerIndex': event.detail.value,
       'endTimePickerIndex': endTimePickerIndex,
@@ -391,22 +391,36 @@ Page({
   bindSave: function(event) {
     var _this = this;
     let timestamp = moment().valueOf();
-  
+
     var startTimeShowArray = this.data.startTimeShowArray;
     var startTimePickerIndex = this.data.startTimePickerIndex;
 
     var endTimeShowArray = this.data.endTimeShowArray;
     var endTimePickerIndex = this.data.endTimePickerIndex;
 
-    // 获取选中的开始时间
-    var beginTime = startTimeShowArray[3][startTimePickerIndex[0]] + ' ' + startTimeShowArray[1][startTimePickerIndex[1]] + ':' + startTimeShowArray[2][startTimePickerIndex[2]];
-    // 获取选中的结束时间
-    var endTime = endTimeShowArray[3][endTimePickerIndex[0]] + ' ' + endTimeShowArray[1][endTimePickerIndex[1]] + ':' + endTimeShowArray[2][endTimePickerIndex[2]];
+    if(this.data.fullDaySwitch == false) {
+      // 未选中全天
+
+      // 获取选中的开始时间
+      var beginTime = startTimeShowArray[3][startTimePickerIndex[0]] + ' ' + startTimeShowArray[1][startTimePickerIndex[1]] + ':' + startTimeShowArray[2][startTimePickerIndex[2]];
+      // 获取选中的结束时间
+      var endTime = endTimeShowArray[3][endTimePickerIndex[0]] + ' ' + endTimeShowArray[1][endTimePickerIndex[1]] + ':' + endTimeShowArray[2][endTimePickerIndex[2]];
+
+    }else if(this.data.fullDaySwitch == true) {
+      // 选中全天
+
+      // 获取选中的开始时间
+      var beginTime = startTimeShowArray[3][startTimePickerIndex[0]] + ' 0' + app.globalData.startTime + ':00'
+      // 获取选中的结束时间
+      var endTime = endTimeShowArray[3][endTimePickerIndex[0]] + ' ' + (app.globalData.endTime + 1) + ':00';
+    }
+    
 
     var remindValue = this.data.remindResault[this.data.remindType];
     var repeatValue = this.data.repeatResault[this.data.repeatType];
 
-    if(this.data.courseType == 0) {
+    console.log(this.data.fullDaySwitch);
+    if (this.data.courseType == 0) {
       // 排课
       $.post(
         'task/plan', {
@@ -422,15 +436,15 @@ Page({
           'courseRecordId': 0, // 购课记录ID（课程类型？）
           'courseContentId': 0, // 上课内容ID
         },
-        function (res) {
+        function(res) {
           console.log(res.data);
           if (res.data.code == 0) {
             // 获取成功
             wx.showToast({
               title: '创建成功',
               icon: 'success',
-              success: function () {
-                setTimeout(function () {
+              success: function() {
+                setTimeout(function() {
                   wx.navigateBack({
                     delta: '1'
                   })
@@ -445,7 +459,7 @@ Page({
           }
         }
       )
-    }else if(this.data.courseType == 1) {
+    } else if (this.data.courseType == 1) {
       // 休息
       $.post(
         'task/rest', {
@@ -457,15 +471,15 @@ Page({
           'repeat': repeatValue, // 重复类型（0：不重复、1、7、30）
           'repeatCycle': this.data.repeatTimes, // 重复周期
         },
-        function (res) {
+        function(res) {
           console.log(res.data);
           if (res.data.code == 0) {
             // 获取成功
             wx.showToast({
               title: '创建成功',
               icon: 'success',
-              success: function () {
-                setTimeout(function () {
+              success: function() {
+                setTimeout(function() {
                   wx.navigateBack({
                     delta: '1'
                   })
@@ -480,7 +494,7 @@ Page({
           }
         }
       )
-    }else if(this.data.courseType == 2) {
+    } else if (this.data.courseType == 2) {
       // 自定义
       $.post(
         'task/customize', {
@@ -530,15 +544,15 @@ Page({
         'timestamp': timestamp, //时间戳
         'taskId': 1,
       },
-      function (res) {
+      function(res) {
         console.log(res.data);
         if (res.data.code == 0) {
           // 获取成功
           wx.showToast({
             title: '创建成功',
             icon: 'success',
-            success: function () {
-              setTimeout(function () {
+            success: function() {
+              setTimeout(function() {
                 wx.navigateBack({
                   delta: '1'
                 })
@@ -553,5 +567,14 @@ Page({
         }
       }
     )
+  },
+
+  /**
+   * 输入自定义标题
+   */
+  inputCustomTitle: function(event) {
+    this.setData({
+      customTitle: event.detail.value,
+    });
   }
 })
