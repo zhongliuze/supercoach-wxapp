@@ -54,6 +54,8 @@ Page({
 
     ],
     customIndex: 0,
+    starStudentList: [],
+    customStudentList: [],
   },
 
   /**
@@ -136,20 +138,20 @@ Page({
   //手指触摸动作开始 记录起点X坐标
   touchStart: function(e) {
     //开始触摸时 重置所有删除
-    var studentList = this.data.studentList;
-    studentList.forEach(function(v, i) {
+    var starStudentList = this.data.starStudentList;
+    starStudentList.forEach(function(v, i) {
       if (v.isTouchMove) //只操作为true的
         v.isTouchMove = false;
     })
     this.setData({
       startX: e.changedTouches[0].clientX,
       startY: e.changedTouches[0].clientY,
-      studentList: studentList
+      starStudentList: starStudentList
     })
   },
   //滑动事件处理
   touchMove: function(e) {
-    var studentList = this.data.studentList;
+    var starStudentList = this.data.starStudentList;
     var that = this,
       index = e.currentTarget.dataset.index, //当前索引
       startX = that.data.startX, //开始X坐标
@@ -164,7 +166,7 @@ Page({
         X: touchMoveX,
         Y: touchMoveY
       });
-    studentList.forEach(function(v, i) {
+    starStudentList.forEach(function(v, i) {
       v.isTouchMove = false
       //滑动超过30度角 return
       if (Math.abs(angle) > 30) return;
@@ -177,7 +179,64 @@ Page({
     })
     //更新数据
     that.setData({
-      studentList: studentList
+      starStudentList: starStudentList
+    })
+  },
+
+
+  //手指触摸动作开始 记录起点X坐标
+  touchStartStudent: function (e) {
+    //开始触摸时 重置所有删除
+    var customStudentList = this.data.customStudentList;
+    var tempStudentList = customStudentList[e.currentTarget.dataset.custom_index];
+
+    tempStudentList.forEach(function (v, i) {
+      if (v.isTouchMove) //只操作为true的
+        v.isTouchMove = false;
+    })
+
+    customStudentList[e.currentTarget.dataset.custom_index] = tempStudentList;
+    this.setData({
+      startX: e.changedTouches[0].clientX,
+      startY: e.changedTouches[0].clientY,
+      customStudentList: customStudentList
+    })
+  },
+
+  //滑动事件处理
+  touchMoveStudent: function (e) {
+    var customStudentList = this.data.customStudentList;
+    var tempStudentList = customStudentList[e.currentTarget.dataset.custom_index];
+
+    var that = this,
+      index = e.currentTarget.dataset.index, //当前索引
+      startX = that.data.startX, //开始X坐标
+      startY = that.data.startY, //开始Y坐标
+      touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
+      touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
+      //获取滑动角度
+      angle = that.angle({
+        X: startX,
+        Y: startY
+      }, {
+          X: touchMoveX,
+          Y: touchMoveY
+        });
+    tempStudentList.forEach(function (v, i) {
+      v.isTouchMove = false
+      //滑动超过30度角 return
+      if (Math.abs(angle) > 30) return;
+      if (i == index) {
+        if (touchMoveX > startX) //右滑
+          v.isTouchMove = false
+        else //左滑
+          v.isTouchMove = true
+      }
+    })
+    //更新数据
+    customStudentList[e.currentTarget.dataset.custom_index] = tempStudentList;
+    that.setData({
+      customStudentList: customStudentList
     })
   },
 
@@ -245,20 +304,23 @@ Page({
     var customStudentList = {};
 
     for (var i = 0; i < getStudentList.length; i++) {
-      if (getStudentList[i]['getStudentList']) {
+      var tempStudentList = getStudentList[i];
+      tempStudentList['nameStr'] = tempStudentList['name'].substring(tempStudentList['name'].length - 2);
+
+      if (tempStudentList['getStudentList']) {
         // 是特别关注学员
-        starStudentList.push(getStudentList[i]);
+        starStudentList.push(tempStudentList);
       } else {
         // 普通学员
-        if (getStudentList[i]['namePinYinHeadChar'][0]) {
+        if (tempStudentList['namePinYinHeadChar'][0]) {
           // 存在拼音缩写字符串
           // 判断是否有所属大写字母列
-          if (!customStudentList[getStudentList[i]['namePinYinHeadChar'][0].toUpperCase()]) {
+          if (!customStudentList[tempStudentList['namePinYinHeadChar'][0].toUpperCase()]) {
             // 没有，先创建列
-            customStudentList[getStudentList[i]['namePinYinHeadChar'][0].toUpperCase()] = [];
+            customStudentList[tempStudentList['namePinYinHeadChar'][0].toUpperCase()] = [];
           }
           // 写入数据
-          customStudentList[getStudentList[i]['namePinYinHeadChar'][0].toUpperCase()].push(getStudentList[i]);
+          customStudentList[tempStudentList['namePinYinHeadChar'][0].toUpperCase()].push(tempStudentList);
         } else {
           // 不存在
           // 判断是否有#列
@@ -267,7 +329,7 @@ Page({
             customStudentList['#'] = [];
           }
           // 写入数据
-          customStudentList['#'].push(getStudentList[i]);
+          customStudentList['#'].push(tempStudentList);
         }
       }
     }
@@ -278,6 +340,7 @@ Page({
       starStudentList: starStudentList,
       customStudentList: customStudentList,
     });
+    console.log(starStudentList);
     console.log(customStudentList);
   }
 })
