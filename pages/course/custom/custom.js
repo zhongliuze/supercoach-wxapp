@@ -1,4 +1,8 @@
 // pages/course/custom/custom.js
+import $ from '../../../common/common.js';
+const util = require('../../../utils/util')
+const moment = require('../../../vendor/moment/moment.js');
+
 Page({
 
   /**
@@ -37,7 +41,30 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var _this = this;
+    let timestamp = moment().valueOf();
 
+    $.get(
+      'commonTaskTitleList', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, //时间戳
+      },
+      function (res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功
+          _this.setData({
+            customArray: res.data.data.commonTaskTitleList,
+          });
+        } else {
+          wx.showToast({
+            title: '获取失败',
+            icon: 'none'
+          })
+        }
+      }
+    )
   },
 
   /**
@@ -136,9 +163,55 @@ Page({
   },
 
   catchDelete: function (event) {
-    wx.showToast({
-      title: '删除成功',
-      icon: 'success'
+    console.log(event);
+    var title_id = event.currentTarget.dataset.title_id;
+    var _this = this;
+    wx.showModal({
+      title: '确认要删除吗？',
+      content: '删除后可手动输入重新添加',
+      cancelText: '删除',
+      cancelColor: '#000000',
+      confirmText: '取消',
+      confirmColor: '#5FCD64',
+      success(res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+
+          let timestamp = moment().valueOf();
+          $.delete(
+            'commonTaskTitle', {
+              'coachid': wx.getStorageSync('coachid'),
+              'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+              'timestamp': timestamp, // 时间戳
+              'titleId': title_id, // 教练与学员关系ID
+            },
+            function (res) {
+              console.log(res.data);
+              if (res.data.code == 0) {
+                // 获取成功
+                wx.showToast({
+                  title: '已删除',
+                  icon: 'success',
+                  complete: function () {
+                    setTimeout(function () {
+                      _this.onShow();
+                    }, 1500);
+                  }
+                })
+              } else {
+                wx.showToast({
+                  title: '删除失败',
+                  icon: 'none'
+                })
+              }
+            }
+          )
+
+        }
+      }
     })
   },
 

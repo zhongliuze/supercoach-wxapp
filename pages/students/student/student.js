@@ -1,18 +1,25 @@
 // pages/students/student/student.js
+const moment = require('../../../vendor/moment/moment.js');
+import $ from '../../../common/common.js';
+const util = require('../../../utils/util')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    student_id: 0, // 学员ID
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options.student_id);
+    this.setData({
+      student_id: options.student_id,
+    });
   },
 
   /**
@@ -26,7 +33,33 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var _this = this;
+    let timestamp = moment().valueOf();
 
+    $.get(
+      'coachStudent', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, //时间戳
+        'coachStudentId': this.data.student_id, // 教练与学员关系ID
+      },
+      function (res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功
+          var studentInfo = res.data.data.coachStudent;
+          studentInfo['nameStr'] = studentInfo['name'].substring(studentInfo['name'].length - 2);
+          _this.setData({
+            studentInfo: studentInfo,
+          });
+        } else {
+          wx.showToast({
+            title: '获取失败',
+            icon: 'none'
+          })
+        }
+      }
+    )
   },
 
   /**

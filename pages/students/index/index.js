@@ -1,7 +1,6 @@
 const moment = require('../../../vendor/moment/moment.js');
 import $ from '../../../common/common.js';
 const util = require('../../../utils/util')
-const md5 = require('../../../vendor/md5/md5.min.js');
 
 Page({
 
@@ -9,53 +8,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    studentList: [{
-        nameStr: '泽中',
-        name: '刘泽中',
-        phone: '18020220001',
-        times: '05',
-        isTouchMove: false
-      },
-      {
-        nameStr: '商量',
-        name: '商量',
-        phone: '18598632214',
-        times: '13',
-        isTouchMove: false
-      },
-      {
-        nameStr: '晓东',
-        name: '周晓东',
-        phone: '',
-        times: '05',
-        isTouchMove: false
-      },
-      {
-        nameStr: '龙哥',
-        name: '龙哥',
-        phone: '18020220001',
-        times: '00',
-        isTouchMove: false
-      },
-      {
-        nameStr: '老公',
-        name: '山东老公',
-        phone: '',
-        times: '',
-        isTouchMove: false
-      },
-      {
-        nameStr: '盖伦',
-        name: '德玛西亚之力',
-        phone: '18020220001',
-        times: '05',
-        isTouchMove: false
-      },
-
-    ],
     customIndex: 0,
     starStudentList: [],
     customStudentList: [],
+    totalStudents: 0, // 学员总计
   },
 
   /**
@@ -253,6 +209,9 @@ Page({
   },
 
   catchDelete: function(event) {
+    console.log(event);
+    var student_id = event.currentTarget.dataset.student_id;
+    var _this = this;
     wx.showModal({
       title: '确认要删除吗？',
       content: '该操作将清空学员的所有信息',
@@ -266,10 +225,37 @@ Page({
 
         } else if (res.cancel) {
           console.log('用户点击取消')
-          wx.showToast({
-            title: '已删除',
-            icon: 'success'
-          })
+          
+          let timestamp = moment().valueOf();
+          $.delete(
+            'coachStudent', {
+              'coachid': wx.getStorageSync('coachid'),
+              'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+              'timestamp': timestamp, // 时间戳
+              'coachStudentId': student_id, // 教练与学员关系ID
+            },
+            function (res) {
+              console.log(res.data);
+              if (res.data.code == 0) {
+                // 获取成功
+                wx.showToast({
+                  title: '已删除',
+                  icon: 'success',
+                  complete: function() {
+                    setTimeout(function(){
+                      _this.onShow();
+                    },1500);
+                  }
+                })
+              } else {
+                wx.showToast({
+                  title: '删除失败',
+                  icon: 'none'
+                })
+              }
+            }
+          )
+          
         }
       }
     })
@@ -290,7 +276,7 @@ Page({
    */
   navigateToBasic: function(event) {
     wx.navigateTo({
-      url: '../student/student',
+      url: '../student/student?student_id=' + event.currentTarget.dataset.student_id,
     })
   },
 
@@ -303,11 +289,16 @@ Page({
     // 普通列表
     var customStudentList = {};
 
+    for (var i = 0; i < 26; i++) {
+      var key = String.fromCharCode(65 + i);
+      customStudentList[key] = [];
+    }
+
+
     for (var i = 0; i < getStudentList.length; i++) {
       var tempStudentList = getStudentList[i];
       tempStudentList['nameStr'] = tempStudentList['name'].substring(tempStudentList['name'].length - 2);
-
-      if (tempStudentList['getStudentList']) {
+      if (tempStudentList['follow']) {
         // 是特别关注学员
         starStudentList.push(tempStudentList);
       } else {
@@ -334,13 +325,11 @@ Page({
       }
     }
 
-
-
     this.setData({
       starStudentList: starStudentList,
+      totalStudents: getStudentList.length,
       customStudentList: customStudentList,
     });
-    console.log(starStudentList);
-    console.log(customStudentList);
-  }
+  },
+
 })

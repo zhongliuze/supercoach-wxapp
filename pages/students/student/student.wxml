@@ -5,20 +5,20 @@
 
 <view class="info">
   <view class="avatar">
-    <text>泽中</text>
+    <text>{{studentInfo.nameStr}}</text>
   </view>
   <view class="base">
     <view class="name">
-      <text class="main">刘泽中</text>
-      <text class="sub">（刘小泽的爸爸）</text>
+      <text class="main">{{studentInfo.name}}</text>
+      <text class="sub" wx:if="{{studentInfo.alias}}">（{{studentInfo.alias}}）</text>
     </view>
     <!-- <view class="status">
       <text>未绑定公众号</text>
     </view> -->
   </view>
-  <view class="phone" bindtap="makePhoneCall" data-phone="18020220001">
+  <view class="phone" bindtap="makePhoneCall" data-phone="{{studentInfo.mobile}}" wx:if="{{studentInfo.mobile}}">
     <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-phone.png"></image>
-    <text>18020220001</text>
+    <text>{{studentInfo.mobile}}</text>
   </view>
   <view class="data-group">
     <view class="data">
