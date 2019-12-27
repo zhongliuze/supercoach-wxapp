@@ -4,21 +4,22 @@
     <view class="userinfo">
       <view class="avatar">
         <view class="user-avatar">
-          <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg" mode="aspectFill"></image>
+          <image src="{{coachInfo.wxHeadimgurl}}" mode="aspectFill"></image>
         </view>
         <view class='vip-status'>
-          <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-vip.png"></image>
-          <!-- <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-novip.png"></image> -->
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-vip.png" wx:if="{{coachInfo.vip}}"></image>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-novip.png" wx:else></image>
         </view>
       </view>
       <view class="info">
         <view class="name">
-          <text>二狗子没有夏天</text>
+          <text>{{coachInfo.wxNickname}}</text>
         </view>
         <view class="viptime">
-          <!-- <text>开通会员，享专属特权</text> -->
-          <text>会员有效期至：2019-09-15</text>
-          <!-- <text>您的会员已到期，<text class="link-text">立即续费</text></text> -->
+          <text wx:if="{{coachInfo.vipTime == 0}}">开通会员，享专属特权</text>
+          <text wx:elif="{{coachInfo.vipTime == 1}}">您的会员已到期，<text class="link-text">立即续费</text></text>
+          <text wx:else>会员有效期至：{{coachInfo.vipTime}}</text>
+          
         </view>
       </view>
       <!-- <view class="other">
@@ -59,7 +60,7 @@
     <view class="data-list" bindtap="bindButton" data-url="data/index/index">
       <view class="data">
         <view class="num">
-          <text>16</text>
+          <text>{{coachInfo.teachingTime}}</text>
         </view>
         <view class="name">
           <text>待上课时</text>
@@ -67,7 +68,7 @@
       </view>
       <view class="data">
         <view class="num">
-          <text>50</text>
+          <text>{{coachInfo.workTime}}</text>
         </view>
         <view class="name">
           <text>已上课时</text>
@@ -75,7 +76,7 @@
       </view>
       <view class="data special-data">
         <view class="num">
-          <text>250</text>
+          <text>{{coachInfo.teachingStudentNumber}}</text>
         </view>
         <view class="name">
           <text>学员总数</text>

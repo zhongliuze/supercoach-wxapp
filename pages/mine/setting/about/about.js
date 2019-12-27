@@ -1,11 +1,13 @@
 // pages/mine/setting/about/about.js
+import $ from '../../../../common/common.js';
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    superCoachInfo: [],
   },
 
   /**
@@ -26,7 +28,25 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var _this = this;
 
+    $.get(
+      'about', {},
+      function (res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功
+          _this.setData({
+            superCoachInfo: res.data.data,
+          });
+        } else {
+          wx.showToast({
+            title: '网络错误',
+            icon: 'none'
+          })
+        }
+      }
+    )
   },
 
   /**

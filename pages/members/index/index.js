@@ -1,4 +1,8 @@
 // pages/members/index/index.js
+const moment = require('../../../vendor/moment/moment.js');
+import $ from '../../../common/common.js';
+const util = require('../../../utils/util');
+
 Page({
 
   /**
@@ -32,7 +36,31 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var _this = this;
+    let timestamp = moment().valueOf();
 
+    $.get(
+      'coach', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, //时间戳
+      },
+      function (res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功
+          var coachInfo = res.data.data.coach;
+          _this.setData({
+            coachInfo: res.data.data.coach,
+          });
+        } else {
+          wx.showToast({
+            title: '个人信息失败',
+            icon: 'none'
+          })
+        }
+      }
+    )
   },
 
   /**

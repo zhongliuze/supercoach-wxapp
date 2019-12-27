@@ -1,10 +1,10 @@
 <!--pages/mine/setting/about/about.wxml-->
 <view class="header">
   <view class="icon">
-    <image src="http://superimage.xianshikeji.com/icon/superwxapp/avatar.jpeg"></image>
+    <image src="{{superCoachInfo.logo}}"></image>
   </view>
   <view class="version">
-    <text>Version 1.0.0</text>
+    <text>version {{superCoachInfo.version}}</text>
   </view>
 </view>
 
@@ -14,7 +14,7 @@
       <text>联系邮箱</text>
     </view>
     <view class="more">
-      <text>fit@xianshikeji.com</text>
+      <text>{{superCoachInfo.email}}</text>
     </view>
   </view>
 
@@ -23,7 +23,7 @@
       <text>新浪微博</text>
     </view>
     <view class="more">
-      <text>超级私教Pro</text>
+      <text>{{superCoachInfo.weibo}}</text>
     </view>
   </view>
 
@@ -32,7 +32,7 @@
       <text>微信公众号</text>
     </view>
     <view class="more">
-      <text>超级私教Pro</text>
+      <text>{{superCoachInfo.wechatMp.mpName}}</text>
     </view>
   </view>
 </view>
