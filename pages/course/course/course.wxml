@@ -61,10 +61,10 @@
     <view class="title">
       <text>上课学员</text>
     </view>
-    <view class="content">
-      <!-- <text>请选择</text> -->
-      <view class="default-avatar avatar">
-        <text>泽中</text>
+    <view class="content" bindtap="navigateToStudent">
+      <text wx:if="{{!selectStudentNamestr}}">请选择</text>
+      <view class="default-avatar avatar" wx:else>
+        <text>{{selectStudentNamestr}}</text>
       </view>
       <!-- <view class="default-avatar avatar">
         <text>泽中</text>

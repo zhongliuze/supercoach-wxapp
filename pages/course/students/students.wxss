@@ -203,6 +203,23 @@
   border: 0;
 }
 
+.select-info .select .no-select button {
+  width: 200rpx;
+  height: 73rpx;
+  background: #C7C7C7;
+  border-radius: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 30rpx;
+  border: 0;
+}
+
+.select-info .select .no-select button::after {
+  border: 0;
+}
+
 .common-bottom {
   width: 750rpx;
   height: 300rpx;

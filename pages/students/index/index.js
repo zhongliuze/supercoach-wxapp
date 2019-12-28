@@ -1,6 +1,6 @@
 const moment = require('../../../vendor/moment/moment.js');
 import $ from '../../../common/common.js';
-const util = require('../../../utils/util')
+const util = require('../../../utils/util');
 
 Page({
 

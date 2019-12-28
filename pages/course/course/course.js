@@ -85,6 +85,11 @@ Page({
     scrollIntoView: '', // 颜色方块自动滚入位置
 
     customTitle: '', // 自定义标题内容
+    selectStudentId: 0, // 选中学员ID
+    selectStudentNamestr: '', // 头像名称
+    selectStudentCustomIndex: -1, // 选中学员key
+    selectStudentStudentIndex: -1, // 选中学员key
+
   },
 
   /**
@@ -382,6 +387,15 @@ Page({
   navigateToLesson: function(event) {
     wx.navigateTo({
       url: '../lesson/lesson',
+    })
+  },
+
+  /**
+   * 点击进入上课学员选择页
+   */
+  navigateToStudent: function (event) {
+    wx.navigateTo({
+      url: '../students/students?selectStudentCustomIndex=' + this.data.selectStudentCustomIndex + '&selectStudentStudentIndex=' + this.data.selectStudentStudentIndex,
     })
   },
 
