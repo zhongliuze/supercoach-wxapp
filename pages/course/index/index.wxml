@@ -126,7 +126,7 @@
                       </view>
                     </block>
                     <block wx:else>
-                      <view class="button" catchtap="clickTableEdit">
+                      <view class="button" catchtap="clickTableEdit" data-index="{{index}}" data-task_id="{{item.taskId}}">
                         <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-edit.png"></image>
                         <text>编辑</text>
                       </view>

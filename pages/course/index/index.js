@@ -622,6 +622,10 @@ Page({
   clickTableEdit: function (event) {
     // 类型：课程？休息？自定义
     console.log(this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]);
+    wx.navigateTo({
+      url: '../course/course?courseType=' + this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['taskType'] + '&editCourse=1' + '&selectDate=' + this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['date'], 
+    })
+    this.bindCloseMark();
   },
 
   /**

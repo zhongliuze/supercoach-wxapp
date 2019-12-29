@@ -109,6 +109,14 @@ Page({
     var startTimePickerIndex = [0, 0, 0]; // 开始日期时间位置
     var endTimePickerIndex = [0, 0, 0]; // 结束日期时间位置
 
+
+    if (options.editCourse) {
+      console.log('编辑页面');
+    }
+
+
+
+
     // 汉化moment的周时间展示
     moment.locale('zh-cn', {
       weekdaysShort: '周日_周一_周二_周三_周四_周五_周六'.split('_'),
