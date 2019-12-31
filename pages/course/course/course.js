@@ -112,6 +112,37 @@ Page({
 
     if (options.editCourse) {
       console.log('编辑页面');
+      var taskId = 52;
+      var _this = this;
+      let timestamp = moment().valueOf();
+
+      $.get(
+        'task/task', {
+          'coachid': wx.getStorageSync('coachid'),
+          'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+          'timestamp': timestamp, //时间戳
+          'taskId': taskId,
+        },
+        function (res) {
+          console.log('get task res data');
+          console.log(res.data.data.task);
+          
+          if (res.data.code == 0) {
+            // 获取成功
+            // _this.setData({
+            //   customArray: res.data.data.commonTaskTitleList,
+            // });
+            var taskInfo = res.data.data.task;
+            console.log(moment.unix(taskInfo.beginTime).format('YYYY-MM-DD-hh-mm'));
+            selectDate = moment.unix(taskInfo.beginTime).format('YYYY-MM-DD-hh-mm')
+          } else {
+            wx.showToast({
+              title: '获取失败',
+              icon: 'none'
+            })
+          }
+        }
+      )
     }
 
 
