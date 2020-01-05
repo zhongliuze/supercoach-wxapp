@@ -23,10 +23,9 @@ Page({
    */
   onLoad: function(options) {
     console.log(options);
-    if (options.selectStudentCustomIndex != -1 && options.selectStudentStudentIndex != -1) {
+    if (options.selectStudentId != -1) {
       this.setData({
-        custom_index: options.selectStudentCustomIndex,
-        student_index: options.selectStudentStudentIndex,
+        selectStudentId: options.selectStudentId,
       });
     }
     this.setData({
@@ -158,21 +157,26 @@ Page({
     }
 
     customStudentList['star'] = starStudentList;
+    
+    console.log(customStudentList);
+
+    // selectStudentId
     var selectStudentName = '';
     var selectStudentNamestr = '';
-    var selectStudentId = '';
-    if (this.data.custom_index != -1 && this.data.student_index != -1) {
-      customStudentList[this.data.custom_index][this.data.student_index]['checked'] = true;
-      selectStudentName = customStudentList[this.data.custom_index][this.data.student_index]['name'];
-      selectStudentNamestr = customStudentList[this.data.custom_index][this.data.student_index]['nameStr'];
-      selectStudentId = customStudentList[this.data.custom_index][this.data.student_index]['id'];
+    for (let key in customStudentList) {
+      for (var i = 0; i < customStudentList[key].length; i++) {
+        if (customStudentList[key][i]['id'] == this.data.selectStudentId) {
+          customStudentList[key][i]['checked'] = true;
+          selectStudentName = customStudentList[key][i]['name'];
+          selectStudentNamestr = customStudentList[key][i]['nameStr'];
+        }
+      }
     }
+
     this.setData({
       totalStudents: getStudentList.length,
       customStudentList: customStudentList,
       selectStudentName: selectStudentName,
-      selectStudentNamestr: selectStudentNamestr,
-      selectStudentId: selectStudentId,
     });
   },
 
@@ -189,14 +193,13 @@ Page({
         customStudentList[key][i]['checked'] = false;
       }
     }
+
     customStudentList[custom_index][student_index]['checked'] = true;
     this.setData({
       customStudentList: customStudentList,
       selectStudentName: customStudentList[custom_index][student_index]['name'],
       selectStudentNamestr: customStudentList[custom_index][student_index]['nameStr'],
       selectStudentId: customStudentList[custom_index][student_index]['id'],
-      custom_index: custom_index,
-      student_index: student_index,
     });
   },
 
@@ -209,11 +212,8 @@ Page({
     var prevPage = pages[pages.length - 2]; // 上一页
 
     prevPage.setData({
-      selectStudentName: this.data.selectStudentName,
       selectStudentId: this.data.selectStudentId,
       selectStudentNamestr: this.data.selectStudentNamestr,
-      selectStudentCustomIndex: this.data.custom_index,
-      selectStudentStudentIndex: this.data.student_index,
     });
 
     // 返回上一页

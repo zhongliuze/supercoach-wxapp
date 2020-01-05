@@ -85,10 +85,9 @@ Page({
     scrollIntoView: '', // 颜色方块自动滚入位置
 
     customTitle: '', // 自定义标题内容
+    
     selectStudentId: 0, // 选中学员ID
     selectStudentNamestr: '', // 头像名称
-    selectStudentCustomIndex: -1, // 选中学员key
-    selectStudentStudentIndex: -1, // 选中学员key
 
   },
 
@@ -96,24 +95,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var _this = this;
     var selectDate = options.selectDate; // 传递过来的选中时间
-    var timePickerArray = []; // 时间选择框列表
-    var timeShowArray = []; // 时间展示列表
-
-    var timePickerDate = []; // 时间日期选择框列表
-    var timeShowDate = []; // 时间日期展示列表
-
-    var timePickerHour = []; // 时间小时选择框列表
-    var timeShowHour = []; // 时间小时展示列表
-
-    var startTimePickerIndex = [0, 0, 0]; // 开始日期时间位置
-    var endTimePickerIndex = [0, 0, 0]; // 结束日期时间位置
-
+    var timeLength = 1; // 结束小时距离开始小时长度，默认间隔1小时
 
     if (options.editCourse) {
       console.log('编辑页面');
-      var taskId = 52;
-      var _this = this;
       let timestamp = moment().valueOf();
 
       $.get(
@@ -121,20 +108,25 @@ Page({
           'coachid': wx.getStorageSync('coachid'),
           'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
           'timestamp': timestamp, //时间戳
-          'taskId': taskId,
+          'taskId': options.courseId,
         },
         function (res) {
           console.log('get task res data');
           console.log(res.data.data.task);
           
           if (res.data.code == 0) {
-            // 获取成功
-            // _this.setData({
-            //   customArray: res.data.data.commonTaskTitleList,
-            // });
             var taskInfo = res.data.data.task;
-            console.log(moment.unix(taskInfo.beginTime).format('YYYY-MM-DD-hh-mm'));
-            selectDate = moment.unix(taskInfo.beginTime).format('YYYY-MM-DD-hh-mm')
+            selectDate = moment.unix(taskInfo.beginTime).format('YYYY-MM-DD-hh-mm');
+            _this.createTimeArray(selectDate, taskInfo.step);
+
+
+            if (taskInfo.taskType == 0) {
+              // 是排课，需要展示学员信息
+              _this.setData({
+                'selectStudentId': taskInfo.studentId,
+                'selectStudentNamestr': taskInfo.title.substring(taskInfo.title.length - 2),
+              });
+            }
           } else {
             wx.showToast({
               title: '获取失败',
@@ -143,85 +135,13 @@ Page({
           }
         }
       )
+    }else {
+      this.createTimeArray(selectDate, timeLength);
     }
 
-
-
-
-    // 汉化moment的周时间展示
-    moment.locale('zh-cn', {
-      weekdaysShort: '周日_周一_周二_周三_周四_周五_周六'.split('_'),
-    });
-
-    // 拆分选中时间数据
-    selectDate = selectDate.split("-");
-
-    // 生成picker选择框日期数据
-    for (let i = 0; i < 5; i++) {
-      timePickerDate.push(moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).add(i + 1, 'day').format('MM月DD日 ddd'));
-      timePickerDate.unshift(moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).subtract(i, 'day').format('MM月DD日 ddd'));
-
-      timeShowDate.push(moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).add(i + 1, 'day').format('YYYY-MM-DD'));
-      timeShowDate.unshift(moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).subtract(i, 'day').format('YYYY-MM-DD'));
-    }
-
-    // 生成picker选择框小时数据
-    for (let i = app.globalData.startTime; i <= app.globalData.endTime + 1; i++) {
-      if (i < 10) {
-        timePickerHour.push('0' + i + '时');
-        timeShowHour.push('0' + i);
-      } else {
-        timePickerHour.push(i + '时');
-        timeShowHour.push(i);
-      }
-    }
-
-    // 写入picker列表中
-    timePickerArray.push(timePickerDate, timePickerHour, ['00分', '30分']);
-
-    // 写入展示数据列表中
-    timeShowArray.push(timePickerDate, timeShowHour, ['00', '30'], timeShowDate)
-
-
-    // 获取当前日期所在位置
-    for (let i = 0; i < timePickerArray[0].length; i++) {
-      if (moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).format('MM月DD日 ddd') == timePickerArray[0][i]) {
-        startTimePickerIndex[0] = endTimePickerIndex[0] = i;
-        break;
-      }
-    }
-
-    // 获取当前时间所在位置
-    for (let i = 0; i < timePickerArray[1].length; i++) {
-      if ((selectDate[3] + '时') == timePickerArray[1][i] || ('0' + selectDate[3] + '时') == timePickerArray[1][i]) {
-        startTimePickerIndex[1] = i;
-        if (i + 1 >= timePickerArray[1].length) {
-          endTimePickerIndex[1] = i;
-        } else {
-          endTimePickerIndex[1] = i + 1;
-        }
-        break;
-      }
-    }
-
-    // 获取当前时分所在位置
-    if ((selectDate[4] + '分') == timePickerArray[2][0]) {
-      startTimePickerIndex[2] = endTimePickerIndex[2] = 0;
-    } else if ((selectDate[4] + '分') == timePickerArray[2][1]) {
-      startTimePickerIndex[2] = endTimePickerIndex[2] = 1;
-    }
-
-    console.log(timePickerArray);
-    console.log(timeShowArray);
 
     this.setData({
       fixedBottomButtonMargin: wx.getStorageSync('fixedBottomButtonMargin'), // 设置吸底按钮自适应高度
-      startTimePickerArray: timePickerArray,
-      endTimePickerArray: timePickerArray,
-      startTimeShowArray: timeShowArray,
-      endTimeShowArray: timeShowArray,
-      startTimePickerIndex: startTimePickerIndex,
-      endTimePickerIndex: endTimePickerIndex,
       courseType: options.courseType,
     });
   },
@@ -434,7 +354,7 @@ Page({
    */
   navigateToStudent: function (event) {
     wx.navigateTo({
-      url: '../students/students?selectStudentCustomIndex=' + this.data.selectStudentCustomIndex + '&selectStudentStudentIndex=' + this.data.selectStudentStudentIndex,
+      url: '../students/students?selectStudentId=' + this.data.selectStudentId,
     })
   },
 
@@ -482,7 +402,7 @@ Page({
           'timestamp': timestamp, //时间戳
           'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
           'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
-          'coachStudentId': 1, // 教练与学员关系 ID
+          'coachStudentId': this.data.selectStudentId, // 教练与学员关系 ID
           'remind': remindValue, // 课前提醒（0：无提醒、1、30、60、180、360、86400
           'repeat': repeatValue, // 重复类型（0：不重复、1、7、30）
           'repeatCycle': this.data.repeatTimes, // 重复周期
@@ -629,5 +549,93 @@ Page({
     this.setData({
       customTitle: event.detail.value,
     });
-  }
+  },
+
+  /**
+ * 生成时间选择列表
+ */
+  createTimeArray: function (selectDate, timeLength) {
+    var timePickerArray = []; // 时间选择框列表
+    var timeShowArray = []; // 时间展示列表
+
+    var timePickerDate = []; // 时间日期选择框列表
+    var timeShowDate = []; // 时间日期展示列表
+
+    var timePickerHour = []; // 时间小时选择框列表
+    var timeShowHour = []; // 时间小时展示列表
+
+    var startTimePickerIndex = [0, 0, 0]; // 开始日期时间位置
+    var endTimePickerIndex = [0, 0, 0]; // 结束日期时间位置
+
+    // 汉化moment的周时间展示
+    moment.locale('zh-cn', {
+      weekdaysShort: '周日_周一_周二_周三_周四_周五_周六'.split('_'),
+    });
+
+    // 拆分选中时间数据
+    selectDate = selectDate.split("-");
+
+    // 生成picker选择框日期数据
+    for (let i = 0; i < 5; i++) {
+      timePickerDate.push(moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).add(i + 1, 'day').format('MM月DD日 ddd'));
+      timePickerDate.unshift(moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).subtract(i, 'day').format('MM月DD日 ddd'));
+
+      timeShowDate.push(moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).add(i + 1, 'day').format('YYYY-MM-DD'));
+      timeShowDate.unshift(moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).subtract(i, 'day').format('YYYY-MM-DD'));
+    }
+
+    // 生成picker选择框小时数据
+    for (let i = app.globalData.startTime; i <= app.globalData.endTime + 1; i++) {
+      if (i < 10) {
+        timePickerHour.push('0' + i + '时');
+        timeShowHour.push('0' + i);
+      } else {
+        timePickerHour.push(i + '时');
+        timeShowHour.push(i);
+      }
+    }
+
+    // 写入picker列表中
+    timePickerArray.push(timePickerDate, timePickerHour, ['00分', '30分']);
+
+    // 写入展示数据列表中
+    timeShowArray.push(timePickerDate, timeShowHour, ['00', '30'], timeShowDate)
+
+    // 获取当前日期所在位置
+    for (let i = 0; i < timePickerArray[0].length; i++) {
+      if (moment(selectDate[0] + '-' + selectDate[1] + '-' + selectDate[2]).format('MM月DD日 ddd') == timePickerArray[0][i]) {
+        startTimePickerIndex[0] = endTimePickerIndex[0] = i;
+        break;
+      }
+    }
+
+    // 获取当前时间所在位置
+    for (let i = 0; i < timePickerArray[1].length; i++) {
+      if ((selectDate[3] + '时') == timePickerArray[1][i] || ('0' + selectDate[3] + '时') == timePickerArray[1][i]) {
+        startTimePickerIndex[1] = i;
+        if (i + 1 >= timePickerArray[1].length) {
+          endTimePickerIndex[1] = i;
+        } else {
+          endTimePickerIndex[1] = i + timeLength;
+        }
+        break;
+      }
+    }
+
+    // 获取当前时分所在位置
+    if ((selectDate[4] + '分') == timePickerArray[2][0]) {
+      startTimePickerIndex[2] = endTimePickerIndex[2] = 0;
+    } else if ((selectDate[4] + '分') == timePickerArray[2][1]) {
+      startTimePickerIndex[2] = endTimePickerIndex[2] = 1;
+    }
+
+    this.setData({
+      startTimePickerArray: timePickerArray,
+      endTimePickerArray: timePickerArray,
+      startTimeShowArray: timeShowArray,
+      endTimeShowArray: timeShowArray,
+      startTimePickerIndex: startTimePickerIndex,
+      endTimePickerIndex: endTimePickerIndex,
+    });
+  },
 })

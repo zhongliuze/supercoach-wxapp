@@ -621,9 +621,10 @@ Page({
    */
   clickTableEdit: function (event) {
     // 类型：课程？休息？自定义
-    console.log(this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]);
+    var clickCourseInfo = this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex];
+    console.log(clickCourseInfo);
     wx.navigateTo({
-      url: '../course/course?courseType=' + this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['taskType'] + '&editCourse=1' + '&selectDate=' + this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['date'], 
+      url: '../course/course?courseType=' + clickCourseInfo['taskType'] + '&editCourse=1' + '&courseId=' + clickCourseInfo['taskId'], 
     })
     this.bindCloseMark();
   },
