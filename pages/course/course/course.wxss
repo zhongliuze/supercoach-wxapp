@@ -194,6 +194,10 @@ page {
   color: #181d24;
 }
 
+.course-cells-group .course-cells .content .edit-value {
+  width: 429rpx;
+}
+
 .course-cells-group .course-cells .content .arrow {
   margin-left: 15rpx;
   width: 14rpx;

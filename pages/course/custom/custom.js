@@ -232,9 +232,9 @@ Page({
         colorArray[i]['selected'] = false;
       }
     }
-
+    console.log(scrollIntoView);
     prevPage.setData({
-      customTitle: this.data.customArray[index]['name'],
+      customTitle: this.data.customArray[index]['titleName'],
       colorArray: colorArray,
       scrollIntoView: scrollIntoView,
     });

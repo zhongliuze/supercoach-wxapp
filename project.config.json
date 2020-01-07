@@ -74,7 +74,7 @@
 					"id": 2,
 					"name": "pages/course/course/course",
 					"pathName": "pages/course/course/course",
-					"query": "courseType=0&selectDate='2019-10-17-09-00'",
+					"query": "courseType=0&selectDate='2019-10-17-09-00'&editCourse=1",
 					"scene": null
 				},
 				{

@@ -93,10 +93,13 @@
         <view class="title">
           <text>课前提醒</text>
         </view>
-        <view class="value valuable" bindtap="navigateToRemind">
+        <view class="value valuable edit-value" wx:if="{{editCourse}}">
           <text>{{remindArray[remindType]}}</text>
         </view>
-        <view class="arrow">
+        <view class="value valuable" bindtap="navigateToRemind" wx:else>
+          <text>{{remindArray[remindType]}}</text>
+        </view>
+        <view class="arrow" wx:if="{{!editCourse}}">
           <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
         </view>
       </view>
@@ -109,10 +112,13 @@
         <view class="title">
           <text>重复</text>
         </view>
-        <view class="value valuable" bindtap="navigateToRepeat">
+        <view class="value valuable edit-value" wx:if="{{editCourse}}">
           <text>{{repeatArray[repeatType]}}</text>
         </view>
-        <view class="arrow">
+        <view class="value valuable" bindtap="navigateToRepeat" wx:else>
+          <text>{{repeatArray[repeatType]}}</text>
+        </view>
+        <view class="arrow" wx:if="{{!editCourse}}">
           <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
         </view>
       </view>
@@ -127,10 +133,13 @@
         <view class="title">
           <text>课程类型</text>
         </view>
-        <view class="value valuable" bindtap="navigateToSubject">
+        <view class="value valuable edit-value" wx:if="{{editCourse}}">
           <text>请选择</text>
         </view>
-        <view class="arrow">
+        <view class="value valuable" bindtap="navigateToSubject" wx:else>
+          <text>请选择</text>
+        </view>
+        <view class="arrow" wx:if="{{!editCourse}}">
           <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
         </view>
       </view>
@@ -151,6 +160,24 @@
         </view>
       </view>
     </view> -->
+  </view>
+
+  <view class="course-cells-group course-other-info" wx:if="{{courseType == 0 && editCourse}}">
+    <view class="course-cells" wx:if="{{courseType == 0}}">
+      <view class="icon">
+        <image src="/images/course-edit-complete.png"></image>
+      </view>
+      <view class="content noborder">
+        <view class="title">
+          <text>已完成课程</text>
+        </view>
+        <view class="value valuable edit-value">
+          <view class="switch">
+            <switch color="#5FCD64" />
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
 
 
