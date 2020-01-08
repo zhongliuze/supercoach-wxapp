@@ -60,43 +60,40 @@
           </view>
         </view>
       </block>
-
     </block>
   </view>
 
 
   <block wx:for="{{customStudentList}}" wx:for-index="customIndex" wx:for-item="customItem" wx:key="this">
-    <view class="student-sort" wx:if="{{customItem != ''}}">
-      <text>{{customIndex}}</text>
-    </view>
-    <view class="student-group">
-      <block wx:for="{{customItem}}" wx:for-index="studentIndex" wx:for-item="studentItem" wx:key="this">
-        <view class="student-line" bindtap="selectRadio" data-custom_index="{{customIndex}}" data-student_index="{{studentIndex}}">
-          <view class="checked">
-            <radio checked="{{studentItem.checked}}"></radio>
+    <block wx:if="{{customIndex != 'star'}}">
+      <view class="student-sort" wx:if="{{customItem != ''}}">
+        <text>{{customIndex}}</text>
+      </view>
+      <view class="student-group">
+        <block wx:for="{{customItem}}" wx:for-index="studentIndex" wx:for-item="studentItem" wx:key="this">
+          <view class="student-line" bindtap="selectRadio" data-custom_index="{{customIndex}}" data-student_index="{{studentIndex}}">
+            <view class="checked">
+              <radio checked="{{studentItem.checked}}"></radio>
+            </view>
+            <view class="content {{studentIndex >= (customItem.length - 1) ? 'no-border' : ''}}">
+              <view class="avatar">
+                <text>{{studentItem.nameStr}}</text>
+              </view>
+              <view class="info">
+                <text>{{studentItem.name}}</text>
+              </view>
+              <view class="subtitle" wx:if="{{studentItem.times}}">
+                <text>每周二上课</text>
+              </view>
+            </view>
           </view>
-          <view class="content {{studentIndex >= (customItem.length - 1) ? 'no-border' : ''}}">
-            <view class="avatar">
-              <text>{{studentItem.nameStr}}</text>
-            </view>
-            <view class="info">
-              <text>{{studentItem.name}}</text>
-            </view>
-            <view class="subtitle" wx:if="{{studentItem.times}}">
-              <text>每周二上课</text>
-            </view>
-          </view>
-        </view>
-      </block>
-
-    </view>
-
+        </block>
+      </view>
+    </block>
   </block>
-
 </view>
 
 <view class="common-bottom"></view>
-
 <view class="select-info" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;">
   <view class="select">
     <view class="title" wx:if="{{selectStudentName}}">
