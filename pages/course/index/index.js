@@ -24,7 +24,6 @@ Page({
     viewType: 0, // 0为表格视图，1为列表视图
     menuButtonPopup: false, // 左上角菜单弹窗是/否显示
 
-
     /**
      * 表格视图相关
      */
@@ -33,6 +32,7 @@ Page({
 
     timeList: [], // 表格视图：时间字典列表
     courseList: [], // 任务及表格列表
+    emptyCourseList: [], // 任务及表格列表,空列表
 
     tableLoadBefore: 6, // 表格视图：加载当前日期前x周
     tableLoadAfter: 5, // 表格视图：加载当前日期后x周
@@ -65,6 +65,7 @@ Page({
      * 日历视图相关
      */
     calendarList: [], // 日历视图：日历列表
+    emptyCalendarList: [], // 日历视图，空列表
 
     calendarView: true, // 日历视图：false为日历隐藏，true为日历展开
 
@@ -88,7 +89,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     // 页面初始化设置
     this.initSettings();
 
@@ -99,13 +100,13 @@ Page({
 
     // 表格视图：生成表格视图（无数据）
     var courseListData = this.generateTableList(tableDateList, 'init');
-
     // 日历视图：生成日历视图（无数据）
     var calendarListData = this.generateCalendarList(0 - this.data.calendarLoadBefore, this.data.calendarLoadafter);
-    console.log(calendarListData);
+
     // 更新数据
     this.setData({
       'timeList': timeList, // 表格视图：时间列表
+      'tableDateList': tableDateList,
       'courseList': courseListData.courseList, // 表格视图：表格列表（无数据）
       'currentTableWeekIndex': courseListData.currentTableWeekIndex,
       'currentTableScrollIndex': courseListData.currentTableWeekIndex,
@@ -126,18 +127,22 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
+  onReady: function() {
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
+    // 表格视图：生成表格视图（无数据）
+    var courseListData = this.generateTableList(this.data.tableDateList, 'init');
+    // 日历视图：生成日历视图（无数据）
+    var calendarListData = this.generateCalendarList(0 - this.data.calendarLoadBefore, this.data.calendarLoadafter);
+
     // 表格视图：获取任务数据并填充至表格视图中
-    this.requestCourseTasks(this.data.courseList);
+    this.requestCourseTasks(courseListData.courseList);
     // 日历视图：获取任务所在日期并填充至日历列表中
-    this.requestCalendarTasks(this.data.calendarList);
+    this.requestCalendarTasks(calendarListData.calendarList);
 
     // 更新数据
     this.setData({
@@ -145,49 +150,48 @@ Page({
       timeList: this.realTimeList(), // 更新当前时间展示颜色
       movableMessageY: 1029 + (this.data.statusBarHeight - 20), // 设置可移动预约消息框初始Y轴坐标
     });
-    console.log('**************');
     console.log(this.data.courseList[this.data.selectReduceCalendarWeekIndex]['weekList'][this.data.selectReduceCalendarDayIndex]);
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
   /**
    * 表格视图：滑动加载表格数据
    */
-  loadTableData: function (event) {
+  loadTableData: function(event) {
     // 获取现有表格、日历列表
     var courseList = this.data.courseList;
     var calendarList = this.data.calendarList;
@@ -311,7 +315,7 @@ Page({
   /**
    * 日历视图：滑动加载日历数据 
    */
-  loadCalendarData: function (event) {
+  loadCalendarData: function(event) {
     // 获取现有表格、日历列表
     var courseList = this.data.courseList;
     var calendarList = this.data.calendarList;
@@ -397,13 +401,16 @@ Page({
   /**
    * 表格视图：点击空白区域关闭弹窗
    */
-  bindCloseMark: function (event) {
+  bindCloseMark: function(event) {
     var clickTableWeekIndex = this.data.clickTableWeekIndex; // 表格弹窗选中周下标
     var clickTableDayIndex = this.data.clickTableDayIndex; // 表格弹窗选中周下标
     var clickTableHourIndex = this.data.clickTableHourIndex; // 表格弹窗选中周下标
     var courseList = this.data.courseList;
     // 选中位置颜色改成默认
-    courseList[clickTableWeekIndex]['weekList'][clickTableDayIndex]['tableList'][clickTableHourIndex]['titleColor'] = '';
+    if (courseList[clickTableWeekIndex]['weekList'][clickTableDayIndex]['tableList'][clickTableHourIndex]['hasTask'] == false) {
+      courseList[clickTableWeekIndex]['weekList'][clickTableDayIndex]['tableList'][clickTableHourIndex]['titleColor'] = '';
+    }
+
     this.setData({
       'menuButtonPopup': false,
       'tableButtonPopup': false,
@@ -415,7 +422,7 @@ Page({
   /**
    * 开启/关闭左上角菜单
    */
-  catchMenuButton: function (event) {
+  catchMenuButton: function(event) {
     this.setData({
       'menuButtonPopup': !this.data.menuButtonPopup,
     });
@@ -425,40 +432,53 @@ Page({
   /**
    * 表格视图：点击弹窗自身，阻止冒泡关闭弹窗
    */
-  catchMenuButtonBubbling: function (event) { },
+  catchMenuButtonBubbling: function(event) {},
 
   /**
    * 切换表格/日历视图
    */
-  catchChangeView: function (event) {
+  catchChangeView: function(event) {
     wx.setStorageSync('viewType', this.data.viewType == 0 ? 1 : 0);
     this.setData({
       viewType: this.data.viewType == 0 ? 1 : 0,
       'menuButtonPopup': false,
-
     });
   },
 
   /**
    * 表格视图：生成课表图片
    */
-  catchGenerateImages: function (enent) {
+  catchGenerateImages: function(enent) {
     console.log('生成课表图片');
+    wx.showToast({
+      title: '您未获得该功能的体验资格哦~',
+      icon: 'none',
+    })
+    this.setData({
+      'menuButtonPopup': false,
+    });
   },
 
   /**
    * 打开预约消息列表
    */
-  catchNavigateOrder: function (event) {
-    wx.navigateTo({
-      url: '../../order/index/index',
+  catchNavigateOrder: function(event) {
+    wx.showToast({
+      title: '该功能暂未开放',
+      icon: 'none',
     })
+    this.setData({
+      'menuButtonPopup': false,
+    });
+    // wx.navigateTo({
+    //   url: '../../order/index/index',
+    // })
   },
 
   /**
    * 返回本周所在位置
    */
-  catchCurrentTableChange: function (event) {
+  catchCurrentTableChange: function(event) {
     console.log('本周位置：' + this.data.currentTableWeekIndex);
     this.setData({
       'currentTableScrollIndex': this.data.currentTableWeekIndex,
@@ -470,8 +490,9 @@ Page({
   /**
    * 表格视图：选中表格按钮弹窗
    */
-  tableButtonPopup: function (event) {
+  tableButtonPopup: function(event) {
     var courseList = this.data.courseList; // 任务列表
+    console.log(this.data.tableButtonPopup);
 
     // 判断是否打开，已打开则直接关闭，未打开则计算下面内容
     if (this.data.tableButtonPopup == true) {
@@ -479,139 +500,150 @@ Page({
       var clickTableDayIndex = this.data.clickTableDayIndex; // 表格弹窗选中周下标
       var clickTableHourIndex = this.data.clickTableHourIndex; // 表格弹窗选中周下标
       // 选中位置颜色改成默认
-      courseList[clickTableWeekIndex]['weekList'][clickTableDayIndex]['tableList'][clickTableHourIndex]['titleColor'] = '';
+      if (courseList[clickTableWeekIndex]['weekList'][clickTableDayIndex]['tableList'][clickTableHourIndex]['hasTask'] == false) {
+        courseList[clickTableWeekIndex]['weekList'][clickTableDayIndex]['tableList'][clickTableHourIndex]['titleColor'] = '';
+      }
+
       this.setData({
         'tableButtonPopup': false,
         'courseList': courseList,
       });
-      return;
-    }
-
-    var courseIndex = event.currentTarget.dataset.courseindex; // 选中周下标位置
-    var weekIndex = event.currentTarget.dataset.weekindex; // 选中天下标位置
-    var tableIndex = event.currentTarget.dataset.tableindex; // 选中时间位置
-
-    var tableButtonPopupStyle = ''; // 弹窗样式
-    var tableButtonPopupArrowStyle = ''; // 弹窗三角标样式
-    var tableButtonTop = 20; // 初始化默认加上距顶部的边距
-
-    // 计算弹窗x轴边距
-    // 判断弹窗显示位置
-    if (weekIndex < 4) {
-      // 弹窗显示在左侧
-      var tableButtonLeft = (weekIndex + 1) * 90 + 5;
-      tableButtonPopupStyle += 'left:' + tableButtonLeft + 'rpx;';
-      var tableButtonPopupDirection = 'right';
-      // 弹窗三角标左边距
-      tableButtonPopupArrowStyle += 'left: -15rpx;'
     } else {
-      // 弹窗显示在右侧
-      var tableButtonLeft = weekIndex * 80 + (weekIndex + 1) * 10 - 266 + 4;
-      tableButtonPopupStyle += 'left:' + tableButtonLeft + 'rpx;';
-      var tableButtonPopupDirection = 'left';
-      // 弹窗三角标右边距
-      tableButtonPopupArrowStyle += 'right: -15rpx;'
-    }
+      var courseIndex = event.currentTarget.dataset.courseindex; // 选中周下标位置
+      var weekIndex = event.currentTarget.dataset.weekindex; // 选中天下标位置
+      var tableIndex = event.currentTarget.dataset.tableindex; // 选中时间位置
 
-    // 计算弹窗Y轴边距
-    for (var i = 0; i <= tableIndex; i++) {
-      // 累加上方所有表格的高度
-      tableButtonTop += parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][i]['height']) +
-        parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][i]['paddingBottom']);
-    }
+      var tableButtonPopupStyle = ''; // 弹窗样式
+      var tableButtonPopupArrowStyle = ''; // 弹窗三角标样式
+      var tableButtonTop = 20; // 初始化默认加上距顶部的边距
 
-    // 判断选中表格是否有任务
-    if (courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['hasTask'] == true) {
-      // 有任务
-      var tableButtonMarkHeight = 284; // 弹窗高度
-      var tableButtonPopupType = 1; // 弹窗类型
-      tableButtonPopupStyle += 'height: 284rpx;';
-    } else if (courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['hasTask'] == false) {
-      // 无任务
-      var tableButtonMarkHeight = 402; // 弹窗高度
-      var tableButtonPopupType = 0; // 弹窗类型
-      tableButtonPopupStyle += 'height: 402rpx;';
-    }
-
-    // 累计高度减去自身高度的一半
-    tableButtonTop -= ((tableButtonMarkHeight - parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['height'])) / 2 +
-      parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['height']) +
-      parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['paddingBottom']));
-
-    // 上下边距判断，保证显示在安全位置
-    if (tableButtonTop < 0) {
-      // 弹窗位置已超过上边距
-      tableButtonTop = 20;
-      tableButtonPopupStyle += 'top:20rpx;';
-      if (tableButtonPopupType == 0) {
-        // 无任务区域
-        if (tableIndex == 0) {
-          tableButtonPopupArrowStyle += 'top: 40rpx;'; // 弹窗三角标位置
-        } else if (tableIndex == 1) {
-          tableButtonPopupArrowStyle += 'top: 154rpx;'; // 弹窗三角标位置
-        }
+      // 计算弹窗x轴边距
+      // 判断弹窗显示位置
+      if (weekIndex < 4) {
+        // 弹窗显示在左侧
+        var tableButtonLeft = (weekIndex + 1) * 90 + 5;
+        tableButtonPopupStyle += 'left:' + tableButtonLeft + 'rpx;';
+        var tableButtonPopupDirection = 'right';
+        // 弹窗三角标左边距
+        tableButtonPopupArrowStyle += 'left: -15rpx;'
       } else {
-        // 有任务区域
-        var tableButtonArrowBottom = (parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['height']) / 2 - 12);
-        tableButtonPopupArrowStyle += 'top:' + tableButtonArrowBottom + 'rpx'; // 弹窗三角标位置
+        // 弹窗显示在右侧
+        var tableButtonLeft = weekIndex * 80 + (weekIndex + 1) * 10 - 266 + 4;
+        tableButtonPopupStyle += 'left:' + tableButtonLeft + 'rpx;';
+        var tableButtonPopupDirection = 'left';
+        // 弹窗三角标右边距
+        tableButtonPopupArrowStyle += 'right: -15rpx;'
       }
 
-    } else if ((tableButtonTop + tableButtonMarkHeight) > ((this.data.tableEndTime - this.data.tableStartTime + 1) * 114 + 20)) {
-      // 弹窗位置已超过上边距，判断方法：计算弹窗按钮区域顶部坐标像素+弹窗按钮区域高度 是否大于 表格区域的总高度
-      tableButtonPopupStyle += 'bottom:9rpx;';
-      if (tableButtonPopupType == 0) {
-        // 无任务区域
-        if (tableIndex == (courseList[courseIndex]['weekList'][weekIndex]['tableList'].length - 1)) {
-          tableButtonPopupArrowStyle += 'bottom: 40rpx;';
-        } else if (tableIndex == (courseList[courseIndex]['weekList'][weekIndex]['tableList'].length - 2)) {
-          tableButtonPopupArrowStyle += 'bottom: 154rpx;';
-        }
-      } else {
-        // 有任务区域，（弹窗高度-表格区域高度） + 表格区域高度 / 2 + 12
-        var tableButtonArrowBottom = (parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['height']) / 2 - 12);
-        tableButtonPopupArrowStyle += 'bottom:' + tableButtonArrowBottom + 'rpx';
+      // 计算弹窗Y轴边距
+      for (var i = 0; i <= tableIndex; i++) {
+        // 累加上方所有表格的高度
+        tableButtonTop += parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][i]['height']) +
+          parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][i]['paddingBottom']);
       }
-    } else {
-      // 位置正常
-      tableButtonPopupStyle += 'top:' + tableButtonTop + 'rpx;'; // 上边距
-      // 判断弹窗类型，确定三角标位置
-      if (tableButtonPopupType == 0) {
-        // 无任务
-        tableButtonPopupArrowStyle += 'top:189rpx'; // 三角标位置
-      } else {
+
+      // 判断选中表格是否有任务
+      if (courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['hasTask'] == true) {
         // 有任务
-        tableButtonPopupArrowStyle += 'top:130rpx'; // 三角标位置
+        var tableButtonMarkHeight = 284; // 弹窗高度
+        var tableButtonPopupType = 1; // 弹窗类型
+        tableButtonPopupStyle += 'height: 284rpx;';
+      } else if (courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['hasTask'] == false) {
+        // 无任务
+        var tableButtonMarkHeight = 402; // 弹窗高度
+        var tableButtonPopupType = 0; // 弹窗类型
+        tableButtonPopupStyle += 'height: 402rpx;';
       }
+
+      // 累计高度减去自身高度的一半
+      tableButtonTop -= ((tableButtonMarkHeight - parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['height'])) / 2 +
+        parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['height']) +
+        parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['paddingBottom']));
+
+      // 上下边距判断，保证显示在安全位置
+      if (tableButtonTop < 0) {
+        // 弹窗位置已超过上边距
+        tableButtonTop = 20;
+        tableButtonPopupStyle += 'top:20rpx;';
+        if (tableButtonPopupType == 0) {
+          // 无任务区域
+          if (tableIndex == 0) {
+            tableButtonPopupArrowStyle += 'top: 40rpx;'; // 弹窗三角标位置
+          } else if (tableIndex == 1) {
+            tableButtonPopupArrowStyle += 'top: 154rpx;'; // 弹窗三角标位置
+          }
+        } else {
+          // 有任务区域
+          var tableButtonArrowBottom = (parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['height']) / 2 - 12);
+          tableButtonPopupArrowStyle += 'top:' + tableButtonArrowBottom + 'rpx'; // 弹窗三角标位置
+        }
+
+      } else if ((tableButtonTop + tableButtonMarkHeight) > ((this.data.tableEndTime - this.data.tableStartTime + 1) * 114 + 20)) {
+        // 弹窗位置已超过上边距，判断方法：计算弹窗按钮区域顶部坐标像素+弹窗按钮区域高度 是否大于 表格区域的总高度
+        tableButtonPopupStyle += 'bottom:9rpx;';
+        if (tableButtonPopupType == 0) {
+          // 无任务区域
+          if (tableIndex == (courseList[courseIndex]['weekList'][weekIndex]['tableList'].length - 1)) {
+            tableButtonPopupArrowStyle += 'bottom: 40rpx;';
+          } else if (tableIndex == (courseList[courseIndex]['weekList'][weekIndex]['tableList'].length - 2)) {
+            tableButtonPopupArrowStyle += 'bottom: 154rpx;';
+          }
+        } else {
+          // 有任务区域，（弹窗高度-表格区域高度） + 表格区域高度 / 2 + 12
+          var tableButtonArrowBottom = (parseInt(courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['height']) / 2 - 12);
+          tableButtonPopupArrowStyle += 'bottom:' + tableButtonArrowBottom + 'rpx';
+        }
+      } else {
+        // 位置正常
+        tableButtonPopupStyle += 'top:' + tableButtonTop + 'rpx;'; // 上边距
+        // 判断弹窗类型，确定三角标位置
+        if (tableButtonPopupType == 0) {
+          // 无任务
+          tableButtonPopupArrowStyle += 'top:189rpx'; // 三角标位置
+        } else {
+          // 有任务
+          tableButtonPopupArrowStyle += 'top:130rpx'; // 三角标位置
+        }
+      }
+
+      // 选择位置颜色区分
+
+      if (tableButtonPopupType == 0 && courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['hasTask'] == false) {
+        courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['titleColor'] = '#B2F3B5';
+      }
+
+
+      // 赋值更新数据
+      this.setData({
+        'tableButtonPopup': !this.data.tableButtonPopup, // 显示/隐藏弹窗
+        'tableButtonPopupStyle': tableButtonPopupStyle, // 表格弹窗样式
+        'tableButtonPopupDirection': tableButtonPopupDirection, // 弹窗方向
+        'tableButtonPopupArrowStyle': tableButtonPopupArrowStyle, // 弹窗箭头指示方向
+        'tableButtonPopupType': tableButtonPopupType, // 弹窗类型
+        'courseList': courseList,
+        'clickTableWeekIndex': courseIndex,
+        'clickTableDayIndex': weekIndex,
+        'clickTableHourIndex': tableIndex,
+      });
+
+
     }
-
-    // 选择位置颜色区分
-
-    if (tableButtonPopupType == 0) {
-      courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['titleColor'] = '#B2F3B5';
-    }
-
-
-    // 赋值更新数据
-    this.setData({
-      'tableButtonPopup': !this.data.tableButtonPopup, // 显示/隐藏弹窗
-      'tableButtonPopupStyle': tableButtonPopupStyle, // 表格弹窗样式
-      'tableButtonPopupDirection': tableButtonPopupDirection, // 弹窗方向
-      'tableButtonPopupArrowStyle': tableButtonPopupArrowStyle, // 弹窗箭头指示方向
-      'tableButtonPopupType': tableButtonPopupType, // 弹窗类型
-      'courseList': courseList,
-      'clickTableWeekIndex': courseIndex,
-      'clickTableDayIndex': weekIndex,
-      'clickTableHourIndex': tableIndex,
-    });
   },
 
   /**
    * 表格视图：点击弹窗中排课、休息、自定义按钮
    */
-  clickTableCourse: function (event) {
+  clickTableCourse: function(event) {
     wx.showTabBar();
+    if (event.currentTarget.dataset.type == 0) {
+      // 表格视图进来
+      var selectDate = this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['date'];
+    } else if (event.currentTarget.dataset.type == 1) {
+      // 日历视图进来
+      var selectDate = moment().format('YYYY-MM-DD-HH-00');
+    }
     wx.navigateTo({
-      url: '../course/course?courseType=' + event.currentTarget.dataset.index + '&selectDate=' + this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['date'],
+      url: '../course/course?courseType=' + event.currentTarget.dataset.index + '&selectDate=' + selectDate,
     })
     this.bindCloseMark();
   },
@@ -619,12 +651,20 @@ Page({
   /**
    * 表格视图：点击弹窗中编辑按钮
    */
-  clickTableEdit: function (event) {
+  clickTableEdit: function(event) {
     // 类型：课程？休息？自定义
-    var clickCourseInfo = this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex];
-    console.log(clickCourseInfo);
+    if (event.currentTarget.dataset.type == 0) {
+      // 表格列表进入
+      var clickCourseInfo = this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex];
+      var courseType = clickCourseInfo['taskType'];
+      var courseId = clickCourseInfo['taskId'];
+    } else if (event.currentTarget.dataset.type == 1) {
+      // 日历列表进入
+      var courseType = event.currentTarget.dataset.course_type;
+      var courseId = event.currentTarget.dataset.course_id;
+    }
     wx.navigateTo({
-      url: '../course/course?courseType=' + clickCourseInfo['taskType'] + '&editCourse=1' + '&courseId=' + clickCourseInfo['taskId'], 
+      url: '../course/course?courseType=' + courseType + '&editCourse=1' + '&courseId=' + courseId,
     })
     this.bindCloseMark();
   },
@@ -632,12 +672,11 @@ Page({
   /**
    * 表格视图：点击弹窗中删除按钮
    */
-  clickTableDelete: function (event) {
+  clickTableDelete: function(event) {
     var _this = this;
     // 关闭编辑弹窗
     if (this.data.tableButtonPopup == true) {
       // 编辑弹窗
-
       var clickTableWeekIndex = this.data.clickTableWeekIndex; // 表格弹窗选中周下标
       var clickTableDayIndex = this.data.clickTableDayIndex; // 表格弹窗选中周下标
       var clickTableHourIndex = this.data.clickTableHourIndex; // 表格弹窗选中周下标
@@ -648,7 +687,7 @@ Page({
     } else {
       var task_id = event.currentTarget.dataset.task_id;
     }
-    
+
     wx.showModal({
       title: '确认要删除吗？',
       content: '相关联的课程数据也将被删除',
@@ -669,15 +708,15 @@ Page({
               'timestamp': timestamp, //时间戳
               'taskId': task_id,
             },
-            function (res) {
+            function(res) {
               console.log(res.data);
               if (res.data.code == 0) {
                 // 获取成功
                 wx.showToast({
                   title: '已删除',
                   icon: 'success',
-                  success: function () {
-
+                  success: function() {
+                    _this.onShow();
                   }
                 })
               } else {
@@ -696,7 +735,7 @@ Page({
   /**
    * 日历视图：点击切换缩略日历和完整日历展示
    */
-  switchCalendarView: function (event) {
+  switchCalendarView: function(event) {
     // 将日历展开、收起状态写入缓存中
     wx.setStorageSync('calendarView', !this.data.calendarView);
     if (this.data.calendarView == false) {
@@ -759,7 +798,7 @@ Page({
   /**
    * 侧滑删除：手指触摸动作开始 记录起点X坐标
    */
-  touchStart: function (event) {
+  touchStart: function(event) {
     //开始触摸时 重置所有删除
     var courseList = this.data.courseList;
 
@@ -793,17 +832,23 @@ Page({
   /**
    * 侧滑删除：滑动事件处理
    */
-  touchMove: function (event) {
+  touchMove: function(event) {
 
     var courseList = this.data.courseList;
-    var taskIndex = event.currentTarget.dataset.index;  //当前索引
-    var startX = this.data.startX;  //开始X坐标
-    var startY = this.data.startY;  //开始Y坐标
+    var taskIndex = event.currentTarget.dataset.index; //当前索引
+    var startX = this.data.startX; //开始X坐标
+    var startY = this.data.startY; //开始Y坐标
     var touchMoveX = event.changedTouches[0].clientX; //滑动变化坐标
     var touchMoveY = event.changedTouches[0].clientY; //滑动变化坐标
 
     //获取滑动角度
-    var angle = this.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
+    var angle = this.angle({
+      X: startX,
+      Y: startY
+    }, {
+      X: touchMoveX,
+      Y: touchMoveY
+    });
 
 
     var courseList = this.data.courseList;
@@ -867,14 +912,14 @@ Page({
    * @param {Object} start 起点坐标
    * @param {Object} end 终点坐标
    */
-  angle: function (start, end) {
+  angle: function(start, end) {
     var _X = end.X - start.X,
       _Y = end.Y - start.Y
     //返回角度 /Math.atan()返回数字的反正切值
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   },
 
-  catchUnwind: function (event) {
+  catchUnwind: function(event) {
     if (this.data.fullScreenPopup == true) {
       // 关闭遮罩层，打开菜单栏
       wx.showTabBar();
@@ -890,7 +935,7 @@ Page({
   /**
    * 表格视图：将任务数据赋值到表格列表中
    */
-  composeCourseTasks: function (taskList, courseList) {
+  composeCourseTasks: function(taskList, courseList) {
     var _this = this;
     for (let i = 0; i < taskList.length; i++) {
       for (let j = 0; j < courseList.length; j++) {
@@ -1076,7 +1121,7 @@ Page({
   /**
    * 表格视图：生成表格视图列表（无数据）
    */
-  generateTableList: function (dateList, loadType) {
+  generateTableList: function(dateList, loadType) {
     var tableList = [];
     // 初始化moment设置
     moment.locale('zh-cn', {
@@ -1158,7 +1203,7 @@ Page({
   /**
    * 日历视图：选中缩略日历中日期
    */
-  selectReduceCalendarDate: function (event) {
+  selectReduceCalendarDate: function(event) {
     var weekIndex = event.currentTarget.dataset.week;
     var dayIndex = event.currentTarget.dataset.day;
     this.setData({
@@ -1170,7 +1215,7 @@ Page({
   /**
    * 日历视图：选中完整日历中日期
    */
-  selectCalendarDate: function (event) {
+  selectCalendarDate: function(event) {
     var monthIndex = event.currentTarget.dataset.month;
     var weekIndex = event.currentTarget.dataset.week;
     var dayIndex = event.currentTarget.dataset.day;
@@ -1198,7 +1243,7 @@ Page({
   /**
    * 日历视图：生成日历视图列表（无数据）
    */
-  generateCalendarList: function (beginCalendar, endCalendar, loadType = 'init') {
+  generateCalendarList: function(beginCalendar, endCalendar, loadType = 'init') {
     var tempCalendarList = [];
     for (let i = beginCalendar; i < endCalendar; i++) {
       if (loadType == 'loadLeft') {
@@ -1279,11 +1324,25 @@ Page({
   /**
    * 日历视图：获取任务数据并更新日历显示（点）
    */
-  requestCalendarTasks: function (newCalendarList, oldCalendarList, scrollCurrent, setType = 'init') {
+  requestCalendarTasks: function(newCalendarList, oldCalendarList, scrollCurrent, setType = 'init') {
+    if (setType == 'init') {
+      wx.showLoading({
+        title: '加载中',
+      });
+    }
     var _this = this;
     let timestamp = moment().valueOf();
-    var beginDate = newCalendarList[0]['year'] + '-' + newCalendarList[0]['month'] + '-' + '01';
-    var endDate = newCalendarList[newCalendarList.length - 1]['year'] + '-' + newCalendarList[newCalendarList.length - 1]['month'] + '-' + '01';
+    if (newCalendarList[0]['month'] < 10) {
+      var beginDate = newCalendarList[0]['year'] + '-0' + newCalendarList[0]['month'] + '-' + '01';
+    } else {
+      var beginDate = newCalendarList[0]['year'] + '-' + newCalendarList[0]['month'] + '-' + '01';
+    }
+    if (newCalendarList[newCalendarList.length - 1]['month'] < 10) {
+      var endDate = newCalendarList[newCalendarList.length - 1]['year'] + '-0' + newCalendarList[newCalendarList.length - 1]['month'] + '-' + '01';
+    } else {
+      var endDate = newCalendarList[newCalendarList.length - 1]['year'] + '-' + newCalendarList[newCalendarList.length - 1]['month'] + '-' + '01';
+    }
+
     $.get(
       'task/monthRange', {
         'coachid': wx.getStorageSync('coachid'),
@@ -1292,7 +1351,7 @@ Page({
         'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
         'timestamp': timestamp, //时间戳
       },
-      function (res) {
+      function(res) {
         if (res.data.code == 0) {
           // 获取成功
           var taskList = res.data.data.taskList;
@@ -1332,6 +1391,9 @@ Page({
             'calendarScrollIndex': scrollCurrent,
           });
         }
+        if (setType == 'init') {
+          wx.hideLoading();
+        }
       }
     )
   },
@@ -1340,9 +1402,15 @@ Page({
   /**
    * 表格视图：获取任务数据并填充至表格视图中
    */
-  requestCourseTasks: function (tableList, courseList = [], scrollCurrent = 0, loadType = 'init') {
+  requestCourseTasks: function(tableList, courseList = [], scrollCurrent = 0, loadType = 'init') {
     var _this = this;
     let timestamp = moment().valueOf(); // 时间戳
+    if (loadType == 'init') {
+      wx.showLoading({
+        title: '加载中',
+      });
+    }
+    
     $.get(
       'task/weekRange', {
         coachid: wx.getStorageSync('coachid'), // 用户id
@@ -1351,7 +1419,7 @@ Page({
         sign: util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
         timestamp: timestamp, //时间戳
       },
-      function (res) {
+      function(res) {
         if (res.data.code == 0) {
           // 判断数据加载方向
           if (loadType == 'loadLeft') {
@@ -1384,15 +1452,18 @@ Page({
         // 更新数据
         if (loadType != 'init') {
           _this.setData({
-            courseList: newCourseList,
-            tableScrollYear: newCourseList[scrollCurrent].year + '年',
-            tableScrollMonth: newCourseList[scrollCurrent].month + '月',
+            'courseList': newCourseList,
+            'tableScrollYear': newCourseList[scrollCurrent].year + '年',
+            'tableScrollMonth': newCourseList[scrollCurrent].month + '月',
           });
         } else {
           _this.setData({
-            courseList: newCourseList,
+            'courseList': newCourseList,
           });
         }
+        if (loadType == 'init') {
+          wx.hideLoading();
+        };
       }
     )
   },
@@ -1400,7 +1471,7 @@ Page({
   /**
    * 表格视图：构建表格日期列表
    */
-  buildTableDateList: function (beginCalendar, endCalendar, loadType = 'init') {
+  buildTableDateList: function(beginCalendar, endCalendar, loadType = 'init') {
     var dateList = [];
     for (let i = beginCalendar; i < endCalendar; i++) {
       var weekArray = [];
@@ -1431,7 +1502,7 @@ Page({
   /**
    * 表格视图：更新实时时间列表显示
    */
-  realTimeList: function () {
+  realTimeList: function() {
     var timeList = this.data.timeList;
     for (let i = 0; i < timeList.length; i++) {
       if (timeList[i]['hour'] == moment().hour()) {
@@ -1445,7 +1516,7 @@ Page({
   /**
    * 表格视图：更新实时时间线位置
    */
-  realTimeLine: function () {
+  realTimeLine: function() {
     if (moment().hour() < (this.data.tableEndTime + 1) && moment().hour() > (this.data.tableStartTime - 1)) {
       // 显示时间线
       var timeLinePosition = 20 + (parseInt(moment().hour()) - this.data.tableStartTime) * 114 + (104 / 60) * moment().minute() - 4;
@@ -1459,7 +1530,7 @@ Page({
   /**
    * 初始化页面设置
    */
-  initSettings: function () {
+  initSettings: function() {
     // 获取缓存中视图类型
     var _this = this;
     if (wx.getStorageSync('viewType')) {

@@ -173,7 +173,7 @@
         </view>
         <view class="value valuable edit-value">
           <view class="switch">
-            <switch color="#5FCD64" />
+            <switch checked="{{courseStatusSwitch}}" bindchange="courseStatusSwitch" color="#5FCD64" />
           </view>
         </view>
       </view>

@@ -14,14 +14,14 @@
               <image src='http://superimage.xianshikeji.com/icon/superwxapp/course-menu-change.png'></image>
               <text>切换视图</text>
             </view>
-            <!-- <view class="bar-menu-button" catchtap="catchGenerateImages">
+            <view class="bar-menu-button" catchtap="catchGenerateImages">
               <image src='http://superimage.xianshikeji.com/icon/superwxapp/course-menu-image.png'></image>
               <text>生成图片</text>
             </view>
             <view class="bar-menu-button" catchtap="catchNavigateOrder">
               <image src='http://superimage.xianshikeji.com/icon/superwxapp/course-menu-message.png'></image>
               <text>预约消息</text>
-            </view> -->
+            </view>
             <view class="bar-menu-button" catchtap="catchCurrentTableChange" wx:if="{{currentTableWeekIndex != currentTableScrollIndex}}">
               <image src='http://superimage.xianshikeji.com/icon/superwxapp/return-tables.png'></image>
               <text>返回本周</text>
@@ -96,7 +96,7 @@
                     <view class="day">
                       <block wx:for="{{weekItem.tableList}}" wx:key="this" wx:for-item="tableItem" wx:for-index="tableIndex">
                         <block wx:if="{{tableItem.hasTask == true}}">
-                          <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}} ready" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;margin-top:{{tableItem.marginTop}}rpx;" catchtap="tableButtonPopup"
+                          <view class="time {{weekItem.isCurrent == 1 ? 'onday' : ''}}" style="background-color:{{tableItem.titleColor}};margin-bottom: {{tableItem.paddingBottom}}rpx;height:{{tableItem.height}}rpx;margin-top:{{tableItem.marginTop}}rpx;" catchtap="tableButtonPopup"
                             data-tableIndex="{{tableIndex}}" data-weekIndex="{{weekIndex}}" data-courseIndex="{{courseIndex}}">
                             <text>{{tableItem.title}}</text>
                           </view>
@@ -112,21 +112,21 @@
                 <view class="table-mark" wx:if="{{tableButtonPopup}}" style="{{tableButtonPopupStyle}}">
                   <view class="content">
                     <block wx:if="{{tableButtonPopupType == 0}}">
-                      <view class="button" catchtap="clickTableCourse" data-index="0">
+                      <view class="button" catchtap="clickTableCourse" data-index="0" data-type="0">
                         <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-course.png"></image>
                         <text>排课</text>
                       </view>
-                      <view class="button" catchtap="clickTableCourse" data-index="1">
+                      <view class="button" catchtap="clickTableCourse" data-index="1" data-type="0">
                         <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-rest.png"></image>
                         <text>休息</text>
                       </view>
-                      <view class="button" catchtap="clickTableCourse" data-index="2">
+                      <view class="button" catchtap="clickTableCourse" data-index="2" data-type="0">
                         <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-custom.png"></image>
                         <text>自定义</text>
                       </view>
                     </block>
                     <block wx:else>
-                      <view class="button" catchtap="clickTableEdit" data-index="{{index}}" data-task_id="{{item.taskId}}">
+                      <view class="button" catchtap="clickTableEdit" data-index="{{index}}" data-task_id="{{item.taskId}}" data-type="0">
                         <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-edit.png"></image>
                         <text>编辑</text>
                       </view>
@@ -186,7 +186,7 @@
         </swiper>
 
         <swiper class="calendar-swiper" wx:elif="{{calendarView == true}}" current="{{calendarScrollIndex}}" bindchange="loadCalendarData">
-          <swiper-item wx:for="{{calendarList}}" wx:for-item="calendarItem" wx:for-index="calendarIndex">
+          <swiper-item wx:for="{{calendarList}}" wx:for-item="calendarItem" wx:for-index="calendarIndex" wx:key="this">
             <view class="scroll-date-line">
               <view class="week-line">
                 <text>一</text>
@@ -198,9 +198,9 @@
                 <text>日</text>
               </view>
               <view class="day-list">
-                <block wx:for="{{calendarItem.monthList}}" wx:for-item="monthItem" wx:for-index="monthIndex">
+                <block wx:for="{{calendarItem.monthList}}" wx:for-item="monthItem" wx:for-index="monthIndex" wx:key="this">
                   <view class="day-line">
-                    <block wx:for="{{monthItem.weekList}}" wx:for-item="weekItem" wx:for-index="weekIndex">
+                    <block wx:for="{{monthItem.weekList}}" wx:for-item="weekItem" wx:for-index="weekIndex" wx:key="this">
 
                       <view class="datenum {{calendarItem.month != weekItem.month ? 'default' : ''}} {{(selectCalendarMonthIndex == calendarIndex && selectCalendarWeekIndex == monthIndex && selectCalendarDayIndex == weekIndex) ? 'select_day' : (weekItem.isCurrent ? 'current_day' : '')}}"
                         catchtap="selectCalendarDate" data-month="{{calendarIndex}}" data-week="{{monthIndex}}" data-day="{{weekIndex}}" data-date="{{weekItem.date}}">
@@ -233,12 +233,12 @@
         </view>
         <!-- 任务列表 -->
         <view class="tasks" wx:if="{{courseList[selectReduceCalendarWeekIndex]['weekList'][selectReduceCalendarDayIndex]['hasTask']}}">
-        
+
           <block wx:for="{{courseList[selectReduceCalendarWeekIndex]['weekList'][selectReduceCalendarDayIndex]['tableList']}}" wx:key="this">
             <movable-area class='movable-area' wx:if="{{item.hasTask}}">
               <movable-view direction="horizontal" class='movable-view'>
                 <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchStart" bindtouchmove="touchMove">
-                  <view class="task-line {{item.isTouchMove ? 'touch-task-line' : ''}}">
+                  <view class="task-line {{item.isTouchMove ? 'touch-task-line' : ''}}" catchtap="clickTableEdit" data-type="1" data-course_type="{{item.taskType}}" data-course_id="{{item.taskId}}">
                     <view class="task-status" style="background-color:{{item.titleColor}};"></view>
                     <view class="avatar" wx:if="{{item.avatar == '' || item.avatar == null}}">
                       <text>{{item.studentName}}</text>
@@ -294,15 +294,15 @@
   <view class="unwind-view" catchtap="catchUnwind">
   </view>
   <view class="unwind-button-group">
-    <view class="button" catchtap="catchCourse">
+    <view class="button" catchtap="clickTableCourse" data-index="0" data-type="1">
       <text>排课</text>
       <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-course.png"></image>
     </view>
-    <view class="button" catchtap="catchRest">
+    <view class="button" catchtap="clickTableCourse" data-index="1" data-type="1">
       <text>休息</text>
       <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-rest.png"></image>
     </view>
-    <view class="button" catchtap="catchCustom">
+    <view class="button" catchtap="clickTableCourse" data-index="2" data-type="1">
       <text>自定义</text>
       <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-custom.png"></image>
     </view>

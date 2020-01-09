@@ -1,4 +1,5 @@
 // pages/course/course/course.js
+import config from '../../../common/config.js';
 const moment = require('../../../vendor/moment/moment.js');
 import $ from '../../../common/common.js';
 const util = require('../../../utils/util')
@@ -32,6 +33,7 @@ Page({
     repeatResault: [0, 1, 7, 30],
 
     fullDaySwitch: false, // 全天按钮打开/关闭
+    courseStatusSwitch: false, // 已完成课程打开/关闭
 
     colorArray: [{
         color: '#DC4F5A',
@@ -85,7 +87,7 @@ Page({
     scrollIntoView: '', // 颜色方块自动滚入位置
 
     customTitle: '', // 自定义标题内容
-    
+
     selectStudentId: 0, // 选中学员ID
     selectStudentNamestr: '', // 头像名称
 
@@ -113,10 +115,10 @@ Page({
           'timestamp': timestamp, //时间戳
           'taskId': options.courseId,
         },
-        function (res) {
+        function(res) {
           console.log('get task res data');
           console.log(res.data.data.task);
-          
+
           if (res.data.code == 0) {
             var taskInfo = res.data.data.task;
             selectDate = moment.unix(taskInfo.beginTime).format('YYYY-MM-DD-hh-mm');
@@ -125,9 +127,16 @@ Page({
 
             if (taskInfo.taskType == 0) {
               // 是排课，需要展示学员信息
+              // 判断是否已完成课程
+              if (taskInfo.taskStatus == 0) {
+                var courseStatusSwitch = false;
+              } else if (taskInfo.taskStatus == 1) {
+                var courseStatusSwitch = true;
+              }
               _this.setData({
                 'selectStudentId': taskInfo.studentId,
                 'selectStudentNamestr': taskInfo.title.substring(taskInfo.title.length - 2),
+                'courseStatusSwitch': courseStatusSwitch,
               });
             } else if (taskInfo.taskType == 2) {
               // 是自定义，需要展示自定义信息
@@ -159,7 +168,7 @@ Page({
         'editCourse': options.editCourse,
         'courseId': options.courseId,
       });
-    }else {
+    } else {
       this.createTimeArray(selectDate, timeLength);
     }
 
@@ -319,9 +328,17 @@ Page({
    * 整天Switch开关打开/关闭
    */
   fullDaySwitch: function(event) {
-    console.log(event);
     this.setData({
       fullDaySwitch: event.detail.value,
+    });
+  },
+
+  /**
+   * 已完成课程Switch开关打开/关闭
+   */
+  courseStatusSwitch: function(event) {
+    this.setData({
+      courseStatusSwitch: event.detail.value,
     });
   },
 
@@ -375,7 +392,7 @@ Page({
   /**
    * 点击进入上课学员选择页
    */
-  navigateToStudent: function (event) {
+  navigateToStudent: function(event) {
     wx.navigateTo({
       url: '../students/students?selectStudentId=' + this.data.selectStudentId,
     })
@@ -394,285 +411,142 @@ Page({
     var endTimeShowArray = this.data.endTimeShowArray;
     var endTimePickerIndex = this.data.endTimePickerIndex;
 
-    if(this.data.fullDaySwitch == false) {
+    if (this.data.fullDaySwitch == false) {
       // 未选中全天
-
       // 获取选中的开始时间
       var beginTime = startTimeShowArray[3][startTimePickerIndex[0]] + ' ' + startTimeShowArray[1][startTimePickerIndex[1]] + ':' + startTimeShowArray[2][startTimePickerIndex[2]];
       // 获取选中的结束时间
       var endTime = endTimeShowArray[3][endTimePickerIndex[0]] + ' ' + endTimeShowArray[1][endTimePickerIndex[1]] + ':' + endTimeShowArray[2][endTimePickerIndex[2]];
-
-    }else if(this.data.fullDaySwitch == true) {
+      // 判断选中时长是否为整小时
+      if (startTimeShowArray[2][startTimePickerIndex[2]] != endTimeShowArray[2][endTimePickerIndex[2]]) {
+        // 存在半小时的情况
+        wx.showToast({
+          title: '任务时长必须为整小时',
+          icon: 'none'
+        })
+        return;
+      }
+    } else if (this.data.fullDaySwitch == true) {
       // 选中全天
-
       // 获取选中的开始时间
       var beginTime = startTimeShowArray[3][startTimePickerIndex[0]] + ' 0' + app.globalData.startTime + ':00'
       // 获取选中的结束时间
       var endTime = endTimeShowArray[3][endTimePickerIndex[0]] + ' ' + (app.globalData.endTime + 1) + ':00';
     }
-    
 
     var remindValue = this.data.remindResault[this.data.remindType];
     var repeatValue = this.data.repeatResault[this.data.repeatType];
 
-    console.log(this.data.fullDaySwitch);
-    if(this.data.editCourse) {
-      // 编辑
+
+    if (this.data.editCourse) {
+      // 编辑任务
+      var method = 'PUT';
+      var requestSuccessTitle = '修改成功';
       if (this.data.courseType == 0) {
         // 编辑排课
-        $.put(
-          'task/plan', {
-            'coachid': wx.getStorageSync('coachid'),
-            'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-            'timestamp': timestamp, //时间戳
-            'taskId': this.data.courseId,
-            'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
-            'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
-            'remind': remindValue, // 课前提醒（0：无提醒、1、30、60、180、360、86400
-            'courseRecordId': 0, // 购课记录ID（课程类型？）
-            'courseContentId': 0, // 上课内容ID
-
-            'coachStudentId': this.data.selectStudentId, // 教练与学员关系 ID
-            'taskStatus': 0, // 课程任务状态
-          },
-          function (res) {
-            console.log(res.data);
-            if (res.data.code == 0) {
-              // 获取成功
-              wx.showToast({
-                title: '修改成功',
-                icon: 'success',
-                success: function () {
-                  setTimeout(function () {
-                    wx.navigateBack({
-                      delta: '1'
-                    })
-                  }, 1500);
-                }
-              })
-            } else {
-              wx.showToast({
-                title: '修改失败',
-                icon: 'none'
-              })
-            }
-          }
-        )
+        var requestUrl = 'task/plan'
+        var requestData = {
+          'coachid': wx.getStorageSync('coachid'),
+          'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+          'timestamp': timestamp, //时间戳
+          'taskId': this.data.courseId,
+          'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
+          'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
+          'remind': remindValue, // 课前提醒（0：无提醒、1、30、60、180、360、86400
+          'courseRecordId': 0, // 购课记录ID（课程类型？）
+          'courseContentId': 0, // 上课内容ID
+          'coachStudentId': this.data.selectStudentId, // 教练与学员关系 ID
+          'taskStatus': this.data.courseStatusSwitch ? 1 : 0, // 课程任务状态
+        };
       } else if (this.data.courseType == 1) {
         // 编辑休息
-        $.put(
-          'task/rest', {
-            'coachid': wx.getStorageSync('coachid'),
-            'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-            'timestamp': timestamp, //时间戳
-            'taskId': this.data.courseId,
-            'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
-            'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
-          },
-          function (res) {
-            console.log(res.data);
-            if (res.data.code == 0) {
-              // 获取成功
-              wx.showToast({
-                title: '修改成功',
-                icon: 'success',
-                success: function () {
-                  setTimeout(function () {
-                    wx.navigateBack({
-                      delta: '1'
-                    })
-                  }, 1500);
-                }
-              })
-            } else {
-              wx.showToast({
-                title: '修改失败',
-                icon: 'none'
-              })
-            }
-          }
-        )
+        var requestUrl = 'task/rest'
+        var requestData = {
+          'coachid': wx.getStorageSync('coachid'),
+          'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+          'timestamp': timestamp, //时间戳
+          'taskId': this.data.courseId,
+          'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
+          'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
+        };
       } else if (this.data.courseType == 2) {
         // 自定义
-        $.put(
-          'task/customize', {
-            'coachid': wx.getStorageSync('coachid'),
-            'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-            'timestamp': timestamp, //时间戳
-            'taskId': this.data.courseId,
-            'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
-            'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
-            'title': this.data.customTitle, // 自定义标题
-            'titleColor': this.data.colorArray[this.data.selectColorIndex]['color'], // 自定义颜色
-          },
-          function (res) {
-            console.log(res.data);
-            if (res.data.code == 0) {
-              // 获取成功
-              wx.showToast({
-                title: '修改成功',
-                icon: 'success',
-                success: function () {
-                  setTimeout(function () {
-                    wx.navigateBack({
-                      delta: '1'
-                    })
-                  }, 1500);
-                }
-              })
-            } else {
-              wx.showToast({
-                title: '修改失败',
-                icon: 'none'
-              })
-            }
-          }
-        )
+        var requestUrl = 'task/customize'
+        var requestData = {
+          'coachid': wx.getStorageSync('coachid'),
+          'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+          'timestamp': timestamp, //时间戳
+          'taskId': this.data.courseId,
+          'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
+          'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
+          'title': this.data.customTitle, // 自定义标题
+          'titleColor': this.data.colorArray[this.data.selectColorIndex]['color'], // 自定义颜色
+        };
       }
-
-
-
-
-
-
-
-    }else {
-      // 新增
+    } else {
+      // 新增任务
+      var method = 'POST';
+      var requestSuccessTitle = '创建成功';
       if (this.data.courseType == 0) {
         // 排课
-        $.post(
-          'task/plan', {
-            'coachid': wx.getStorageSync('coachid'),
-            'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-            'timestamp': timestamp, //时间戳
-            'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
-            'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
-            'coachStudentId': this.data.selectStudentId, // 教练与学员关系 ID
-            'remind': remindValue, // 课前提醒（0：无提醒、1、30、60、180、360、86400
-            'repeat': repeatValue, // 重复类型（0：不重复、1、7、30）
-            'repeatCycle': this.data.repeatTimes, // 重复周期
-            'courseRecordId': 0, // 购课记录ID（课程类型？）
-            'courseContentId': 0, // 上课内容ID
-          },
-          function (res) {
-            console.log(res.data);
-            if (res.data.code == 0) {
-              // 获取成功
-              wx.showToast({
-                title: '创建成功',
-                icon: 'success',
-                success: function () {
-                  setTimeout(function () {
-                    wx.navigateBack({
-                      delta: '1'
-                    })
-                  }, 1500);
-                }
-              })
-            } else {
-              wx.showToast({
-                title: '创建失败',
-                icon: 'none'
-              })
-            }
-          }
-        )
+        var requestUrl = 'task/plan'
+        var requestData = {
+          'coachid': wx.getStorageSync('coachid'),
+          'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+          'timestamp': timestamp, //时间戳
+          'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
+          'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
+          'coachStudentId': this.data.selectStudentId, // 教练与学员关系 ID
+          'remind': remindValue, // 课前提醒（0：无提醒、1、30、60、180、360、86400
+          'repeat': repeatValue, // 重复类型（0：不重复、1、7、30）
+          'repeatCycle': this.data.repeatTimes, // 重复周期
+          'courseRecordId': 0, // 购课记录ID（课程类型？）
+          'courseContentId': 0, // 上课内容ID
+        };
+        
       } else if (this.data.courseType == 1) {
         // 休息
-        $.post(
-          'task/rest', {
-            'coachid': wx.getStorageSync('coachid'),
-            'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-            'timestamp': timestamp, //时间戳
-            'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
-            'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
-            'repeat': repeatValue, // 重复类型（0：不重复、1、7、30）
-            'repeatCycle': this.data.repeatTimes, // 重复周期
-          },
-          function (res) {
-            console.log(res.data);
-            if (res.data.code == 0) {
-              // 获取成功
-              wx.showToast({
-                title: '创建成功',
-                icon: 'success',
-                success: function () {
-                  setTimeout(function () {
-                    wx.navigateBack({
-                      delta: '1'
-                    })
-                  }, 1500);
-                }
-              })
-            } else {
-              wx.showToast({
-                title: '创建失败',
-                icon: 'none'
-              })
-            }
-          }
-        )
+        var requestUrl = 'task/rest'
+        var requestData = {
+          'coachid': wx.getStorageSync('coachid'),
+          'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+          'timestamp': timestamp, //时间戳
+          'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
+          'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
+          'repeat': repeatValue, // 重复类型（0：不重复、1、7、30）
+          'repeatCycle': this.data.repeatTimes, // 重复周期
+        };
       } else if (this.data.courseType == 2) {
         // 自定义
-        $.post(
-          'task/customize', {
-            'coachid': wx.getStorageSync('coachid'),
-            'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-            'timestamp': timestamp, //时间戳
-            'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
-            'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
-            'repeat': repeatValue, // 重复类型（0：不重复、1、7、30）
-            'repeatCycle': this.data.repeatTimes, // 重复周期
-            'title': this.data.customTitle, // 自定义标题
-            'titleColor': this.data.colorArray[this.data.selectColorIndex]['color'], // 自定义颜色
-          },
-          function (res) {
-            console.log(res.data);
-            if (res.data.code == 0) {
-              // 获取成功
-              wx.showToast({
-                title: '创建成功',
-                icon: 'success',
-                success: function () {
-                  setTimeout(function () {
-                    wx.navigateBack({
-                      delta: '1'
-                    })
-                  }, 1500);
-                }
-              })
-            } else {
-              wx.showToast({
-                title: '创建失败',
-                icon: 'none'
-              })
-            }
-          }
-        )
+        var requestUrl = 'task/customize'
+        var requestData = {
+          'coachid': wx.getStorageSync('coachid'),
+          'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+          'timestamp': timestamp, //时间戳
+          'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
+          'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
+          'repeat': repeatValue, // 重复类型（0：不重复、1、7、30）
+          'repeatCycle': this.data.repeatTimes, // 重复周期
+          'title': this.data.customTitle, // 自定义标题
+          'titleColor': this.data.colorArray[this.data.selectColorIndex]['color'], // 自定义颜色
+        };
       }
     }
-    
-  },
 
-  deleteCourse: function(event) {
-    var _this = this;
-    let timestamp = moment().valueOf();
-    $.delete(
-      'task/plan', {
-        'coachid': wx.getStorageSync('coachid'),
-        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-        'timestamp': timestamp, //时间戳
-        'taskId': 1,
-      },
-      function(res) {
-        console.log(res.data);
+    // 发起请求
+    wx.request({
+      url: config.server + requestUrl,
+      data: requestData,
+      header: { 'content-type': 'application/x-www-form-urlencoded' },
+      method: method,
+      success: function (res) {
         if (res.data.code == 0) {
           // 获取成功
           wx.showToast({
-            title: '创建成功',
+            title: requestSuccessTitle,
             icon: 'success',
-            success: function() {
-              setTimeout(function() {
+            success: function () {
+              setTimeout(function () {
                 wx.navigateBack({
                   delta: '1'
                 })
@@ -681,13 +555,14 @@ Page({
           })
         } else {
           wx.showToast({
-            title: '创建失败',
+            title: res.data.message,
             icon: 'none'
           })
         }
-      }
-    )
+      },
+    })
   },
+
 
   /**
    * 输入自定义标题
@@ -699,9 +574,9 @@ Page({
   },
 
   /**
- * 生成时间选择列表
- */
-  createTimeArray: function (selectDate, timeLength) {
+   * 生成时间选择列表
+   */
+  createTimeArray: function(selectDate, timeLength) {
     var timePickerArray = []; // 时间选择框列表
     var timeShowArray = []; // 时间展示列表
 
@@ -779,7 +654,7 @@ Page({
     // 判断是否开关全天按钮
     if (timeLength >= (app.globalData.endTime - app.globalData.startTime + 1)) {
       var fullDaySwitch = true;
-    }else {
+    } else {
       var fullDaySwitch = false;
     }
 
