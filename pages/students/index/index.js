@@ -12,6 +12,8 @@ Page({
     starStudentList: [],
     customStudentList: [],
     totalStudents: 0, // 学员总计
+    searchKey: '',
+    searchStudentList: [],
   },
 
   /**
@@ -136,6 +138,54 @@ Page({
     //更新数据
     that.setData({
       starStudentList: starStudentList
+    })
+  },
+
+  //手指触摸动作开始 记录起点X坐标
+  touchStartSearch: function (e) {
+    //开始触摸时 重置所有删除
+    var searchStudentList = this.data.searchStudentList;
+    searchStudentList.forEach(function (v, i) {
+      if (v.isTouchMove) //只操作为true的
+        v.isTouchMove = false;
+    })
+    this.setData({
+      startX: e.changedTouches[0].clientX,
+      startY: e.changedTouches[0].clientY,
+      searchStudentList: searchStudentList
+    })
+  },
+  //滑动事件处理
+  touchMoveSearch: function (e) {
+    var searchStudentList = this.data.searchStudentList;
+    var that = this,
+      index = e.currentTarget.dataset.index, //当前索引
+      startX = that.data.startX, //开始X坐标
+      startY = that.data.startY, //开始Y坐标
+      touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
+      touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
+      //获取滑动角度
+      angle = that.angle({
+        X: startX,
+        Y: startY
+      }, {
+          X: touchMoveX,
+          Y: touchMoveY
+        });
+    searchStudentList.forEach(function (v, i) {
+      v.isTouchMove = false
+      //滑动超过30度角 return
+      if (Math.abs(angle) > 30) return;
+      if (i == index) {
+        if (touchMoveX > startX) //右滑
+          v.isTouchMove = false
+        else //左滑
+          v.isTouchMove = true
+      }
+    })
+    //更新数据
+    that.setData({
+      searchStudentList: searchStudentList
     })
   },
 
@@ -332,4 +382,58 @@ Page({
     });
   },
 
+  /**
+   * 搜索输入框
+   */
+  bindSearch: function(event) {
+    // 搜索关键字
+    var searchKey = event.detail.value;
+
+    // 搜索学员并保存结果信息
+    var searchStudentList = this.searchStudents(searchKey);
+    this.setData({
+      'searchKey': searchKey,
+      'searchStudentList': searchStudentList,
+    });
+  },
+
+  /**
+   * 搜索学员
+   */
+  searchStudents: function (searchKey) {
+    var starStudentList = this.data.starStudentList;
+    var customStudentList = this.data.customStudentList;
+    var searchStudentList = [];
+    
+    if(searchKey) {
+      // 查找星标学员
+      for (var i = 0; i < starStudentList.length; i++) {
+        if (starStudentList[i]['name'].indexOf(searchKey) != -1 || starStudentList[i]['namePinYin'].indexOf(searchKey) != -1) {
+          searchStudentList.push(starStudentList[i]);
+        }
+      }
+
+      // 查找普通列表中学员
+      for (let key in customStudentList) {
+        for (var i = 0; i < customStudentList[key].length; i++) {
+          if (customStudentList[key][i]['name'].indexOf(searchKey) != -1 || customStudentList[key][i]['namePinYin'].indexOf(searchKey) != -1) {
+            searchStudentList.push(customStudentList[key][i]);
+          }
+        }
+      }
+    }
+    return searchStudentList;
+  },
+
+  /**
+   * 点击搜索按钮
+   */
+  searchConfirm: function(event) {
+    if (this.data.searchStudentList == '') {
+      wx.showToast({
+        title: '抱歉，未找到该学员',
+        icon: 'none'
+      })
+    }
+  }
 })

@@ -16,13 +16,17 @@ Page({
     fixedBottomButtonMargin: 0, // 吸底按钮的自适应高度
     custom_index: -1,
     student_index: -1,
+    searchKey: '', // 搜索关键字
+    searchStudentList: [], // 搜索学员结果列表
+    customStudentList: [], // 学员列表
+    lastSearchCustom: 0, // 最后一个搜索到的数据行下标
+    lastSearchStudent: 0, // 最后一个搜索到的数据列下标
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options);
     if (options.selectStudentId != -1) {
       this.setData({
         selectStudentId: options.selectStudentId,
@@ -157,10 +161,7 @@ Page({
     }
 
     customStudentList['star'] = starStudentList;
-    
-    console.log(customStudentList);
 
-    // selectStudentId
     var selectStudentName = '';
     var selectStudentNamestr = '';
     for (let key in customStudentList) {
@@ -221,4 +222,60 @@ Page({
       delta: '1'
     })
   },
+
+  /**
+   * 搜索输入框
+   */
+  bindSearch: function (event) {
+    // 搜索关键字
+    var searchKey = event.detail.value;
+    // 搜索学员并保存结果信息
+    this.searchStudents(searchKey);
+    this.setData({
+      'searchKey': searchKey,
+    });
+  },
+
+  /**
+   * 搜索学员
+   */
+  searchStudents: function (searchKey) {
+    var customStudentList = this.data.customStudentList;
+    var searchStudentList = [];
+    var lastSearchCustom = 0;
+    var lastSearchStudent = 0;
+    if (searchKey) {
+      // 查找列表中学员
+      for (let key in customStudentList) {
+        for (var i = 0; i < customStudentList[key].length; i++) {
+          if (customStudentList[key][i]['name'].indexOf(searchKey) != -1 || customStudentList[key][i]['namePinYin'].indexOf(searchKey) != -1) {
+            searchStudentList.push(customStudentList[key][i]);
+            customStudentList[key][i]['is_search'] = true;
+            lastSearchCustom = key;
+            lastSearchStudent = i;
+          }else {
+            customStudentList[key][i]['is_search'] = false;
+          }
+        }
+      }
+    }
+    this.setData({
+      'customStudentList': customStudentList,
+      'searchStudentList': searchStudentList,
+      'lastSearchCustom': lastSearchCustom,
+      'lastSearchStudent': lastSearchStudent,
+    });
+  },
+
+  /**
+   * 点击搜索按钮
+   */
+  searchConfirm: function (event) {
+    if (this.data.searchStudentList == '') {
+      wx.showToast({
+        title: '抱歉，未找到该学员',
+        icon: 'none'
+      })
+    }
+  }
 })

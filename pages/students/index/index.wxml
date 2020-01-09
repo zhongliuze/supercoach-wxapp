@@ -6,89 +6,116 @@
           <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-search.png"></image>
         </view>
         <view class="input">
-          <input placeholder="搜索" placeholder-class="search-placeholder"></input>
+          <input placeholder="搜索" placeholder-class="search-placeholder" bindinput="bindSearch" confirm-type="search" bindconfirm="searchConfirm"></input>
         </view>
       </view>
     </view>
-
-    <view class="student-sort" wx:if="{{starStudentList != ''}}">
-      <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-attention.png"></image>
-      <text>特别关注</text>
-    </view>
-
-    <view class="student-group">
-      <block wx:for="{{starStudentList}}" wx:key="this">
-        <movable-area class='movable-area'>
-          <movable-view direction="horizontal" class='movable-view'>
-            <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}" data-student_id="{{item.id}}" bindtap="navigateToBasic">
-              <view class="student-line">
-                <view class="avatar">
-                  <text>{{item.nameStr}}</text>
-                </view>
-                <view class="content {{index >= (starStudentList.length - 1) ? 'no-border' : ''}}">
-                  <view class="info">
-                    <view class="name">
-                      <text>{{item.name}}</text>
-                    </view>
-                    <view class="other" wx:if="{{item.mobile}}">
-                      <text>{{item.mobile}}</text>
-                    </view>
-                  </view>
-                  <view class="subtitle" wx:if="{{item.times}}">
-                    <text wx:if="{{item.times}}">剩余{{item.times}}课时</text>
-                  </view>
-                </view>
-              </view>
-              <view class="delete-button" catchtap="catchDelete" data-index="{{index}}" data-student_id="{{item.id}}">删除</view>
-            </view>
-          </movable-view>
-        </movable-area>
-      </block>
-    </view>
-
-
-
-    <block wx:for="{{customStudentList}}" wx:for-index="customIndex" wx:for-item="customItem" wx:key="this">
-      <view class="student-sort" wx:if="{{customItem != ''}}">
-        <text>{{customIndex}}</text>
+    <block wx:if="{{searchStudentList == ''}}">
+      <view class="student-sort" wx:if="{{starStudentList != ''}}">
+        <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-attention.png"></image>
+        <text>特别关注</text>
       </view>
       <view class="student-group">
-        <block wx:for="{{customItem}}" wx:for-index="studentIndex" wx:for-item="studentItem" wx:key="this">
+        <block wx:for="{{starStudentList}}" wx:key="this">
           <movable-area class='movable-area'>
             <movable-view direction="horizontal" class='movable-view'>
-              <view class="touch-item {{studentItem.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStartStudent" bindtouchmove="touchMoveStudent" data-index="{{studentIndex}}" bindtap="navigateToBasic" data-custom_index="{{customIndex}}" data-student_id="{{studentItem.id}}">
+              <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}" data-student_id="{{item.id}}" bindtap="navigateToBasic">
                 <view class="student-line">
                   <view class="avatar">
-                    <text>{{studentItem.nameStr}}</text>
+                    <text>{{item.nameStr}}</text>
                   </view>
-                  <view class="content {{studentIndex >= (customItem.length - 1) ? 'no-border' : ''}}">
+                  <view class="content {{index >= (starStudentList.length - 1) ? 'no-border' : ''}}">
                     <view class="info">
                       <view class="name">
-                        <text>{{studentItem.name}}</text>
+                        <text>{{item.name}}</text>
                       </view>
-                      <view class="other" wx:if="{{studentItem.mobile}}">
-                        <text>{{studentItem.mobile}}</text>
+                      <view class="other" wx:if="{{item.mobile}}">
+                        <text>{{item.mobile}}</text>
                       </view>
                     </view>
-                    <view class="subtitle" wx:if="{{studentItem.times}}">
-                      <text>剩余05课时</text>
+                    <view class="subtitle" wx:if="{{item.times}}">
+                      <text wx:if="{{item.times}}">剩余{{item.times}}课时</text>
                     </view>
                   </view>
                 </view>
-                <view class="delete-button" catchtap="catchDelete" data-index="{{studentIndex}}" data-student_id="{{studentItem.id}}">删除</view>
+                <view class="delete-button" catchtap="catchDelete" data-index="{{index}}" data-student_id="{{item.id}}">删除</view>
               </view>
             </movable-view>
           </movable-area>
+        </block>
+      </view>
+      <block wx:for="{{customStudentList}}" wx:for-index="customIndex" wx:for-item="customItem" wx:key="this">
+        <view class="student-sort" wx:if="{{customItem != ''}}">
+          <text>{{customIndex}}</text>
+        </view>
+        <view class="student-group">
+          <block wx:for="{{customItem}}" wx:for-index="studentIndex" wx:for-item="studentItem" wx:key="this">
+            <movable-area class='movable-area'>
+              <movable-view direction="horizontal" class='movable-view'>
+                <view class="touch-item {{studentItem.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStartStudent" bindtouchmove="touchMoveStudent" data-index="{{studentIndex}}" bindtap="navigateToBasic" data-custom_index="{{customIndex}}" data-student_id="{{studentItem.id}}">
+                  <view class="student-line">
+                    <view class="avatar">
+                      <text>{{studentItem.nameStr}}</text>
+                    </view>
+                    <view class="content {{studentIndex >= (customItem.length - 1) ? 'no-border' : ''}}">
+                      <view class="info">
+                        <view class="name">
+                          <text>{{studentItem.name}}</text>
+                        </view>
+                        <view class="other" wx:if="{{studentItem.mobile}}">
+                          <text>{{studentItem.mobile}}</text>
+                        </view>
+                      </view>
+                      <view class="subtitle" wx:if="{{studentItem.times}}">
+                        <text>剩余05课时</text>
+                      </view>
+                    </view>
+                  </view>
+                  <view class="delete-button" catchtap="catchDelete" data-index="{{studentIndex}}" data-student_id="{{studentItem.id}}">删除</view>
+                </view>
+              </movable-view>
+            </movable-area>
 
 
 
 
+          </block>
+        </view>
+      </block>
+    </block>
+    <block wx:else>
+      <view class="student-group">
+        <block wx:for="{{searchStudentList}}" wx:key="this">
+          <movable-area class='movable-area'>
+            <movable-view direction="horizontal" class='movable-view'>
+              <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}" data-student_id="{{item.id}}" bindtap="navigateToBasic">
+                <view class="student-line">
+                  <view class="avatar">
+                    <text>{{item.nameStr}}</text>
+                  </view>
+                  <view class="content {{index >= (searchStudentList.length - 1) ? 'no-border' : ''}}">
+                    <view class="info">
+                      <view class="name">
+                        <text>{{item.name}}</text>
+                      </view>
+                      <view class="other" wx:if="{{item.mobile}}">
+                        <text>{{item.mobile}}</text>
+                      </view>
+                    </view>
+                    <view class="subtitle" wx:if="{{item.times}}">
+                      <text wx:if="{{item.times}}">剩余{{item.times}}课时</text>
+                    </view>
+                  </view>
+                </view>
+                <view class="delete-button" catchtap="catchDelete" data-index="{{index}}" data-student_id="{{item.id}}">删除</view>
+              </view>
+            </movable-view>
+          </movable-area>
         </block>
       </view>
     </block>
-
   </view>
-  <view class="total" wx:if="{{totalStudents}}">
+  <view class="total" wx:if="{{totalStudents && searchStudentList == ''}}">
     <text>{{totalStudents}}位学员</text>
   </view>
   <view class="common-bottom "></view>
