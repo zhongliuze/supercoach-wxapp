@@ -10,7 +10,7 @@ Page({
    */
   data: {
     birthday: '',
-    birthdayFormat: '',
+    birthdayFormat: '请选择',
     birthdayRemind: false,
     sourceName: '', // 来源名称
     sourceId: 0, // 来源ID
@@ -47,7 +47,7 @@ Page({
               'sourceName': studentInfo.sourceName, // 学员来源
               'birthdayRemind': studentInfo.birthdayRemind ? true : false, // 生日提醒
               'birthday': studentInfo.birthday ? moment.unix(studentInfo.birthday).format('YYYY-MM-DD') : '',
-              'birthdayFormat': studentInfo.birthday ? moment.unix(studentInfo.birthday).format('YYYY年MM月DD日') : '',
+              'birthdayFormat': studentInfo.birthday ? moment.unix(studentInfo.birthday).format('YYYY年MM月DD日') : '请选择',
               'aliasName': studentInfo.alias,  // 学员备注名
               'studentName': studentInfo.name, // 学员姓名
               'studentMobile': studentInfo.mobile, // 学员手机号
@@ -114,7 +114,7 @@ Page({
       'mobile': this.data.studentMobile, // 学员手机号
       'name': this.data.studentName, // 学员姓名
       'remark': this.data.studentRemark, // 备注信息
-      'sourceId': this.data.sourceId, // 学员来源ID
+      'sourceId': this.data.sourceId ? this.data.sourceId : '', // 学员来源ID
     };
     console.log(requestList);
     $.put(

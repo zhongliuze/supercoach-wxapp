@@ -15,6 +15,9 @@ Page({
     getVerifyCode: false, // 是否已获取过验证码
     getVerifyTime: 60, // 获取倒计时
     verifyLogin: false,
+    authorizationUserInfo: false, // 身份信息未授权
+    authorizationPhone:false,// 身份信息已授权
+
   },
 
   /**
@@ -35,7 +38,50 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var _this = this;
+    let timestamp = moment().valueOf();
 
+    $.get(
+      'coach', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, //时间戳
+      },
+      function (res) {
+        if (res.data.code == 0) {
+          // 获取成功
+          // 判断数据库中是否存在微信昵称
+          if(res.data.data.coach.wxNickname) {
+            // 已授权微信信息
+            var authorizationUserInfo = true;
+          }else {
+            // 未授权微信信息
+            var authorizationUserInfo = false;
+          }
+
+          // 判断数据库中是否存在手机号码
+          if (res.data.data.coach.wxNickname) {
+            // 已授权手机号码
+            var authorizationPhone = true;
+          } else {
+            // 未授权手机号码
+            var authorizationPhone = false;
+          }
+          
+          wx.setStorageSync('authorizationUserInfo', authorizationUserInfo);
+          wx.setStorageSync('authorizationPhone', authorizationPhone);
+          _this.setData({
+            'authorizationUserInfo': authorizationUserInfo,
+            'authorizationPhone': authorizationPhone,
+          });
+        } else {
+          wx.showToast({
+            title: '个人信息获取失败',
+            icon: 'none'
+          })
+        }
+      }
+    )
   },
 
   /**
@@ -124,9 +170,13 @@ Page({
    * 切换登录方式
    */
   changeLoginType: function (event) {
-    this.setData({
-      'verifyLogin': !this.data.verifyLogin,
+    wx.showToast({
+      title: '暂未开放，请使用微信快速绑定',
+      icon: 'none',
     })
+    // this.setData({
+    //   'verifyLogin': !this.data.verifyLogin,
+    // })
   },
 
   /**
@@ -163,16 +213,65 @@ Page({
         if (res.data.code == 0) {
           // 获取成功
           wx.showToast({
-            title: '授权成功',
+            title: '微信授权成功',
             icon: 'success',
           })
+          _this.onShow();
         } else {
           wx.showToast({
-            title: '授权失败',
+            title: '微信授权失败',
             icon: 'none'
           })
         }
       }
     )
+  },
+
+  /**
+   * 获取手机号码
+   */
+  getPhoneNumber: function(event) {
+    var _this = this;
+    let timestamp = moment().valueOf();
+
+    //登录
+    wx.login({
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        $.post(
+          'getPhoneNumber', {
+            'coachid': wx.getStorageSync('coachid'),
+            'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+            'timestamp': timestamp, // 时间戳
+            'code': res.code, // 调用 wx.login() 获得的 code
+            'encryptedData': event.detail.encryptedData, // 加密数据
+            'iv': event.detail.iv, // 偏移量
+          },
+          function (res) {
+            console.log(res.data);
+            if (res.data.code == 0) {
+              // 获取成功
+              wx.showToast({
+                title: '绑定成功',
+                icon: 'success',
+                success: function () {
+                  setTimeout(function () {
+                    wx.navigateBack({
+                      delta: '1'
+                    })
+                  }, 1500);
+                }
+              })
+            } else {
+              wx.showToast({
+                title: '绑定失败',
+                icon: 'none'
+              })
+            }
+          }
+        )
+      }
+    })
+    
   }
 })

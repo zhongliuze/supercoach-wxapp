@@ -56,14 +56,6 @@ Page({
           console.log(moment.unix(coachInfo['vipExpired']).format('YYYY-MM-DD'));
           console.log(moment(moment().subtract(1, 'days').format('YYYY-MM-DD')).isBefore(moment.unix(coachInfo['vipExpired']).format('YYYY-MM-DD')));
           if (!coachInfo['vipExpired']) {
-              // 未开通过
-            // console.log(coachInfo['createTime']);
-            // console.log(moment().add(1, 'days').format('YYYY-MM-DD'));
-            // console.log(moment.unix(coachInfo['createTime']).format('YYYY-MM-DD'));
-            console.log();
-            // console.log(moment(coachInfo['createTime']).isBefore('2019-09-25'));
-            // console.log(moment(coachInfo['createTime']).isSame('2019-09-24'));
-            // console.log(moment(coachInfo['createTime']).isSame());
             coachInfo['vip'] = false;
             coachInfo['vipTime'] = 0;
           } else if (coachInfo['vipExpired'] && !moment(moment().subtract(1, 'days').format('YYYY-MM-DD')).isBefore(moment.unix(coachInfo['vipExpired']).format('YYYY-MM-DD'))) {

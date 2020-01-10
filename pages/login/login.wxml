@@ -1,78 +1,84 @@
 <!--pages/login/login.wxml-->
-<!-- <view class="header">
-  <view class="title">
-    <text>验证码登录</text>
-  </view>
-  <view class="subtitle">
-    <text>未注册手机号登录后自动成为超级私教用户</text>
-  </view>
-</view>
 
-<view class="login-group">
-  <block wx:if="{{verifyLogin}}">
-    <view class="login-input">
-      <input placeholder="请输入手机号码" placeholder-class="input-placeholder" bindinput="inputPhoneNumber"></input>
+<block wx:if="{{authorizationUserInfo == false}}">
+  <view class="userInfo">
+    <view class="avatar">
+      <open-data type="userAvatarUrl"></open-data>
     </view>
-    <view class="verfiy-input">
-      <input placeholder="请输入验证码" placeholder-class="input-placeholder" bindinput="inputVerify"></input>
-      <view class="verfiy" bindtap="getVerfiyCode">
-        <text wx:if="{{getVerifyCode == false}}">获取验证码</text>
-        <text wx:elif="{{getVerifyCode == true && getVerifyTime < 1}}">重新获取</text>
-        <text class="get-verfiy" wx:elif="{{getVerifyCode == true && getVerifyTime > 0}}">{{getVerifyTime}}s</text>
-      </view>
+    <view class="nickName">
+      你好，
+      <open-data type="userNickName"></open-data>
     </view>
-    <view class="login-button">
-      <button wx:if="{{phoneNumber && verifyCode}}">登录</button>
-      <button class="disabled" wx:else>登录</button>
+
+  </view>
+  <view class="header">
+    <view class="title">
+      <text>向你申请以下权限</text>
     </view>
-    <view class="change" bindtap="changeLoginType">
-      <text>推荐使用微信快速登录</text>
+    <view class="subtitle">
+      <text>获得你的微信公开信息（昵称、头像、地区及性别）</text>
     </view>
-  </block>
-  <block wx:else>
+  </view>
+
+  <view class="login-group">
     <view class="wechat">
       <view class="recommend">
-        <image src="http://superimage.xianshikeji.com/icon/superwxapp/login-recommend.png"></image>
       </view>
-      <button>微信快速登录</button>
+      <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">我允许授权</button>
     </view>
-    <view class="vercode" bindtap="changeLoginType">
-      <button>验证码登录</button>
+  </view>
+</block>
+<block wx:else>
+  <view class="header">
+    <view class="title">
+      <text>绑定你的手机号</text>
     </view>
-  </block>
-</view>
-
-<view class="protocol">
-  <view class="check">
-    <radio checked="true" />
-  </view>
-  <view class="content">
-    <text>我已阅读并同意<text class="link">《超级私教用户协议》</text></text>
-  </view>
-</view> -->
-
-<view class="userInfo">
-  <view class="avatar">
-    <open-data type="userAvatarUrl"></open-data>
-  </view>
-  <view class="nickName">
-    你好，<open-data type="userNickName"></open-data>
-  </view>
-
-</view>
-<view class="header">
-  <view class="title">
-    <text>向你申请以下权限</text>
-  </view>
-  <view class="subtitle">
-    <text>获得你的微信公开信息（昵称、头像、地区及性别）</text>
-  </view>
-</view>
-
-<view class="login-group">
-  <view class="wechat">
-    <view class="recommend">
+    <view class="subtitle">
+      <text>新用户绑定成功后自动成为超级私教用户</text>
     </view>
-    <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">我允许授权</button>
   </view>
-</view>
+
+  <view class="login-group">
+    <block wx:if="{{verifyLogin}}">
+      <view class="login-input">
+        <input placeholder="请输入手机号码" placeholder-class="input-placeholder" bindinput="inputPhoneNumber"></input>
+      </view>
+      <view class="verfiy-input">
+        <input placeholder="请输入验证码" placeholder-class="input-placeholder" bindinput="inputVerify"></input>
+        <view class="verfiy" bindtap="getVerfiyCode">
+          <text wx:if="{{getVerifyCode == false}}">获取验证码</text>
+          <text wx:elif="{{getVerifyCode == true && getVerifyTime < 1}}">重新获取</text>
+          <text class="get-verfiy" wx:elif="{{getVerifyCode == true && getVerifyTime > 0}}">{{getVerifyTime}}s</text>
+        </view>
+      </view>
+      <view class="login-button">
+        <button wx:if="{{phoneNumber && verifyCode}}">登录</button>
+        <button class="disabled" wx:else>登录</button>
+      </view>
+      <view class="change" bindtap="changeLoginType">
+        <text>推荐使用微信快速登录</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="wechat">
+        <view class="recommend">
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/login-recommend.png"></image>
+        </view>
+        <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信快速绑定</button>
+      </view>
+      <view class="vercode" bindtap="changeLoginType">
+        <button>验证码绑定</button>
+      </view>
+    </block>
+  </view>
+
+  <view class="protocol">
+    <view class="check">
+      <radio checked="true" />
+    </view>
+    <view class="content">
+      <text>我已阅读并同意<text class="link">《超级私教用户协议》</text></text>
+    </view>
+  </view>
+
+</block>

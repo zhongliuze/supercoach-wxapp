@@ -28,6 +28,26 @@ App({
               wx.setStorageSync('coachid', res.data.data.coachid);
               wx.setStorageSync('token', res.data.data.token);
               wx.setStorageSync('coach', res.data.data.coach);
+              // 判断数据库中是否存在微信昵称
+              if (res.data.data.coach.wxNickname) {
+                // 已授权微信信息
+                var authorizationUserInfo = true;
+              } else {
+                // 未授权微信信息
+                var authorizationUserInfo = false;
+              }
+
+              // 判断数据库中是否存在手机号码
+              if (res.data.data.coach.mobile) {
+                // 已授权手机号码
+                var authorizationPhone = true;
+              } else {
+                // 未授权手机号码
+                var authorizationPhone = false;
+              }
+
+              wx.setStorageSync('authorizationUserInfo', authorizationUserInfo);
+              wx.setStorageSync('authorizationPhone', authorizationPhone);
             } else {
               wx.showToast({
                 title: res.data.message,
@@ -36,6 +56,8 @@ App({
               wx.setStorageSync('coachid', '');
               wx.setStorageSync('token', '');
               wx.setStorageSync('coach', '')
+              wx.setStorageSync('authorizationUserInfo', false);
+              wx.setStorageSync('authorizationPhone', false);
             }
           }
         )
