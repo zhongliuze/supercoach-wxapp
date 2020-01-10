@@ -437,7 +437,6 @@ Page({
     var remindValue = this.data.remindResault[this.data.remindType];
     var repeatValue = this.data.repeatResault[this.data.repeatType];
 
-
     if (this.data.editCourse) {
       // 编辑任务
       var method = 'PUT';
@@ -503,7 +502,7 @@ Page({
           'courseRecordId': 0, // 购课记录ID（课程类型？）
           'courseContentId': 0, // 上课内容ID
         };
-        
+
       } else if (this.data.courseType == 1) {
         // 休息
         var requestUrl = 'task/rest'
@@ -537,16 +536,18 @@ Page({
     wx.request({
       url: config.server + requestUrl,
       data: requestData,
-      header: { 'content-type': 'application/x-www-form-urlencoded' },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
       method: method,
-      success: function (res) {
+      success: function(res) {
         if (res.data.code == 0) {
           // 获取成功
           wx.showToast({
             title: requestSuccessTitle,
             icon: 'success',
-            success: function () {
-              setTimeout(function () {
+            success: function() {
+              setTimeout(function() {
                 wx.navigateBack({
                   delta: '1'
                 })

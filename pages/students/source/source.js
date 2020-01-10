@@ -10,26 +10,32 @@ Page({
    */
   data: {
     sourceList: [],
+    selectSourceName: '', // 已选中来源名称
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    
+  onLoad: function(options) {
+    console.log(options);
+    if (options.selectSourceName) {
+      this.setData({
+        'selectSourceName': options.selectSourceName,
+      });
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     var _this = this;
     let timestamp = moment().valueOf();
     $.get(
@@ -40,12 +46,22 @@ Page({
         'pageNumber ': 1, // 第几页
         'pageSize ': 100, // 每页多少条
       },
-      function (res) {
+      function(res) {
         console.log(res.data);
         if (res.data.code == 0) {
           // 获取成功
+          var sourceList = res.data.data.content;
+          if (_this.data.selectSourceName) {
+            for (let i = 0; i < sourceList.length; i++) {
+              if (sourceList[i]['name'] == _this.data.selectSourceName) {
+                sourceList[i]['selected'] = true;
+              } else {
+                sourceList[i]['selected'] = false;
+              }
+            }
+          }
           _this.setData({
-            sourceList: res.data.data.content,
+            sourceList: sourceList,
           });
         } else {
           wx.showToast({
@@ -60,43 +76,43 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
   //手指触摸动作开始 记录起点X坐标
-  touchStart: function (e) {
+  touchStart: function(e) {
     //开始触摸时 重置所有删除
     var sourceList = this.data.sourceList;
-    sourceList.forEach(function (v, i) {
+    sourceList.forEach(function(v, i) {
       if (v.isTouchMove) //只操作为true的
         v.isTouchMove = false;
     })
@@ -107,7 +123,7 @@ Page({
     })
   },
   //滑动事件处理
-  touchMove: function (e) {
+  touchMove: function(e) {
     var sourceList = this.data.sourceList;
     var that = this,
       index = e.currentTarget.dataset.index, //当前索引
@@ -120,10 +136,10 @@ Page({
         X: startX,
         Y: startY
       }, {
-          X: touchMoveX,
-          Y: touchMoveY
-        });
-    sourceList.forEach(function (v, i) {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
+    sourceList.forEach(function(v, i) {
       v.isTouchMove = false
       //滑动超过30度角 return
       if (Math.abs(angle) > 30) return;
@@ -141,11 +157,11 @@ Page({
   },
 
   /**
-  * 计算滑动角度
-  * @param {Object} start 起点坐标
-  * @param {Object} end 终点坐标
-  */
-  angle: function (start, end) {
+   * 计算滑动角度
+   * @param {Object} start 起点坐标
+   * @param {Object} end 终点坐标
+   */
+  angle: function(start, end) {
     var _X = end.X - start.X,
       _Y = end.Y - start.Y
     //返回角度 /Math.atan()返回数字的反正切值
@@ -155,7 +171,7 @@ Page({
   /**
    * 删除
    */
-  catchDelete: function (event) {
+  catchDelete: function(event) {
     var _this = this;
     let timestamp = moment().valueOf();
     $.delete(
@@ -165,7 +181,7 @@ Page({
         'timestamp': timestamp, // 时间戳
         'sourceId': event.currentTarget.dataset.sourceid, // 学员来源ID
       },
-      function (res) {
+      function(res) {
         console.log(res.data);
         if (res.data.code == 0) {
           // 获取成功
@@ -182,21 +198,18 @@ Page({
         }
       }
     )
-
-
-    
   },
 
 
   // 自定义来源
-  customSource: function (event) {
+  customSource: function(event) {
     wx.navigateTo({
       url: '../../common/custom/custom?customType=1',
     })
   },
 
   // 选择
-  selectSource: function (event) {
+  selectSource: function(event) {
     var index = event.currentTarget.dataset.index;
     var sourceList = this.data.sourceList;
     if (index == this.data.sourceIndex) {
@@ -216,6 +229,8 @@ Page({
     var prevPage = pages[pages.length - 2]; // 上一页
     prevPage.setData({
       // remindType: index
+      sourceName: sourceList[index]['name'],
+      sourceId: sourceList[index]['sourceId'],
     });
 
     // 返回上一页

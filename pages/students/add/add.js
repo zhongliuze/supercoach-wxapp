@@ -14,6 +14,8 @@ Page({
     inputMore: false,
     fixedBottomButtonMargin: 0, // 吸底按钮的自适应高度
     name: '', // 输入姓名
+    sourceName:'', // 来源名称
+    sourceId: 0, // 学员来源ID
   },
 
   /**
@@ -132,12 +134,6 @@ Page({
     } else {
       var courseNumber = '';
     }
-    
-    if (event.detail.value.sourceId) {
-      var sourceId = event.detail.value.sourceId;
-    } else {
-      var sourceId = '';
-    }
 
     $.post(
       'coachStudent', {
@@ -146,9 +142,9 @@ Page({
         'timestamp': timestamp, // 时间戳
         'name': event.detail.value.name, // 学员姓名
         'mobile': mobile, // 学员手机号
-        'courseTypeId': courseTypeId, // 课程类型
+        'courseTypeId': 1, // 课程类型
         'courseNumber': courseNumber, // 总课时数
-        'sourceId': sourceId, // 学员来源ID
+        'sourceId': this.data.sourceId, // 学员来源ID
         'remark': '', // 备注信息
       },
       function (res) {
@@ -165,7 +161,6 @@ Page({
                 })
               }, 1500);
             }
-
           })
         } else {
           wx.showToast({
@@ -175,5 +170,14 @@ Page({
         }
       }
     )
+  },
+
+  /**
+   * 选择学员来源
+   */
+  selectStudentSource: function(event) {
+    wx.navigateTo({
+      url: '../source/source?selectSourceName=' + this.data.sourceName,
+    })
   }
 })

@@ -111,7 +111,7 @@ Page({
  */
   bindButton: function (event) {
     wx.navigateTo({
-      url: '../' + event.currentTarget.dataset.url,
+      url: '../' + event.currentTarget.dataset.url + '?student_id=' + this.data.student_id,
     })
   },
 })

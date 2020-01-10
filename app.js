@@ -25,15 +25,17 @@ App({
           function (res) {
             console.log(res);
             if (res.data.code == 0) {
-              wx.setStorageSync('coachid', res.data.data.coachid)
-              wx.setStorageSync('token', res.data.data.token)
+              wx.setStorageSync('coachid', res.data.data.coachid);
+              wx.setStorageSync('token', res.data.data.token);
+              wx.setStorageSync('coach', res.data.data.coach);
             } else {
               wx.showToast({
                 title: res.data.message,
                 icon: 'none',
               })
-              wx.setStorageSync('coachid', '')
-              wx.setStorageSync('token', '')
+              wx.setStorageSync('coachid', '');
+              wx.setStorageSync('token', '');
+              wx.setStorageSync('coach', '')
             }
           }
         )

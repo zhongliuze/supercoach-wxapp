@@ -213,3 +213,29 @@ page {
 .protocol .content .link {
   color: #2b87ff;
 }
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 100rpx;
+  width: 630rpx;
+  margin-left: 60rpx;
+  border-bottom: 1rpx solid #EFF0F1;
+}
+
+.userInfo .avatar{
+  margin-top: 50rpx;
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  overflow: hidden;
+
+}
+
+
+.userInfo .nickName{
+  margin-top: 20rpx;
+  font-size: 32rpx;
+  color: #181d24;
+}

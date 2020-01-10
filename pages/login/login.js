@@ -1,4 +1,9 @@
 // pages/login/login.js
+const moment = require('../../vendor/moment/moment.js');
+import $ from '../../common/common.js';
+const util = require('../../utils/util')
+const md5 = require('../../vendor/md5/md5.min.js');
+
 Page({
 
   /**
@@ -71,7 +76,7 @@ Page({
   /**
    * 获取验证码
    */
-  getVerfiyCode: function(event) {
+  getVerfiyCode: function (event) {
     var _this = this;
     // 手机号码格式判断
 
@@ -118,7 +123,7 @@ Page({
   /**
    * 切换登录方式
    */
-  changeLoginType: function(event) {
+  changeLoginType: function (event) {
     this.setData({
       'verifyLogin': !this.data.verifyLogin,
     })
@@ -132,4 +137,42 @@ Page({
       'verifyCode': event.detail.value,
     })
   },
+
+  /**
+   * 获取授权信息
+   */
+  bindGetUserInfo(e) {
+    var _this = this;
+    let timestamp = moment().valueOf();
+    var userInfo = e.detail.userInfo;
+    $.put(
+      'coach', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, // 时间戳
+        'avatarUrl': userInfo.avatarUrl, // 微信返回的用户头像
+        'city': userInfo.city, // 微信返回的用户所在城市
+        'country': userInfo.country, // 微信返回的用户所在国家
+        'gender': userInfo.gender, // 微信返回的用户性别（0未知，1男，2女）
+        'language': userInfo.language, // 微信返回的 country，province，city 所用的语言（en，zh_CN，zh_TW）
+        'nickName': userInfo.nickName, // 微信返回的用户昵称
+        'province': userInfo.province, // 微信返回的用户所在省份
+      },
+      function (res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功
+          wx.showToast({
+            title: '授权成功',
+            icon: 'success',
+          })
+        } else {
+          wx.showToast({
+            title: '授权失败',
+            icon: 'none'
+          })
+        }
+      }
+    )
+  }
 })

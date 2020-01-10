@@ -141,17 +141,17 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 12,
 					"name": "pages/students/student/student",
 					"pathName": "pages/students/student/student",
-					"query": "",
+					"query": "student_id=11",
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 13,
 					"name": "pages/students/basic/basic",
 					"pathName": "pages/students/basic/basic",
-					"query": "",
+					"query": "student_id=11",
 					"scene": null
 				},
 				{

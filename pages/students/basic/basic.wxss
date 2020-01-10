@@ -27,3 +27,7 @@ switch {
   font-size: 22rpx;
   color: #8893a8;
 }
+
+.hasValue {
+  color: #181d24;
+}
