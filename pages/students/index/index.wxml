@@ -1,4 +1,4 @@
-<block wx:if="{{starStudentList || customStudentList}}">
+<block wx:if="{{(starStudentList != '' || customStudentList !='') && coachLogin}}">
   <view class="container">
     <view class="search-group">
       <view class="search">
@@ -126,7 +126,8 @@
     <view class="container">
       <view class="null-data">
         <image src="http://superimage.xianshikeji.com/icon/superwxapp/null_student.png"></image>
-        <text>您还未有学员，赶紧添加一个吧~</text>
+        <text wx:if="{{coachLogin}}">您还未有学员，赶紧添加一个吧~</text>
+        <text wx:else>您还未登录，无法查看学员信息哦~</text>
       </view>
     </view>
   </view>

@@ -3,15 +3,20 @@
   <view class="header">
     <view class="userinfo">
       <view class="avatar">
-        <view class="user-avatar">
+        <view class="user-avatar" wx:if="{{authorizationUserInfo}}">
           <image src="{{coachInfo.wxHeadimgurl}}" mode="aspectFill"></image>
         </view>
+        <view class="user-avatar" wx:else>
+          <image src="/images/avatar.jpg" mode="aspectFill"></image>
+        </view>
+        <block wx:if="{{coachLogin}}">
         <view class='vip-status'>
           <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-vip.png" wx:if="{{coachInfo.vip}}"></image>
           <image src="http://superimage.xianshikeji.com/icon/superwxapp/member-novip.png" wx:else></image>
         </view>
+        </block>
       </view>
-      <view class="info">
+      <view class="info" wx:if="{{coachLogin}}">
         <view class="name">
           <text>{{coachInfo.wxNickname}}</text>
         </view>
@@ -19,7 +24,11 @@
           <text wx:if="{{coachInfo.vipTime == 0}}">开通会员，享专属特权</text>
           <text wx:elif="{{coachInfo.vipTime == 1}}">您的会员已到期，<text class="link-text">立即续费</text></text>
           <text wx:else>会员有效期至：{{coachInfo.vipTime}}</text>
-          
+        </view>
+      </view>
+      <view class="info" wx:else>
+        <view class="name" bindtap="bindToLogin">
+          <text>点击登录/注册</text>
         </view>
       </view>
       <!-- <view class="other">
@@ -60,7 +69,8 @@
     <view class="data-list" bindtap="bindButton" data-url="data/index/index">
       <view class="data">
         <view class="num">
-          <text>{{coachInfo.teachingTime}}</text>
+          <text wx:if="{{coachLogin}}">{{coachInfo.teachingTime}}</text>
+          <text wx:else>0</text>
         </view>
         <view class="name">
           <text>待上课时</text>
@@ -68,7 +78,8 @@
       </view>
       <view class="data">
         <view class="num">
-          <text>{{coachInfo.workTime}}</text>
+        <text wx:if="{{coachLogin}}">{{coachInfo.workTime}}</text>
+          <text wx:else>0</text>
         </view>
         <view class="name">
           <text>已上课时</text>
@@ -76,13 +87,14 @@
       </view>
       <view class="data special-data">
         <view class="num">
-          <text>{{coachInfo.teachingStudentNumber}}</text>
+        <text wx:if="{{coachLogin}}">{{coachInfo.teachingStudentNumber}}</text>
+          <text wx:else>0</text>
         </view>
         <view class="name">
           <text>学员总数</text>
         </view>
         <view class="add">
-          <text>+20</text>
+          <text wx:if="{{coachLogin}}">+20</text>
         </view>
       </view>
     </view>

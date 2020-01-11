@@ -31,10 +31,10 @@
 <block wx:else>
   <view class="header">
     <view class="title">
-      <text>绑定你的手机号</text>
+      <text>验证你的手机号</text>
     </view>
     <view class="subtitle">
-      <text>新用户绑定成功后自动成为超级私教用户</text>
+      <text>新用户验证成功后自动成为超级私教用户</text>
     </view>
   </view>
 
@@ -64,10 +64,10 @@
         <view class="recommend">
           <image src="http://superimage.xianshikeji.com/icon/superwxapp/login-recommend.png"></image>
         </view>
-        <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信快速绑定</button>
+        <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">微信快速验证</button>
       </view>
       <view class="vercode" bindtap="changeLoginType">
-        <button>验证码绑定</button>
+        <button>短信验证</button>
       </view>
     </block>
   </view>

@@ -82,6 +82,7 @@ Page({
       itemColor: '#FF3D3D',
       success(res) {
         if (res.tapIndex == 0) {
+          wx.setStorageSync('coachLogin', false);
           wx.navigateBack({
             delta: 2,
           })

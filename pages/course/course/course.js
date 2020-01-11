@@ -121,8 +121,7 @@ Page({
 
           if (res.data.code == 0) {
             var taskInfo = res.data.data.task;
-            selectDate = moment.unix(taskInfo.beginTime).format('YYYY-MM-DD-hh-mm');
-            console.log(taskInfo.step);
+            selectDate = moment.unix(taskInfo.beginTime).format('YYYY-MM-DD-HH-mm');
             _this.createTimeArray(selectDate, taskInfo.step);
 
             if (taskInfo.taskType == 0) {

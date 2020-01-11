@@ -1,8 +1,9 @@
 // pages/course/index/index.js
 import $ from '../../../common/common.js';
-const util = require('../../../utils/util')
+const util = require('../../../utils/util');
 const moment = require('../../../vendor/moment/moment.js');
 const md5 = require('../../../vendor/md5/md5.min.js');
+const app = getApp();
 Page({
 
   /**
@@ -84,6 +85,7 @@ Page({
     selectCalendarDayIndex: 0, // 日历视图：完整日历视图中当前选中日期日下标
 
     calendarSwiperEasing: 'default', // 日历视图：滑动动画模式：linear（线性）、default（默认）
+    coachLogin: false, // 是否登录
   },
 
   /**
@@ -127,30 +129,64 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-  },
+  onReady: function() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
     // 表格视图：生成表格视图（无数据）
+    var _this = this;
     var courseListData = this.generateTableList(this.data.tableDateList, 'init');
     // 日历视图：生成日历视图（无数据）
     var calendarListData = this.generateCalendarList(0 - this.data.calendarLoadBefore, this.data.calendarLoadafter);
 
-    // 表格视图：获取任务数据并填充至表格视图中
-    this.requestCourseTasks(courseListData.courseList);
-    // 日历视图：获取任务所在日期并填充至日历列表中
-    this.requestCalendarTasks(calendarListData.calendarList);
+    if (!app.globalData.checkLogin) {
+      app.checkLoginReadyCallback = () => {
+        // 回调等待login登录成功后执行
+        if (wx.getStorageSync('coachLogin')) {
+          // 表格视图：获取任务数据并填充至表格视图中
+          _this.requestCourseTasks(courseListData.courseList);
+          // 日历视图：获取任务所在日期并填充至日历列表中
+          _this.requestCalendarTasks(calendarListData.calendarList);
+          _this.setData({
+            'coachLogin': true,
+          });
+        }else {
+          _this.setData({
+            'courseList': courseListData.courseList, // 表格视图：表格列表（无数据）
+            'calendarList': calendarListData.calendarList, // 日历视图中日历列表，
+            'coachLogin': false,
+          });
+        }
+      };
+    } else {
+      if (wx.getStorageSync('coachLogin')) {
+        // 表格视图：获取任务数据并填充至表格视图中
+        _this.requestCourseTasks(courseListData.courseList);
+        // 日历视图：获取任务所在日期并填充至日历列表中
+        _this.requestCalendarTasks(calendarListData.calendarList);
+        _this.setData({
+          'coachLogin': true,
+        });
+      }else {
+        _this.setData({
+          'courseList': courseListData.courseList, // 表格视图：表格列表（无数据）
+          'calendarList': calendarListData.calendarList, // 日历视图中日历列表，
+          'coachLogin': false,
+        });
+      }
+    }
+    //判断onLaunch中login是否执行完毕
+    
 
     // 更新数据
-    this.setData({
-      timeLinePosition: this.realTimeLine(), // 更新时间线位置
-      timeList: this.realTimeList(), // 更新当前时间展示颜色
-      movableMessageY: 1029 + (this.data.statusBarHeight - 20), // 设置可移动预约消息框初始Y轴坐标
+    _this.setData({
+      'timeLinePosition': _this.realTimeLine(), // 更新时间线位置
+      'timeList': _this.realTimeList(), // 更新当前时间展示颜色
+      'movableMessageY': 1029 + (_this.data.statusBarHeight - 20), // 设置可移动预约消息框初始Y轴坐标
     });
-    console.log(this.data.courseList[this.data.selectReduceCalendarWeekIndex]['weekList'][this.data.selectReduceCalendarDayIndex]);
+    console.log(_this.data.courseList[_this.data.selectReduceCalendarWeekIndex]['weekList'][_this.data.selectReduceCalendarDayIndex]);
   },
 
   /**
@@ -635,16 +671,37 @@ Page({
    */
   clickTableCourse: function(event) {
     wx.showTabBar();
-    if (event.currentTarget.dataset.type == 0) {
-      // 表格视图进来
-      var selectDate = this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['date'];
-    } else if (event.currentTarget.dataset.type == 1) {
-      // 日历视图进来
-      var selectDate = moment().format('YYYY-MM-DD-HH-00');
+    console.log('coachLogin:' + this.data.coachLogin);
+    if (this.data.coachLogin) {
+      if (event.currentTarget.dataset.type == 0) {
+        // 表格视图进来
+        var selectDate = this.data.courseList[this.data.clickTableWeekIndex]['weekList'][this.data.clickTableDayIndex]['tableList'][this.data.clickTableHourIndex]['date'];
+      } else if (event.currentTarget.dataset.type == 1) {
+        // 日历视图进来
+        var selectDate = moment().format('YYYY-MM-DD-HH-00');
+      }
+      wx.navigateTo({
+        url: '../course/course?courseType=' + event.currentTarget.dataset.index + '&selectDate=' + selectDate,
+      })
+    } else {
+      wx.showModal({
+        title: '陛下，您还未登录',
+        content: '请先登录/注册再进行此操作',
+        confirmText: '立即登录',
+        cancelText: '朕再看看',
+        confirmColor: '#5FCD64',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../../login/login',
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
     }
-    wx.navigateTo({
-      url: '../course/course?courseType=' + event.currentTarget.dataset.index + '&selectDate=' + selectDate,
-    })
+
     this.bindCloseMark();
   },
 
@@ -1327,7 +1384,7 @@ Page({
   requestCalendarTasks: function(newCalendarList, oldCalendarList, scrollCurrent, setType = 'init') {
     if (setType == 'init') {
       wx.showLoading({
-        title: '加载中',
+        title: '刷新课表中',
       });
     }
     var _this = this;
@@ -1410,7 +1467,7 @@ Page({
         title: '加载中',
       });
     }
-    
+
     $.get(
       'task/weekRange', {
         coachid: wx.getStorageSync('coachid'), // 用户id

@@ -1,7 +1,7 @@
 const moment = require('../../../vendor/moment/moment.js');
 import $ from '../../../common/common.js';
 const util = require('../../../utils/util');
-
+const app = getApp();
 Page({
 
   /**
@@ -14,6 +14,8 @@ Page({
     totalStudents: 0, // 学员总计
     searchKey: '',
     searchStudentList: [],
+    coachLogin: false, // 登录态
+    
   },
 
   /**
@@ -35,27 +37,34 @@ Page({
    */
   onShow: function() {
     var _this = this;
-    let timestamp = moment().valueOf();
-
-    $.get(
-      'coachStudentList', {
-        'coachid': wx.getStorageSync('coachid'),
-        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-        'timestamp': timestamp, //时间戳
-      },
-      function(res) {
-        console.log(res.data);
-        if (res.data.code == 0) {
-          // 获取成功
-          _this.bulidStudenList(res.data.data.coachStudentList);
+    //判断onLaunch中login是否执行完毕
+    if (!app.globalData.checkLogin) {
+      app.checkLoginReadyCallback = () => {
+        // 回调等待login登录成功后执行
+        if (wx.getStorageSync('coachLogin')) {
+          _this.requestStudentList();
+          _this.setData({
+            'coachLogin': true,
+          });
         } else {
-          wx.showToast({
-            title: '学员获取失败',
-            icon: 'none'
-          })
+          _this.setData({
+            'coachLogin': false,
+          });
         }
+      };
+    } else {
+      if (wx.getStorageSync('coachLogin')) {
+        _this.requestStudentList();
+        _this.setData({
+          'coachLogin': true,
+        });
+      }else {
+        _this.setData({
+          'coachLogin': false,
+        });
       }
-    )
+    }
+    
   },
 
   /**
@@ -316,9 +325,28 @@ Page({
    * 进入新增学员页面
    */
   navigateToAdd: function() {
-    wx.navigateTo({
-      url: '../add/add',
-    })
+    if(this.data.coachLogin) {
+      wx.navigateTo({
+        url: '../add/add',
+      })
+    }else {
+      wx.showModal({
+        title: '陛下，您还未登录',
+        content: '请先登录/注册再进行此操作',
+        confirmText: '立即登录',
+        cancelText: '朕再看看',
+        confirmColor: '#5FCD64',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '../../login/login',
+            })
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    }
   },
 
   /**
@@ -435,5 +463,32 @@ Page({
         icon: 'none'
       })
     }
+  },
+
+  /**
+   * 请求服务器获取学员列表信息
+   */
+  requestStudentList: function() {
+    var _this = this;
+    let timestamp = moment().valueOf();
+    $.get(
+      'coachStudentList', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, //时间戳
+      },
+      function (res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功，学员信息处理
+          _this.bulidStudenList(res.data.data.coachStudentList);
+        } else {
+          wx.showToast({
+            title: '学员获取失败',
+            icon: 'none'
+          })
+        }
+      }
+    )
   }
 })

@@ -1,9 +1,13 @@
 //app.js
 import $ from 'common/common.js';
+const moment = require('vendor/moment/moment.js');
+const util = require('utils/util')
+const md5 = require('vendor/md5/md5.min.js');
 App({
   data: {
   },
   onLaunch: function () {
+    var _this = this;
     // 获取手机系统信息
     wx.getSystemInfo({
       success(res) {
@@ -11,7 +15,6 @@ App({
         wx.setStorageSync('fixedBottomButtonMargin', (res.screenHeight - res.safeArea.bottom)*2);
       }
     })
-
 
     //登录
     wx.login({
@@ -23,31 +26,20 @@ App({
             code: res.code,
           },
           function (res) {
-            console.log(res);
             if (res.data.code == 0) {
+              // 登录态获取成功
+              
               wx.setStorageSync('coachid', res.data.data.coachid);
               wx.setStorageSync('token', res.data.data.token);
               wx.setStorageSync('coach', res.data.data.coach);
-              // 判断数据库中是否存在微信昵称
-              if (res.data.data.coach.wxNickname) {
-                // 已授权微信信息
-                var authorizationUserInfo = true;
-              } else {
-                // 未授权微信信息
-                var authorizationUserInfo = false;
-              }
-
-              // 判断数据库中是否存在手机号码
+              wx.setStorageSync('authorizationUserInfo', res.data.data.coach.wxNickname ? true : false);
+              wx.setStorageSync('authorizationPhone', res.data.data.coach.mobile ? true : false);
+              // 若已获取到手机号，默认设置为已登录
               if (res.data.data.coach.mobile) {
-                // 已授权手机号码
-                var authorizationPhone = true;
-              } else {
-                // 未授权手机号码
-                var authorizationPhone = false;
+                wx.setStorageSync('coachLogin', true);
+              }else {
+                wx.setStorageSync('coachLogin', false);
               }
-
-              wx.setStorageSync('authorizationUserInfo', authorizationUserInfo);
-              wx.setStorageSync('authorizationPhone', authorizationPhone);
             } else {
               wx.showToast({
                 title: res.data.message,
@@ -58,9 +50,18 @@ App({
               wx.setStorageSync('coach', '')
               wx.setStorageSync('authorizationUserInfo', false);
               wx.setStorageSync('authorizationPhone', false);
+              wx.setStorageSync('coachLogin', false);
             }
+            //由于这里是网络请求，可能会在 Page.onLoad 之后才返回
+            // 所以此处加入 callback 以防止这种情况
+            _this.globalData.checkLogin = true;
+            if (_this.checkLoginReadyCallback) {
+              _this.checkLoginReadyCallback(res);
+            }
+            
           }
         )
+        
       }
     })
     // 获取用户信息
@@ -72,8 +73,26 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-              console.log(res.userInfo);
-
+            
+              let timestamp = moment().valueOf();
+              var userInfo = res.userInfo;
+              $.put(
+                'coach', {
+                  'coachid': wx.getStorageSync('coachid'),
+                  'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+                  'timestamp': timestamp, // 时间戳
+                  'avatarUrl': userInfo.avatarUrl, // 微信返回的用户头像
+                  'city': userInfo.city, // 微信返回的用户所在城市
+                  'country': userInfo.country, // 微信返回的用户所在国家
+                  'gender': userInfo.gender, // 微信返回的用户性别（0未知，1男，2女）
+                  'language': userInfo.language, // 微信返回的 country，province，city 所用的语言（en，zh_CN，zh_TW）
+                  'nickName': userInfo.nickName, // 微信返回的用户昵称
+                  'province': userInfo.province, // 微信返回的用户所在省份
+                },
+                function (res) {
+                  console.log(res.data);
+                }
+              )
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -87,6 +106,7 @@ App({
   },
   globalData: {
     userInfo: null,
+    checkLogin: false,
     startTime: 8, // 日程开始时间
     endTime: 22, // 日程结束时间
   }

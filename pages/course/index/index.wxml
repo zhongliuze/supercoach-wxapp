@@ -272,7 +272,8 @@
         <view class="tasks" wx:else>
           <view class="null-data">
             <image src="http://superimage.xianshikeji.com/icon/superwxapp/null_class_schedule.png"></image>
-            <text>暂无课程安排</text>
+            <text wx:if="{{coachLogin}}">暂无课程安排</text>
+            <text wx:else>您还未登录，无法查看课程安排哦~</text>
           </view>
         </view>
         <view class="tasks-bottom"></view>

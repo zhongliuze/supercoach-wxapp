@@ -14,6 +14,7 @@ Page({
     selectPrice: 2, // 选择套餐类型
     agreement: true, // 勾选服务协议
     orderPopup: false, // 确认弹窗
+    coachInfo: [], // 教练信息
   },
 
   /**
@@ -50,12 +51,24 @@ Page({
         if (res.data.code == 0) {
           // 获取成功
           var coachInfo = res.data.data.coach;
+          if (!coachInfo['vipExpired']) {
+            coachInfo['vip'] = false;
+            coachInfo['vipTime'] = 0;
+          } else if (coachInfo['vipExpired'] && !moment(moment().subtract(1, 'days').format('YYYY-MM-DD')).isBefore(moment.unix(coachInfo['vipExpired']).format('YYYY-MM-DD'))) {
+            // 开通过，已过期
+            coachInfo['vip'] = false;
+            coachInfo['vipTime'] = 1;
+          } else if (coachInfo['vipExpired'] && moment(moment().subtract(1, 'days').format('YYYY-MM-DD')).isBefore(moment.unix(coachInfo['vipExpired']).format('YYYY-MM-DD'))) {
+            // 开通过，未过期
+            coachInfo['vip'] = true;
+            coachInfo['vipTime'] = moment.unix(coachInfo['vipExpired']).format('YYYY-MM-DD');
+          }
           _this.setData({
             coachInfo: res.data.data.coach,
           });
         } else {
           wx.showToast({
-            title: '个人信息失败',
+            title: '个人信息获取失败',
             icon: 'none'
           })
         }

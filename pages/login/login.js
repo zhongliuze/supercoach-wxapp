@@ -17,6 +17,7 @@ Page({
     verifyLogin: false,
     authorizationUserInfo: false, // 身份信息未授权
     authorizationPhone:false,// 身份信息已授权
+    coachLogin: false, // 是否登录
 
   },
 
@@ -50,30 +51,18 @@ Page({
       function (res) {
         if (res.data.code == 0) {
           // 获取成功
-          // 判断数据库中是否存在微信昵称
-          if(res.data.data.coach.wxNickname) {
-            // 已授权微信信息
-            var authorizationUserInfo = true;
-          }else {
-            // 未授权微信信息
-            var authorizationUserInfo = false;
-          }
-
-          // 判断数据库中是否存在手机号码
-          if (res.data.data.coach.wxNickname) {
-            // 已授权手机号码
-            var authorizationPhone = true;
-          } else {
-            // 未授权手机号码
-            var authorizationPhone = false;
-          }
-          
+          // 判断是否授权微信
+          var authorizationUserInfo = res.data.data.coach.wxNickname ? true : false;
+          // 判断是否授权手机号码
+          var authorizationPhone = res.data.data.coach.mobile ? true : false;
           wx.setStorageSync('authorizationUserInfo', authorizationUserInfo);
           wx.setStorageSync('authorizationPhone', authorizationPhone);
+          // 若全都授权则返回上一页
           _this.setData({
             'authorizationUserInfo': authorizationUserInfo,
             'authorizationPhone': authorizationPhone,
           });
+          
         } else {
           wx.showToast({
             title: '个人信息获取失败',
@@ -171,7 +160,7 @@ Page({
    */
   changeLoginType: function (event) {
     wx.showToast({
-      title: '暂未开放，请使用微信快速绑定',
+      title: '暂未开放，请使用微信快速验证',
       icon: 'none',
     })
     // this.setData({
@@ -252,9 +241,10 @@ Page({
             if (res.data.code == 0) {
               // 获取成功
               wx.showToast({
-                title: '绑定成功',
+                title: '登录成功',
                 icon: 'success',
                 success: function () {
+                  wx.setStorageSync('coachLogin', true);
                   setTimeout(function () {
                     wx.navigateBack({
                       delta: '1'
@@ -264,7 +254,7 @@ Page({
               })
             } else {
               wx.showToast({
-                title: '绑定失败',
+                title: '登录失败',
                 icon: 'none'
               })
             }
