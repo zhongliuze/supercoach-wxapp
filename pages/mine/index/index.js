@@ -17,8 +17,10 @@ Page({
       id: "98007",
     },
     coachInfo: [], // 教练个人信息
+    coachMonthData: [], // 教练月数据
     authorizationUserInfo: false, // 授权微信信息
     coachLogin: false, // 登录态
+    
   },
 
   /**
@@ -181,11 +183,12 @@ Page({
             coachInfo['vipTime'] = moment.unix(coachInfo['vipExpired']).format('YYYY-MM-DD');
           }
           _this.setData({
-            coachInfo: res.data.data.coach,
+            'coachInfo': coachInfo,
+            'coachMonthData': res.data.data.currentMonthData,
           });
         } else {
           wx.showToast({
-            title: '个人信息失败',
+            title: '个人信息获取失败',
             icon: 'none'
           })
         }

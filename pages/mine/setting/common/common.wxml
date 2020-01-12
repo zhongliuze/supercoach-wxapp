@@ -11,7 +11,7 @@
         </view>
       </view>
       <view class="value">
-        <switch></switch>
+        <switch checked="{{displayStudentAlias}}" bindchange="switchStudentAliasChange"></switch>
       </view>
     </view>
   </view>
@@ -27,7 +27,7 @@
         </view>
       </view>
       <view class="value">
-        <switch></switch>
+        <switch checked="{{autoCompleteTask}}" bindchange="switchAutoCompleteChange"></switch>
       </view>
     </view>
   </view>
@@ -39,13 +39,16 @@
           <text>课时提醒规则</text>
         </view>
         <view class="subtitle">
-          <text>当会员剩余课时小于3时在列表中标记提醒</text>
+          <text>当会员剩余课时小于{{surplusPickerArray[surplusPickerIndex]}}时在列表中提醒</text>
         </view>
       </view>
-      <view class="value">
-        <text>剩余3课时</text>
-        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
-      </view>
+      <picker bindchange="bindSurplusPickerChange" value="{{surplusPickerIndex}}" range="{{surplusPickerArrayFormart}}">
+        <view class="value">
+          <text>剩余{{surplusPickerArray[surplusPickerIndex]}}课时</text>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
+        </view>
+      </picker>
+
     </view>
   </view>
 
@@ -54,19 +57,23 @@
       <view class="name">
         <text>单节课默认时长</text>
       </view>
-      <view class="value">
-        <text>1小时</text>
-        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
-      </view>
+      <picker bindchange="bindTaskTimePickerChange" value="{{taskTimePickerIndex}}" range="{{taskTimePickerArrayFormart}}">
+        <view class="value">
+          <text>{{taskTimePickerArrayFormart[taskTimePickerIndex]}}</text>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
+        </view>
+      </picker>
     </view>
     <view class="input-line no-border">
       <view class="name">
         <text>学员列表副标题展示</text>
       </view>
-      <view class="value">
-        <text>剩余课时数</text>
-        <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
-      </view>
+      <picker bindchange="bindSubtitlePickerChange" value="{{subtitlePickerIndex}}" range="{{subtitlePickerArrayFormart}}">
+        <view class="value">
+          <text>{{subtitlePickerArrayFormart[subtitlePickerIndex]}}</text>
+          <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
+        </view>
+      </picker>
     </view>
   </view>
 
@@ -75,23 +82,24 @@
       <view class="name">
         <text>学员通知方式</text>
       </view>
+      <picker bindchange="bindMessagePickerChange" value="{{messagePickerIndex}}" range="{{messagePickerArrayFormart}}">
       <view class="value">
-        <text>短息通知</text>
+        <text>{{messagePickerArrayFormart[messagePickerIndex]}}</text>
         <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
+      </picker>
     </view>
   </view>
 
-  <view class="result-input-group">
+  <!-- <view class="result-input-group">
     <view class="input-line no-border">
       <view class="name">
         <text>恢复默认课程模块内容</text>
       </view>
       <view class="value">
-
         <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
       </view>
     </view>
-  </view>
+  </view> -->
 </view>
 <view class="common-bottom"></view>

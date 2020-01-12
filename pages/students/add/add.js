@@ -132,7 +132,7 @@ Page({
     if (event.detail.value.courseNumber) {
       var courseNumber = event.detail.value.courseNumber;
     } else {
-      var courseNumber = '';
+      var courseNumber = 0;
     }
 
     $.post(
@@ -144,7 +144,7 @@ Page({
         'mobile': mobile, // 学员手机号
         'courseTypeId': 1, // 课程类型
         'courseNumber': courseNumber, // 总课时数
-        'sourceId': this.data.sourceId, // 学员来源ID
+        'sourceId': this.data.sourceId ? this.data.sourceId : '', // 学员来源ID
         'remark': '', // 备注信息
       },
       function (res) {

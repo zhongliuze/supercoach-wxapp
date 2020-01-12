@@ -133,7 +133,7 @@ Page({
                 var courseStatusSwitch = true;
               }
               _this.setData({
-                'selectStudentId': taskInfo.studentId,
+                'selectStudentId': taskInfo.coachStudentId,
                 'selectStudentNamestr': taskInfo.title.substring(taskInfo.title.length - 2),
                 'courseStatusSwitch': courseStatusSwitch,
               });
@@ -451,8 +451,8 @@ Page({
           'begin': beginTime, // 开始时间（格式 yyyy-MM-dd HH:mm）
           'end': endTime, // 结束时间（格式 yyyy-MM-dd HH:mm）
           'remind': remindValue, // 课前提醒（0：无提醒、1、30、60、180、360、86400
-          'courseRecordId': 0, // 购课记录ID（课程类型？）
-          'courseContentId': 0, // 上课内容ID
+          'courseRecordId': '', // 购课记录ID（课程类型？）
+          'courseContentId': '', // 上课内容ID
           'coachStudentId': this.data.selectStudentId, // 教练与学员关系 ID
           'taskStatus': this.data.courseStatusSwitch ? 1 : 0, // 课程任务状态
         };

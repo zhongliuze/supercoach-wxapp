@@ -69,7 +69,7 @@
     <view class="data-list" bindtap="bindButton" data-url="data/index/index">
       <view class="data">
         <view class="num">
-          <text wx:if="{{coachLogin}}">{{coachInfo.teachingTime}}</text>
+          <text wx:if="{{coachLogin}}">{{coachMonthData.incompletePlanCount}}</text>
           <text wx:else>0</text>
         </view>
         <view class="name">
@@ -78,7 +78,7 @@
       </view>
       <view class="data">
         <view class="num">
-        <text wx:if="{{coachLogin}}">{{coachInfo.workTime}}</text>
+        <text wx:if="{{coachLogin}}">{{coachMonthData.completePlanCount}}</text>
           <text wx:else>0</text>
         </view>
         <view class="name">
@@ -87,14 +87,14 @@
       </view>
       <view class="data special-data">
         <view class="num">
-        <text wx:if="{{coachLogin}}">{{coachInfo.teachingStudentNumber}}</text>
+        <text wx:if="{{coachLogin}}">{{coachMonthData.studentTotalCount}}</text>
           <text wx:else>0</text>
         </view>
         <view class="name">
           <text>学员总数</text>
         </view>
         <view class="add">
-          <text wx:if="{{coachLogin}}">+20</text>
+          <text wx:if="{{coachLogin && coachMonthData.studentCountForCurrentMonth}}">+{{coachMonthData.studentCountForCurrentMonth}}</text>
         </view>
       </view>
     </view>

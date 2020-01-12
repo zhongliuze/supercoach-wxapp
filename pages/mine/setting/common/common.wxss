@@ -17,7 +17,7 @@
 }
 
 .common-input-group .input-line .name {
-  width: 490rpx;
+  width: 480rpx;
   display: flex;
   flex-direction: column;
 }
@@ -34,7 +34,7 @@
 }
 
 .common-input-group .input-line .value {
-  width: 200rpx;
+  width: 210rpx;
   display: flex;
   justify-content: flex-end;
   align-items: center;

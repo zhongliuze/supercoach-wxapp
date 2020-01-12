@@ -64,7 +64,7 @@ Page({
             coachInfo['vipTime'] = moment.unix(coachInfo['vipExpired']).format('YYYY-MM-DD');
           }
           _this.setData({
-            coachInfo: res.data.data.coach,
+            'coachInfo': coachInfo,
           });
         } else {
           wx.showToast({

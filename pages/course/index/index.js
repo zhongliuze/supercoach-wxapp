@@ -99,6 +99,7 @@ Page({
     var timeList = this.initTimeList(this.data.tableStartTime, this.data.tableEndTime);
     // 表格视图：构建表格日期
     var tableDateList = this.buildTableDateList(0, this.data.tableLoadLength + 1);
+    
 
     // 表格视图：生成表格视图（无数据）
     var courseListData = this.generateTableList(tableDateList, 'init');
@@ -137,7 +138,9 @@ Page({
   onShow: function() {
     // 表格视图：生成表格视图（无数据）
     var _this = this;
+    console.log(this.data.tableDateList);
     var courseListData = this.generateTableList(this.data.tableDateList, 'init');
+    
     // 日历视图：生成日历视图（无数据）
     var calendarListData = this.generateCalendarList(0 - this.data.calendarLoadBefore, this.data.calendarLoadafter);
 
@@ -251,12 +254,11 @@ Page({
           var loadCalendarLength = moment(tableMonth).diff(moment().format('YYYY-MM'), 'month') - this.data.calendarLoadafter + 1;
           // 日历视图：生成日历视图（无数据）
           var tempCalendarList = this.generateCalendarList(this.data.calendarLoadafter, this.data.calendarLoadafter + loadCalendarLength, 'loadRight');
-          console.log('生成后得表格');
-          console.log(tempCalendarList);
           // 更新数据
           this.setData({
-            calendarList: calendarList.concat(tempCalendarList),
-            calendarLoadafter: this.data.calendarLoadafter + loadCalendarLength,
+            'tableDateList': this.data.tableDateList.concat(tableDateList),
+            'calendarList': calendarList.concat(tempCalendarList),
+            'calendarLoadafter': this.data.calendarLoadafter + loadCalendarLength,
           });
           // 日历视图：获取任务所在日期并填充至日历列表中
           this.requestCalendarTasks(tempCalendarList, calendarList, 0, 'loadRight');
@@ -280,13 +282,10 @@ Page({
           // 日历视图：生成日历视图（无数据）
           var tempCalendarList = this.generateCalendarList(calendarLoadBefore + 1, calendarLoadBefore + loadCalendarLength + 1, 'loadLeft');
           // 更新数据
-          console.log('new');
-          console.log(tempCalendarList);
-          console.log('old');
-          console.log(calendarList);
           this.setData({
-            calendarList: tempCalendarList.concat(calendarList),
-            calendarLoadBefore: calendarLoadBefore + loadCalendarLength,
+            'tableDateList': tableDateList.concat(this.data.tableDateList),
+            'calendarList': tempCalendarList.concat(calendarList),
+            'calendarLoadBefore': calendarLoadBefore + loadCalendarLength,
           });
           // 日历视图：获取任务所在日期并填充至日历列表中
           this.requestCalendarTasks(tempCalendarList, calendarList, 0, 'loadLeft');
