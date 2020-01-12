@@ -10,6 +10,7 @@ Page({
    */
   data: {
     student_id: 0, // 学员ID
+    studentData:[], // 学员数据信息
   },
 
   /**
@@ -50,11 +51,12 @@ Page({
           var studentInfo = res.data.data.coachStudent;
           studentInfo['nameStr'] = studentInfo['name'].substring(studentInfo['name'].length - 2);
           _this.setData({
-            studentInfo: studentInfo,
+            'studentInfo': studentInfo,
+            'studentData': res.data.data.courseData,
           });
         } else {
           wx.showToast({
-            title: '获取失败',
+            title: '学员信息获取失败',
             icon: 'none'
           })
         }

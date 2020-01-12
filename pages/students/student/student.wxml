@@ -23,7 +23,7 @@
   <view class="data-group">
     <view class="data">
       <view class="num">
-        <text>30</text>
+        <text>{{studentData.totalCourseCount}}</text>
       </view>
       <view class="name">
         <text>总课时数</text>
@@ -32,7 +32,7 @@
 
     <view class="data">
       <view class="num">
-        <text>5</text>
+        <text>{{studentData.usageCourseCount}}</text>
       </view>
       <view class="name">
         <text>已上课时</text>
@@ -41,7 +41,7 @@
 
     <view class="data">
       <view class="num">
-        <text>25</text>
+        <text>{{studentData.surplusCourseCount}}</text>
       </view>
       <view class="name">
         <text>剩余课时</text>
