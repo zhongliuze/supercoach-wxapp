@@ -42,6 +42,7 @@ Page({
       app.checkLoginReadyCallback = () => {
         // 回调等待login登录成功后执行
         if (wx.getStorageSync('coachLogin')) {
+          _this.getCommonSetting();
           _this.requestStudentList();
           _this.setData({
             'coachLogin': true,
@@ -54,6 +55,7 @@ Page({
       };
     } else {
       if (wx.getStorageSync('coachLogin')) {
+        _this.getCommonSetting();
         _this.requestStudentList();
         _this.setData({
           'coachLogin': true,
@@ -490,5 +492,38 @@ Page({
         }
       }
     )
-  }
+  },
+
+  /**
+   * 获取通用设置
+   */
+  getCommonSetting: function () {
+    var _this = this;
+    let timestamp = moment().valueOf();
+    $.get(
+      'settings/settings', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, //时间戳
+      },
+      function (res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功
+          var generalSettings = res.data.data.generalSettings;
+          _this.setData({
+            'generalSettings': res.data.data.generalSettings,
+            
+            // remark 需要截取
+            // 备注名需要截取
+            // 'displayStudentAlias': generalSettings.displayStudentAlias ? true : false, // 优先展示学员备注名
+            // 'surplusPickerIndex': _this.data.surplusPickerArray.indexOf(generalSettings.surplusTaskRemind), // 课时提醒规则
+           
+            // 'subtitlePickerIndex': _this.data.subtitlePickerArray.indexOf(generalSettings.displayStudentSubtitle), // 学员列表副标题展示
+        
+          });
+        }
+      }
+    )
+  },
 })

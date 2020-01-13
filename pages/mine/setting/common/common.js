@@ -23,9 +23,9 @@ Page({
     taskTimePickerArray: [3600], // 单节课默认时长原始数据
     taskTimePickerIndex: 0, // 默认选中原始数据
 
-    subtitlePickerArrayFormart: ['剩余课时数', '手机号码', '备注信息'], // 学员列表副标题展示内容列表
+    subtitlePickerArrayFormart: ['不显示', '手机号码', '备注信息'], // 学员列表副标题展示内容列表
     subtitlePickerArray: [0, 1, 2], // 学员列表副标题展示内容原始数据列表
-    subtitlePickerIndex: 0, // 默认选中副标题展示
+    subtitlePickerIndex: 1, // 默认选中副标题展示
 
     messagePickerArrayFormart: ['不通知', '微信通知', '短信通知', '微信+短信通知'], // 学员通知方式字典
     messagePickerArray: [0, 1, 2, 3], // 学员通知方式原始数据字典

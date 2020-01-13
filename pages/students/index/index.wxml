@@ -27,14 +27,18 @@
                   <view class="content {{index >= (starStudentList.length - 1) ? 'no-border' : ''}}">
                     <view class="info">
                       <view class="name">
-                        <text>{{item.name}}</text>
+                        <text wx:if="{{generalSettings.displayStudentAlias}}">{{item.alias}}</text>
+                        <text wx:else>{{item.name}}</text>
                       </view>
-                      <view class="other" wx:if="{{item.mobile}}">
+                      <view class="other" wx:if="{{generalSettings.displayStudentSubtitle == 1 && item.mobile}}">
                         <text>{{item.mobile}}</text>
                       </view>
+                      <view class="other" wx:elif="{{generalSettings.displayStudentSubtitle == 2 && item.remark}}">
+                        <text>{{item.remark}}</text>
+                      </view>
                     </view>
-                    <view class="subtitle" wx:if="{{item.times}}">
-                      <text wx:if="{{item.times}}">剩余{{item.times}}课时</text>
+                    <view class="subtitle" wx:if="{{studentItem.courseData.surplusCourseCount}}">
+                      <text>剩余{{item.courseData.surplusCourseCount}}课时</text>
                     </view>
                   </view>
                 </view>
@@ -60,14 +64,18 @@
                     <view class="content {{studentIndex >= (customItem.length - 1) ? 'no-border' : ''}}">
                       <view class="info">
                         <view class="name">
-                          <text>{{studentItem.name}}</text>
+                          <text wx:if="{{generalSettings.displayStudentAlias}}">{{studentItem.alias}}</text>
+                          <text wx:else>{{studentItem.name}}</text>
                         </view>
-                        <view class="other" wx:if="{{studentItem.mobile}}">
-                          <text>{{studentItem.mobile}}</text>
-                        </view>
+                        <view class="other" wx:if="{{generalSettings.displayStudentSubtitle == 1 && studentItem.mobile}}">
+                        <text>{{studentItem.mobile}}</text>
                       </view>
-                      <view class="subtitle" wx:if="{{studentItem.times}}">
-                        <text>剩余05课时</text>
+                      <view class="other" wx:elif="{{generalSettings.displayStudentSubtitle == 2 && studentItem.remark}}">
+                        <text>{{studentItem.remark}}</text>
+                      </view>
+                      </view>
+                      <view class="subtitle" wx:if="{{studentItem.courseData.surplusCourseCount}}">
+                        <text>剩余{{studentItem.courseData.surplusCourseCount}}课时</text>
                       </view>
                     </view>
                   </view>

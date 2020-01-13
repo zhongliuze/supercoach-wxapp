@@ -142,7 +142,7 @@ Page({
         'timestamp': timestamp, // 时间戳
         'name': event.detail.value.name, // 学员姓名
         'mobile': mobile, // 学员手机号
-        'courseTypeId': 1, // 课程类型
+        'courseTypeId': courseTypeId, // 课程类型
         'courseNumber': courseNumber, // 总课时数
         'sourceId': this.data.sourceId ? this.data.sourceId : '', // 学员来源ID
         'remark': '', // 备注信息
