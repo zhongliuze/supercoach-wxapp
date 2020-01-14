@@ -22,12 +22,13 @@
               <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}" data-student_id="{{item.id}}" bindtap="navigateToBasic">
                 <view class="student-line">
                   <view class="avatar">
-                    <text>{{item.nameStr}}</text>
+                    <text wx:if="{{generalSettings.displayStudentAlias && item.aliasStr}}">{{item.aliasStr}}</text>
+                    <text wx:else>{{item.nameStr}}</text>
                   </view>
                   <view class="content {{index >= (starStudentList.length - 1) ? 'no-border' : ''}}">
                     <view class="info">
                       <view class="name">
-                        <text wx:if="{{generalSettings.displayStudentAlias}}">{{item.alias}}</text>
+                        <text wx:if="{{generalSettings.displayStudentAlias && item.alias}}">{{item.alias}}</text>
                         <text wx:else>{{item.name}}</text>
                       </view>
                       <view class="other" wx:if="{{generalSettings.displayStudentSubtitle == 1 && item.mobile}}">
@@ -37,8 +38,8 @@
                         <text>{{item.remark}}</text>
                       </view>
                     </view>
-                    <view class="subtitle" wx:if="{{studentItem.courseData.surplusCourseCount}}">
-                      <text>剩余{{item.courseData.surplusCourseCount}}课时</text>
+                    <view class="subtitle" wx:if="{{item.courseData.surplusCourseCount}}">
+                      <text style="{{item.courseData.surplusCourseCount <= generalSettings.surplusTaskRemind ? 'color:#FF5050' : ''}}">剩余{{item.courseData.surplusCourseCount}}课时</text>
                     </view>
                   </view>
                 </view>
@@ -59,23 +60,24 @@
                 <view class="touch-item {{studentItem.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStartStudent" bindtouchmove="touchMoveStudent" data-index="{{studentIndex}}" bindtap="navigateToBasic" data-custom_index="{{customIndex}}" data-student_id="{{studentItem.id}}">
                   <view class="student-line">
                     <view class="avatar">
-                      <text>{{studentItem.nameStr}}</text>
+                      <text wx:if="{{generalSettings.displayStudentAlias && studentItem.aliasStr}}">{{studentItem.aliasStr}}</text>
+                      <text wx:else>{{studentItem.nameStr}}</text>
                     </view>
                     <view class="content {{studentIndex >= (customItem.length - 1) ? 'no-border' : ''}}">
                       <view class="info">
                         <view class="name">
-                          <text wx:if="{{generalSettings.displayStudentAlias}}">{{studentItem.alias}}</text>
+                          <text wx:if="{{generalSettings.displayStudentAlias && studentItem.alias}}">{{studentItem.alias}}</text>
                           <text wx:else>{{studentItem.name}}</text>
                         </view>
                         <view class="other" wx:if="{{generalSettings.displayStudentSubtitle == 1 && studentItem.mobile}}">
-                        <text>{{studentItem.mobile}}</text>
-                      </view>
-                      <view class="other" wx:elif="{{generalSettings.displayStudentSubtitle == 2 && studentItem.remark}}">
-                        <text>{{studentItem.remark}}</text>
-                      </view>
+                          <text>{{studentItem.mobile}}</text>
+                        </view>
+                        <view class="other" wx:elif="{{generalSettings.displayStudentSubtitle == 2 && studentItem.remark}}">
+                          <text>{{studentItem.remark}}</text>
+                        </view>
                       </view>
                       <view class="subtitle" wx:if="{{studentItem.courseData.surplusCourseCount}}">
-                        <text>剩余{{studentItem.courseData.surplusCourseCount}}课时</text>
+                        <text style="{{studentItem.courseData.surplusCourseCount <= generalSettings.surplusTaskRemind ? 'color:#FF5050' : ''}}">剩余{{studentItem.courseData.surplusCourseCount}}课时</text>
                       </view>
                     </view>
                   </view>
@@ -83,15 +85,12 @@
                 </view>
               </movable-view>
             </movable-area>
-
-
-
-
           </block>
         </view>
       </block>
     </block>
     <block wx:else>
+      <!-- 搜索出来的结果 -->
       <view class="student-group">
         <block wx:for="{{searchStudentList}}" wx:key="this">
           <movable-area class='movable-area'>
@@ -99,19 +98,24 @@
               <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}" data-student_id="{{item.id}}" bindtap="navigateToBasic">
                 <view class="student-line">
                   <view class="avatar">
-                    <text>{{item.nameStr}}</text>
+                    <text wx:if="{{generalSettings.displayStudentAlias && item.aliasStr}}">{{item.aliasStr}}</text>
+                    <text wx:else>{{item.nameStr}}</text>
                   </view>
                   <view class="content {{index >= (searchStudentList.length - 1) ? 'no-border' : ''}}">
                     <view class="info">
                       <view class="name">
-                        <text>{{item.name}}</text>
+                        <text wx:if="{{generalSettings.displayStudentAlias && item.alias}}">{{item.alias}}<text class="sub" wx:if="{{item.searchType == 0}}">({{item.name}})</text></text>
+                        <text wx:else>{{item.name}}<text class="sub" wx:if="{{item.searchType == 1}}">({{item.alias}})</text></text>
                       </view>
-                      <view class="other" wx:if="{{item.mobile}}">
+                      <view class="other" wx:if="{{generalSettings.displayStudentSubtitle == 1 && item.mobile}}">
                         <text>{{item.mobile}}</text>
                       </view>
+                      <view class="other" wx:elif="{{generalSettings.displayStudentSubtitle == 2 && item.remark}}">
+                        <text>{{item.remark}}</text>
+                      </view>
                     </view>
-                    <view class="subtitle" wx:if="{{item.times}}">
-                      <text wx:if="{{item.times}}">剩余{{item.times}}课时</text>
+                    <view class="subtitle" wx:if="{{item.courseData.surplusCourseCount}}">
+                      <text style="{{item.courseData.surplusCourseCount <= generalSettings.surplusTaskRemind ? 'color:#FF5050' : ''}}">剩余{{item.courseData.surplusCourseCount}}课时</text>
                     </view>
                   </view>
                 </view>

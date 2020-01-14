@@ -49,13 +49,15 @@
             </view>
             <view class="content {{studentIndex >= (customItem.length - 1) ? 'no-border' : ''}}">
               <view class="avatar">
-                <text>{{studentItem.nameStr}}</text>
+                <text wx:if="{{generalSettings.displayStudentAlias && studentItem.aliasStr}}">{{studentItem.aliasStr}}</text>
+                <text wx:else>{{studentItem.nameStr}}</text>
               </view>
               <view class="info">
-                <text>{{studentItem.name}}</text>
+                <text wx:if="{{generalSettings.displayStudentAlias && studentItem.alias}}">{{studentItem.alias}}</text>
+                <text wx:else>{{studentItem.name}}</text>
               </view>
-              <view class="subtitle" wx:if="{{studentItem.times}}">
-                <text wx:if="{{studentItem.times}}">剩余{{studentItem.times}}课时</text>
+              <view class="subtitle" wx:if="{{studentItem.courseData.surplusCourseCount}}">
+                <text style="{{studentItem.courseData.surplusCourseCount <= generalSettings.surplusTaskRemind ? 'color:#FF5050' : ''}}">剩余{{studentItem.courseData.surplusCourseCount}}课时</text>
               </view>
             </view>
           </view>
@@ -75,13 +77,15 @@
               </view>
               <view class="content {{studentIndex >= (customItem.length - 1) ? 'no-border' : ''}}">
                 <view class="avatar">
-                  <text>{{studentItem.nameStr}}</text>
+                  <text wx:if="{{generalSettings.displayStudentAlias && studentItem.aliasStr}}">{{studentItem.aliasStr}}</text>
+                  <text wx:else>{{studentItem.nameStr}}</text>
                 </view>
                 <view class="info">
-                  <text>{{studentItem.name}}</text>
+                  <text wx:if="{{generalSettings.displayStudentAlias && studentItem.alias}}">{{studentItem.alias}}</text>
+                  <text wx:else>{{studentItem.name}}</text>
                 </view>
-                <view class="subtitle" wx:if="{{studentItem.times}}">
-                  <text>每周二上课</text>
+                <view class="subtitle" wx:if="{{studentItem.courseData.surplusCourseCount}}">
+                  <text style="{{studentItem.courseData.surplusCourseCount <= generalSettings.surplusTaskRemind ? 'color:#FF5050' : ''}}">剩余{{studentItem.courseData.surplusCourseCount}}课时</text>
                 </view>
               </view>
             </view>
@@ -100,13 +104,15 @@
             </view>
             <view class="content {{(lastSearchCustom == customIndex && lastSearchStudent == studentIndex) ? 'no-border' : ''}}">
               <view class="avatar">
-                <text>{{studentItem.nameStr}}</text>
+                <text wx:if="{{generalSettings.displayStudentAlias && studentItem.aliasStr}}">{{studentItem.aliasStr}}</text>
+                <text wx:else>{{studentItem.nameStr}}</text>
               </view>
               <view class="info">
-                <text>{{studentItem.name}}</text>
+                <text wx:if="{{generalSettings.displayStudentAlias && studentItem.alias}}">{{studentItem.alias}}<text class='sub' wx:if="{{studentItem.searchType == 0}}">({{studentItem.name}})</text></text>
+                <text wx:else>{{studentItem.name}}<text class='sub' wx:if="{{studentItem.searchType == 1}}">({{studentItem.alias}})</text></text>
               </view>
-              <view class="subtitle" wx:if="{{studentItem.times}}">
-                <text>每周二上课</text>
+              <view class="subtitle" wx:if="{{studentItem.courseData.surplusCourseCount}}">
+                <text style="{{studentItem.courseData.surplusCourseCount <= generalSettings.surplusTaskRemind ? 'color:#FF5050' : ''}}">剩余{{studentItem.courseData.surplusCourseCount}}课时</text>
               </view>
             </view>
           </view>

@@ -48,28 +48,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var _this = this;
-    let timestamp = moment().valueOf();
-
-    $.get(
-      'coachStudentList', {
-        'coachid': wx.getStorageSync('coachid'),
-        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-        'timestamp': timestamp, //时间戳
-      },
-      function(res) {
-        console.log(res.data);
-        if (res.data.code == 0) {
-          // 获取成功
-          _this.bulidStudenList(res.data.data.coachStudentList);
-        } else {
-          wx.showToast({
-            title: '学员获取失败',
-            icon: 'none'
-          })
-        }
-      }
-    )
+    // 获取通用设置
+    this.getCommonSetting();
+    // 获取学员列表
+    this.requestStudentList();
   },
 
   /**
@@ -133,12 +115,23 @@ Page({
     for (var i = 0; i < getStudentList.length; i++) {
       var tempStudentList = getStudentList[i];
       tempStudentList['nameStr'] = tempStudentList['name'].substring(tempStudentList['name'].length - 2);
+      tempStudentList['aliasStr'] = tempStudentList['alias'].substring(tempStudentList['alias'].length - 2);
+      tempStudentList['remark'] = tempStudentList['remark'].substring(0, 12) + (tempStudentList['remark'].length > 12 ? '…' : '');
       if (tempStudentList['follow']) {
         // 是特别关注学员
         starStudentList.push(tempStudentList);
       } else {
         // 普通学员
-        if (tempStudentList['namePinYinHeadChar'][0]) {
+        if (this.data.generalSettings.displayStudentAlias == 1 && tempStudentList['aliasPinYinHeadChar'][0]) {
+          // 存在拼音缩写字符串
+          // 判断是否有所属大写字母列
+          if (!customStudentList[tempStudentList['aliasPinYinHeadChar'][0].toUpperCase()]) {
+            // 没有，先创建列
+            customStudentList[tempStudentList['aliasPinYinHeadChar'][0].toUpperCase()] = [];
+          }
+          // 写入数据
+          customStudentList[tempStudentList['aliasPinYinHeadChar'][0].toUpperCase()].push(tempStudentList);
+        }else if (tempStudentList['namePinYinHeadChar'][0]) {
           // 存在拼音缩写字符串
           // 判断是否有所属大写字母列
           if (!customStudentList[tempStudentList['namePinYinHeadChar'][0].toUpperCase()]) {
@@ -164,16 +157,23 @@ Page({
 
     var selectStudentName = '';
     var selectStudentNamestr = '';
-    for (let key in customStudentList) {
-      for (var i = 0; i < customStudentList[key].length; i++) {
-        if (customStudentList[key][i]['id'] == this.data.selectStudentId) {
-          customStudentList[key][i]['checked'] = true;
-          selectStudentName = customStudentList[key][i]['name'];
-          selectStudentNamestr = customStudentList[key][i]['nameStr'];
+    if (this.data.selectStudentId) {
+      for (let key in customStudentList) {
+        for (var i = 0; i < customStudentList[key].length; i++) {
+          if (customStudentList[key][i]['id'] == this.data.selectStudentId) {
+            customStudentList[key][i]['checked'] = true;
+            if (this.data.generalSettings.displayStudentAlias == 1 && customStudentList[key][i]['alias']) {
+              selectStudentName = customStudentList[key][i]['alias'];
+              selectStudentNamestr = customStudentList[key][i]['aliasStr'];
+            } else {
+              selectStudentName = customStudentList[key][i]['name'];
+              selectStudentNamestr = customStudentList[key][i]['nameStr'];
+            }
+
+          }
         }
       }
     }
-
     this.setData({
       totalStudents: getStudentList.length,
       customStudentList: customStudentList,
@@ -194,12 +194,23 @@ Page({
         customStudentList[key][i]['checked'] = false;
       }
     }
-
+    // 设置该位置选中
     customStudentList[custom_index][student_index]['checked'] = true;
+
+    // 判断是否优先展示备注名
+    if (this.data.generalSettings.displayStudentAlias == 1 && customStudentList[custom_index][student_index]['alias']) {
+      // 优先展示备注名
+      var selectStudentName = customStudentList[custom_index][student_index]['alias'];
+      var selectStudentNamestr = customStudentList[custom_index][student_index]['aliasStr'];
+    } else {
+      // 展示正常名称
+      var selectStudentName = customStudentList[custom_index][student_index]['name'];
+      var selectStudentNamestr = customStudentList[custom_index][student_index]['nameStr'];
+    }
     this.setData({
       customStudentList: customStudentList,
-      selectStudentName: customStudentList[custom_index][student_index]['name'],
-      selectStudentNamestr: customStudentList[custom_index][student_index]['nameStr'],
+      selectStudentName: selectStudentName,
+      selectStudentNamestr: selectStudentNamestr,
       selectStudentId: customStudentList[custom_index][student_index]['id'],
     });
   },
@@ -226,7 +237,7 @@ Page({
   /**
    * 搜索输入框
    */
-  bindSearch: function (event) {
+  bindSearch: function(event) {
     // 搜索关键字
     var searchKey = event.detail.value;
     // 搜索学员并保存结果信息
@@ -239,7 +250,7 @@ Page({
   /**
    * 搜索学员
    */
-  searchStudents: function (searchKey) {
+  searchStudents: function(searchKey) {
     var customStudentList = this.data.customStudentList;
     var searchStudentList = [];
     var lastSearchCustom = 0;
@@ -251,6 +262,13 @@ Page({
           if (customStudentList[key][i]['name'].indexOf(searchKey) != -1 || customStudentList[key][i]['namePinYin'].indexOf(searchKey) != -1) {
             searchStudentList.push(customStudentList[key][i]);
             customStudentList[key][i]['is_search'] = true;
+            customStudentList[key][i]['searchType'] = 0; // 通过名称找到
+            lastSearchCustom = key;
+            lastSearchStudent = i;
+          } else if (customStudentList[key][i]['alias'].indexOf(searchKey) != -1 || customStudentList[key][i]['aliasPinYin'].indexOf(searchKey) != -1) {
+            searchStudentList.push(customStudentList[key][i]);
+            customStudentList[key][i]['is_search'] = true;
+            customStudentList[key][i]['searchType'] = 1; // 通过昵称找到
             lastSearchCustom = key;
             lastSearchStudent = i;
           }else {
@@ -270,12 +288,68 @@ Page({
   /**
    * 点击搜索按钮
    */
-  searchConfirm: function (event) {
+  searchConfirm: function(event) {
     if (this.data.searchStudentList == '') {
       wx.showToast({
         title: '抱歉，未找到该学员',
         icon: 'none'
       })
     }
+  },
+
+  /**
+   * 获取通用设置
+   */
+  getCommonSetting: function() {
+    var _this = this;
+    let timestamp = moment().valueOf();
+    $.get(
+      'settings/settings', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, //时间戳
+      },
+      function(res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功
+          var generalSettings = res.data.data.generalSettings;
+          _this.setData({
+            'generalSettings': res.data.data.generalSettings,
+          });
+        }
+      }
+    )
+  },
+
+  /**
+   * 请求服务器获取学员列表信息
+   */
+  requestStudentList: function() {
+    var _this = this;
+    let timestamp = moment().valueOf();
+    wx.showLoading({
+      title: '加载中',
+    })
+    $.get(
+      'coachStudentList', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, //时间戳
+      },
+      function(res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取成功
+          _this.bulidStudenList(res.data.data.coachStudentList);
+        } else {
+          wx.showToast({
+            title: '学员获取失败',
+            icon: 'none'
+          })
+        }
+        wx.hideLoading();
+      }
+    )
   }
 })

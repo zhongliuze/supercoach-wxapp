@@ -143,12 +143,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    // 表格视图：生成表格视图（无数据）
+    
     var _this = this;
     console.log('向前加载了' + this.data.tableLoadBefore + '周');
     console.log('向后加载了' + this.data.tableLoadAfter + '周');
     console.log(this.data.tableDateList);
-
+    // 表格视图：生成表格视图（无数据）
     var courseListData = this.generateTableList(this.data.tableDateList, 'init');
 
     // 日历视图：生成日历视图（无数据）
@@ -1513,6 +1513,7 @@ Page({
         timestamp: timestamp, //时间戳
       },
       function(res) {
+        console.log(res.data);
         if (res.data.code == 0) {
           // 判断数据加载方向
           if (loadType == 'loadLeft') {
@@ -1542,6 +1543,7 @@ Page({
           }
         }
 
+        console.log(newCourseList);
         // 更新数据
         if (loadType != 'init') {
           _this.setData({

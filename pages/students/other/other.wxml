@@ -5,7 +5,7 @@
         <text>设为特别关注</text>
       </view>
       <view class="value">
-        <switch></switch>
+        <switch checked="{{follow}}" bindchange="changeFollow"></switch>
       </view>
     </view>
   </view>

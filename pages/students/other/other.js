@@ -1,18 +1,24 @@
 // pages/students/other/other.js
+const moment = require('../../../vendor/moment/moment.js');
+import $ from '../../../common/common.js';
+const util = require('../../../utils/util')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    follow: false, // 是否关注
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      'follow': (options.follow == 1) ? true : false,
+      'student_id': options.student_id,
+    });
   },
 
   /**
@@ -88,5 +94,29 @@ Page({
         }
       }
     })
+  },
+
+  /**
+   * 更改状态
+   */
+  changeFollow: function(event) {
+    console.log(event.detail.value);
+    var _this = this;
+    let timestamp = moment().valueOf();
+    $.put(
+      'follow', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, //时间戳
+        'coachStudentId': this.data.student_id,
+        'follow': event.detail.value ? 1 : 0,
+      },
+      function (res) {
+        console.log(res.data);
+      }
+    )
+    _this.setData({
+      'follow': event.detail.value,
+    });
   }
 })

@@ -15,7 +15,7 @@ Page({
     searchKey: '',
     searchStudentList: [],
     coachLogin: false, // 登录态
-    
+
   },
 
   /**
@@ -60,13 +60,13 @@ Page({
         _this.setData({
           'coachLogin': true,
         });
-      }else {
+      } else {
         _this.setData({
           'coachLogin': false,
         });
       }
     }
-    
+
   },
 
   /**
@@ -153,10 +153,10 @@ Page({
   },
 
   //手指触摸动作开始 记录起点X坐标
-  touchStartSearch: function (e) {
+  touchStartSearch: function(e) {
     //开始触摸时 重置所有删除
     var searchStudentList = this.data.searchStudentList;
-    searchStudentList.forEach(function (v, i) {
+    searchStudentList.forEach(function(v, i) {
       if (v.isTouchMove) //只操作为true的
         v.isTouchMove = false;
     })
@@ -167,7 +167,7 @@ Page({
     })
   },
   //滑动事件处理
-  touchMoveSearch: function (e) {
+  touchMoveSearch: function(e) {
     var searchStudentList = this.data.searchStudentList;
     var that = this,
       index = e.currentTarget.dataset.index, //当前索引
@@ -180,10 +180,10 @@ Page({
         X: startX,
         Y: startY
       }, {
-          X: touchMoveX,
-          Y: touchMoveY
-        });
-    searchStudentList.forEach(function (v, i) {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
+    searchStudentList.forEach(function(v, i) {
       v.isTouchMove = false
       //滑动超过30度角 return
       if (Math.abs(angle) > 30) return;
@@ -202,12 +202,12 @@ Page({
 
 
   //手指触摸动作开始 记录起点X坐标
-  touchStartStudent: function (e) {
+  touchStartStudent: function(e) {
     //开始触摸时 重置所有删除
     var customStudentList = this.data.customStudentList;
     var tempStudentList = customStudentList[e.currentTarget.dataset.custom_index];
 
-    tempStudentList.forEach(function (v, i) {
+    tempStudentList.forEach(function(v, i) {
       if (v.isTouchMove) //只操作为true的
         v.isTouchMove = false;
     })
@@ -221,7 +221,7 @@ Page({
   },
 
   //滑动事件处理
-  touchMoveStudent: function (e) {
+  touchMoveStudent: function(e) {
     var customStudentList = this.data.customStudentList;
     var tempStudentList = customStudentList[e.currentTarget.dataset.custom_index];
 
@@ -236,10 +236,10 @@ Page({
         X: startX,
         Y: startY
       }, {
-          X: touchMoveX,
-          Y: touchMoveY
-        });
-    tempStudentList.forEach(function (v, i) {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
+    tempStudentList.forEach(function(v, i) {
       v.isTouchMove = false
       //滑动超过30度角 return
       if (Math.abs(angle) > 30) return;
@@ -286,7 +286,7 @@ Page({
 
         } else if (res.cancel) {
           console.log('用户点击取消')
-          
+
           let timestamp = moment().valueOf();
           $.delete(
             'coachStudent', {
@@ -295,7 +295,7 @@ Page({
               'timestamp': timestamp, // 时间戳
               'coachStudentId': student_id, // 教练与学员关系ID
             },
-            function (res) {
+            function(res) {
               console.log(res.data);
               if (res.data.code == 0) {
                 // 获取成功
@@ -303,9 +303,9 @@ Page({
                   title: '已删除',
                   icon: 'success',
                   complete: function() {
-                    setTimeout(function(){
+                    setTimeout(function() {
                       _this.onShow();
-                    },1500);
+                    }, 1500);
                   }
                 })
               } else {
@@ -316,7 +316,7 @@ Page({
               }
             }
           )
-          
+
         }
       }
     })
@@ -327,11 +327,11 @@ Page({
    * 进入新增学员页面
    */
   navigateToAdd: function() {
-    if(this.data.coachLogin) {
+    if (this.data.coachLogin) {
       wx.navigateTo({
         url: '../add/add',
       })
-    }else {
+    } else {
       wx.showModal({
         title: '陛下，您还未登录',
         content: '请先登录/注册再进行此操作',
@@ -356,7 +356,7 @@ Page({
    */
   navigateToBasic: function(event) {
     wx.navigateTo({
-      url: '../student/student?student_id=' + event.currentTarget.dataset.student_id,
+      url: '../student/student?student_id=' + event.currentTarget.dataset.student_id + '&displayStudentAlias=' + this.data.generalSettings.displayStudentAlias,
     })
   },
 
@@ -378,12 +378,24 @@ Page({
     for (var i = 0; i < getStudentList.length; i++) {
       var tempStudentList = getStudentList[i];
       tempStudentList['nameStr'] = tempStudentList['name'].substring(tempStudentList['name'].length - 2);
+      tempStudentList['aliasStr'] = tempStudentList['alias'].substring(tempStudentList['alias'].length - 2);
+      tempStudentList['remark'] = tempStudentList['remark'].substring(0, 12) + (tempStudentList['remark'].length > 12 ? '…' : '');
       if (tempStudentList['follow']) {
         // 是特别关注学员
         starStudentList.push(tempStudentList);
       } else {
         // 普通学员
-        if (tempStudentList['namePinYinHeadChar'][0]) {
+        // 判断是否优先展示备注名
+        if (this.data.generalSettings.displayStudentAlias == 1 && tempStudentList['aliasPinYinHeadChar'][0]) {
+          // 存在拼音缩写字符串
+          // 判断是否有所属大写字母列
+          if (!customStudentList[tempStudentList['aliasPinYinHeadChar'][0].toUpperCase()]) {
+            // 没有，先创建列
+            customStudentList[tempStudentList['aliasPinYinHeadChar'][0].toUpperCase()] = [];
+          }
+          // 写入数据
+          customStudentList[tempStudentList['aliasPinYinHeadChar'][0].toUpperCase()].push(tempStudentList);
+        } else if (tempStudentList['namePinYinHeadChar'][0]) {
           // 存在拼音缩写字符串
           // 判断是否有所属大写字母列
           if (!customStudentList[tempStudentList['namePinYinHeadChar'][0].toUpperCase()]) {
@@ -430,15 +442,19 @@ Page({
   /**
    * 搜索学员
    */
-  searchStudents: function (searchKey) {
+  searchStudents: function(searchKey) {
     var starStudentList = this.data.starStudentList;
     var customStudentList = this.data.customStudentList;
     var searchStudentList = [];
-    
-    if(searchKey) {
+
+    if (searchKey) {
       // 查找星标学员
       for (var i = 0; i < starStudentList.length; i++) {
         if (starStudentList[i]['name'].indexOf(searchKey) != -1 || starStudentList[i]['namePinYin'].indexOf(searchKey) != -1) {
+          starStudentList[i]['searchType'] = 0; // 通过名称找到
+          searchStudentList.push(starStudentList[i]);
+        } else if (starStudentList[i]['alias'].indexOf(searchKey) != -1 || starStudentList[i]['aliasPinYin'].indexOf(searchKey) != -1) {
+          starStudentList[i]['searchType'] = 1; // 通过昵称找到
           searchStudentList.push(starStudentList[i]);
         }
       }
@@ -447,6 +463,10 @@ Page({
       for (let key in customStudentList) {
         for (var i = 0; i < customStudentList[key].length; i++) {
           if (customStudentList[key][i]['name'].indexOf(searchKey) != -1 || customStudentList[key][i]['namePinYin'].indexOf(searchKey) != -1) {
+            customStudentList[key][i]['searchType'] = 0; // 通过名称找到
+            searchStudentList.push(customStudentList[key][i]);
+          } else if (customStudentList[key][i]['alias'].indexOf(searchKey) != -1 || customStudentList[key][i]['aliasPinYin'].indexOf(searchKey) != -1) {
+            customStudentList[key][i]['searchType'] = 1; // 通过昵称找到
             searchStudentList.push(customStudentList[key][i]);
           }
         }
@@ -479,7 +499,7 @@ Page({
         'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
         'timestamp': timestamp, //时间戳
       },
-      function (res) {
+      function(res) {
         console.log(res.data);
         if (res.data.code == 0) {
           // 获取成功，学员信息处理
@@ -497,7 +517,7 @@ Page({
   /**
    * 获取通用设置
    */
-  getCommonSetting: function () {
+  getCommonSetting: function() {
     var _this = this;
     let timestamp = moment().valueOf();
     $.get(
@@ -506,21 +526,13 @@ Page({
         'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
         'timestamp': timestamp, //时间戳
       },
-      function (res) {
+      function(res) {
         console.log(res.data);
         if (res.data.code == 0) {
           // 获取成功
           var generalSettings = res.data.data.generalSettings;
           _this.setData({
             'generalSettings': res.data.data.generalSettings,
-            
-            // remark 需要截取
-            // 备注名需要截取
-            // 'displayStudentAlias': generalSettings.displayStudentAlias ? true : false, // 优先展示学员备注名
-            // 'surplusPickerIndex': _this.data.surplusPickerArray.indexOf(generalSettings.surplusTaskRemind), // 课时提醒规则
-           
-            // 'subtitlePickerIndex': _this.data.subtitlePickerArray.indexOf(generalSettings.displayStudentSubtitle), // 学员列表副标题展示
-        
           });
         }
       }

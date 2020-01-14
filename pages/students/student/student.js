@@ -11,6 +11,7 @@ Page({
   data: {
     student_id: 0, // 学员ID
     studentData:[], // 学员数据信息
+    displayStudentAlias: 0, // 优先展示学员备注名
   },
 
   /**
@@ -18,8 +19,10 @@ Page({
    */
   onLoad: function (options) {
     console.log(options.student_id);
+    console.log(options.displayStudentAlias);
     this.setData({
-      student_id: options.student_id,
+      'student_id': options.student_id,
+      'displayStudentAlias': options.displayStudentAlias,
     });
   },
 
@@ -50,6 +53,7 @@ Page({
           // 获取成功
           var studentInfo = res.data.data.coachStudent;
           studentInfo['nameStr'] = studentInfo['name'].substring(studentInfo['name'].length - 2);
+          studentInfo['aliasStr'] = studentInfo['alias'].substring(studentInfo['alias'].length - 2);
           _this.setData({
             'studentInfo': studentInfo,
             'studentData': res.data.data.courseData,
@@ -112,8 +116,15 @@ Page({
  * 点击进入二级页面
  */
   bindButton: function (event) {
+    var otherData = '';
+    if (event.currentTarget.dataset.type == 3) {
+      // 其它信息
+      otherData = '&follow=' + this.data.studentInfo['follow'];
+    }
     wx.navigateTo({
-      url: '../' + event.currentTarget.dataset.url + '?student_id=' + this.data.student_id,
+      url: '../' + event.currentTarget.dataset.url + '?student_id=' + this.data.student_id + otherData,
     })
   },
+
+  
 })

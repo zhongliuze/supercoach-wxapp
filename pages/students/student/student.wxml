@@ -5,10 +5,15 @@
 
 <view class="info">
   <view class="avatar">
-    <text>{{studentInfo.nameStr}}</text>
+    <text wx:if="{{displayStudentAlias == 1 && studentInfo.aliasStr}}">{{studentInfo.aliasStr}}</text>
+    <text wx:else>{{studentInfo.nameStr}}</text>
   </view>
   <view class="base">
-    <view class="name">
+    <view class="name" wx:if="{{displayStudentAlias == 1 && studentInfo.alias}}">
+      <text class="main">{{studentInfo.alias}}</text>
+      <text class="sub">（{{studentInfo.name}}）</text>
+    </view>
+    <view class="name" wx:else>
       <text class="main">{{studentInfo.name}}</text>
       <text class="sub" wx:if="{{studentInfo.alias}}">（{{studentInfo.alias}}）</text>
     </view>
@@ -114,7 +119,7 @@
 </view> -->
 
 <view class="button-cell-group">
-  <view class="button-cell" bindtap="bindButton" data-url="other/other">
+  <view class="button-cell" bindtap="bindButton" data-url="other/other" data-type="3">
     <view class="icon">
       <image src="http://superimage.xianshikeji.com/icon/superwxapp/student-info-more.png" style="width:28rpx;height:24rpx;"></image>
     </view>

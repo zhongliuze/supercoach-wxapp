@@ -126,6 +126,11 @@
   line-height: 54rpx;
 }
 
+.student-line .content .info .name .sub {
+   color: #707888;
+  font-size: 26rpx;
+}
+
 .student-line .content .info .other {
   font-size: 26rpx;
   color: #8c95a7;
