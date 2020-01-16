@@ -782,11 +782,11 @@ Page({
     }
 
     wx.showModal({
-      title: '确认要删除吗？',
-      content: '相关联的课程数据也将被删除',
-      cancelText: '删除',
+      title: '确认要取消课程吗？',
+      content: '取消后用户将收到课程取消通知',
+      cancelText: '确认取消',
       cancelColor: '#000000',
-      confirmText: '取消',
+      confirmText: '我再想想',
       confirmColor: '#5FCD64',
       success(res) {
         if (res.confirm) {
@@ -806,7 +806,7 @@ Page({
               if (res.data.code == 0) {
                 // 获取成功
                 wx.showToast({
-                  title: '已删除',
+                  title: '已取消课程',
                   icon: 'success',
                   success: function() {
                     _this.onShow();
@@ -814,7 +814,7 @@ Page({
                 })
               } else {
                 wx.showToast({
-                  title: '删除失败',
+                  title: '取消失败',
                   icon: 'none'
                 })
               }

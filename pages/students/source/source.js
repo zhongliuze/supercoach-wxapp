@@ -1,8 +1,7 @@
 // pages/students/source/source.js
 const moment = require('../../../vendor/moment/moment.js');
 import $ from '../../../common/common.js';
-const util = require('../../../utils/util')
-const md5 = require('../../../vendor/md5/md5.min.js');
+const util = require('../../../utils/util');
 Page({
 
   /**

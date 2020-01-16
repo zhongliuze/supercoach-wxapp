@@ -144,7 +144,7 @@
 					"id": 12,
 					"name": "pages/students/student/student",
 					"pathName": "pages/students/student/student",
-					"query": "student_id=11",
+					"query": "student_id=13",
 					"scene": null
 				},
 				{

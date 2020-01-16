@@ -1,33 +1,22 @@
 // pages/students/record/record.js
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
+const moment = require('../../../vendor/moment/moment.js');
+import $ from '../../../common/common.js';
+const util = require('../../../utils/util');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    tabs: ["待完成(5)", "已完成(3)","已取消(1)"],
+    tabs: ["待完成(0)", "已完成(0)","已取消(0)"],
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
     systemInfo: [],
-    tasksList: [
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '0'},
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '1'},
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '0'},
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '1' },
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '0' },
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '0' },
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '1' },
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '1' },
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '-1' },
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '0' },
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '0' },
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '-1' },
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '0' },
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '0' },
-      { 'time': '07月15日 19:30~20:30', 'type': '1V1游泳私教', status: '0' },
-    ],
+    incompleteList: [], // 待完成
+    completeList: [], // 已完成
+    cancelledList: [], // 已取消
   },
 
   /**
@@ -35,6 +24,9 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    this.setData({
+      'student_id': options.student_id,
+    });
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -56,7 +48,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    // 获取待完成列表
+    this.getRecord(0);
+    // 获取已完成列表
+    this.getRecord(1);
+    // 获取已取消列表
+    this.getRecord(2);
   },
 
   /**
@@ -98,9 +95,8 @@ Page({
    * 切换菜单
    */
   tabClick: function (e) {
-    var that = this;
-    
-    that.setData({
+    this.getRecord(e.currentTarget.id);
+    this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
@@ -177,5 +173,72 @@ Page({
     wx.navigateTo({
       url: '../course/course',
     })
+  },
+
+  /**
+   * 从服务器获取记录
+   */
+  getRecord: function (taskStatus = 0) {
+    var _this = this;
+    var tabs = this.data.tabs;
+    let timestamp = moment().valueOf();
+    $.get(
+      'task/planRecord', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, // 时间戳
+        'pageNumber': 1, // 第几页
+        'pageSize': 1000, // 每页多少条
+        'taskStatus': (taskStatus == 2) ? -1 : taskStatus, // 任务状态（0:待完成，1:已完成，2:待确认，-1:已取消，-2:已删除）
+        'coachStudentId': this.data.student_id,
+      },
+      function (res) {
+        console.log(res.data);
+        if (res.data.code == 0) {
+          // 获取待完成课表成功
+          var completeList = _this.optimalData(res.data.data.content);
+          if (taskStatus == 0) {
+            // 待完成
+            tabs[0] = '待完成(' + (completeList ? completeList.length : 0) +')';
+            _this.setData({
+              'incompleteList': completeList,
+              'tabs': tabs,
+            });
+          } else if (taskStatus == 1) {
+            // 已完成
+            tabs[1] = '已完成(' + (completeList ? completeList.length : 0) + ')';
+            _this.setData({
+              'completeList': completeList,
+              'tabs': tabs,
+            });
+          } else if (taskStatus == 2) {
+            // 已取消
+            tabs[2] = '已取消(' + (completeList ? completeList.length : 0) + ')';
+            _this.setData({
+              'cancelledList': completeList,
+              'tabs': tabs,
+            });
+          }
+        } else {
+          wx.showToast({
+            title: '上课记录获取失败',
+            icon: 'none'
+          })
+        }
+      }
+    )
+  },
+
+  /**
+   * 优化数组
+   */
+  optimalData: function(completeList) {
+    if(!completeList) {
+      return [];
+    }
+    for(var i=0;i<completeList.length;i++) {
+      completeList[i]['courseTime'] = moment.unix(completeList[i]['beginTime']).format('MM月DD日 HH:mm') + '~' + moment.unix(completeList[i]['endTime']).format('HH:mm');
+    }
+    return completeList;
   }
 })

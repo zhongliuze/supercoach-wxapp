@@ -132,7 +132,7 @@
                       </view>
                       <view class="button" catchtap="clickTableDelete" data-index="{{index}}" data-task_id="{{item.taskId}}">
                         <image src="http://superimage.xianshikeji.com/icon/superwxapp/course-table-button-delete.png"></image>
-                        <text>删除</text>
+                        <text>取消</text>
                       </view>
                     </block>
                   </view>
@@ -263,7 +263,7 @@
                       </view>
                     </view>
                   </view>
-                  <view class="delete-button" catchtap="clickTableDelete" data-index="{{index}}" data-task_id="{{item.taskId}}">删除</view>
+                  <view class="delete-button" catchtap="clickTableDelete" data-index="{{index}}" data-task_id="{{item.taskId}}">取消</view>
                 </view>
               </movable-view>
             </movable-area>
