@@ -13,7 +13,7 @@
     <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
       <block wx:if="{{incompleteList != ''}}">
         <view class="course-group">
-          <block wx:for="{{incompleteList}}">
+          <block wx:for="{{incompleteList}}" wx:key="this">
             <movable-area class='movable-area'>
               <movable-view direction="horizontal" class='movable-view'>
                 <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}" bindtap="navigateToCourse">
@@ -51,7 +51,7 @@
     <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
       <block wx:if="{{completeList != ''}}">
         <view class="course-group">
-          <block wx:for="{{completeList}}">
+          <block wx:for="{{completeList}}" wx:key="this">
             <movable-area class='movable-area'>
               <movable-view direction="horizontal" class='movable-view'>
                 <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}" bindtap="navigateToCourse">
@@ -89,7 +89,7 @@
     <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
         <block wx:if="{{cancelledList != ''}}">
         <view class="course-group">
-          <block wx:for="{{cancelledList}}">
+          <block wx:for="{{cancelledList}}" wx:key="this">
             <movable-area class='movable-area'>
               <movable-view direction="horizontal" class='movable-view'>
                 <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" bindtouchstart="touchStart" bindtouchmove="touchMove" data-index="{{index}}" bindtap="navigateToCourse">

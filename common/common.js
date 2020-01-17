@@ -8,11 +8,14 @@ export default {
         'content-type': 'application/x-www-form-urlencoded'
       },
       method: 'POST',
-      success: successcallback
+      success: successcallback,
     });
   },
 
   'get': function (url, data, successcallback) {
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.request({
       url: config.server + url,
       data: data,
@@ -20,7 +23,10 @@ export default {
         'content-type': 'application/x-www-form-urlencoded'
       },
       method: 'GET',
-      success: successcallback
+      success: successcallback,
+      complete: function () {
+        wx.hideLoading();
+      }
     });
   },
 

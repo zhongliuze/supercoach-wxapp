@@ -9,7 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabs: ["待完成(0)", "已完成(0)","已取消(0)"],
+    tabs: ["待完成(0)", "已完成(0)", "已取消(0)"],
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
@@ -22,15 +22,15 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this;
     this.setData({
       'student_id': options.student_id,
     });
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.setData({
-          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2 -2,
+          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2 - 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
         });
       }
@@ -40,62 +40,57 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     // 获取待完成列表
-    this.getRecord(0);
-    // 获取已完成列表
-    this.getRecord(1);
-    // 获取已取消列表
-    this.getRecord(2);
+    this.getRecord();
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
   /**
    * 切换菜单
    */
-  tabClick: function (e) {
-    this.getRecord(e.currentTarget.id);
+  tabClick: function(e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
@@ -103,10 +98,10 @@ Page({
   },
 
   //手指触摸动作开始 记录起点X坐标
-  touchStart: function (e) {
+  touchStart: function(e) {
     //开始触摸时 重置所有删除
     var tasksList = this.data.tasksList;
-    tasksList.forEach(function (v, i) {
+    tasksList.forEach(function(v, i) {
       if (v.isTouchMove) //只操作为true的
         v.isTouchMove = false;
     })
@@ -117,7 +112,7 @@ Page({
     })
   },
   //滑动事件处理
-  touchMove: function (e) {
+  touchMove: function(e) {
     var tasksList = this.data.tasksList;
     var that = this,
       index = e.currentTarget.dataset.index, //当前索引
@@ -130,10 +125,10 @@ Page({
         X: startX,
         Y: startY
       }, {
-          X: touchMoveX,
-          Y: touchMoveY
-        });
-    tasksList.forEach(function (v, i) {
+        X: touchMoveX,
+        Y: touchMoveY
+      });
+    tasksList.forEach(function(v, i) {
       v.isTouchMove = false
       //滑动超过30度角 return
       if (Math.abs(angle) > 30) return;
@@ -151,18 +146,18 @@ Page({
   },
 
   /**
-  * 计算滑动角度
-  * @param {Object} start 起点坐标
-  * @param {Object} end 终点坐标
-  */
-  angle: function (start, end) {
+   * 计算滑动角度
+   * @param {Object} start 起点坐标
+   * @param {Object} end 终点坐标
+   */
+  angle: function(start, end) {
     var _X = end.X - start.X,
       _Y = end.Y - start.Y
     //返回角度 /Math.atan()返回数字的反正切值
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   },
 
-  catchDelete: function (event) {
+  catchDelete: function(event) {
     wx.showToast({
       title: '删除成功',
       icon: 'success'
@@ -178,10 +173,13 @@ Page({
   /**
    * 从服务器获取记录
    */
-  getRecord: function (taskStatus = 0) {
+  getRecord: function() {
     var _this = this;
     var tabs = this.data.tabs;
     let timestamp = moment().valueOf();
+    wx.showLoading({
+      title: '加载中',
+    })
     $.get(
       'task/planRecord', {
         'coachid': wx.getStorageSync('coachid'),
@@ -189,36 +187,21 @@ Page({
         'timestamp': timestamp, // 时间戳
         'pageNumber': 1, // 第几页
         'pageSize': 1000, // 每页多少条
-        'taskStatus': (taskStatus == 2) ? -1 : taskStatus, // 任务状态（0:待完成，1:已完成，2:待确认，-1:已取消，-2:已删除）
         'coachStudentId': this.data.student_id,
       },
-      function (res) {
+      function(res) {
         console.log(res.data);
         if (res.data.code == 0) {
           // 获取待完成课表成功
-          var completeList = _this.optimalData(res.data.data.content);
-          if (taskStatus == 0) {
-            // 待完成
-            tabs[0] = '待完成(' + (completeList ? completeList.length : 0) +')';
-            _this.setData({
-              'incompleteList': completeList,
-              'tabs': tabs,
-            });
-          } else if (taskStatus == 1) {
-            // 已完成
-            tabs[1] = '已完成(' + (completeList ? completeList.length : 0) + ')';
-            _this.setData({
-              'completeList': completeList,
-              'tabs': tabs,
-            });
-          } else if (taskStatus == 2) {
-            // 已取消
-            tabs[2] = '已取消(' + (completeList ? completeList.length : 0) + ')';
-            _this.setData({
-              'cancelledList': completeList,
-              'tabs': tabs,
-            });
-          }
+          tabs[0] = '待完成(' + res.data.data.incompleteTask.totalElements + ')';
+          tabs[1] = '已完成(' + res.data.data.completeTask.totalElements + ')';
+          tabs[2] = '已取消(' + res.data.data.cancelTask.totalElements + ')';
+          _this.setData({
+            'incompleteList': _this.optimalData(res.data.data.incompleteTask.content),
+            'completeList': _this.optimalData(res.data.data.completeTask.content),
+            'cancelledList': _this.optimalData(res.data.data.cancelTask.content),
+            'tabs': tabs,
+          });
         } else {
           wx.showToast({
             title: '上课记录获取失败',
@@ -233,10 +216,10 @@ Page({
    * 优化数组
    */
   optimalData: function(completeList) {
-    if(!completeList) {
+    if (!completeList) {
       return [];
     }
-    for(var i=0;i<completeList.length;i++) {
+    for (var i = 0; i < completeList.length; i++) {
       completeList[i]['courseTime'] = moment.unix(completeList[i]['beginTime']).format('MM月DD日 HH:mm') + '~' + moment.unix(completeList[i]['endTime']).format('HH:mm');
     }
     return completeList;

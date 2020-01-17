@@ -93,6 +93,7 @@ Page({
 
     loadMaxBefore: 12, // 允许最多加载前x周
     loadMaxAfter: 12, // 允许最多加载后x周
+    deleteName: '删除', // 删除按钮文案
   },
 
   /**
@@ -684,7 +685,12 @@ Page({
         courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['titleColor'] = '#B2F3B5';
       }
 
-
+      // 判断是排课还是休息或自定义
+      if (courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['taskType'] == 0) {
+        var deleteName = '取消';
+      }else {
+        var deleteName = '删除';
+      }
       // 赋值更新数据
       this.setData({
         'tableButtonPopup': !this.data.tableButtonPopup, // 显示/隐藏弹窗
@@ -696,6 +702,7 @@ Page({
         'clickTableWeekIndex': courseIndex,
         'clickTableDayIndex': weekIndex,
         'clickTableHourIndex': tableIndex,
+        'deleteName': deleteName,
       });
 
 
@@ -767,62 +774,113 @@ Page({
    */
   clickTableDelete: function(event) {
     var _this = this;
+    var clickTableWeekIndex = this.data.clickTableWeekIndex; // 表格弹窗选中周下标
+    var clickTableDayIndex = this.data.clickTableDayIndex; // 表格弹窗选中周下标
+    var clickTableHourIndex = this.data.clickTableHourIndex; // 表格弹窗选中周下标
+    var courseInfo = this.data.courseList[clickTableWeekIndex]['weekList'][clickTableDayIndex]['tableList'][clickTableHourIndex];
     // 关闭编辑弹窗
     if (this.data.tableButtonPopup == true) {
       // 编辑弹窗
-      var clickTableWeekIndex = this.data.clickTableWeekIndex; // 表格弹窗选中周下标
-      var clickTableDayIndex = this.data.clickTableDayIndex; // 表格弹窗选中周下标
-      var clickTableHourIndex = this.data.clickTableHourIndex; // 表格弹窗选中周下标
-      var task_id = this.data.courseList[clickTableWeekIndex]['weekList'][clickTableDayIndex]['tableList'][clickTableHourIndex]['taskId'];
+      var task_id = courseInfo['taskId'];
       this.setData({
         tableButtonPopup: false,
       });
     } else {
       var task_id = event.currentTarget.dataset.task_id;
     }
+    
+    console.log('*******2020-01-17');
+    console.log(courseInfo);
 
-    wx.showModal({
-      title: '确认要取消课程吗？',
-      content: '取消后用户将收到课程取消通知',
-      cancelText: '确认取消',
-      cancelColor: '#000000',
-      confirmText: '我再想想',
-      confirmColor: '#5FCD64',
-      success(res) {
-        if (res.confirm) {
-          console.log('用户点击确定')
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-          let timestamp = moment().valueOf();
-          $.delete(
-            'task/task', {
-              'coachid': wx.getStorageSync('coachid'),
-              'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-              'timestamp': timestamp, //时间戳
-              'taskId': task_id,
-            },
-            function(res) {
-              console.log(res.data);
-              if (res.data.code == 0) {
-                // 获取成功
-                wx.showToast({
-                  title: '已取消课程',
-                  icon: 'success',
-                  success: function() {
-                    _this.onShow();
-                  }
-                })
-              } else {
-                wx.showToast({
-                  title: '取消失败',
-                  icon: 'none'
-                })
+    if (courseInfo['taskType'] == 0) {
+      // 排课
+      wx.showModal({
+        title: '确认要取消课程吗？',
+        content: '取消后用户将收到课程取消通知',
+        cancelText: '确认取消',
+        cancelColor: '#000000',
+        confirmText: '我再想想',
+        confirmColor: '#5FCD64',
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+            let timestamp = moment().valueOf();
+            $.put(
+              'task/cancelPlan', {
+                'coachid': wx.getStorageSync('coachid'),
+                'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+                'timestamp': timestamp, //时间戳
+                'taskId': task_id,
+              },
+              function (res) {
+                console.log(res.data);
+                if (res.data.code == 0) {
+                  // 获取成功
+                  wx.showToast({
+                    title: '课程已取消',
+                    icon: 'success',
+                    success: function () {
+                      _this.onShow();
+                    }
+                  })
+                } else {
+                  wx.showToast({
+                    title: '取消失败',
+                    icon: 'none'
+                  })
+                }
               }
-            }
-          )
+            )
+          }
         }
-      }
-    })
+      })
+  } else {
+      // 休息或自定义
+      wx.showModal({
+        title: '确认要删除吗？',
+        content: '删除后内容不可被恢复',
+        cancelText: '确认',
+        cancelColor: '#000000',
+        confirmText: '取消',
+        confirmColor: '#5FCD64',
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+            let timestamp = moment().valueOf();
+            $.delete(
+              'task/task', {
+                'coachid': wx.getStorageSync('coachid'),
+                'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+                'timestamp': timestamp, //时间戳
+                'taskId': task_id,
+              },
+              function (res) {
+                console.log(res.data);
+                if (res.data.code == 0) {
+                  // 获取成功
+                  wx.showToast({
+                    title: '已删除',
+                    icon: 'success',
+                    success: function () {
+                      _this.onShow();
+                    }
+                  })
+                } else {
+                  wx.showToast({
+                    title: '删除失败',
+                    icon: 'none'
+                  })
+                }
+              }
+            )
+          }
+        }
+      })
+    }
   },
 
   /**
@@ -1419,9 +1477,9 @@ Page({
    */
   requestCalendarTasks: function(newCalendarList, oldCalendarList, scrollCurrent, setType = 'init') {
     if (setType == 'init') {
-      wx.showLoading({
-        title: '刷新课表中',
-      });
+      // wx.showLoading({
+      //   title: '刷新课表中',
+      // });
     }
     var _this = this;
     let timestamp = moment().valueOf();
@@ -1485,7 +1543,7 @@ Page({
           });
         }
         if (setType == 'init') {
-          wx.hideLoading();
+          // wx.hideLoading();
         }
       }
     )
@@ -1499,9 +1557,9 @@ Page({
     var _this = this;
     let timestamp = moment().valueOf(); // 时间戳
     if (loadType == 'init') {
-      wx.showLoading({
-        title: '加载中',
-      });
+      // wx.showLoading({
+      //   title: '加载中',
+      // });
     }
 
     $.get(
@@ -1547,7 +1605,7 @@ Page({
         // 更新数据
         if (loadType != 'init') {
           _this.setData({
-            'courseList': newCourseList,
+            'courseList': newCourseList,  
             'tableScrollYear': newCourseList[scrollCurrent].year + '年',
             'tableScrollMonth': newCourseList[scrollCurrent].month + '月',
           });
@@ -1557,7 +1615,7 @@ Page({
           });
         }
         if (loadType == 'init') {
-          wx.hideLoading();
+          // wx.hideLoading();
         };
       }
     )
