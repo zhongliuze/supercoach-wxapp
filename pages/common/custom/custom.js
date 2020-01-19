@@ -18,16 +18,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (options.customType == 1) {
+    var customType = options.customType;
+    if (customType == 0) {
       // 自定义学员来源
+      var inputName = '来源名称';
       wx.setNavigationBarTitle({
-        title: '自定义学员来源',
+        'title': '自定义学员来源',
       })
-      this.setData({
-        customType: options.customType,
-        inputName: '来源名称'
-      });
+    } else if (customType == 1) {
+      // 选择课程名称
+      var inputName = '课程名称';
+      wx.setNavigationBarTitle({
+        'title': '自定义课程名称',
+      })
+    } else if (customType == 2) {
+      // 选择课程类型
+      var inputName = '类型名称';
+      wx.setNavigationBarTitle({
+        'title': '自定义课程类型',
+      })
     }
+    this.setData({
+      'customType': customType,
+      'inputName': inputName,
+    });
 
   },
 
@@ -93,16 +107,13 @@ Page({
    * 保存自定义名称
    */
   saveCustom: function(event) {
-    if (this.data.customType == 1) {
-      // 自定义学员来源
-      if (this.data.customValue) {
-        this.saveStudentSource();
-      } else {
-        wx.showToast({
-          title: '请输入来源名称',
-          icon: 'none',
-        })
-      }
+    if (this.data.customValue) {
+      this.saveStudentSource();
+    } else {
+      wx.showToast({
+        title: '请输入来源名称',
+        icon: 'none',
+      })
     }
   },
 
@@ -110,16 +121,29 @@ Page({
    * 保存自定义学员来源
    */
   saveStudentSource: function() {
+    var requestData = {
+      'coachid': wx.getStorageSync('coachid'),
+      'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+      'timestamp': timestamp, // 时间戳
+    };
+    if (this.data.customType == 0) {
+      // 自定义学员来源
+      var requestURL = 'studentSource';
+      requestData['sourceName'] = this.data.customValue;
+    } else if (this.data.customType == 1) {
+      // 自定义课程名称
+      var requestURL = 'courseName';
+      requestData['courseName'] = this.data.customValue;
+    } else if (this.data.customType == 2) {
+      // 自定义课程类别
+      var requestURL = 'courseType';
+      requestData['typeName'] = this.data.customValue;
+    }
     var _this = this;
     let timestamp = moment().valueOf();
     $.post(
-      'studentSource', {
-        'coachid': wx.getStorageSync('coachid'),
-        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-        'timestamp': timestamp, // 时间戳
-        'sourceName': this.data.customValue, // 来源名称
-      },
-      function(res) {
+      requestURL, requestData,
+      function(res){
         console.log(res.data);
         if (res.data.code == 0) {
           // 保存成功

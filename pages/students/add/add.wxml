@@ -87,8 +87,8 @@
               <text>学员来源</text>
             </view>
             <view class="value" bindtap="selectStudentSource">
-              <text wx:if="{{sourceName == ''}}">请选择</text>
-              <text wx:else class="hasValue">{{sourceName}}</text>
+              <text wx:if="{{selectName == ''}}">请选择</text>
+              <text wx:else class="hasValue">{{selectName}}</text>
               <view class="arrow">
                 <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
               </view>

@@ -14,8 +14,8 @@ Page({
     inputMore: false,
     fixedBottomButtonMargin: 0, // 吸底按钮的自适应高度
     name: '', // 输入姓名
-    sourceName:'', // 来源名称
-    sourceId: 0, // 学员来源ID
+    selectName:'', // 来源名称
+    selectId: 0, // 学员来源ID
   },
 
   /**
@@ -144,7 +144,7 @@ Page({
         'mobile': mobile, // 学员手机号
         'courseTypeId': courseTypeId, // 课程类型
         'courseNumber': courseNumber, // 总课时数
-        'sourceId': this.data.sourceId ? this.data.sourceId : '', // 学员来源ID
+        'sourceId': this.data.selectId ? this.data.selectId : '', // 学员来源ID
         'remark': '', // 备注信息
       },
       function (res) {
@@ -177,7 +177,7 @@ Page({
    */
   selectStudentSource: function(event) {
     wx.navigateTo({
-      url: '../source/source?selectSourceName=' + this.data.sourceName,
+      url: '../../common/select/select?selectName=' + this.data.selectName + '&selectContentType=0',
     })
   }
 })

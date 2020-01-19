@@ -1,0 +1,34 @@
+/* pages/common/select/select.wxss */
+page {
+  background-color: #f7f7f7;
+}
+
+.source-select-cells {
+  margin-top: 32rpx;
+}
+
+.source-select-cells-group {
+  margin-top: 24rpx;
+}
+
+.select-cells-group .select-cells .content .arrow image {
+  width: 34rpx;
+  height: 24rpx;
+}
+
+.select-cells-group .select-cells .content .arrow-more image {
+  margin-left: 20rpx;
+  width: 14rpx;
+  height: 24rpx;
+}
+
+.remind-content {
+  margin-top: 32rpx;
+  margin-left: 30rpx;
+  font-size: 26rpx;
+  color: #a3a4a6;
+}
+
+
+
+

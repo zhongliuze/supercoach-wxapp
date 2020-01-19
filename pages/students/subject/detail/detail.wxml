@@ -9,8 +9,12 @@
         <view class="title">
           <text>课程名称</text>
         </view>
-        <view class="value">
-          <input placeholder="请输入课程名称" placeholder-class="input-placeholder"></input>
+        <view class="value" bindtap="bindSelect" data-type="1">
+          <text wx:if="{{courseName == ''}}">请选择课程名称</text>
+          <text wx:else class="hasValue">{{courseName}}</text>
+          <view class="arrow">
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
+          </view>
         </view>
       </view>
     </view>
@@ -20,10 +24,14 @@
       </view>
       <view class="content">
         <view class="title">
-          <text>课程内容</text>
+          <text>课程类型</text>
         </view>
-        <view class="value">
-          <input placeholder="如蛙泳、自由泳(选填)" placeholder-class="input-placeholder" value=""></input>
+        <view class="value" bindtap="bindSelect" data-type="2">
+          <text wx:if="{{courseType == ''}}">请选择课程类型</text>
+          <text wx:else class="hasValue">{{courseType}}</text>
+          <view class="arrow">
+            <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
+          </view>
         </view>
       </view>
     </view>

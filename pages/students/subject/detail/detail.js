@@ -20,6 +20,11 @@ Page({
     alreadyPickerFormat: '请选择已上课时',
     lastPicker: 0, // 选中剩余课时下标
     lastPickerFormat: '请选择剩余课时',
+
+    courseName: '', // 课程名称
+    courseNameId: 0, // 课程名称ID
+    courseType: '', // 课程类型
+    courseTypeId: 0, // 课程类型ID
   },
 
   /**
@@ -180,5 +185,15 @@ Page({
         detailType: 0,
       });
     }
+  },
+
+  /**
+   * 选择课程名称
+   */
+  bindSelect: function(event) {
+    var selectType = event.currentTarget.dataset.type;
+    wx.navigateTo({
+      url: '../../../common/select/select?selectName=' + (selectType == 1 ? this.data.courseName : this.data.courseType) + '&selectContentType=' + selectType,
+    })
   }
 })

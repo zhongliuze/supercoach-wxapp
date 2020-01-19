@@ -11,6 +11,7 @@
     "pages/students/basic/basic",
     "pages/students/student/student",
     "pages/common/custom/custom",
+    "pages/common/select/select",
     "pages/students/source/source",
     "pages/students/add/add",
     "pages/order/detail/detail",
