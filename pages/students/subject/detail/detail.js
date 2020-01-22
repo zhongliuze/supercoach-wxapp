@@ -1,5 +1,7 @@
 // pages/students/subject/detail/detail.js
 const moment = require('../../../../vendor/moment/moment.js');
+import $ from '../../../../common/common.js';
+const util = require('../../../../utils/util');
 Page({
 
   /**
@@ -20,6 +22,8 @@ Page({
     alreadyPickerFormat: '请选择已上课时',
     lastPicker: 0, // 选中剩余课时下标
     lastPickerFormat: '请选择剩余课时',
+
+    student_id: 0, // 学员ID
 
     courseName: '', // 课程名称
     courseNameId: 0, // 课程名称ID
@@ -50,6 +54,7 @@ Page({
       'detailType': detailType, // 页面类型：0为新建，1为编辑
       'priceList': priceList,
       'courseList': courseList,
+      'student_id': options.student_id,
     });
   },
 
@@ -175,15 +180,65 @@ Page({
     });
   },
 
+  /**
+   * 保存课程信息
+   */
   bindSave: function(event) {
+    
     if (this.data.detailType == 0) {
-      this.setData({
-        detailType: 1,
-      });
+      // 创建课程
+      var _this = this;
+      let timestamp = moment().valueOf();
+      if(!this.data.courseNameId) {
+        wx.showToast({
+          title: '请填写课程名称',
+          icon: 'none',
+        })
+        return ;
+      }
+      var requestData = {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, // 时间戳
+        'coachStudentId': this.data.student_id, // 学员ID
+        'courseNameId': this.data.courseNameId, //课程名称 ID
+        'courseTypeId': this.data.courseTypeId, //课程类型 ID
+        'perTicketPrice': this.data.pricePicker * 100, // 客单价（单位: 分）
+        'totalNumber': this.data.sumPicker, // 总课时数
+        'usageNumber': this.data.alreadyPicker, // 已上课时
+        'remark': '', // 备注
+        'buyTime': this.data.time, // 购课时间（单位: 秒）
+        //'buyTime': this.data.time ? moment(this.data.time).unix() : '', // 购课时间（单位: 秒）
+      };
+      
+      $.post(
+        'studentCourseRecord', requestData,
+        function (res) {
+          console.log(res.data);
+          if (res.data.code == 0) {
+            // 获取成功
+            wx.showToast({
+              title: '创建成功',
+              icon: 'success',
+              success: function () {
+                setTimeout(function () {
+                  wx.navigateBack({
+                    delta: '1'
+                  })
+                }, 1500);
+              }
+            })
+          } else {
+            wx.showToast({
+              title: '创建失败',
+              icon: 'none'
+            })
+          }
+        }
+      )
+      
     } else if (this.data.detailType == 1) {
-      this.setData({
-        detailType: 0,
-      });
+      
     }
   },
 

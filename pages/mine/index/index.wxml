@@ -66,7 +66,7 @@
     <view class="title">
       <text>本月数据</text>
     </view>
-    <view class="data-list" bindtap="bindButton" data-url="data/index/index">
+    <view class="data-list">
       <view class="data">
         <view class="num">
           <text wx:if="{{coachLogin}}">{{coachMonthData.incompletePlanCount}}</text>

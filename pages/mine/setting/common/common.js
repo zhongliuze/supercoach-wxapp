@@ -92,7 +92,21 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    var _this = this;
+    let timestamp = moment().valueOf();
+    $.get(
+      'settings/settings', {
+        'coachid': wx.getStorageSync('coachid'),
+        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
+        'timestamp': timestamp, //时间戳
+      },
+      function (res) {
+        if (res.data.code == 0) {
+          // 获取成功
+          wx.setStorageSync('generalSettings', res.data.data.generalSettings);
+        }
+      }
+    )
   },
 
   /**

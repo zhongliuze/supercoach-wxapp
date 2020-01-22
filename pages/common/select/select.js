@@ -11,6 +11,7 @@ Page({
     selectList: [],
     selectName: '', // 已选中来源名称
     selectContentType: 1, // 0:学员来源，1:课程名称，2：课程类型
+    requestComplete: false, // 加载完毕
   },
 
   /**
@@ -112,9 +113,9 @@ Page({
             }
           }
           _this.setData({
-            selectList: selectList,
+            'selectList': selectList,
+            'requestComplete': true,
           });
-          console.log(selectList);
         } else {
           wx.showToast({
             title: '加载失败',

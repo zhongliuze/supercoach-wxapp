@@ -13,9 +13,6 @@ export default {
   },
 
   'get': function (url, data, successcallback) {
-    wx.showLoading({
-      title: '加载中',
-    })
     wx.request({
       url: config.server + url,
       data: data,
@@ -24,9 +21,6 @@ export default {
       },
       method: 'GET',
       success: successcallback,
-      complete: function () {
-        wx.hideLoading();
-      }
     });
   },
 

@@ -1,5 +1,4 @@
-<view class="container-page">
-
+<view class="container-page" wx:if="{{requestComplete}}">
   <view class="select-cells-group source-select-cells-group">
     <block wx:for="{{selectList}}" wx:key="this">
       <movable-area class='movable-area'>

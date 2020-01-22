@@ -23,8 +23,8 @@ Page({
     startTimePickerIndex: [0, 0, 0], // 开始时间选中位置 
     endTimePickerIndex: [0, 0, 0], // 结束时间选中位置
 
-    remindType: 0, // 提醒类型：0不提醒，1开始时、30分钟前、1小时前……
-    repeatType: 0, // 重复类型：0不重复，1每天、2每周、3每月
+    remindType: -1, // 提醒类型：0不提醒，1开始时、30分钟前、1小时前……
+    repeatType: -1, // 重复类型：0不重复，1每天、2每周、3每月
     repeatTimes: 0, // 重复次数, 实际次数为repeatTimes+1
 
     remindArray: ['无提醒', '开始时', '30分钟前', '1小时前', '3小时前', '6小时前', '1天前'], // 提醒类型字典
@@ -93,6 +93,8 @@ Page({
 
     editCourse: 0, // 编辑课程信息
     courseId: 0, // 任务ID
+
+    courseRecordId: 0, // 选择课程信息ID
 
   },
 
@@ -498,7 +500,7 @@ Page({
           'remind': remindValue, // 课前提醒（0：无提醒、1、30、60、180、360、86400
           'repeat': repeatValue, // 重复类型（0：不重复、1、7、30）
           'repeatCycle': this.data.repeatTimes, // 重复周期
-          'courseRecordId': 0, // 购课记录ID（课程类型？）
+          'courseRecordId': this.data.courseRecordId, // 购课记录ID（课程类型？）
           'courseContentId': 0, // 上课内容ID
         };
 

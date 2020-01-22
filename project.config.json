@@ -288,10 +288,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 33,
 					"name": "pages/students/subject/detail/detail",
 					"pathName": "pages/students/subject/detail/detail",
-					"query": "",
+					"query": "detailType=0",
 					"scene": null
 				},
 				{

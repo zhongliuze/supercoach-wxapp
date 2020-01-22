@@ -22,13 +22,16 @@ Page({
       { 'time': '康复训练课程', 'type': '1V1游泳私教', status: '0' },
       { 'time': '康复训练课程', 'type': '1V1游泳私教', status: '0' },
     ],
+    student_id: 0, // 学员ID
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      'student_id': options.student_id,
+    });
   },
 
   /**
@@ -152,6 +155,9 @@ Page({
     return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   },
 
+  /**
+   * 删除课程
+   */
   catchDelete: function (event) {
     wx.showToast({
       title: '删除成功',
@@ -164,7 +170,7 @@ Page({
    */
   navigateToDetail: function () {
     wx.navigateTo({
-      url: '../detail/detail?detailType=1',
+      url: '../detail/detail?detailType=1&student_id=' + this.data.student_id,
     })
   },
 
@@ -173,7 +179,7 @@ Page({
    */
   navigateToAdd: function () {
     wx.navigateTo({
-      url: '../detail/detail?detailType=0',
+      url: '../detail/detail?detailType=0&student_id=' + this.data.student_id,
     })
   },
 })

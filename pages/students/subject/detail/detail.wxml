@@ -10,7 +10,7 @@
           <text>课程名称</text>
         </view>
         <view class="value" bindtap="bindSelect" data-type="1">
-          <text wx:if="{{courseName == ''}}">请选择课程名称</text>
+          <text wx:if="{{courseName == ''}}">请填写课程名称</text>
           <text wx:else class="hasValue">{{courseName}}</text>
           <view class="arrow">
             <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
@@ -27,7 +27,7 @@
           <text>课程类型</text>
         </view>
         <view class="value" bindtap="bindSelect" data-type="2">
-          <text wx:if="{{courseType == ''}}">请选择课程类型</text>
+          <text wx:if="{{courseType == ''}}">请填写课程类型</text>
           <text wx:else class="hasValue">{{courseType}}</text>
           <view class="arrow">
             <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
@@ -83,7 +83,7 @@
       <view class="icon">
         <image src="http://superimage.xianshikeji.com/icon/superwxapp/students-subject-already.png" style="width:24rpx;height:28rpx;"></image>
       </view>
-      <view class="content input-cell-border">
+      <view class="content">
         <view class="title">
           <text>已上课时</text>
         </view>
@@ -97,7 +97,7 @@
         </picker>
       </view>
     </view>
-    <view class="input-cell">
+    <!-- <view class="input-cell">
       <view class="icon">
         <image src="http://superimage.xianshikeji.com/icon/superwxapp/students-subject-remaining.png" style="width:26rpx;height:28rpx;"></image>
       </view>
@@ -114,7 +114,7 @@
           </view>
         </picker>
       </view>
-    </view>
+    </view> -->
   </view>
 
   <view class="input-cell-group input-cell-group-margin">
@@ -152,8 +152,9 @@
       </view>
     </view>
   </view> -->
-  <view class="fixed-bottom-button" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;" wx:if="{{detailType == 0}}">
-    <button bindtap="bindSave">保存</button>
+  <view class="{{courseNameId ? 'fixed-bottom-button' : 'fixed-bottom-button-default'}}" style="padding-bottom:{{fixedBottomButtonMargin}}rpx!important;" wx:if="{{detailType == 0}}">
+    <button bindtap="bindSave" wx:if="{{courseNameId}}">保存</button>
+    <button wx:else>保存</button>
   </view>
 </view>
 <view class="course-button" wx:if="{{detailType == 1}}" bindtap="bindSave">

@@ -42,6 +42,9 @@
   width: 164rpx;
   height: 122rpx;
   border-radius: 12rpx;
+  /* -webkit-filter: grayscale(1);
+  filter: gray;
+  filter: grayscale(1); */
 }
 
 .course-group .course .info {

@@ -24,9 +24,9 @@
       <view class="other">
         <view class="vip-other-button">
           <view class="vip-other-margin"></view>
-          <view class="vip-button" bindtap="navigateToRecord">
+          <!-- <view class="vip-button" bindtap="navigateToRecord">
             <text>开通记录</text>
-          </view>
+          </view> -->
         </view>
 
       </view>
@@ -40,9 +40,9 @@
       <view class="main">
         <text>会员套餐</text>
       </view>
-      <view class="title-link" bindtap="navigateToExchange">
+      <!-- <view class="title-link" bindtap="navigateToExchange">
         <text>使用兑换码</text>
-      </view>
+      </view> -->
     </view>
 
     <view class="price-group">
@@ -64,7 +64,7 @@
         </view>
         <view class="money">
           <text class="symbol">￥</text>
-          <text>27</text>
+          <text>25</text>
         </view>
         <view class="cost">
           <text>￥50</text>
@@ -80,10 +80,10 @@
         </view>
         <view class="money">
           <text class="symbol">￥</text>
-          <text>96</text>
+          <text>100</text>
         </view>
         <view class="cost">
-          <text>￥150</text>
+          <text>￥200</text>
         </view>
       </view>
     </view>

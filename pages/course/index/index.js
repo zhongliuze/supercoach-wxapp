@@ -144,7 +144,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    
+
     var _this = this;
     console.log('向前加载了' + this.data.tableLoadBefore + '周');
     console.log('向后加载了' + this.data.tableLoadAfter + '周');
@@ -688,7 +688,7 @@ Page({
       // 判断是排课还是休息或自定义
       if (courseList[courseIndex]['weekList'][weekIndex]['tableList'][tableIndex]['taskType'] == 0) {
         var deleteName = '取消';
-      }else {
+      } else {
         var deleteName = '删除';
       }
       // 赋值更新数据
@@ -788,7 +788,7 @@ Page({
     } else {
       var task_id = event.currentTarget.dataset.task_id;
     }
-    
+
     console.log('*******2020-01-17');
     console.log(courseInfo);
 
@@ -814,14 +814,14 @@ Page({
                 'timestamp': timestamp, //时间戳
                 'taskId': task_id,
               },
-              function (res) {
+              function(res) {
                 console.log(res.data);
                 if (res.data.code == 0) {
                   // 获取成功
                   wx.showToast({
                     title: '课程已取消',
                     icon: 'success',
-                    success: function () {
+                    success: function() {
                       _this.onShow();
                     }
                   })
@@ -836,7 +836,7 @@ Page({
           }
         }
       })
-  } else {
+    } else {
       // 休息或自定义
       wx.showModal({
         title: '确认要删除吗？',
@@ -858,14 +858,14 @@ Page({
                 'timestamp': timestamp, //时间戳
                 'taskId': task_id,
               },
-              function (res) {
+              function(res) {
                 console.log(res.data);
                 if (res.data.code == 0) {
                   // 获取成功
                   wx.showToast({
                     title: '已删除',
                     icon: 'success',
-                    success: function () {
+                    success: function() {
                       _this.onShow();
                     }
                   })
@@ -1121,7 +1121,7 @@ Page({
                       'taskId': tempTaskList[q]['taskId'], // 任务ID
                       'titleColor': tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
                       'taskType': tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
-                      'title': tempTaskList[q]['title'], // 任务名称、标题
+                      'title': tempTaskList[q]['step'] > 1 ? tempTaskList[q]['title'] : tempTaskList[q]['title'].substring(tempTaskList[q]['title'].length - 3), // 任务名称、标题
                       'height': 104 * tempTaskList[q]['step'] + 10 * (tempTaskList[q]['step'] - 1), // 任务列方块高度
                       'paddingBottom': '10', // 任务列方块距底部间距
                       'isTouchMove': false, // 是否左侧滑动
@@ -1172,7 +1172,7 @@ Page({
                         'titleColor': tempTaskList[q]['titleColor'], // 任务背景颜色   0:#ffc229  1 :#5fcd64
                         'taskType': tempTaskList[q]['taskType'], // 任务类型   0:排课，1:休息，2:自定义
                         'title': tempTaskList[q]['title'], // 任务标题、名称
-                        'height': (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])), // 任务列方块高度                   
+                        'height': (104 * tempTaskList[q]['step']) + (10 * (tempTaskList[q]['step'])), // 任务列方块高度                 
                         'marginTop': '0',
                         'paddingBottom': '0', // 任务列方块距底部间距
                         'isTouchMove': false,
@@ -1605,7 +1605,7 @@ Page({
         // 更新数据
         if (loadType != 'init') {
           _this.setData({
-            'courseList': newCourseList,  
+            'courseList': newCourseList,
             'tableScrollYear': newCourseList[scrollCurrent].year + '年',
             'tableScrollMonth': newCourseList[scrollCurrent].month + '月',
           });

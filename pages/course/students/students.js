@@ -301,25 +301,9 @@ Page({
    * 获取通用设置
    */
   getCommonSetting: function() {
-    var _this = this;
-    let timestamp = moment().valueOf();
-    $.get(
-      'settings/settings', {
-        'coachid': wx.getStorageSync('coachid'),
-        'sign': util.getSign(timestamp), // 签名（coachid + token + timestamp 的 MD5值）
-        'timestamp': timestamp, //时间戳
-      },
-      function(res) {
-        console.log(res.data);
-        if (res.data.code == 0) {
-          // 获取成功
-          var generalSettings = res.data.data.generalSettings;
-          _this.setData({
-            'generalSettings': res.data.data.generalSettings,
-          });
-        }
-      }
-    )
+    this.setData({
+      'generalSettings': wx.getStorageSync('generalSettings'),
+    });
   },
 
   /**

@@ -10,7 +10,7 @@
           <text>标题</text>
         </view>
         <view class="custom-value">
-          <input placeholder="输入自定义事项名称" placeholder-class="custom-value-placeholder" value="{{customTitle}}" bindinput="inputCustomTitle"></input>
+          <input placeholder="输入自定义事项名称" placeholder-class="custom-value-placeholder" value="{{customTitle}}" bindinput="inputCustomTitle" maxlength="6"></input>
         </view>
         <view class="custom-button" bindtap="navigateToCustomList">
           <text>常用</text>
@@ -96,8 +96,9 @@
         <view class="value valuable edit-value" wx:if="{{editCourse}}">
           <text>{{remindArray[remindType]}}</text>
         </view>
-        <view class="value valuable" bindtap="navigateToRemind" wx:else>
-          <text>{{remindArray[remindType]}}</text>
+        <view class="value {{remindType == -1 ? '' : 'valuable'}}" bindtap="navigateToRemind" wx:else>
+          <text wx:if="{{remindType == -1}}">{{remindArray[remindType+1]}}</text>
+          <text wx:else>{{remindArray[remindType]}}</text>
         </view>
         <view class="arrow" wx:if="{{!editCourse}}">
           <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
@@ -115,8 +116,9 @@
         <view class="value valuable edit-value" wx:if="{{editCourse}}">
           <text>{{repeatArray[repeatType]}}</text>
         </view>
-        <view class="value valuable" bindtap="navigateToRepeat" wx:else>
-          <text>{{repeatArray[repeatType]}}</text>
+        <view class="value {{repeatType == -1 ? '' : 'valuable'}}" bindtap="navigateToRepeat" wx:else>
+          <text wx:if="{{repeatType == -1}}">{{repeatArray[repeatType+1]}}</text>
+          <text wx:else>{{repeatArray[repeatType]}}</text>
         </view>
         <view class="arrow" wx:if="{{!editCourse}}">
           <image src="http://superimage.xianshikeji.com/icon/superwxapp/arrow-right.png"></image>
@@ -131,12 +133,13 @@
       </view>
       <view class="content noborder">
         <view class="title">
-          <text>课程类型</text>
+          <text>课程信息</text>
         </view>
-        <view class="value valuable edit-value" wx:if="{{editCourse}}">
+        
+        <view class="value {{courseRecordId ? 'valuable' : ''}} edit-value" wx:if="{{editCourse}}">
           <text>请选择</text>
         </view>
-        <view class="value valuable" bindtap="navigateToSubject" wx:else>
+        <view class="value {{courseRecordId ? 'valuable' : ''}}" bindtap="navigateToSubject" wx:else>
           <text>请选择</text>
         </view>
         <view class="arrow" wx:if="{{!editCourse}}">

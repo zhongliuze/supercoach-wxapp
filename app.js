@@ -4,15 +4,14 @@ const moment = require('vendor/moment/moment.js');
 const util = require('utils/util')
 const md5 = require('vendor/md5/md5.min.js');
 App({
-  data: {
-  },
-  onLaunch: function () {
+  data: {},
+  onLaunch: function() {
     var _this = this;
     // 获取手机系统信息
     wx.getSystemInfo({
       success(res) {
         // 吸底按钮自适应,设置吸底按钮距离
-        wx.setStorageSync('fixedBottomButtonMargin', (res.screenHeight - res.safeArea.bottom)*2);
+        wx.setStorageSync('fixedBottomButtonMargin', (res.screenHeight - res.safeArea.bottom) * 2);
       }
     })
 
@@ -25,19 +24,31 @@ App({
           'code2Session', {
             code: res.code,
           },
-          function (res) {
+          function(res) {
+            console.log('***2020***');
+            console.log(res);
             if (res.data.code == 0) {
               // 登录态获取成功
-              
-              wx.setStorageSync('coachid', res.data.data.coachid);
-              wx.setStorageSync('token', res.data.data.token);
-              wx.setStorageSync('coach', res.data.data.coach);
-              wx.setStorageSync('authorizationUserInfo', res.data.data.coach.wxNickname ? true : false);
-              wx.setStorageSync('authorizationPhone', res.data.data.coach.mobile ? true : false);
+              var coachData = res.data.data;
+              var generalSettings = {
+                'autoCompleteTask': coachData.coach.autoCompleteTask,
+                'coachId': coachData.coach.coachId,
+                'defaultTaskTime': coachData.coach.defaultTaskTime,
+                'displayStudentAlias': coachData.coach.displayStudentAlias,
+                'displayStudentSubtitle': coachData.coach.displayStudentSubtitle,
+                'notificationStudentMethod': coachData.coach.notificationStudentMethod,
+                'surplusTaskRemind': coachData.coach.surplusTaskRemind,
+              };
+              wx.setStorageSync('generalSettings', generalSettings);
+              wx.setStorageSync('coachid', coachData.coachid);
+              wx.setStorageSync('token', coachData.token);
+              wx.setStorageSync('coach', coachData.coach);
+              wx.setStorageSync('authorizationUserInfo', coachData.coach.wxNickname ? true : false);
+              wx.setStorageSync('authorizationPhone', coachData.coach.mobile ? true : false);
               // 若已获取到手机号，默认设置为已登录
               if (res.data.data.coach.mobile) {
                 wx.setStorageSync('coachLogin', true);
-              }else {
+              } else {
                 wx.setStorageSync('coachLogin', false);
               }
             } else {
@@ -58,10 +69,10 @@ App({
             if (_this.checkLoginReadyCallback) {
               _this.checkLoginReadyCallback(res);
             }
-            
+
           }
         )
-        
+
       }
     })
     // 获取用户信息
@@ -73,7 +84,7 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-            
+
               let timestamp = moment().valueOf();
               var userInfo = res.userInfo;
               $.put(
@@ -89,7 +100,7 @@ App({
                   'nickName': userInfo.nickName, // 微信返回的用户昵称
                   'province': userInfo.province, // 微信返回的用户所在省份
                 },
-                function (res) {
+                function(res) {
                   console.log(res.data);
                 }
               )
@@ -104,6 +115,7 @@ App({
       }
     })
   },
+
   globalData: {
     userInfo: null,
     checkLogin: false,
